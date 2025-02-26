@@ -495,6 +495,7 @@ async function custom_toggles(settings) {
 	const force_hide_lsposed = document.getElementById("force_hide_lsposed");
 	const hide_vendor_sepolicy = document.getElementById("hide_vendor_sepolicy");
 	const hide_compat_matrix = document.getElementById("hide_compat_matrix");
+	const fake_service_list = document.getElementById("fake_service_list");
 	//var config_sh = await run(`cat ${config}/config.sh`);
 
 	// Convert the string content to an object
@@ -513,6 +514,8 @@ async function custom_toggles(settings) {
 	else hide_vendor_sepolicy.checked=false;
 	if (custom_settings.hide_compat_matrix==true) hide_compat_matrix.checked="checked";
 	else hide_compat_matrix.checked=false;
+	if (custom_settings.fake_service_list==true) fake_service_list.checked="checked";
+	else fake_service_list.checked=false;
 	if (custom_settings.hide_gapps==true) hide_gapps.checked="checked";
 	else hide_gapps.checked=false;
 	if (custom_settings.hide_revanced==true) hide_revanced.checked="checked";
@@ -571,6 +574,22 @@ async function custom_toggles(settings) {
 			/*if (await run(`grep -q 'hide_compat_matrix' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_compat_matrix=1' >> ${config}/config.sh`)
 			else*/ run (`sed -i 's/hide_compat_matrix=0/hide_compat_matrix=1/' ${config}/config.sh`)
 			custom_settings.hide_compat_matrix=true
+			toast("Reboot to take effect");
+		}
+	});
+
+	// fake service list toggle
+	fake_service_list.addEventListener("click",async function (){
+		//var fake_service_list_toggle = await run(`grep -q 'fake_service_list=1' ${config}/config.sh && echo true || echo false`);
+		if (custom_settings.fake_service_list==true){
+			run(`sed -i 's/fake_service_list=1/fake_service_list=0/' ${config}/config.sh`)
+			custom_settings.fake_service_list=false
+			toast("Reboot to take effect");
+		}
+		else {
+			/*if (await run(`grep -q 'fake_service_list' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'fake_service_list=1' >> ${config}/config.sh`)
+			else*/ run (`sed -i 's/fake_service_list=0/fake_service_list=1/' ${config}/config.sh`)
+			custom_settings.fake_service_list=true
 			toast("Reboot to take effect");
 		}
 	});
