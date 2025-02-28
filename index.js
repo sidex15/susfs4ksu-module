@@ -26,17 +26,29 @@ if (is_log_empty=="true"){
 }
 
 function catToObject(cat){
-	// Convert the string content to an object
-	const obj = cat
-	.split('\n')                    // Split into lines
-	.filter(line => line.includes('='))  // Filter valid lines
-	.reduce((acc, line) => {
-		const [key, value] = line.split('=').map(str => str.trim());
-		acc[key] = Number(value); // Map values
-		return acc;
-	}, {});
+    // Convert the string content to an object
+    const obj = cat
+    .split('\n')                    // Split into lines
+    .filter(line => line.includes('='))  // Filter valid lines
+    .reduce((acc, line) => {
+        const [key, value] = line.split('=').map(str => str.trim());
+        
+        // Check if value is a quoted string
+        if (value.startsWith("'") && value.endsWith("'")) {
+            // Handle string values - remove the quotes
+            acc[key] = value.substring(1, value.length - 1);
+        } else if (value.startsWith('"') && value.endsWith('"')) {
+            // Also handle double quotes
+            acc[key] = value.substring(1, value.length - 1); 
+        } else {
+            // Convert to number if it's not a string
+            acc[key] = isNaN(Number(value)) ? value : Number(value);
+        }
+        
+        return acc;
+    }, {});
 
-	return obj
+    return obj;
 }
 
 document.getElementById("sus_path").innerHTML= susfs_stats.sus_path;
@@ -87,7 +99,6 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
     // Add specific script initializations here
     if (currentPath === '/index.html') {
 		console.log("in index");
-        keyboard_pop();
 		set_uname(settings);
 		susfs_log_toggle(settings);
 		if (susfs_version_decimal>=154) auto_hide_settings();
@@ -365,6 +376,9 @@ async function set_uname(settings) {
     const confirmBtn = document.getElementById('modal_confirm');
     const cancelBtn = document.getElementById('modal_cancel');
     const modalMessage = document.getElementById('modal_message');
+	const mainContainer = document.querySelector('main');
+	var sus_uname=document.getElementById("sus_uname");
+	var sus_uname_build=document.getElementById("sus_uname_build");
 
 	// Convert the string content to an object
 	const custom_settings = settings;
@@ -381,24 +395,40 @@ async function set_uname(settings) {
 	else boot_on_postfsdata.checked=false;
 
 	set_uname.addEventListener("click",async function(){
-		var sus_uname=document.getElementById("sus_uname");
+		sus_uname=document.getElementById("sus_uname");
+		sus_uname_build=document.getElementById("sus_uname_build");
 		if (sus_uname.value.includes(' ')) {
 			toast('Spaces are not allowed in the input!');
 		} 
 		else {
-			if(sus_uname.value==''){
+			if(sus_uname.value=='' && sus_uname_build.value==''){
 				console.log("default kernel version");
 				run(`${susfs_bin} set_uname 'default' 'default'`)
-				run(`echo default > ${config}/kernelversion.txt`)
+				await run(`sed -i 's/kernel_version=.*/kernel_version="default"/' ${config}/config.sh`);
+				await run(`sed -i 's/kernel_build=.*/kernel_build="default"/' ${config}/config.sh`);
 				document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
 				set_uname.blur();
 			}
 			else{
 				console.log(`sets to ${sus_uname.value}`);
-				run(`${susfs_bin} set_uname '${sus_uname.value}' 'default'`)
-				run(`echo ${sus_uname.value} > ${config}/kernelversion.txt`)
+				if(sus_uname_build.value==''){
+					run(`${susfs_bin} set_uname '${sus_uname.value}' 'default'`)
+					await run(`sed -i 's/kernel_version=.*/kernel_version="${sus_uname.value}"/' ${config}/config.sh`);
+					await run(`sed -i 's/kernel_build=.*/kernel_build="default"/' ${config}/config.sh`);
+				}
+				else if(sus_uname.value==''){
+					run(`${susfs_bin} set_uname 'default' '${sus_uname_build.value}'`);
+					await run(`sed -i 's/kernel_version=.*/kernel_version="default"/' ${config}/config.sh`);
+					await run(`sed -i 's/kernel_build=.*/kernel_build="${sus_uname_build.value}"/' ${config}/config.sh`);
+				}
+				else{
+					run(`${susfs_bin} set_uname '${sus_uname.value}' '${sus_uname_build.value}'`);
+					await run(`sed -i 's/kernel_version=.*/kernel_version="${sus_uname.value}"/' ${config}/config.sh`);
+					await run(`sed -i 's/kernel_build=.*/kernel_build="${sus_uname_build.value}"/' ${config}/config.sh`);
+				}
 				document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
 				sus_uname.value='';
+				sus_uname_build.value='';
 				set_uname.blur();
 			}
 		}
@@ -447,6 +477,48 @@ async function set_uname(settings) {
         boot_on_postfsdata.checked = false;
         modal.close();
     });
+
+	// Keyboard handling for uname inputs
+	sus_uname.addEventListener('focus', () => {
+		// Add padding to prevent the keyboard from obscuring content
+		mainContainer.style.paddingBottom = '350px';
+		sus_uname.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+	});
+
+	sus_uname.addEventListener('blur', (e) => {
+		// Check if focus is moving to sus_uname_build
+		setTimeout(() => {
+			// Only remove padding if focus isn't moving to the other input
+			if (document.activeElement !== sus_uname_build) {
+				gsap.to(mainContainer, { 
+					duration: 0.5, 
+					paddingBottom: '0px', 
+					ease: 'power1.out' 
+				});
+			}
+		}, 0);
+	});
+
+	// Keyboard handling for uname_build input
+	sus_uname_build.addEventListener('focus', () => {
+		// Add padding to prevent the keyboard from obscuring content
+		mainContainer.style.paddingBottom = '350px';
+		sus_uname_build.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+	});
+
+	sus_uname_build.addEventListener('blur', (e) => {
+		// Check if focus is moving to sus_uname
+		setTimeout(() => {
+			// Only remove padding if focus isn't moving to the other input
+			if (document.activeElement !== sus_uname) {
+				gsap.to(mainContainer, { 
+					duration: 0.5, 
+					paddingBottom: '0px', 
+					ease: 'power1.out' 
+				});
+			}
+		}, 0);
+	});
 
 }
 
@@ -774,28 +846,6 @@ async function custom_try_umount(){
 	});
 }
 
-//Keyboard
-function keyboard_pop(){
-const inputBox = document.getElementById('sus_uname');
-const mainContainer = document.querySelector('main');
-
-inputBox.addEventListener('focus', () => {
-    // Add padding to prevent the keyboard from obscuring content
-    mainContainer.style.paddingBottom = '350px'; // Adjust padding value based on need
-    inputBox.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
-});
-
-inputBox.addEventListener('blur', () => {
-    // Remove the padding when the input loses focus
-    mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
-	setTimeout(() => {
-		mainContainer.style.paddingBottom = '0px';
-	}, 500);
-	
-});
-}
-
 //susfsstats();
 set_uname(settings);
-keyboard_pop();
 susfs_log_toggle(settings);
