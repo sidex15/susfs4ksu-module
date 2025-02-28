@@ -50,16 +50,12 @@ const sus_su_152 = document.getElementById("sus_su_152");
 const sus_su_154 = document.getElementById("sus_su_154");
 const sus_su_142 = document.getElementById("sus_su_142");
 const sus_su_1 = document.getElementById("sus_su_1");
-const sus_su_NOS = document.getElementById("sus_su_NOS");
 //toast(`is_sus_su_exists: ${is_sus_su_exists}`);
 if (is_sus_su_exists==-1){
 	sus_su.removeAttribute("checked");
 	sus_su.setAttribute("disabled","");
 	enable_sus_su.removeAttribute("checked");
 	enable_sus_su.setAttribute("disabled","");
-	if(susfs_version_decimal>=153 && kernel_variant=="GKI"){
-		sus_su_NOS.classList.remove("hidden");
-	}
 }
 else{
 	if(susfs_version_decimal>=150){
