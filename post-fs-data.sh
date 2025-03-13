@@ -4,7 +4,7 @@ SUSFS_BIN=/data/adb/ksu/bin/ksu_susfs
 . ${MODDIR}/utils.sh
 PERSISTENT_DIR=/data/adb/susfs4ksu
 tmpfolder=/data/adb/ksu/susfs4ksu
-mntfolder=/debug_ramdisk/susfs4ksu
+mntfolder=/dev/susfs4ksu
 mkdir -p $tmpfolder/logs
 mkdir -p $tmpfolder
 mkdir -p $mntfolder
