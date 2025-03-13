@@ -138,8 +138,8 @@ fi
 [ $hide_loops = 1 ] && {
 	echo "susfs4ksu/service: [hide_loops]" >> $logfile1
 	for device in $(ls -Ld /proc/fs/jbd2/loop*8 | sed 's|/proc/fs/jbd2/||; s|-8||'); do
-		${SUSFS_BIN} add_sus_path /proc/fs/jbd2/${device}-8 && echo "[sus_path]: susfs4ksu/service $i" >> $logfile1
-		${SUSFS_BIN} add_sus_path /proc/fs/ext4/${device} && echo "[sus_path]: susfs4ksu/service $i" >> $logfile1
+		${SUSFS_BIN} add_sus_path /proc/fs/jbd2/${device}-8 && echo "[sus_path]: susfs4ksu/service /proc/fs/jbd2/${device}-8" >> $logfile1
+		${SUSFS_BIN} add_sus_path /proc/fs/ext4/${device} && echo "[sus_path]: susfs4ksu/service /proc/fs/ext4/${device}" >> $logfile1
 	done
 }
 
@@ -149,11 +149,11 @@ fi
 	sepolicy_cil=/vendor/etc/selinux/vendor_sepolicy.cil
 	grep -q lineage $sepolicy_cil && {
 		grep -v "lineage" $sepolicy_cil > $mntfolder/vendor_sepolicy.cil
-		${SUSFS_BIN} add_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $i" >> $logfile1
+		${SUSFS_BIN} add_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
 		susfs_clone_perm $mntfolder/vendor_sepolicy.cil $sepolicy_cil
 		mount --bind $mntfolder/vendor_sepolicy.cil $sepolicy_cil
-		${SUSFS_BIN} update_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $i" >> $logfile1
-		${SUSFS_BIN} add_sus_mount $sepolicy_cil && echo "[sus_mount]: susfs4ksu/service $i" >> $logfile1
+		${SUSFS_BIN} update_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
+		${SUSFS_BIN} add_sus_mount $sepolicy_cil && echo "[sus_mount]: susfs4ksu/service $sepolicy_cil" >> $logfile1
 	}
 }
 
@@ -163,11 +163,11 @@ fi
 	compatibility_matrix=/system/etc/vintf/compatibility_matrix.device.xml
 	grep -q lineage $compatibility_matrix && {
 		grep -v "lineage" $compatibility_matrix > $mntfolder/compatibility_matrix.device.xml
-		${SUSFS_BIN} add_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $i" >> $logfile1
+		${SUSFS_BIN} add_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $compatibility_matrix" >> $logfile1
 		susfs_clone_perm $mntfolder/compatibility_matrix.device.xml $compatibility_matrix
 		mount --bind $mntfolder/compatibility_matrix.device.xml $compatibility_matrix
-		${SUSFS_BIN} update_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $i" >> $logfile1
-		${SUSFS_BIN} add_sus_mount $compatibility_matrix && echo "[sus_mount]: susfs4ksu/service $i" >> $logfile1
+		${SUSFS_BIN} update_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $compatibility_matrix" >> $logfile1
+		${SUSFS_BIN} add_sus_mount $compatibility_matrix && echo "[sus_mount]: susfs4ksu/service $compatibility_matrix" >> $logfile1
 	}
 }
 
