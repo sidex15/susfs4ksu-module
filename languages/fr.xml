@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="fr">
+  <!-- Général -->
+  <string id="app_title">Menu WebUI</string>
+  <string id="warning_label">Avertissement !</string>
+  <string id="cancel_label">Annuler</string>
+  <string id="confirm_label">Confirmer</string>
+  <string id="about_label">À propos</string>
+  <string id="main_menu_label">Menu Principal</string>
+  <string id="load_label">Charger</string>
+  
+  <!-- Page d'accueil -->
+  <string id="kernel_version_label">Version du noyau</string>
+  <string id="sus_path_label">CHEMIN SUS</string>
+  <string id="sus_mount_label">MONTAGE SUS</string>
+  <string id="try_umount_label">ESSAYER DE DÉMONTER</string>
+  
+  <!-- Paramètres -->
+  <string id="susfs_log_label">Journaux SUSFS</string>
+  <string id="sus_su_1_label">SUS SU est en mode 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU au démarrage</string>
+  <string id="susfs_settings_label">paramètres personnalisés susfs</string>
+  <string id="auto_hide_label">masquage automatique</string>
+  <string id="default_mounts_label">masquer automatiquement les montages par défaut</string>
+  <string id="bind_mounts_label">masquer automatiquement les montages de liaison</string>
+  <string id="try_umount_bind_label">essayer automatiquement de démonter les montages de liaison</string>
+  <string id="zygote_try_umount_label">essayer de démonter pour le processus système zygote</string>
+  <string id="kernel_uname_label">Uname du noyau</string>
+  <string id="spoof_kernel_version_label">Fausse version du noyau</string>
+  <string id="spoof_kernel_build_label">Fausse compilation du noyau</string>
+  <string id="spoof_on_boot_label">Falsification au démarrage</string>
+  <string id="post_fs_data_label">Exécuter post-fs-data (falsification améliorée)</string>
+  <string id="uname_warning_label2">L&#39;activation de cette option peut provoquer un bootloop ou une instabilité en cas de falsification incorrecte. Confirmez-vous l&#39;exécution post-fs-data ?</string>
+  
+  <!-- Personnalisation -->
+  <string id="custom_settings_label">Paramètres personnalisés</string>
+  <string id="hide_custom_rom_label">Masquer la ROM personnalisée</string>
+  <string id="hide_vendor_sepolicy_label">Masquer la SEPolicy du vendeur</string>
+  <string id="hide_compat_matrix_label">Masquer la matrice de compatibilité</string>
+  <string id="fake_service_list_label">Liste de services falsifiée</string>
+  <string id="hide_gapps_label">Masquer GApps</string>
+  <string id="hide_revanced_label">Masquer ReVanced</string>
+  <string id="spoof_cmdline_label">Fausse ligne de commande</string>
+  <string id="hide_ksu_loop_label">Masquer la boucle KSU</string>
+  <string id="force_hide_lsposed_label">Forcer le masquage de LSPosed</string>
+  <string id="custom_sus_path_label">Chemin SUS personnalisé</string>
+  <string id="custom_sus_mount_label">Montage SUS personnalisé</string>
+  <string id="custom_try_umount_label">Essai de démontage personnalisé</string>
+</language>

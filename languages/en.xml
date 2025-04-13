@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="en">
+  <!-- General -->
+  <string id="app_title">WebUI menu</string>
+  <string id="warning_label">Warning!</string>
+  <string id="cancel_label">Cancel</string>
+  <string id="confirm_label">Confirm</string>
+  <string id="about_label">About</string>
+  <string id="main_menu_label">Main Menu</string>
+  <string id="load_label">Load</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">Kernel Version</string>
+  <string id="sus_path_label">SUS PATH</string>
+  <string id="sus_mount_label">SUS MOUNT</string>
+  <string id="try_umount_label">TRY UMOUNT</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">SUSFS Logs</string>
+  <string id="sus_su_1_label">SUS SU is on Mode 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU on boot</string>
+  <string id="susfs_settings_label">custom susfs settings</string>
+  <string id="auto_hide_label">auto hide settings</string>
+  <string id="default_mounts_label">auto hide default mounts</string>
+  <string id="bind_mounts_label">auto hide bind mounts</string>
+  <string id="try_umount_bind_label">auto try umount bind mounts</string>
+  <string id="zygote_try_umount_label">try umount for zygote system process</string>
+  <string id="kernel_uname_label">Kernel Uname</string>
+  <string id="spoof_kernel_version_label">Spoof Kernel Version</string>
+  <string id="spoof_kernel_build_label">Spoof Kernel Build</string>
+  <string id="spoof_on_boot_label">Spoof on boot</string>
+  <string id="post_fs_data_label">Execute on post-fs-data (spoofs better)</string>
+  <string id="uname_warning_label2">Setting this on may cause a bootloop or instability if spoofed incorrectly. Are you sure you want to enable post-fs-data execution?</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">Custom Settings</string>
+  <string id="hide_custom_rom_label">Hide Custom ROM</string>
+  <string id="hide_vendor_sepolicy_label">Hide Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">Hide Compat Matrix</string>
+  <string id="fake_service_list_label">Spoof Service List</string>
+  <string id="hide_gapps_label">Hide GApps</string>
+  <string id="hide_revanced_label">Hide Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Spoof Cmdline</string>
+  <string id="hide_ksu_loop_label">Hide KSU Loop</string>
+  <string id="force_hide_lsposed_label">Force Hide LSPosed</string>
+  <string id="custom_sus_path_label">Custom SUS Path</string>
+  <string id="custom_sus_mount_label">Custom SUS Mount</string>
+  <string id="custom_try_umount_label">Custom Try Umount</string>
+</language>

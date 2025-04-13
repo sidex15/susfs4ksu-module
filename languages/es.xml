@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<language id="es">  
+  <!-- General -->  
+  <string id="app_title">Menú WebUI</string>  
+  <string id="warning_label">¡Advertencia!</string>  
+  <string id="cancel_label">Cancelar</string>  
+  <string id="confirm_label">Confirmar</string>  
+  <string id="about_label">Acerca de</string>
+  <string id="main_menu_label">Menú Principal</string>
+  <string id="load_label">Cargar</string>
+  
+  <!-- Página de inicio -->  
+  <string id="kernel_version_label">Versión del Kernel</string>  
+  <string id="sus_path_label">RUTA SUS</string>  
+  <string id="sus_mount_label">MONTAJE SUS</string>  
+  <string id="try_umount_label">INTENTAR DESMONTAR</string>  
+  
+  <!-- Configuración -->  
+  <string id="susfs_log_label">Registros SUSFS</string>  
+  <string id="sus_su_1_label">SUS SU está en Modo 1</string>  
+  <string id="sus_su_label">SUS SU</string>  
+  <string id="sus_su_boot_label">SUS SU al arranque</string>  
+  <string id="susfs_settings_label">configuraciones personalizadas de susfs</string>  
+  <string id="auto_hide_label">ocultar automáticamente configuraciones</string>  
+  <string id="default_mounts_label">ocultar automáticamente montajes predeterminados</string>  
+  <string id="bind_mounts_label">ocultar automáticamente montajes de enlace</string>  
+  <string id="try_umount_bind_label">intentar automáticamente desmontar montajes de enlace</string>  
+  <string id="zygote_try_umount_label">intentar desmontar para el proceso del sistema zygote</string>  
+  <string id="kernel_uname_label">Uname del Kernel</string>  
+  <string id="spoof_kernel_version_label">Suplantar Versión del Kernel</string>  
+  <string id="spoof_kernel_build_label">Suplantar Compilación del Kernel</string>  
+  <string id="spoof_on_boot_label">Suplantar al arranque</string>  
+  <string id="post_fs_data_label">Ejecutar en post-fs-data (suplantación más efectiva)</string>  
+  <string id="uname_warning_label2">Activar esto puede causar un bucle de arranque o inestabilidad si la suplantación es incorrecta. ¿Seguro que deseas habilitar la ejecución post-fs-data?</string>  
+  
+  <!-- Personalizado -->  
+  <string id="custom_settings_label">Configuraciones Personalizadas</string>
+  <string id="hide_custom_rom_label">Ocultar ROM Personalizada</string>  
+  <string id="hide_vendor_sepolicy_label">Ocultar SEPolicy del Fabricante</string>  
+  <string id="hide_compat_matrix_label">Ocultar Matriz de Compatibilidad</string>  
+  <string id="fake_service_list_label">Lista de Servicios Falsos</string>  
+  <string id="hide_gapps_label">Ocultar GApps</string>  
+  <string id="hide_revanced_label">Ocultar ReVanced</string>  
+  <string id="spoof_cmdline_label">Suplantar Línea de Comandos</string>  
+  <string id="hide_ksu_loop_label">Ocultar Bucle KSU</string>  
+  <string id="force_hide_lsposed_label">Forzar Ocultación de LSPosed</string>  
+  <string id="custom_sus_path_label">Ruta SUS Personalizada</string>  
+  <string id="custom_sus_mount_label">Montaje SUS Personalizado</string>  
+  <string id="custom_try_umount_label">Intento de Desmontaje Personalizado</string>  
+</language>  

@@ -3,6 +3,7 @@ import Highway from '@dogstudio/highway';
 import { gsap } from 'gsap';
 import Fade from './fade.js';
 import './space.js';
+import './i18n.js';
 
 //module location
 const tmpfolder="/data/adb/ksu/susfs4ksu"
@@ -90,6 +91,15 @@ const H = new Highway.Core({
 	transitions: {
 		default: Fade
 	}
+});
+
+H.on('NAVIGATE_IN', async ({ to, from, trigger, location }) => {
+	// Apply translations to new page content
+    if (window.i18n) {
+        // Re-apply translations to the new DOM elements
+        const currentLang = window.i18n.getCurrentLanguage();
+        window.i18n.applyTranslationsToNewContent(to.view);
+    }
 });
 
 //execute again after the transition ends
@@ -365,7 +375,6 @@ async function set_uname(settings) {
     boot_on_postfsdata.addEventListener('change', async function(event) {
 		event.preventDefault();
 		if (custom_settings.spoof_uname<2){
-			modalMessage.textContent = `Setting this on may cause a bootloop or instability if spoofed incorrectly. Are you sure you want to enable post-fs-data execution?`;
 			modal.showModal();
 		}
 		else{
@@ -762,6 +771,6 @@ async function custom_try_umount(){
 	});
 }
 
-//susfsstats();
+// Initialize the page
 set_uname(settings);
 susfs_log_toggle(settings);
