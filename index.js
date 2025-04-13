@@ -601,7 +601,13 @@ async function custom_toggles(settings) {
 		const more_custom_rom = document.getElementById("more_custom_rom");
 		if (custom_settings.hide_cusrom==true){
 			run(`sed -i 's/hide_cusrom=1/hide_cusrom=0/' ${config}/config.sh`)
+			run (`sed -i 's/hide_vendor_sepolicy=1/hide_vendor_sepolicy=0/' ${config}/config.sh`)
+			run(`sed -i 's/hide_compat_matrix=1/hide_compat_matrix=0/' ${config}/config.sh`)
+			run(`sed -i 's/fake_service_list=1/fake_service_list=0/' ${config}/config.sh`)
 			custom_settings.hide_cusrom=false
+			hide_vendor_sepolicy.checked=false;
+			hide_compat_matrix.checked=false;
+			fake_service_list.checked=false;
 			more_custom_rom.classList.add("hidden");
 			toast("Reboot to take effect");
 		}
