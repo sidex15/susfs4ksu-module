@@ -8,6 +8,8 @@ const availableLanguages = {
   'en': 'English',
   'es': 'Español',
   'fr': 'Français',
+  'ptbr': 'Português',
+  'tr': 'Türkçe',
 };
 
 // Current language
