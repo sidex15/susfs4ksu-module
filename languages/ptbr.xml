@@ -1,0 +1,49 @@
+<language id="ptbr">
+  <!-- Geral -->
+  <string id="app_title">Menu WebUI</string>
+  <string id="warning_label">Aviso!</string>
+  <string id="cancel_label">Cancelar</string>
+  <string id="confirm_label">Confirmar</string>
+  <string id="about_label">Sobre</string>
+  <string id="main_menu_label">Menu Principal</string>
+  <string id="load_label">Carregar</string>
+  
+  <!-- Página Inicial -->
+  <string id="kernel_version_label">Versão do Kernel</string>
+  <string id="sus_path_label">Caminho SUS</string>
+  <string id="sus_mount_label">Montagem SUS</string>
+  <string id="try_umount_label">Tentar Desmontar</string>
+  
+  <!-- Configurações -->
+  <string id="susfs_log_label">Logs do SUSFS</string>
+  <string id="sus_su_1_label">SUS SU está no Modo 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU na inicialização</string>
+  <string id="susfs_settings_label">Configurações personalizadas do SUSFS</string>
+  <string id="auto_hide_label">Ocultar configurações automaticamente</string>
+  <string id="default_mounts_label">Ocultar montagens padrão automaticamente</string>
+  <string id="bind_mounts_label">Ocultar montagens bind automaticamente</string>
+  <string id="try_umount_bind_label">Tentar desmontar montagens bind automaticamente</string>
+  <string id="zygote_try_umount_label">Tentar desmontar para o processo do sistema Zygote</string>
+  <string id="kernel_uname_label">Kernel Uname</string>
+  <string id="spoof_kernel_version_label">Falsificar Versão do Kernel</string>
+  <string id="spoof_kernel_build_label">Falsificar Build do Kernel</string>
+  <string id="spoof_on_boot_label">Falsificar na inicialização</string>
+  <string id="post_fs_data_label">Executar no post-fs-data (melhora falsificação)</string>
+  <string id="uname_warning_label2">Ativar isso pode causar bootloop ou instabilidade se falsificado incorretamente. Tem certeza de que deseja ativar a execução no post-fs-data?</string>
+  
+  <!-- Personalizado -->
+  <string id="custom_settings_label">Configurações Personalizadas</string>
+  <string id="hide_custom_rom_label">Ocultar ROM Personalizada</string>
+  <string id="hide_vendor_sepolicy_label">Ocultar SEPolicy do Vendor</string>
+  <string id="hide_compat_matrix_label">Ocultar Matriz de Compatibilidade</string>
+  <string id="fake_service_list_label">Falsificar Lista de Serviços</string>
+  <string id="hide_gapps_label">Ocultar GApps</string>
+  <string id="hide_revanced_label">Ocultar Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Falsificar Cmdline</string>
+  <string id="hide_ksu_loop_label">Ocultar Loop do KSU</string>
+  <string id="force_hide_lsposed_label">Forçar Ocultação do LSPosed</string>
+  <string id="custom_sus_path_label">Caminho SUS Personalizado</string>
+  <string id="custom_sus_mount_label">Montagem SUS Personalizada</string>
+  <string id="custom_try_umount_label">Tentar Desmontar Personalizado</string>
+</language>
