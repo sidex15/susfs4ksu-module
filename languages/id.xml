@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="en">
+  <!-- General -->
+  <string id="app_title">Menu WebUI</string>
+  <string id="warning_label">Peringatan!</string>
+  <string id="cancel_label">Batal</string>
+  <string id="confirm_label">Konfirmasi</string>
+  <string id="about_label">Tentang</string>
+  <string id="main_menu_label">Menu Utama</string>
+  <string id="load_label">Muat</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">Versi Kernel</string>
+  <string id="sus_path_label">SUS PATH</string>
+  <string id="sus_mount_label">SUS MOUNT</string>
+  <string id="try_umount_label">TRY UMOUNT</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">Log SUSFS</string>
+  <string id="sus_su_1_label">SUS SU ada di Mode 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU saat boot</string>
+  <string id="susfs_settings_label">setelan kustom susfs</string>
+  <string id="auto_hide_label">setelan auto hide</string>
+  <string id="default_mounts_label">otomatis sembunyikan mount awal</string>
+  <string id="bind_mounts_label">otomatis sembunyikan bind mounts</string>
+  <string id="try_umount_bind_label">otomatis coba umount bind mount</string>
+  <string id="zygote_try_umount_label">coba umount untuk proses sistem zygote</string>
+  <string id="kernel_uname_label">Kernel Uname</string>
+  <string id="spoof_kernel_version_label">Spoof Versi Kernel</string>
+  <string id="spoof_kernel_build_label">Spoof Build Kernel</string>
+  <string id="spoof_on_boot_label">Spoof saat boot</string>
+  <string id="post_fs_data_label">Dieksekusi pada post-fs-data (lebih baik dalam spoofing)</string>
+  <string id="uname_warning_label2">Mengaktifkan ini dapat menyebabkan bootloop atau ketidakstabilan jika dispoof secara tidak benar. Apakah kamu yakin ingin mengaktifkan eksekusi post-fs-data?</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">Setelan Kustom</string>
+  <string id="hide_custom_rom_label">Sembunyikan Custom ROM</string>
+  <string id="hide_vendor_sepolicy_label">Sembunyikan SEPolicy Vendor</string>
+  <string id="hide_compat_matrix_label">Sembunyikan Compat Matrix</string>
+  <string id="fake_service_list_label">Spoof Daftar Service</string>
+  <string id="hide_gapps_label">Sembunyikan GApps</string>
+  <string id="hide_revanced_label">Sembunyikan Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Spoof Cmdline</string>
+  <string id="hide_ksu_loop_label">Sembunyikan Loop KSU</string>
+  <string id="force_hide_lsposed_label">Paksa Sembunyikan LSPosed</string>
+  <string id="custom_sus_path_label">SUS Path Kustom</string>
+  <string id="custom_sus_mount_label">SUS Mount Kustom</string>
+  <string id="custom_try_umount_label">Try Umount Kustom</string>
+</language>
