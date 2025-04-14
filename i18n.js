@@ -3,15 +3,31 @@
  * Uses XML files to store translations for different languages
  */
 
-// Available languages - add more as needed
-const availableLanguages = {
-  'en': 'English',
-  'es': 'Español',
-  'fr': 'Français',
+// Default language as fallback
+let availableLanguages = {
+  'en': 'English'
 };
 
 // Current language
 let currentLanguage = localStorage.getItem('susfs_language') || 'en';
+
+/**
+ * Load available languages from languages.json file
+ * @returns {Promise<void>}
+ */
+async function loadAvailableLanguages() {
+  try {
+    const response = await fetch('/languages/languages.json');
+    if (response.ok) {
+      availableLanguages = await response.json();
+      console.log("Available languages loaded:", availableLanguages);
+    } else {
+      console.error("Could not load languages.json, using defaults");
+    }
+  } catch (error) {
+    console.error("Error loading languages.json:", error);
+  }
+}
 
 /**
  * Load a language XML file
@@ -87,6 +103,9 @@ async function switchLanguage(langCode) {
  * Initialize the translation system
  */
 async function initTranslations() {
+  // Load available languages first
+  await loadAvailableLanguages();
+  
   // Create language selector
   createLanguageSelector();
   

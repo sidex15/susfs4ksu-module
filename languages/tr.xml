@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="tr">
+  <!-- General -->
+  <string id="app_title">WebUI Menüsü</string>
+  <string id="warning_label">Uyarı!</string>
+  <string id="cancel_label">İptal</string>
+  <string id="confirm_label">Onayla</string>
+  <string id="about_label">Hakkında</string>
+  <string id="main_menu_label">Ana Menü</string>
+  <string id="load_label">Yükle</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">Çekirdek Sürümü</string>
+  <string id="sus_path_label">SUS Yolu</string>
+  <string id="sus_mount_label">SUS Bağlama</string>
+  <string id="try_umount_label">Bağlantıyı Kaldırmayı Dene</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">SUSFS Günlükleri</string>
+  <string id="sus_su_1_label">SUS SU Mod 1\'de</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">Başlangıçta SUS SU</string>
+  <string id="susfs_settings_label">Özel SUSFS Ayarları</string>
+  <string id="auto_hide_label">Otomatik Gizleme Ayarları</string>
+  <string id="default_mounts_label">Varsayılan Bağlantıları Otomatik Gizle</string>
+  <string id="bind_mounts_label">Bağlantı Bağlantılarını Otomatik Gizle</string>
+  <string id="try_umount_bind_label">Bağlantı Bağlantılarını Otomatik Kaldırmayı Dene</string>
+  <string id="zygote_try_umount_label">Zygote Sistem Süreci için Bağlantı Kaldırmayı Dene</string>
+  <string id="kernel_uname_label">Çekirdek (Kernel) Uname</string>
+  <string id="spoof_kernel_version_label">Çekirdek Sürümünü Taklit Et</string>
+  <string id="spoof_kernel_build_label">Çekirdek Derlemesini Taklit Et</string>
+  <string id="spoof_on_boot_label">Başlangıçta Taklit Et</string>
+  <string id="post_fs_data_label">Post-fs-data\'da Çalıştır (daha iyi taklit eder)</string>
+  <string id="uname_warning_label2">Bu ayarı açmak, yanlış taklit edilmesi durumunda önyükleme döngüsüne veya kararsızlığa neden olabilir. Post-fs-data çalıştırmasını etkinleştirmek istediğinizden emin misiniz?</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">Özel Ayarlar</string>
+  <string id="hide_custom_rom_label">Özel ROM\'u Gizle</string>
+  <string id="hide_vendor_sepolicy_label">Satıcı SEPolicy\'sini Gizle</string>
+  <string id="hide_compat_matrix_label">Uyumluluk Matrisini Gizle</string>
+  <string id="fake_service_list_label">Servis Listesini Taklit Et</string>
+  <string id="hide_gapps_label">GApps\'i Gizle</string>
+  <string id="hide_revanced_label">Revanced\'ı Gizle (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Komut Satırını Taklit Et</string>
+  <string id="hide_ksu_loop_label">KSU Döngüsünü Gizle</string>
+  <string id="force_hide_lsposed_label">LSPosed\'ı Zorla Gizle</string>
+  <string id="custom_sus_path_label">Özel SUS Yolu</string>
+  <string id="custom_sus_mount_label">Özel SUS Bağlama</string>
+  <string id="custom_try_umount_label">Özel Bağlantı Kaldırmayı Dene</string>
+</language>
