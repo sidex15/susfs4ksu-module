@@ -11,8 +11,8 @@
   
   <!-- Home Page -->
   <string id="kernel_version_label">内核版本</string>
-  <string id="sus_path_label">SUS 路径</string>
-  <string id="sus_mount_label">SUS 挂载</string>
+  <string id="sus_path_label">SUS路径</string>
+  <string id="sus_mount_label">SUS挂载</string>
   <string id="try_umount_label">尝试卸载</string>
   
   <!-- Settings -->
@@ -26,7 +26,7 @@
   <string id="bind_mounts_label">自动隐藏绑定挂载</string>
   <string id="try_umount_bind_label">自动尝试卸载绑定挂载</string>
   <string id="zygote_try_umount_label">尝试卸载Zygote系统进程挂载</string>
-  <string id="kernel_uname_label">内核名字</string>
+  <string id="kernel_uname_label">内核版本信息</string>
   <string id="spoof_kernel_version_label">伪装内核版本</string>
   <string id="spoof_kernel_build_label">伪装内核构建</string>
   <string id="spoof_on_boot_label">启用伪装</string>
@@ -35,7 +35,7 @@
   
   <!-- Custom -->
   <string id="custom_settings_label">自定义设置</string>
-  <string id="hide_custom_rom_label">隐藏类原生系统</string>
+  <string id="hide_custom_rom_label">隐藏类原生ROM路径</string>
   <string id="hide_vendor_sepolicy_label">隐藏 Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">隐藏 Compat Matrix</string>
   <string id="fake_service_list_label">伪造服务列表</string>
@@ -44,7 +44,7 @@
   <string id="spoof_cmdline_label">隐藏 Cmdline</string>
   <string id="hide_ksu_loop_label">隐藏Ksu挂载点</string>
   <string id="force_hide_lsposed_label">强制隐藏 LSPosed</string>
-  <string id="custom_sus_path_label">自定义 SUS 路径</string>
-  <string id="custom_sus_mount_label">自定义 SUS 挂载</string>
+  <string id="custom_sus_path_label">自定义SUS路径</string>
+  <string id="custom_sus_mount_label">自定义SUS挂载</string>
   <string id="custom_try_umount_label">自定义尝试卸载</string>
 </language>
