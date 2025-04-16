@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="zh-rCN">
+  <!-- General -->
+  <string id="app_title">菜单</string>
+  <string id="warning_label">警告!</string>
+  <string id="cancel_label">取消</string>
+  <string id="confirm_label">确认</string>
+  <string id="about_label">关于</string>
+  <string id="main_menu_label">主菜单</string>
+  <string id="load_label">加载</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">内核版本</string>
+  <string id="sus_path_label">SUS路径</string>
+  <string id="sus_mount_label">SUS挂载</string>
+  <string id="try_umount_label">尝试卸载</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">日志</string>
+  <string id="sus_su_1_label">SUS SU 处于模式 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">启动SUS SU</string>
+  <string id="susfs_settings_label">自定义Susfs设置</string>
+  <string id="auto_hide_label">自动隐藏设置</string>
+  <string id="default_mounts_label">自动隐藏默认挂载</string>
+  <string id="bind_mounts_label">自动隐藏绑定挂载</string>
+  <string id="try_umount_bind_label">自动尝试卸载绑定挂载</string>
+  <string id="zygote_try_umount_label">尝试卸载Zygote系统进程挂载</string>
+  <string id="kernel_uname_label">内核版本信息</string>
+  <string id="spoof_kernel_version_label">伪装内核版本</string>
+  <string id="spoof_kernel_build_label">伪装内核构建</string>
+  <string id="spoof_on_boot_label">启用伪装</string>
+  <string id="post_fs_data_label">在 post-fs-data 上执行（更好的伪装）</string>
+  <string id="uname_warning_label2">如果错误地启用此选项，可能会导致设备变砖或不稳定。您确定要启用后文件系统数据执行吗？</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">自定义设置</string>
+  <string id="hide_custom_rom_label">隐藏类原生ROM路径</string>
+  <string id="hide_vendor_sepolicy_label">隐藏 Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">隐藏 Compat Matrix</string>
+  <string id="fake_service_list_label">伪造服务列表</string>
+  <string id="hide_gapps_label">隐藏谷歌应用</string>
+  <string id="hide_revanced_label">隐藏 Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">隐藏 Cmdline</string>
+  <string id="hide_ksu_loop_label">隐藏Ksu挂载点</string>
+  <string id="force_hide_lsposed_label">强制隐藏 LSPosed</string>
+  <string id="custom_sus_path_label">自定义SUS路径</string>
+  <string id="custom_sus_mount_label">自定义SUS挂载</string>
+  <string id="custom_try_umount_label">自定义尝试卸载</string>
+</language>
