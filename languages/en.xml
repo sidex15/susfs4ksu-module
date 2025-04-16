@@ -47,4 +47,8 @@
   <string id="custom_sus_path_label">Custom SUS Path</string>
   <string id="custom_sus_mount_label">Custom SUS Mount</string>
   <string id="custom_try_umount_label">Custom Try Umount</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Contributors:</string>
+  <string id= "translators_label">Translators:</string>
 </language>

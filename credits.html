@@ -7,6 +7,7 @@
 	<title>Document</title>
 	<link href="./index.css" type="text/css" rel="stylesheet">
 	<script type="module" src="index.js"></script>
+    <script type="module" src="i18n.js"></script>
 </head>
 
 <body class="max-h-screen overflow-y-auto" data-router-wrapper>
@@ -48,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <h1 class="text-3xl text-white">Contributors:</h1>
+                    <h1 class="text-3xl text-white" data-i18n="contrib_label">Contributors:</h1>
                     <div class="flex justify-center w-full">
                         <div class="flex gap-7 overflow-x-auto pb-4 pl-2 pr-2 max-w-full hide-scrollbar">
                             <div class="space-y-2 flex-shrink-0">
@@ -143,7 +144,7 @@
                             </div>
                         </div>  
                     </div>
-                    <h1 class="text-3xl text-white mb-4">Translators:</h1>
+                    <h1 class="text-3xl text-white mb-4" data-i18n="translators_label">Translators:</h1>
                     <div class="flex justify-center w-full">
                         <div class="flex gap-7 overflow-x-auto pb-4 pl-2 pr-2 max-w-full hide-scrollbar">
 
@@ -216,8 +217,14 @@
                         </div>         
                     </div>
                 </div>
-                <a href="index.html" class="text-white"><button class="btn btn-outline text-xl bg-cyan-100/30 dark:bg-black/30 backdrop-blur-sm text-white border-white">Back to main menu</button></a>
+                <a href="index.html" class="text-white"><button class="btn btn-outline text-xl bg-cyan-100/30 dark:bg-black/30 backdrop-blur-sm text-white border-white" data-i18n="main_menu_label">Back to main menu</button></a>
             </section>
     </main>
+    <script>
+		// Initialize translations after DOM is loaded
+		document.addEventListener('DOMContentLoaded', () => {
+		  window.i18n.init();
+		});
+	</script>
 </body>
 </html>
