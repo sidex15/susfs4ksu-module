@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="en">
+  <!-- General -->
+  <string id="app_title">Меню WebUI</string>
+  <string id="warning_label">Внимание!</string>
+  <string id="cancel_label">Отмена</string>
+  <string id="confirm_label">Применить</string>
+  <string id="about_label">О нас</string>
+  <string id="main_menu_label">Главное меню</string>
+  <string id="load_label">Загрузка</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">Версия ядра</string>
+  <string id="sus_path_label">Пропатчено SUS</string>
+  <string id="sus_mount_label">Смонтировано SUS</string>
+  <string id="try_umount_label">Отмонтировано</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">Логи SUSFS</string>
+  <string id="sus_su_1_label">SUS SU находится в режиме 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU при загрузке</string>
+  <string id="susfs_settings_label">Доп. настройки susfs</string>
+  <string id="auto_hide_label">Настройка автоскрытия</string>
+  <string id="default_mounts_label">Автоскрытие default mounts</string>
+  <string id="bind_mounts_label">Автоскрытие bind mounts</string>
+  <string id="try_umount_bind_label">Автомантическое отмонтирование bind mounts</string>
+  <string id="zygote_try_umount_label">Пробовать отмонтировать системны процесс zygote</string>
+  <string id="kernel_uname_label">Имя ядра</string>
+  <string id="spoof_kernel_version_label">Подмена версии ядра</string>
+  <string id="spoof_kernel_build_label">Подмена билда ядра</string>
+  <string id="spoof_on_boot_label">Подмена при загрузке</string>
+  <string id="post_fs_data_label">Выполнить из post-fs-data (рекомендуется подмена)</string>
+  <string id="uname_warning_label2">Включение этого параметра может привести к задержке загрузки или нестабильности при неправильной настройке. Вы уверены, что хотите включить выполнение post-fs-data?</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">Доп. настройки</string>
+  <string id="hide_custom_rom_label">Скрыть следы кастомной прошивки</string>
+  <string id="hide_vendor_sepolicy_label">Скрыть Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">Скрыть Compat Matrix</string>
+  <string id="fake_service_list_label">Подмена Service List</string>
+  <string id="hide_gapps_label">Скрыть GApps</string>
+  <string id="hide_revanced_label">Скрыть Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Подмена Cmdline</string>
+  <string id="hide_ksu_loop_label">Скрыть KSU Loop</string>
+  <string id="force_hide_lsposed_label">Улучшенное скрытие LSPosed</string>
+  <string id="custom_sus_path_label">Свой патч SUS</string>
+  <string id="custom_sus_mount_label">Свой SUS Mount</string>
+  <string id="custom_try_umount_label">Свой Try Umount</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Сопровождающие:</string>
+  <string id= "translators_label">Переводчики:</string>
+</language>
