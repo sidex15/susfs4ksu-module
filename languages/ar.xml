@@ -23,8 +23,8 @@
   <string id="susfs_settings_label">إعدادات SUSFS مخصصة</string>
   <string id="auto_hide_label">إخفاء الإعدادات تلقائيا</string>
   <string id="default_mounts_label">إخفاء mounts تلقائيا</string>
-  <string id="bind_mounts_label">إخفاء bindmounts تلقائيا</string>
-  <string id="try_umount_bind_label">إلغاء binmounts تلقائيا</string>
+  <string id="bind_mounts_label">إخفاء bind mounts تلقائيا</string>
+  <string id="try_umount_bind_label">إلغاء bind mounts تلقائيا</string>
   <string id="zygote_try_umount_label">محاولة unmount على عملية النواة (zygote)</string>
   <string id="kernel_uname_label">Kernel Uname</string>
   <string id="spoof_kernel_version_label">تزييف إصدار الكيرنيل</string>
