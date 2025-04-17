@@ -41,8 +41,8 @@
   <string id="fake_service_list_label">伪造服务列表</string>
   <string id="hide_gapps_label">隐藏谷歌应用</string>
   <string id="hide_revanced_label">隐藏 Revanced (YT/YTM)</string>
-  <string id="spoof_cmdline_label">隐藏 Cmdline</string>
-  <string id="hide_ksu_loop_label">隐藏Ksu挂载点</string>
+  <string id="spoof_cmdline_label">伪装命令行</string>
+  <string id="hide_ksu_loop_label">隐藏Ksu循环</string>
   <string id="force_hide_lsposed_label">强制隐藏 LSPosed</string>
   <string id="custom_sus_path_label">自定义SUS路径</string>
   <string id="custom_sus_mount_label">自定义SUS挂载</string>
