@@ -3,7 +3,10 @@
 <head>
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Document</title>
+
+
+
   <script type="module" crossorigin src="/assets/fade-DXKTELhO.js"></script>
   <script type="module" crossorigin src="/assets/i18n-BqJdyLAD.js"></script>
   <script type="module" crossorigin src="/assets/index-Bo4QDfVZ.js"></script>
@@ -37,31 +40,31 @@
 		<div data-router-view="home">
 			<div class="flex justify-between items-center mx-auto ml-4 pt-5 mr-4">
 				<div class="flex flex-col">
-					<h1 class="font-bold text-6xl text-white font-amongus">SUSFS A</h1>
-					<h3 class="text-2xl text-balance text-white" data-i18n="app_title">WebUI menu</h3>
+					<h1 class="font-bold text-4xl text-white font-amongus">SUSFS A</h1>
+					<h3 class="text-xl text-balance text-white" data-i18n="app_title">WebUI menu</h3>
 					<h4 id="susfs_version" class="text-lg text-balance text-white font-amongus2"></h4>
 				</div>
 				<div>
 					<select class="select font-sans border-white bg-cyan-100/20 dark:bg-black/20 dark:text-white backdrop-blur-[2.5px] pt-1 text-white" id="language">
 					</select>
-					<a href="credits.html" class="text-white"><button class="btn btn-outline text-lg border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] mt-2 text-white h-auto" data-i18n="about_label">about</button></a>
+					<a href="credits.html" class="text-white"><button class="btn btn-outline text-base border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] mt-2 text-white h-auto" data-i18n="about_label">about</button></a>
 				</div>
 			</div>
 			<section class="flex flex-col justify-start items-center min-h-fit ml-4 mr-4 uppercase">
 				<div class="stats stats-horizontal border-2 border-white divide-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] lg:stats-horizontal mt-6">
 					<div class="stat">
-					  <div class="stat-title text-white text-xl text-wrap text-center" data-i18n="sus_path_label">SUS PATH</div>
-					  <div class="stat-value text-white text-lg text-ellipsis overflow-hidden text-center" id="sus_path"></div>
+					  <div class="stat-title text-white text-base text-wrap text-center" data-i18n="sus_path_label">SUS PATH</div>
+					  <div class="stat-value text-white text-base text-ellipsis overflow-hidden text-center" id="sus_path"></div>
 					</div>
 				  
 					<div class="stat">
-					  <div class="stat-title text-white text-xl text-wrap text-center" data-i18n="sus_mount_label">SUS MOUNT</div>
-					  <div class="stat-value text-white text-lg text-ellipsis overflow-hidden text-center" id="sus_mount"></div>
+					  <div class="stat-title text-white text-base text-wrap text-center" data-i18n="sus_mount_label">SUS MOUNT</div>
+					  <div class="stat-value text-white text-base text-ellipsis overflow-hidden text-center" id="sus_mount"></div>
 					</div>
 				  
 					<div class="stat">
-					  <div class="stat-title text-white text-xl text-wrap text-center" data-i18n="try_umount_label">TRY UMOUNT</div>
-					  <div class="stat-value text-white text-lg text-ellipsis overflow-hidden text-center" id="try_umount"></div>
+					  <div class="stat-title text-white text-base text-wrap text-center" data-i18n="try_umount_label">TRY UMOUNT</div>
+					  <div class="stat-value text-white text-base text-ellipsis overflow-hidden text-center" id="try_umount"></div>
 					</div>
 				  </div>
 				  <div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
@@ -69,7 +72,7 @@
 						<div class="w-[18.6rem]">
 							<div class="form-control">
 							  <label class="label cursor-pointer">
-								<span class="text-white text-xl" data-i18n="susfs_log_label">SUSFS Logs</span>
+								<span class="text-white text-lg" data-i18n="susfs_log_label">SUSFS Logs</span>
 								<input type="checkbox" id="susfs_log" class="toggle toggle-primary" checked="checked" />
 							  </label>
 							</div>
@@ -86,46 +89,46 @@
 							<div id="sus_su_142" class="hidden">
 								<div class="form-control">
 								<label class="label cursor-pointer">
-									<span class="text-white text-xl" data-i18n="sus_su_label">SUS SU</span>
+									<span class="text-white text-lg" data-i18n="sus_su_label">SUS SU</span>
 									<input type="checkbox" id="sus_su" class="toggle toggle-secondary" checked="checked" />
 								</label>
 								</div>
 								<div class="form-control">
 									<label class="label cursor-pointer">
-									<span class="text-white text-lg" data-i18n="sus_su_boot_label">SUS SU on boot</span>
+									<span class="text-white text-base" data-i18n="sus_su_boot_label">SUS SU on boot</span>
 									<input type="checkbox" id="enable_sus_su" class="toggle toggle-accent" checked="checked" />
 									</label>
 								</div>
 							</div>
 						</div>
 					</div>
-					<a href="custom.html" class="text-white"><button class="btn btn-outline text-lg border-white mt-2 text-white" data-i18n="susfs_settings_label">custom susfs settings</button></a>
+					<a href="custom.html" class="text-white"><button class="btn btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_settings_label">custom susfs settings</button></a>
 				  </div>
 				  <div id="sus_su_154" class="hidden">
 				  <div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
 					<div class="stat p-0 mt-0">
-						<div class="stat-title text-xl text-white pb-1" data-i18n="auto_hide_label">auto hide settings</div>
+						<div class="stat-title text-lg text-white pb-1" data-i18n="auto_hide_label">auto hide settings</div>
 						<div class="w-[18.6rem]">
 							<div class="form-control">
 							  <label class="label cursor-pointer">
-								<span class="text-white text-lg" data-i18n="default_mounts_label">auto hide default mounts</span>
+								<span class="text-white text-base" data-i18n="default_mounts_label">auto hide default mounts</span>
 								<input type="checkbox" id="auto_mount" class="toggle toggle-primary" checked="checked" />
 							  </label>
 							  <div class="form-control">
 								<label class="label cursor-pointer">
-								  <span class="text-white text-lg" data-i18n="bind_mounts_label">auto hide bind mounts</span>
+								  <span class="text-white text-base" data-i18n="bind_mounts_label">auto hide bind mounts</span>
 								  <input type="checkbox" id="auto_bind" class="toggle toggle-secondary" checked="checked" />
 								</label>
 							  </div>
 							  <div class="form-control">
 								<label class="label cursor-pointer">
-								  <span class="text-white text-lg" data-i18n="try_umount_bind_label">auto try umount bind mounts</span>
+								  <span class="text-white text-base" data-i18n="try_umount_bind_label">auto try umount bind mounts</span>
 								  <input type="checkbox" id="auto_umount_bind" class="toggle toggle-accent" checked="checked" />
 								</label>
 							  </div>
 							  <div class="form-control">
 								<label class="label cursor-pointer">
-								  <span class="text-white text-lg" data-i18n="zygote_try_umount_label">try umount for zygote system process</span>
+								  <span class="text-white text-base" data-i18n="zygote_try_umount_label">try umount for zygote system process</span>
 								  <input type="checkbox" id="try_umount_zygote" class="toggle toggle-success" checked="checked" />
 								</label>
 							  </div>
@@ -136,27 +139,27 @@
 				  </div>
 				  <div class="stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px]">
 					<div class="stat">
-						<div class="stat-title text-xl text-white" data-i18n="kernel_uname_label">Kernel Uname</div>
+						<div class="stat-title text-base text-white" data-i18n="kernel_uname_label">Kernel Uname</div>
 						<p class="text-white text-sm break-all font-sans normal-case font-normal" id="kernel_version"></p>
 					</div>
 					<div class="stat">
-						<div class="stat-title text-xl text-white" data-i18n="spoof_kernel_version_label">Spoof Kernel Version</div>
+						<div class="stat-title text-base text-white" data-i18n="spoof_kernel_version_label">Spoof Kernel Version</div>
 						<input type="text" id="sus_uname" placeholder="default" class="input text-sm font-sans w-full font-normal"/>
-						<div class="stat-title text-xl text-white" data-i18n="spoof_kernel_build_label">Spoof Kernel Build</div>
+						<div class="stat-title text-lg text-white" data-i18n="spoof_kernel_build_label">Spoof Kernel Build</div>
 						<input type="text" id="sus_uname_build" placeholder="default" class="input text-sm font-sans w-full font-normal"/>
 						<div class="form-control">
 							<label class="label cursor-pointer">
-							<span class="text-white text-lg font-amongus2" data-i18n="spoof_on_boot_label">Spoof on boot</span>
+							<span class="text-white text-sm font-amongus2" data-i18n="spoof_on_boot_label">Spoof on boot</span>
 							<input type="checkbox" id="uname-spoof-on-boot" class="checkbox checkbox-primary" checked="checked"/>
 							</label>
 						</div>
 						<div id="uname-at-postfs" class="form-control hidden">
 							<label class="label cursor-pointer">
-							<span class="text-white text-lg font-amongus2" data-i18n="post_fs_data_label">Execute on post-fs-data (spoofs better)</span>
+							<span class="text-white text-base font-amongus2" data-i18n="post_fs_data_label">Execute on post-fs-data (spoofs better)</span>
 							<input type="checkbox" id="uname-spoof-on-postfsdata" class="checkbox checkbox-primary" checked="checked"/>
 							</label>
 						</div>
-						<button class="btn btn-outline w-28 mt-2 border-white text-white text-lg font-normal" id="set_uname">Make it SuS</button>
+						<button class="btn btn-outline w-28 mt-2 border-white text-white text-base font-normal" id="set_uname">Make it SuS</button>
 					</div>
 				  </div>
 			</section>
