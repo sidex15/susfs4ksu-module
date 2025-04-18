@@ -11,6 +11,7 @@ jobs:
       - name: Checkout webui branch
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           ref: webui
 
       - name: Build webui branch
@@ -25,6 +26,7 @@ jobs:
       - name: Checkout v1.5.2+ branch
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           ref: v1.5.2+
 
       - name: Remove old contents from webroot folder
@@ -38,7 +40,9 @@ jobs:
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
-          github_token: ${{ secrets.SUSFS_PUSH_SECRET }}
+          github_token: ${{ secrets.SUSFS4KSU_SECRET }}
+          author_email: "24408329+sidex15@users.noreply.github.com"
+          author_name: "sidex15"
           message: 'Update webroot with latest build from webui branch'
           branch: 'v1.5.2+'
           
