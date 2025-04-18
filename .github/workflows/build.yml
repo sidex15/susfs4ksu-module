@@ -38,7 +38,7 @@ jobs:
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.SUSFS_PUSH_SECRET }}
           message: 'Update webroot with latest build from webui branch'
           branch: 'v1.5.2+'
           
