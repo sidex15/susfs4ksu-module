@@ -47,4 +47,8 @@
   <string id="custom_sus_path_label">Özel SUS Yolu</string>
   <string id="custom_sus_mount_label">Özel SUS Bağlama</string>
   <string id="custom_try_umount_label">Özel Bağlantı Kaldırmayı Dene</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Katkıda bulunanlar:</string>
+  <string id= "translators_label">Çevirmenler:</string>
 </language>
