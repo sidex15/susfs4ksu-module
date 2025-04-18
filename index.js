@@ -23,11 +23,12 @@ var susfs_stats = catToObject(await run(`cat ${tmpfolder}/susfs_stats.txt`));
 const kernel_variant = await run(`${susfs_bin} show variant`);
 if (is_log_empty=="true"){
 	susfs_stats = catToObject(await run(`cat ${tmpfolder}/susfs_stats1.txt`));
-	toast("susfs_stats.txt is empty/missing. Showed Stats from module script");
+	toast("/data/adb/ksu/susfs4ksu/logs/susfs.log is empty/missing.");
+	toast("Fallback to stats executed from the module.");
 }
 
+// Convert the string content to an object
 function catToObject(cat){
-    // Convert the string content to an object
     const obj = cat
     .split('\n')                    // Split into lines
     .filter(line => line.includes('='))  // Filter valid lines
