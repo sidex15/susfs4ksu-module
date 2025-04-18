@@ -2,7 +2,6 @@ name: Build and Release
 
 on:
   push:
-  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -36,20 +35,10 @@ jobs:
         run: |
           cp -r ../dist-temp/* webroot/
 
-      - name: Update version with random CI string
-        run: |
-          RANDOM_STRING=$(tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 5)
-          echo "BUILD_ID=${RANDOM_STRING}" >> $GITHUB_ENV
-          sed -i "s/version=v1.5.2-R.*/version=v1.5.2-CI-${RANDOM_STRING}/" module.prop
-
-      - name: Upload release artifact
-        uses: actions/upload-artifact@v4
+      - name: Commit & Push changes
+        uses: actions-js/push@master
         with:
-          name: release-1.5.2+_${{ env.BUILD_ID }}
-          path: ${{ github.workspace }}
-          exclude: |
-            .git/**
-            .github/**
-            node_modules/**
-            src/**
-            tests/**
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: 'Update webroot with latest build from webui branch'
+          branch: 'v1.5.2+'
+          
