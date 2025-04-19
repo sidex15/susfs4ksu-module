@@ -43,6 +43,6 @@ jobs:
           github_token: ${{ secrets.SUSFS4KSU_SECRET }}
           author_email: "24408329+sidex15@users.noreply.github.com"
           author_name: "sidex15"
-          message: 'Update webroot with latest build from webui branch'
+          message: 'WebUI: Update webroot with latest build from webui branch (Automated commit)'
           branch: 'v1.5.2+'
           
