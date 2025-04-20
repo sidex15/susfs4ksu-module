@@ -28,10 +28,10 @@
   <string id="zygote_try_umount_label">尝试卸载 Zygote 系统进程挂载</string>
   <string id="kernel_uname_label">内核版本信息</string>
   <string id="spoof_kernel_version_label">伪装内核版本</string>
-  <string id="spoof_kernel_build_label">伪装内核构建</string>
-  <string id="spoof_on_boot_label">启用伪装</string>
-  <string id="post_fs_data_label">在 post-fs-data 时执行（伪装效果更好）</string>
-  <string id="uname_warning_label2">如果错误地启用此选项，可能会导致设备变砖或不稳定，您确定要在 post-fs-data 时执行吗？</string>
+  <string id="spoof_kernel_build_label">伪装内核构建信息</string>
+  <string id="spoof_on_boot_label">在设备启动时自动伪装</string>
+  <string id="post_fs_data_label">在 post-fs-data 时伪装（伪装效果更好）</string>
+  <string id="uname_warning_label2">如果错误地启用此选项，可能会导致设备变砖或不稳定，您确定要在 post-fs-data 时伪装吗？</string>
   
   <!-- Custom -->
   <string id="custom_settings_label">自定义设置</string>
