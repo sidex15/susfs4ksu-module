@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language id="en">
+<language id="ru">
   <!-- General -->
   <string id="app_title">Меню WebUI</string>
   <string id="warning_label">Внимание!</string>
@@ -13,25 +13,25 @@
   <string id="kernel_version_label">Версия ядра</string>
   <string id="sus_path_label">Пропатчено SUS</string>
   <string id="sus_mount_label">Смонтировано SUS</string>
-  <string id="try_umount_label">Отмонтировано</string>
+  <string id="try_umount_label">Размонтировано</string>
   
   <!-- Settings -->
   <string id="susfs_log_label">Логи SUSFS</string>
   <string id="sus_su_1_label">SUS SU находится в режиме 1</string>
   <string id="sus_su_label">SUS SU</string>
-  <string id="sus_su_boot_label">SUS SU при загрузке</string>
+  <string id="sus_su_boot_label">SUS SU при загрузке boot</string>
   <string id="susfs_settings_label">Доп. настройки susfs</string>
-  <string id="auto_hide_label">Настройка автоскрытия</string>
+  <string id="auto_hide_label">Настройки автоскрытия</string>
   <string id="default_mounts_label">Автоскрытие default mounts</string>
   <string id="bind_mounts_label">Автоскрытие bind mounts</string>
-  <string id="try_umount_bind_label">Автомантическое отмонтирование bind mounts</string>
-  <string id="zygote_try_umount_label">Пробовать отмонтировать системны процесс zygote</string>
-  <string id="kernel_uname_label">Имя ядра</string>
+  <string id="try_umount_bind_label">Автоматическое размонтирование bind mounts</string>
+  <string id="zygote_try_umount_label">Пробовать размонтировать системный процесс zygote</string>
+  <string id="kernel_uname_label">Название ядра</string>
   <string id="spoof_kernel_version_label">Подмена версии ядра</string>
   <string id="spoof_kernel_build_label">Подмена билда ядра</string>
-  <string id="spoof_on_boot_label">Подмена при загрузке</string>
-  <string id="post_fs_data_label">Выполнить из post-fs-data (рекомендуется подмена)</string>
-  <string id="uname_warning_label2">Включение этого параметра может привести к задержке загрузки или нестабильности при неправильной настройке. Вы уверены, что хотите включить выполнение post-fs-data?</string>
+  <string id="spoof_on_boot_label">Подмена при загрузке boot</string>
+  <string id="post_fs_data_label">Выполнить из post-fs-data (эффективнее)</string>
+  <string id="uname_warning_label2">Включение этой опции может привести к циклу перезагрузки или нестабильности системы при неправильной подмене. Вы уверены, что хотите включить выполнение из post-fs-data?</string>
   
   <!-- Custom -->
   <string id="custom_settings_label">Доп. настройки</string>
@@ -43,12 +43,12 @@
   <string id="hide_revanced_label">Скрыть Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Подмена Cmdline</string>
   <string id="hide_ksu_loop_label">Скрыть KSU Loop</string>
-  <string id="force_hide_lsposed_label">Улучшенное скрытие LSPosed</string>
-  <string id="custom_sus_path_label">Свой патч SUS</string>
+  <string id="force_hide_lsposed_label">Принудительное скрытие LSPosed</string>
+  <string id="custom_sus_path_label">Свой SUS Path</string>
   <string id="custom_sus_mount_label">Свой SUS Mount</string>
   <string id="custom_try_umount_label">Свой Try Umount</string>
 
   <!-- Credits -->
   <string id="contrib_label">Сопровождающие:</string>
-  <string id= "translators_label">Переводчики:</string>
+  <string id="translators_label">Переводчики:</string>
 </language>
