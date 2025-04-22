@@ -93,12 +93,12 @@ resetprop -w sys.boot_completed 0
 check_vbmeta_prop "ro.boot.vbmeta.invalidate_on_error" yes
 check_vbmeta_prop "ro.boot.vbmeta.avb_version" "1.2"
 check_vbmeta_prop "ro.boot.vbmeta.hash_alg" "sha256"
+check_vbmeta_prop "ro.boot.vbmeta.device_state" "locked"
 
 # Extract vbmeta_size value from config file, fallback to default 65536 (64KB, 4K-aligned) if failed
 vbmeta_size=$(grep "^vbmeta_size=" /data/adb/susfs4ksu/config.sh | cut -d'=' -f2 || echo "65536")
 check_vbmeta_prop "ro.boot.vbmeta.size" "$vbmeta_size"
 
-resetprop "ro.boot.vbmeta.device_state" "locked"
 resetprop "ro.boot.verifiedbootstate" "green"
 resetprop "ro.boot.flash.locked" "1"
 resetprop "ro.boot.veritymode" "enforcing"
