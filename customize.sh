@@ -120,18 +120,10 @@ for i in $files ; do
     fi
     rm $MODPATH/$i
 done
-# Get the real ro.boot.vbmeta.size value
-# If unavailable, generate a random 4K-aligned value with probability distribution (10%-50%-25%-15%)
-vbmeta_size=$(blockdev --getsize64 /dev/block/by-name/vbmeta_a 2>/dev/null)
-[ -z "$vbmeta_size" ] || [ "$vbmeta_size" -eq 0 ] && \
-  vbmeta_size=$(blockdev --getsize64 /dev/block/by-name/vbmeta_b 2>/dev/null)
-[ -z "$vbmeta_size" ] || [ "$vbmeta_size" -eq 0 ] && {
-  roll=$(( RANDOM % 100 + 1 ))
-  [ $roll -le 5 ] && vbmeta_size=$(( 262144 + (RANDOM % 769 + 1)*256 ))        # 256KB~1MB
-  [ $roll -gt 5 ] && [ $roll -le 55 ] && vbmeta_size=$(( 1048576 + (RANDOM % 769 + 1)*4096 ))   # 1MB~4MB
-  [ $roll -gt 55 ] && [ $roll -le 80 ] && vbmeta_size=$(( 4194304 + (RANDOM % 1025 + 1)*4096 ))  # 4MB~8MB
-  [ $roll -gt 80 ] && vbmeta_size=$(( 8388608 + (RANDOM % 1025 + 1)*4096 ))    # 8MB~12MB
-}
+
+# Random ro.boot.vbmeta.size value
+# vbmeta_size=$(( 5504 + (RANDOM % 14 + 1)*1024 ))  # 5504~16384, 1KB对齐
+vbmeta_size="$(( RANDOM % (7000 - 1000 + 1) + 3000 ))"
 
 # Precisely overwrite vbmeta_size in config
 if grep -q "^vbmeta_size=" /data/adb/susfs4ksu/config.sh; then
