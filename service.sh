@@ -97,7 +97,7 @@ check_reset_prop "ro.boot.vbmeta.device_state" "locked"
 
 # Extract vbmeta_size value from config file, fallback to default 65536 (64KB, 4K-aligned) if failed
 vbmeta_size=$(sed -n 's/^vbmeta_size=//p' /data/adb/susfs4ksu/config.sh 2>/dev/null)
-vbmeta_size=${vbmeta_size:-65536}
+vbmeta_size=${vbmeta_size:-5248}
 check_reset_prop "ro.boot.vbmeta.size" "$vbmeta_size"
 
 check_reset_prop "ro.boot.verifiedbootstate" "green"
