@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="en">
+  <!-- General -->
+  <string id="app_title">WebUI menu</string>
+  <string id="warning_label">Cảnh báo!</string>
+  <string id="cancel_label">Hủy bỏ</string>
+  <string id="confirm_label">Xác nhận</string>
+  <string id="about_label">Khác</string>
+  <string id="main_menu_label">Menu chính</string>
+  <string id="load_label">Tải</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">Phiên bản kernel</string>
+  <string id="sus_path_label">SUS PATH</string>
+  <string id="sus_mount_label">SUS MOUNT</string>
+  <string id="try_umount_label">TRY UMOUNT</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">Nhật ký SUSFS</string>
+  <string id="sus_su_1_label">SUS SU đang ở chế độ 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU khi khởi động</string>
+  <string id="susfs_settings_label">Thiết lập susfs</string>
+  <string id="auto_hide_label">tự động ẩn cài đặt</string>
+  <string id="default_mounts_label">tự động ẩn các liên kết mặc định</string>
+  <string id="bind_mounts_label">tự động ẩn liên kết bind</string>
+  <string id="try_umount_bind_label">tự động thử umount các liên kết bind</string>
+  <string id="zygote_try_umount_label">thử umount cho hệ thống zygote</string>
+  <string id="kernel_uname_label">Tên Kernel</string>
+  <string id="spoof_kernel_version_label">Giả mạo phiên bản Kernel</string>
+  <string id="spoof_kernel_build_label">Giả mạo phiên bản Kernel build</string>
+  <string id="spoof_on_boot_label">Giả mạo khi khởi động</string>
+  <string id="post_fs_data_label">Thực hiện trên post-fs-data (giả mạo tốt hơn)</string>
+  <string id="uname_warning_label2">Bật tính năng này có thể gây ra treo máy hoặc mất ổn định nếu giả mạo không đúng cách. Bạn có chắc chắn muốn bật thực thi không?</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">Cài đặt tùy chỉnh</string>
+  <string id="hide_custom_rom_label">Ẩn ROM tùy chỉnh</string>
+  <string id="hide_vendor_sepolicy_label">Ẩn Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">Ẩn Compat Matrix</string>
+  <string id="fake_service_list_label">Danh sách dịch vụ giả mạo</string>
+  <string id="hide_gapps_label">Ẩn GApps</string>
+  <string id="hide_revanced_label">Ẩn Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Giả mạo Cmdline</string>
+  <string id="hide_ksu_loop_label">Ẩn KSU Loop</string>
+  <string id="force_hide_lsposed_label">Buộc ẩn LSPosed</string>
+  <string id="custom_sus_path_label">Tùy chỉnh SUS Path</string>
+  <string id="custom_sus_mount_label">Tùy chỉnh SUS Mount</string>
+  <string id="custom_try_umount_label">Tùy chỉnh Try Umount</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Người đóng góp:</string>
+  <string id= "translators_label">Người dịch:</string>
+</language>
