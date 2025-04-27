@@ -90,18 +90,18 @@ sus_su_2(){
 ## Props ##
 resetprop -w sys.boot_completed 0
 
-check_vbmeta_prop "ro.boot.vbmeta.invalidate_on_error" yes
-check_vbmeta_prop "ro.boot.vbmeta.avb_version" "1.2"
-check_vbmeta_prop "ro.boot.vbmeta.hash_alg" "sha256"
-check_vbmeta_prop "ro.boot.vbmeta.size" "$(( RANDOM % (7000 - 1000 + 1) + 3000 ))"
+check_reset_prop "ro.boot.vbmeta.invalidate_on_error" yes
+check_reset_prop "ro.boot.vbmeta.avb_version" "1.2"
+check_reset_prop "ro.boot.vbmeta.hash_alg" "sha256"
+check_reset_prop "ro.boot.vbmeta.size" "$(( RANDOM % (7000 - 1000 + 1) + 3000 ))"
 
-resetprop "ro.boot.vbmeta.device_state" "locked"
-resetprop "ro.boot.verifiedbootstate" "green"
-resetprop "ro.boot.flash.locked" "1"
-resetprop "ro.boot.veritymode" "enforcing"
-resetprop "ro.boot.warranty_bit" "0"
-resetprop "vendor.boot.vbmeta.device_state" "locked"
-resetprop "vendor.boot.verifiedbootstate" "green"
+check_reset_prop "ro.boot.vbmeta.device_state" "locked"
+check_reset_prop "ro.boot.verifiedbootstate" "green"
+check_reset_prop "ro.boot.flash.locked" "1"
+check_reset_prop "ro.boot.veritymode" "enforcing"
+check_reset_prop "ro.boot.warranty_bit" "0"
+check_reset_prop "vendor.boot.vbmeta.device_state" "locked"
+check_reset_prop "vendor.boot.verifiedbootstate" "green"
 check_reset_prop "ro.warranty_bit" "0"
 check_reset_prop "ro.debuggable" "0"
 check_reset_prop "ro.force.debuggable" "0"
