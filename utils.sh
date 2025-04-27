@@ -40,6 +40,13 @@ check_reset_prop() {
   [ -z $VALUE ] && resetprop $NAME $EXPECTED # if the property is missing
 }
 
+check_missing_prop() {
+  local NAME=$1
+  local EXPECTED=$2
+  local VALUE=$(resetprop $NAME)
+  [ -z $VALUE ] && resetprop $NAME $EXPECTED # if the property is missing
+}
+
 contains_reset_prop() {
   local NAME=$1
   local CONTAINS=$2
