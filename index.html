@@ -22,8 +22,8 @@
 			<h3 class="font-bold text-base font-sans" data-i18n="warning_label">Warning!</h3>
 			<p class="py-4 font-sans" id="modal_message" data-i18n="uname_warning_label2">Setting this on may cause a bootloop or instability if spoofed incorrectly. Are you sure you want to enable post-fs-data execution?</p>
 			<div class="modal-action">
-				<button class="btn btn-sm btn-error font-sans" id="modal_cancel" data-i18n="cancel_label">Cancel</button>
-				<button class="btn btn-sm btn-primary font-sans" id="modal_confirm" data-i18n="confirm_label">Confirm</button>
+				<button class="btn btn-md btn-error font-sans" id="modal_cancel" data-i18n="cancel_label">Cancel</button>
+				<button class="btn btn-md btn-primary font-sans" id="modal_confirm" data-i18n="confirm_label">Confirm</button>
 			</div>
 		</div>
 	</dialog>
@@ -33,7 +33,7 @@
 		  </div>
 	</div>-->
 	<main class="max-h-screen relative overflow-auto text-base" data-router-wrapper>
-		<div data-router-view="home">
+		<div class="pb-14" data-router-view="home">
 			<div class="flex justify-between items-center mx-auto ml-4 pt-5 mr-4">
 				<div class="flex flex-col">
 					<h1 class="font-bold text-6xl text-white font-amongus">SUSFS A</h1>
@@ -43,7 +43,7 @@
 				<div>
 					<select class="select select-sm font-sans border-white bg-cyan-100/20 dark:bg-black/20 dark:text-white backdrop-blur-[2.5px] text-white" id="language">
 					</select>
-					<a href="credits.html" class="text-white"><button class="btn btn-sm btn-outline text-base border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] mt-2 text-white h-auto" data-i18n="about_label">about</button></a>
+					<a href="credits.html" class="text-white"><button class="btn btn-md btn-outline text-base border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] mt-2 text-white h-auto" data-i18n="about_label">about</button></a>
 				</div>
 			</div>
 			<section class="flex flex-col justify-start items-center min-h-fit ml-4 mr-4 uppercase">
@@ -69,7 +69,7 @@
 							<div class="form-control">
 							  <label class="label cursor-pointer">
 								<span class="text-white text-base" data-i18n="susfs_log_label">SUSFS Logs</span>
-								<input type="checkbox" id="susfs_log" class="toggle toggle-sm toggle-primary" checked="checked" />
+								<input type="checkbox" id="susfs_log" class="toggle toggle-md toggle-primary" checked="checked" />
 							  </label>
 							</div>
 							<!--this one is for 1.5.2+ if the user force enables sus_su 1-->
@@ -86,19 +86,19 @@
 								<div class="form-control">
 								<label class="label cursor-pointer">
 									<span class="text-white text-lg" data-i18n="sus_su_label">SUS SU</span>
-									<input type="checkbox" id="sus_su" class="toggle toggle-sm toggle-secondary" checked="checked" />
+									<input type="checkbox" id="sus_su" class="toggle toggle-md toggle-secondary" checked="checked" />
 								</label>
 								</div>
 								<div class="form-control">
 									<label class="label cursor-pointer">
 									<span class="text-white text-base" data-i18n="sus_su_boot_label">SUS SU on boot</span>
-									<input type="checkbox" id="enable_sus_su" class="toggle toggle-sm toggle-accent" checked="checked" />
+									<input type="checkbox" id="enable_sus_su" class="toggle toggle-md toggle-accent" checked="checked" />
 									</label>
 								</div>
 							</div>
 						</div>
 					</div>
-					<a href="custom.html" class="text-white"><button class="btn btn-sm btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_settings_label">custom susfs settings</button></a>
+					<a href="custom.html" class="text-white"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_settings_label">custom susfs settings</button></a>
 				  </div>
 				  <div id="sus_su_154" class="hidden">
 				  <div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
@@ -108,24 +108,24 @@
 							<div class="form-control">
 							  <label class="label cursor-pointer">
 								<span class="text-white text-base" data-i18n="default_mounts_label">auto hide default mounts</span>
-								<input type="checkbox" id="auto_mount" class="toggle toggle-sm toggle-primary" checked="checked" />
+								<input type="checkbox" id="auto_mount" class="toggle toggle-md toggle-primary" checked="checked" />
 							  </label>
 							  <div class="form-control">
 								<label class="label cursor-pointer">
 								  <span class="text-white text-base" data-i18n="bind_mounts_label">auto hide bind mounts</span>
-								  <input type="checkbox" id="auto_bind" class="toggle toggle-sm toggle-secondary" checked="checked" />
+								  <input type="checkbox" id="auto_bind" class="toggle toggle-md toggle-secondary" checked="checked" />
 								</label>
 							  </div>
 							  <div class="form-control">
 								<label class="label cursor-pointer">
 								  <span class="text-white text-base" data-i18n="try_umount_bind_label">auto try umount bind mounts</span>
-								  <input type="checkbox" id="auto_umount_bind" class="toggle toggle-sm toggle-accent" checked="checked" />
+								  <input type="checkbox" id="auto_umount_bind" class="toggle toggle-md toggle-accent" checked="checked" />
 								</label>
 							  </div>
 							  <div class="form-control">
 								<label class="label cursor-pointer">
 								  <span class="text-white text-base" data-i18n="zygote_try_umount_label">try umount for zygote system process</span>
-								  <input type="checkbox" id="try_umount_zygote" class="toggle toggle-sm toggle-success" checked="checked" />
+								  <input type="checkbox" id="try_umount_zygote" class="toggle toggle-md toggle-success" checked="checked" />
 								</label>
 							  </div>
 							</div>
@@ -155,7 +155,7 @@
 							<input type="checkbox" id="uname-spoof-on-postfsdata" class="checkbox checkbox-sm checkbox-primary" checked="checked"/>
 							</label>
 						</div>
-						<button class="btn btn-sm btn-outline w-28 mt-2 border-white text-white text-base font-normal" id="set_uname">Make it SuS</button>
+						<button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="set_uname">Make it SuS</button>
 					</div>
 				  </div>
 			</section>
