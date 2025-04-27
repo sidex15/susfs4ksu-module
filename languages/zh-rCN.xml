@@ -13,7 +13,7 @@
   <string id="kernel_version_label">内核版本</string>
   <string id="sus_path_label">SUS路径</string>
   <string id="sus_mount_label">SUS挂载</string>
-  <string id="try_umount_label">尝试卸载路径</string>
+  <string id="try_umount_label">尝试卸载</string>
   
   <!-- Settings -->
   <string id="susfs_log_label">日志</string>
