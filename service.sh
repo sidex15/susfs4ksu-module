@@ -4,11 +4,14 @@ SUSFS_BIN=/data/adb/ksu/bin/ksu_susfs
 . ${MODDIR}/utils.sh
 PERSISTENT_DIR=/data/adb/susfs4ksu
 tmpfolder=/data/adb/ksu/susfs4ksu
-mntfolder=$MODDIR/mounts
 logfile1="$tmpfolder/logs/susfs1.log"
 logfile="$tmpfolder/logs/susfs.log"
 version=$(${SUSFS_BIN} show version)
 SUSFS_DECIMAL=$(echo "$version" | sed 's/^v//; s/\.//g')
+
+# Mount folder of susfs4ksu
+[ -w /mnt ] && mntfolder=/mnt/susfs4ksu
+[ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
 
 hide_loops=1
 hide_vendor_sepolicy=0

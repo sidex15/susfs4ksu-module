@@ -4,9 +4,13 @@ SUSFS_BIN=/data/adb/ksu/bin/ksu_susfs
 . ${MODDIR}/utils.sh
 PERSISTENT_DIR=/data/adb/susfs4ksu
 tmpfolder=/data/adb/ksu/susfs4ksu
-mntfolder=$MODDIR/mounts
 logfile="$tmpfolder/logs/susfs.log"
 logfile1="$tmpfolder/logs/susfs1.log"
+
+# Mount folder of susfs4ksu
+[ -w /mnt ] && mntfolder=/mnt/susfs4ksu
+[ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
+
 # to add mounts
 # echo "/system" >> /data/adb/susfs4ksu/sus_mount.txt
 # this'll make it easier for the webui to do stuff
