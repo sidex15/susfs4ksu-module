@@ -37,7 +37,6 @@ check_reset_prop() {
   local EXPECTED=$2
   local VALUE=$(resetprop $NAME)
   [ -z $VALUE ] || [ $VALUE = $EXPECTED ] || resetprop $NAME $EXPECTED # if the property is not what we expect
-  [ -z $VALUE ] && resetprop $NAME $EXPECTED # if the property is missing
 }
 
 check_missing_prop() {
