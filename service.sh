@@ -100,7 +100,7 @@ check_missing_prop "ro.boot.vbmeta.hash_alg" "sha256"
 # Extract vbmeta_size from config file, fallback to 8192 if missing.
 vbmeta_size=$(sed -n 's/^vbmeta_size=//p' /data/adb/susfs4ksu/config.sh 2>/dev/null)
 vbmeta_size=${vbmeta_size:-8192}
-check_reset_prop "ro.boot.vbmeta.size" "$vbmeta_size"
+check_missing_prop "ro.boot.vbmeta.size" "$vbmeta_size"
 
 check_missing_prop "ro.boot.vbmeta.device_state" "locked"
 check_missing_prop "ro.boot.verifiedbootstate" "green"
