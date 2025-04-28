@@ -96,7 +96,11 @@ resetprop -w sys.boot_completed 0
 check_missing_prop "ro.boot.vbmeta.invalidate_on_error" yes
 check_missing_prop "ro.boot.vbmeta.avb_version" "1.2"
 check_missing_prop "ro.boot.vbmeta.hash_alg" "sha256"
-check_missing_prop "ro.boot.vbmeta.size" "$(( RANDOM % (7000 - 1000 + 1) + 3000 ))"
+
+# Extract vbmeta_size from config file, fallback to 8192 if missing.
+vbmeta_size=$(sed -n 's/^vbmeta_size=//p' /data/adb/susfs4ksu/config.sh 2>/dev/null)
+vbmeta_size=${vbmeta_size:-8192}
+check_reset_prop "ro.boot.vbmeta.size" "$vbmeta_size"
 
 check_missing_match_prop "ro.boot.vbmeta.device_state" "locked"
 check_missing_match_prop "ro.boot.verifiedbootstate" "green"
