@@ -32,6 +32,13 @@ susfs_hexpatch_props() {
 	magiskboot hexpatch /dev/__properties__/$(resetprop -Z ${TARGET_PROP_NAME}) $(echo -n ${TARGET_PROP_NAME} | xxd -p | tr "[:lower:]" "[:upper:]") $(echo -n ${SPOOFED_PROP_NAME} | xxd -p | tr "[:lower:]" "[:upper:]")
 }
 
+check_missing_prop() {
+  local NAME=$1
+  local EXPECTED=$2
+  local VALUE=$(resetprop $NAME)
+  [ -z $VALUE ] && resetprop $NAME $EXPECTED # if the property is missing
+}
+
 check_reset_prop() {
   local NAME=$1
   local EXPECTED=$2
@@ -39,7 +46,7 @@ check_reset_prop() {
   [ -z $VALUE ] || [ $VALUE = $EXPECTED ] || resetprop $NAME $EXPECTED # if the property is not what we expect
 }
 
-check_missing_prop() {
+check_missing_match_prop() {
   local NAME=$1
   local EXPECTED=$2
   local VALUE=$(resetprop $NAME)
