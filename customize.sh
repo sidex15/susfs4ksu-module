@@ -121,6 +121,16 @@ for i in $files ; do
     rm $MODPATH/$i
 done
 
+# Random ro.boot.vbmeta.size value
+vbmeta_size=$(( 5504 + (RANDOM % 14 + 1)*1024 ))  # 5504~16384
+
+# Data persistence
+if grep -q "^vbmeta_size=" /data/adb/susfs4ksu/config.sh; then
+    sed -i "s/^vbmeta_size=.*/vbmeta_size=$vbmeta_size/" /data/adb/susfs4ksu/config.sh
+else
+    echo "vbmeta_size=$vbmeta_size" >> /data/adb/susfs4ksu/config.sh
+fi
+
 rm -rf ${MODPATH}/tools
 rm ${MODPATH}/customize.sh ${MODPATH}/README.md
 
