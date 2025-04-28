@@ -29,6 +29,10 @@ export default defineConfig({
                 {
                     src: 'languages/*',
                     dest: 'languages'
+                },
+                {
+                    src: 'config.json',
+                    dest: ''
                 }
             ]
         })
