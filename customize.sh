@@ -80,7 +80,7 @@ cp ${TMPDIR}/susfs/tools/sus_su_arm64 ${DEST_BIN_DIR}/sus_su
 	chmod 755 ${DEST_BIN_DIR}/susfsd
 }
 chmod 755 ${DEST_BIN_DIR}/ksu_susfs ${DEST_BIN_DIR}/sus_su
-chmod 644 ${MODPATH}/post-fs-data.sh ${MODPATH}/service.sh ${MODPATH}/uninstall.sh
+chmod 644 ${MODPATH}/post-fs-data.sh ${MODPATH}/post-mount.sh ${MODPATH}/service.sh ${MODPATH}/boot-completed.sh ${MODPATH}/action.sh ${MODPATH}/uninstall.sh
 
 prop_value=$(getprop ro.boot.vbmeta.digest)
 HASH_DIR=/data/adb/VerifiedBootHash
