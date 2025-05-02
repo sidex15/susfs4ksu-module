@@ -17,6 +17,19 @@
 
 <body class="bg-black font-amongus2 font-bold">
 	<canvas id="backgroundCanvas" class="absolute inset-0 z-0 max-h-screen bg-black"></canvas>
+	<!-- Susfs not installed dialog -->
+	<dialog id="susfs_nos_dialog" class="modal">
+		<div class="modal-box flex flex-col items-center border-2 border-white bg-black">
+		  <img src="assets/amongus/susfs_error.png" class="w-auto h-28 mx-auto mb-2"/>
+		  <h3 class="text-lg font-bold text-center text-white font-amongus2" data-i18n="susfs_error_label">NUH UH! Unsupported Kernel!</h3>
+		  <p class="py-4 text-center font-normal text-white font-amongus2" data-i18n="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</p>
+		  <div class="flex flex-row justify-center items-center gap-2">
+		  <button class="btn border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] text-white" data-i18n="close_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -d https://gitlab.com/simonpunk/susfs4ksu`)">SUSFS Repo</button>
+		  <button class="btn border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] text-white" data-i18n="close_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -d https://github.com/WildKernels`)">GKI Kernel With SUSFS</button>
+		  </div>
+		</div>
+	</dialog>
+	<!--Spoof uname dialog-->
 	<dialog id="confirm_modal" class="modal modal-bottom sm:modal-middle">
 		<div class="modal-box">
 			<h3 class="font-bold text-base font-sans" data-i18n="warning_label">Warning!</h3>

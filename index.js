@@ -17,6 +17,11 @@ var susfs_version_decimal=parseFloat(susfs_version.replace(/[v.]/g,""));
 const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
 
+if(await run(`[ -f ${tmpfolder}/logs/susfs_active ] && echo true || echo false`)=="false"){
+	const susfs_error = document.getElementById("susfs_nos_dialog");
+	susfs_error.showModal();
+}
+
 //susfs stats and kernel version
 var is_log_empty=await run (`[ -s ${tmpfolder}/logs/susfs.log ] && echo false || echo true`);
 var susfs_stats = catToObject(await run(`cat ${tmpfolder}/susfs_stats.txt`));
