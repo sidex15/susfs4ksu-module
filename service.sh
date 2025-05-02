@@ -138,7 +138,7 @@ check_reset_prop "ro.crypto.state" "encrypted"
 # Set vbmeta verifiedBootHash from file (if present and not empty)
 HASH_FILE="/data/adb/VerifiedBootHash/VerifiedBootHash.txt"
 if [ -s "$HASH_FILE" ]; then
-    resetprop -v -n ro.boot.vbmeta.digest "$(cat $HASH_FILE)"
+    resetprop -v -n ro.boot.vbmeta.digest "$(cat $HASH_FILE | tr '[:upper:]' '[:lower:]')"
 fi
 
 # echo "hide_loops=1" >> /data/adb/susfs4ksu/config.sh
