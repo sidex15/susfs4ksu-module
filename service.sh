@@ -135,8 +135,8 @@ contains_reset_prop "ro.bootmode" "recovery" "unknown"
 contains_reset_prop "ro.boot.bootmode" "recovery" "unknown"
 contains_reset_prop "vendor.boot.bootmode" "recovery" "unknown"
 
-# ro.kernel.qemu = 0 will trigger Hunter(root checker app) for possible cloud phone; resetprop --delete will trigger "found hole in prop area: u:object_r:exported_default_prop:s0"
-check_reset_prop "ro.kernel.qemu" " "
+# Hide cloudphone detection
+[ -n "$(resetprop ro.kernel.qemu)" ] && resetprop ro.kernel.qemu ""
 
 # fake encryption status
 check_reset_prop "ro.crypto.state" "encrypted"
