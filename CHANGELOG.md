@@ -1,3 +1,32 @@
+## v1.5.2+ Revision 18
+### WebUI
+* Localization:
+  * Add Arabic Language (Thanks @ZG089)
+  * Add Persian Language (Thanks @AlirezaParsi)
+  * Add Vietnamese Language (Thanks @Wuang26)
+  * Add Russian Language (Thanks @Alohaa666)
+  * Various fixes on Chinese language (Thank @YangQi0408 and @mehu3dhokia)
+* Add a Dialog when SUSFS is not installed in the kernel
+* Reduce Font Size
+* Various UI Adjustments
+* Rephrase susfs stats toast message
+* Disable back handling for MMRL/WebUI-X
+* fix blue character and add default yellow character
+### Scripts
+* scripts: action: implement susfs4ksu userspace tool update script
+  * Action button to update susfs4ksu userspace binaries, so no need to reinstall the module when updating your kernel to the newest SUSFS version.
+* scripts: customize: add susfsd from KernelSU-Next
+* scripts: move mount folder to either /mnt or /mnt/vendor
+* scripts: service/utils: remove check_vbmeta_prop function and add missing prop condition to check_reset_prop
+* scripts: service/utils: Add ro.boot props if missing using check_missing_match_prop
+* scripts: service: convert verifiedboothash value from uppercase to lowercase
+* scripts: service/utils: prevent overwriting some ro.boot.vbmeta props using check_missing_prop
+* scripts: service/customize: implement persistence on ro.boot.vbmeta.size (Thanks @TeenyAntX)
+* scripts: config: make custom settings all disabled by default (Thanks @TeenyAntX)
+* scripts: uninstall: add /data/adb/ksu/susfs4ksu
+* scripts: service: reset vold app data isolation prop (Thanks @rifsxd)
+* scripts: customize: chmod 644 to other scripts
+
 ## v1.5.2+ Revision 17
 ### WebUI
 * Add Localization
