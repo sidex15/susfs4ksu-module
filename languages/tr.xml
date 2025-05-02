@@ -8,13 +8,17 @@
   <string id="about_label">Hakkında</string>
   <string id="main_menu_label">Ana Menü</string>
   <string id="load_label">Yükle</string>
-  
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">HAYIR! Desteklenmeyen Çekirdek!</string>
+  <string id="susfs_error_desc">WebUI Erişimi Reddedildi! SuSFS yaması uygulanmış bir çekirdek kullandığınızdan emin olun!</string>
+
   <!-- Home Page -->
   <string id="kernel_version_label">Çekirdek Sürümü</string>
   <string id="sus_path_label">SUS Yolu</string>
   <string id="sus_mount_label">SUS Bağlama</string>
   <string id="try_umount_label">Bağlantıyı Kaldırmayı Dene</string>
-  
+
   <!-- Settings -->
   <string id="susfs_log_label">SUSFS Günlükleri</string>
   <string id="sus_su_1_label">SUS SU Mod 1\'de</string>
@@ -32,7 +36,7 @@
   <string id="spoof_on_boot_label">Başlangıçta Taklit Et</string>
   <string id="post_fs_data_label">Post-fs-data\'da Çalıştır (daha iyi taklit eder)</string>
   <string id="uname_warning_label2">Bu ayarı açmak, yanlış taklit edilmesi durumunda önyükleme döngüsüne veya kararsızlığa neden olabilir. Post-fs-data çalıştırmasını etkinleştirmek istediğinizden emin misiniz?</string>
-  
+
   <!-- Custom -->
   <string id="custom_settings_label">Özel Ayarlar</string>
   <string id="hide_custom_rom_label">Özel ROM\'u Gizle</string>
