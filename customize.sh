@@ -73,10 +73,14 @@ fi
 # cleanup
 rm -f ${MODPATH}/ksu_susfs_remote > /dev/null 2>&1
 
-# copy sus_su over
+# copy sus_su and susfsd over
 cp ${TMPDIR}/susfs/tools/sus_su_arm64 ${DEST_BIN_DIR}/sus_su
+[ -f ${TMPDIR}/susfs/tools/susfsd ] || {
+	cp ${TMPDIR}/susfs/tools/susfsd ${DEST_BIN_DIR}/susfsd
+	chmod 755 ${DEST_BIN_DIR}/susfsd
+}
 chmod 755 ${DEST_BIN_DIR}/ksu_susfs ${DEST_BIN_DIR}/sus_su
-chmod 644 ${MODPATH}/post-fs-data.sh ${MODPATH}/service.sh ${MODPATH}/uninstall.sh
+chmod 644 ${MODPATH}/post-fs-data.sh ${MODPATH}/post-mount.sh ${MODPATH}/service.sh ${MODPATH}/boot-completed.sh ${MODPATH}/action.sh ${MODPATH}/uninstall.sh
 
 prop_value=$(getprop ro.boot.vbmeta.digest)
 HASH_DIR=/data/adb/VerifiedBootHash
@@ -120,6 +124,16 @@ for i in $files ; do
     fi
     rm $MODPATH/$i
 done
+
+# Random ro.boot.vbmeta.size value
+vbmeta_size=$(( 5504 + (RANDOM % 14 + 1)*1024 ))  # 5504~16384
+
+# Data persistence
+if grep -q "^vbmeta_size=" /data/adb/susfs4ksu/config.sh; then
+    sed -i "s/^vbmeta_size=.*/vbmeta_size=$vbmeta_size/" /data/adb/susfs4ksu/config.sh
+else
+    echo "vbmeta_size=$vbmeta_size" >> /data/adb/susfs4ksu/config.sh
+fi
 
 rm -rf ${MODPATH}/tools
 rm ${MODPATH}/customize.sh ${MODPATH}/README.md

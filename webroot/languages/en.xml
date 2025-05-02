@@ -8,6 +8,10 @@
   <string id="about_label">About</string>
   <string id="main_menu_label">Main Menu</string>
   <string id="load_label">Load</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
+  <string id="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</string>
   
   <!-- Home Page -->
   <string id="kernel_version_label">Kernel Version</string>

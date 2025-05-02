@@ -4,11 +4,14 @@ SUSFS_BIN=/data/adb/ksu/bin/ksu_susfs
 . ${MODDIR}/utils.sh
 PERSISTENT_DIR=/data/adb/susfs4ksu
 tmpfolder=/data/adb/ksu/susfs4ksu
-mntfolder=$MODDIR/mounts
 logfile1="$tmpfolder/logs/susfs1.log"
 logfile="$tmpfolder/logs/susfs.log"
 version=$(${SUSFS_BIN} show version)
 SUSFS_DECIMAL=$(echo "$version" | sed 's/^v//; s/\.//g')
+
+# Mount folder of susfs4ksu
+[ -w /mnt ] && mntfolder=/mnt/susfs4ksu
+[ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
 
 hide_loops=1
 hide_vendor_sepolicy=0
@@ -90,18 +93,22 @@ sus_su_2(){
 ## Props ##
 resetprop -w sys.boot_completed 0
 
-check_vbmeta_prop "ro.boot.vbmeta.invalidate_on_error" yes
-check_vbmeta_prop "ro.boot.vbmeta.avb_version" "1.2"
-check_vbmeta_prop "ro.boot.vbmeta.hash_alg" "sha256"
-check_vbmeta_prop "ro.boot.vbmeta.size" "$(( RANDOM % (7000 - 1000 + 1) + 3000 ))"
+check_missing_prop "ro.boot.vbmeta.invalidate_on_error" yes
+check_missing_prop "ro.boot.vbmeta.avb_version" "1.2"
+check_missing_prop "ro.boot.vbmeta.hash_alg" "sha256"
 
-resetprop "ro.boot.vbmeta.device_state" "locked"
-resetprop "ro.boot.verifiedbootstate" "green"
-resetprop "ro.boot.flash.locked" "1"
-resetprop "ro.boot.veritymode" "enforcing"
-resetprop "ro.boot.warranty_bit" "0"
-resetprop "vendor.boot.vbmeta.device_state" "locked"
-resetprop "vendor.boot.verifiedbootstate" "green"
+# Extract vbmeta_size from config file, fallback to 8192 if missing.
+vbmeta_size=$(sed -n 's/^vbmeta_size=//p' /data/adb/susfs4ksu/config.sh 2>/dev/null)
+vbmeta_size=${vbmeta_size:-8192}
+check_missing_prop "ro.boot.vbmeta.size" "$vbmeta_size"
+
+check_missing_match_prop "ro.boot.vbmeta.device_state" "locked"
+check_missing_match_prop "ro.boot.verifiedbootstate" "green"
+check_missing_match_prop "ro.boot.flash.locked" "1"
+check_missing_match_prop "ro.boot.veritymode" "enforcing"
+check_missing_match_prop "ro.boot.warranty_bit" "0"
+check_reset_prop "vendor.boot.vbmeta.device_state" "locked"
+check_reset_prop "vendor.boot.verifiedbootstate" "green"
 check_reset_prop "ro.warranty_bit" "0"
 check_reset_prop "ro.debuggable" "0"
 check_reset_prop "ro.force.debuggable" "0"
@@ -112,6 +119,9 @@ check_reset_prop "ro.build.tags" "release-keys"
 check_reset_prop "ro.vendor.boot.warranty_bit" "0"
 check_reset_prop "ro.vendor.warranty_bit" "0"
 check_reset_prop "sys.oem_unlock_allowed" "0"
+
+# HMA/L specific
+check_reset_prop "persist.sys.vold_app_data_isolation_enabled" "0"
 
 # MIUI specific
 check_reset_prop "ro.secureboot.lockstate" "locked"
@@ -131,7 +141,7 @@ check_reset_prop "ro.crypto.state" "encrypted"
 # Set vbmeta verifiedBootHash from file (if present and not empty)
 HASH_FILE="/data/adb/VerifiedBootHash/VerifiedBootHash.txt"
 if [ -s "$HASH_FILE" ]; then
-    resetprop -v -n ro.boot.vbmeta.digest "$(cat $HASH_FILE)"
+    resetprop -v -n ro.boot.vbmeta.digest "$(cat $HASH_FILE | tr '[:upper:]' '[:lower:]')"
 fi
 
 # echo "hide_loops=1" >> /data/adb/susfs4ksu/config.sh
