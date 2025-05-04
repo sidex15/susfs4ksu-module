@@ -13,7 +13,8 @@ export default defineConfig({
                 credits: './credits.html',
                 custom: './custom.html',
                 fade: './fade.js',
-                i18n: './i18n.js'
+                i18n: './i18n.js',
+                credits: './credits.js',
             }
         }
     },
