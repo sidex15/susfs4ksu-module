@@ -39,7 +39,7 @@
   
   <!-- Custom -->
   <string id="custom_settings_label">Custom Settings</string>
-  <string id="hide_custom_rom_label">Hide Custom ROM</string>
+  <string id="hide_custom_rom_label">Hide Custom Rom Paths</string>
   <string id="hide_vendor_sepolicy_label">Hide Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">Hide Compat Matrix</string>
   <string id="fake_service_list_label">Spoof Service List</string>
@@ -47,7 +47,7 @@
   <string id="hide_revanced_label">Hide Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Spoof Cmdline</string>
   <string id="hide_ksu_loop_label">Hide KSU Loop</string>
-  <string id="force_hide_lsposed_label">Force Hide LSPosed</string>
+  <string id="force_hide_lsposed_label">Force Hide Dex2oat Mounts</string>
   <string id="custom_sus_path_label">Custom SUS Path</string>
   <string id="custom_sus_mount_label">Custom SUS Mount</string>
   <string id="custom_try_umount_label">Custom Try Umount</string>
