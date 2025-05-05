@@ -1,32 +1,32 @@
 [
 {
     "name": "xx (backslashxx)",
-    "imgSrc": "assets/amongus/lime.png",
+    "character": 6,
     "github": "https://github.com/backslashxx"
 },
 {
     "name": "chisewaguri",
-    "imgSrc": "assets/amongus/brown.png",
+    "character": 1,
     "github": "https://github.com/chisewaguri"
 },
 {
     "name": "0x11DFE",
-    "imgSrc": "assets/amongus/orange.png",
+    "character": 3,
     "github": "https://github.com/0x11DFE"
 },
 {
     "name": "cvnertnc",
-    "imgSrc": "assets/amongus/white.png",
+    "character": 10,
     "github": "https://github.com/cvnertnc"
 },
 {
     "name": "rifsxd (Rifat Azad)",
-    "imgSrc": "assets/amongus/purple.png",
+    "character": 8,
     "github": "https://github.com/rifsxd"
 },
 {
     "name": "mehu3dhokia",
-    "imgSrc": "assets/amongus/pink.png",
+    "character": 7,
     "github": "https://github.com/mehu3dhokia"
 }
 ]

@@ -1,11 +1,11 @@
-function n({name:e,country:t,imgSrc:s,github:c}){return`
+const c="/assets/blue-CDd1JgFA.png",r="/assets/brown-DkMF-zd4.png",o="/assets/cyan-CxxU9VUc.png",i="/assets/orange-Dz5Wr5v6.png",l="/assets/yellow-CMDT5nHw.png",g="/assets/green-BwBzMX7_.png",p="/assets/lime-DPDNUj7v.png",d="/assets/pink-BsJVk9ad.png",h="/assets/purple-b3Qaozit.png",x="/assets/red-DsgSinuJ.png",m="/assets/white-BOZMyur9.png",w="/assets/black-CWwxUpmx.png",n=[c,r,o,i,l,g,p,d,h,x,m,w];function u({name:s,country:t,character:e,github:a}){return`
       <div class="space-y-2 flex-shrink-0">
         <div class="flex justify-center items-center flex-col space-y-3 text-lg font-medium leading-6">
-          <img src="${s}" class="w-20 h-25"/>
-          <h3 class="text-white text-xl">${e}</h3>
+          <img src="${n[e]}" class="w-20 h-25"/>
+          <h3 class="text-white text-xl">${s}</h3>
           <p class="text-indigo-300 text-xl text-center" style="white-space: pre;">${t}</p>
           <div class="flex justify-center mt-5 space-x-5">
-            <a onclick="ksu.exec(\`am start -a android.intent.action.VIEW -d ${c}\`)" 
+            <a onclick="ksu.exec(\`am start -a android.intent.action.VIEW -d ${a}\`)" 
                target="_blank" rel="noopener noreferrer"
                class="inline-block text-gray-400">
                <span class="sr-only">GitHub</span>
@@ -18,13 +18,13 @@ function n({name:e,country:t,imgSrc:s,github:c}){return`
           </div>
         </div>
       </div>
-    `}function r({name:e,imgSrc:t,github:s}){return`
+    `}function f({name:s,character:t,github:e}){return`
       <div class="space-y-2 flex-shrink-0">
         <div class="flex justify-center items-center flex-col space-y-3 text-lg font-medium leading-6">
-          <img src="${t}" class="w-20 h-25"/>
-          <h3 class="text-white text-xl">${e}</h3>
+          <img src="${n[t]}" class="w-20 h-25"/>
+          <h3 class="text-white text-xl">${s}</h3>
           <div class="flex justify-center mt-5 space-x-5">
-            <a onclick="ksu.exec(\`am start -a android.intent.action.VIEW -d ${s}\`)" 
+            <a onclick="ksu.exec(\`am start -a android.intent.action.VIEW -d ${e}\`)" 
                target="_blank" rel="noopener noreferrer"
                class="inline-block text-gray-400">
                <span class="sr-only">GitHub</span>
@@ -37,4 +37,4 @@ function n({name:e,country:t,imgSrc:s,github:c}){return`
           </div>
         </div>
       </div>
-    `}fetch("/translators.json").then(e=>e.json()).then(e=>{const t=document.getElementById("translators-container");e.forEach(s=>{t.innerHTML+=n(s)})});fetch("/contributors.json").then(e=>e.json()).then(e=>{const t=document.getElementById("contributors-container");e.forEach(s=>{t.innerHTML+=r(s)})});
+    `}function y(){fetch("/translators.json").then(s=>s.json()).then(s=>{const t=document.getElementById("translators-container");s.forEach(e=>{t.innerHTML+=u(e)})})}function v(){fetch("/contributors.json").then(s=>s.json()).then(s=>{const t=document.getElementById("contributors-container");s.forEach(e=>{t.innerHTML+=f(e)})})}export{r as a,c as b,o as c,h as d,w as e,y as f,g,p as l,i as o,d as p,x as r,v as s,m as w,l as y};
