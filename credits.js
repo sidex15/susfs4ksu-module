@@ -1,8 +1,36 @@
-function createProfileCard({ name, country, imgSrc, github }) {
+import blue from '/assets/amongus/blue.png';
+import brown from '/assets/amongus/brown.png';
+import cyan from '/assets/amongus/cyan.png';
+import orange from '/assets/amongus/orange.png';
+import yellow from '/assets/amongus/yellow.png';
+import green from '/assets/amongus/green.png';
+import lime from '/assets/amongus/lime.png';
+import pink from '/assets/amongus/pink.png';
+import purple from '/assets/amongus/purple.png';
+import red from '/assets/amongus/red.png';
+import white from '/assets/amongus/white.png';  
+import black from '/assets/amongus/black.png';  
+
+const ICON_PATHS = [
+    blue,
+    brown,
+    cyan,
+    orange,
+    yellow,
+    green,
+    lime,
+    pink,
+    purple,
+    red,
+    white,
+    black
+];
+
+function createProfileCard({ name, country, character, github }) {
     return `
       <div class="space-y-2 flex-shrink-0">
         <div class="flex justify-center items-center flex-col space-y-3 text-lg font-medium leading-6">
-          <img src="${imgSrc}" class="w-20 h-25"/>
+          <img src="${ICON_PATHS[character]}" class="w-20 h-25"/>
           <h3 class="text-white text-xl">${name}</h3>
           <p class="text-indigo-300 text-xl text-center" style="white-space: pre;">${country}</p>
           <div class="flex justify-center mt-5 space-x-5">
@@ -22,11 +50,11 @@ function createProfileCard({ name, country, imgSrc, github }) {
     `;
 }
 
-function createProfileCard2({ name, imgSrc, github }) {
+function createProfileCard2({ name, character, github }) {
     return `
       <div class="space-y-2 flex-shrink-0">
         <div class="flex justify-center items-center flex-col space-y-3 text-lg font-medium leading-6">
-          <img src="${imgSrc}" class="w-20 h-25"/>
+          <img src="${ICON_PATHS[character]}" class="w-20 h-25"/>
           <h3 class="text-white text-xl">${name}</h3>
           <div class="flex justify-center mt-5 space-x-5">
             <a onclick="ksu.exec(\`am start -a android.intent.action.VIEW -d ${github}\`)" 
@@ -45,19 +73,24 @@ function createProfileCard2({ name, imgSrc, github }) {
     `;
 }
 
-fetch('/translators.json')
-.then(response => response.json())
-.then(profiles => {
-const container = document.getElementById("translators-container");
-profiles.forEach(profile => {
-    container.innerHTML += createProfileCard(profile);
-});
-});
-fetch('/contributors.json')
-.then(response => response.json())
-.then(profiles => {
-const container = document.getElementById("contributors-container");
-profiles.forEach(profile => {
-    container.innerHTML += createProfileCard2(profile);
-});
-});
+export function show_translators(){
+  fetch('/translators.json')
+  .then(response => response.json())
+  .then(profiles => {
+    const container = document.getElementById("translators-container");
+    profiles.forEach(profile => {
+      container.innerHTML += createProfileCard(profile);
+    });
+  });
+}
+
+export function show_contributors(){
+  fetch('/contributors.json')
+  .then(response => response.json())
+  .then(profiles => {
+    const container = document.getElementById("contributors-container");
+    profiles.forEach(profile => {
+      container.innerHTML += createProfileCard2(profile);
+    });
+  });
+}

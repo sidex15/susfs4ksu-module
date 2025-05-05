@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import Fade from './fade.js';
 import './space.js';
 import './i18n.js';
+import {show_contributors,show_translators} from './credits.js';
 
 //module location
 const tmpfolder="/data/adb/ksu/susfs4ksu"
@@ -101,11 +102,17 @@ const H = new Highway.Core({
 
 H.on('NAVIGATE_IN', async ({ to, from, trigger, location }) => {
 	// Apply translations to new page content
+	var currentPath = window.location.pathname;
     if (window.i18n) {
         // Re-apply translations to the new DOM elements
         const currentLang = window.i18n.getCurrentLanguage();
         window.i18n.applyTranslationsToNewContent(to.view);
     }
+    // Add specific script initializations here
+    if (currentPath === '/credits.html') {
+		show_contributors();
+		show_translators();
+	}
 });
 
 //execute again after the transition ends
@@ -127,7 +134,6 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		custom_sus_path();
     }
 });
-
 
 //run function
 async function run(cmd) {

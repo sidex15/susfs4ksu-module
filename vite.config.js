@@ -14,7 +14,7 @@ export default defineConfig({
                 custom: './custom.html',
                 fade: './fade.js',
                 i18n: './i18n.js',
-                credits: './credits.js',
+                creditsjs: 'credits.js',
             }
         }
     },
