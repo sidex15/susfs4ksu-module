@@ -1,15 +1,15 @@
 {
-  "ar": "العربية",
-  "de": "Deutsch",
   "en": "English",
   "es": "Español",
-  "fa": "پارسی",
   "fr": "Français",
-  "id": "Indonesia",
-  "it": "Italiano",
   "ptbr": "Português", 
-  "ru": "Russian",
   "tr": "Türkçe",
-  "vi": "Tiếng Việt",
+  "id": "Indonesia",
   "zh-rCN": "中文",
+  "ar": "العربية",
+  "fa": "پارسی",
+  "ru": "Russian",
+  "vi": "Tiếng Việt",
+  "de": "Deutsch",
+  "it": "Italiano"
 }
