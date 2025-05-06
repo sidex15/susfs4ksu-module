@@ -43,7 +43,7 @@
   <string id="hide_revanced_label">隐藏 Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">伪装 CMDLINE</string>
   <string id="hide_ksu_loop_label">隐藏KSU循环</string>
-  <string id="force_hide_lsposed_label">强制隐藏 LSPosed</string>
+  <string id="force_hide_lsposed_label">强制隐藏 Dex2oat 挂载</string>
   <string id="custom_sus_path_label">自定义 SUS 路径路径</string>
   <string id="custom_sus_mount_label">自定义 SUS 挂载路径</string>
   <string id="custom_try_umount_label">自定义尝试卸载路径</string>
