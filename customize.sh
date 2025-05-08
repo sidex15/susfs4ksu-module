@@ -74,11 +74,16 @@ fi
 rm -f ${MODPATH}/ksu_susfs_remote > /dev/null 2>&1
 
 # copy sus_su and susfsd over
+ui_print "[-] Installing sus_su"
 cp ${TMPDIR}/susfs/tools/sus_su_arm64 ${DEST_BIN_DIR}/sus_su
-[ -f ${TMPDIR}/susfs/tools/susfsd ] || {
+if [ -f ${DEST_BIN_DIR}/susfsd ]; then
+	ui_print "[-] Susfsd already exists, skipping installation"
+else
+	ui_print "[-] Installing susfsd"
 	cp ${TMPDIR}/susfs/tools/susfsd ${DEST_BIN_DIR}/susfsd
 	chmod 755 ${DEST_BIN_DIR}/susfsd
-}
+fi
+
 chmod 755 ${DEST_BIN_DIR}/ksu_susfs ${DEST_BIN_DIR}/sus_su
 chmod 644 ${MODPATH}/post-fs-data.sh ${MODPATH}/post-mount.sh ${MODPATH}/service.sh ${MODPATH}/boot-completed.sh ${MODPATH}/action.sh ${MODPATH}/uninstall.sh
 
