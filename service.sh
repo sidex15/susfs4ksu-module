@@ -125,6 +125,7 @@ resetprop "sys.usb.adb.disabled" " "
 
 # HMA/L specific
 check_reset_prop "persist.sys.vold_app_data_isolation_enabled" "0"
+check_reset_prop "persist.zygote.app_data_isolation" "0"
 
 # MIUI specific
 check_reset_prop "ro.secureboot.lockstate" "locked"
