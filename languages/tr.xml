@@ -47,7 +47,7 @@
   <string id="hide_revanced_label">Revanced\'ı Gizle (YT/YTM)</string>
   <string id="spoof_cmdline_label">Komut Satırını Taklit Et</string>
   <string id="hide_ksu_loop_label">KSU Döngüsünü Gizle</string>
-  <string id="force_hide_lsposed_label">LSPosed\'ı Zorla Gizle</string>
+  <string id="force_hide_dex2oat_label">Dex2oat\'ı Zorla Gizle</string>
   <string id="custom_sus_path_label">Özel SUS Yolu</string>
   <string id="custom_sus_mount_label">Özel SUS Bağlama</string>
   <string id="custom_try_umount_label">Özel Bağlantı Kaldırmayı Dene</string>

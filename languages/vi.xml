@@ -43,7 +43,7 @@
   <string id="hide_revanced_label">Ẩn Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Giả mạo Cmdline</string>
   <string id="hide_ksu_loop_label">Ẩn KSU Loop</string>
-  <string id="force_hide_lsposed_label">Buộc ẩn LSPosed</string>
+  <string id="force_hide_dex2oat_label">Buộc ẩn Dex2oat</string>
   <string id="custom_sus_path_label">Tùy chỉnh SUS Path</string>
   <string id="custom_sus_mount_label">Tùy chỉnh SUS Mount</string>
   <string id="custom_try_umount_label">Tùy chỉnh Try Umount</string>

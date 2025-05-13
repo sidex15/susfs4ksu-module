@@ -43,7 +43,7 @@
   <string id="hide_revanced_label">Ocultar ReVanced</string>  
   <string id="spoof_cmdline_label">Suplantar Línea de Comandos</string>  
   <string id="hide_ksu_loop_label">Ocultar Bucle KSU</string>  
-  <string id="force_hide_lsposed_label">Forzar Ocultación de LSPosed</string>  
+  <string id="force_hide_dex2oat_label">Forzar Ocultación de Dex2oat</string>  
   <string id="custom_sus_path_label">Ruta SUS Personalizada</string>  
   <string id="custom_sus_mount_label">Montaje SUS Personalizado</string>  
   <string id="custom_try_umount_label">Intento de Desmontaje Personalizado</string>  

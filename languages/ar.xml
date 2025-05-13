@@ -43,7 +43,7 @@
   <string id="hide_revanced_label">إخفاء YouTube/YT-Music (Revanced)</string>
   <string id="spoof_cmdline_label">تزييف cmdline</string>
   <string id="hide_ksu_loop_label">إخفاء حلقة KSU</string>
-  <string id="force_hide_lsposed_label">إخفاء LSPosed إجباريّا</string>
+  <string id="force_hide_dex2oat_label">إخفاء Dex2oat إجباريّا</string>
   <string id="custom_sus_path_label">مسار SUS مخصص</string>
   <string id="custom_sus_mount_label">SUS mount مخصص</string>
   <string id="custom_try_umount_label">TRY umount مخصص</string>
