@@ -43,7 +43,7 @@
   <string id="hide_revanced_label">Masquer ReVanced</string>
   <string id="spoof_cmdline_label">Fausse ligne de commande</string>
   <string id="hide_ksu_loop_label">Masquer la boucle KSU</string>
-  <string id="force_hide_lsposed_label">Forcer le masquage de LSPosed</string>
+  <string id="force_hide_dex2oat_label">Forcer le masquage de Dex2oat</string>
   <string id="custom_sus_path_label">Chemin SUS personnalisé</string>
   <string id="custom_sus_mount_label">Montage SUS personnalisé</string>
   <string id="custom_try_umount_label">Essai de démontage personnalisé</string>

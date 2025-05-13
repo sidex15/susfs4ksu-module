@@ -43,7 +43,7 @@
   <string id="hide_revanced_label">Скрыть Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Подмена Cmdline</string>
   <string id="hide_ksu_loop_label">Скрыть KSU Loop</string>
-  <string id="force_hide_lsposed_label">Принудительное скрытие LSPosed</string>
+  <string id="force_hide_dex2oat_label">Принудительное скрытие Dex2oat</string>
   <string id="custom_sus_path_label">Свой SUS Path</string>
   <string id="custom_sus_mount_label">Свой SUS Mount</string>
   <string id="custom_try_umount_label">Свой Try Umount</string>

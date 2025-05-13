@@ -47,7 +47,7 @@
   <string id="hide_revanced_label">Ukryj Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Podszyj się pod Cmdline</string>
   <string id="hide_ksu_loop_label">Ukryj pętlę KSU</string>
-  <string id="force_hide_lsposed_label">Wymuś ukrycie LSPosed</string>
+  <string id="force_hide_dex2oat_label">Wymuś ukrycie Dex2oat</string>
   <string id="custom_sus_path_label">Niestandardowa ścieżka SUS</string>
   <string id="custom_sus_mount_label">Niestandardowy mount SUS</string>
   <string id="custom_try_umount_label">Niestandardowa próba odmontowania</string>

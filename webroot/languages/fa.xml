@@ -43,7 +43,7 @@
    <string id="hide_revanced_label">نهان‌سازی ری‌ونسد (یوتیوب/موسیقی یوتیوب)</string>
    <string id="spoof_cmdline_label">ساختگی کردن خط فرمان</string>
    <string id="hide_ksu_loop_label">نهان‌سازی چرخه KSU</string>
-   <string id="force_hide_lsposed_label">نهان‌سازی ناگزیر LSPosed</string>
+   <string id="force_hide_dex2oat_label">نهان‌سازی ناگزیر Dex2oat</string>
    <string id="custom_sus_path_label">مسیر ویژه SUS</string>
    <string id="custom_sus_mount_label">پیوست ویژه SUS</string>
    <string id="custom_try_umount_label">کوشش ویژه برای جداکردن</string>
