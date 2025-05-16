@@ -50,9 +50,6 @@ Then add your language to the `./languages/languages.json` with this format:
 ```
 so it will be included in the language drop-down menu. <br>
 
-~~Don't worry; it will release officially soon 😊~~
-Released on Revision 17 🚀
-
 ## Credits
 susfs4ksu: https://gitlab.com/simonpunk/susfs4ksu/
 
