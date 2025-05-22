@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="zh-rTW">
+  <!-- General -->
+  <string id="app_title">選單</string>
+  <string id="warning_label">警告</string>
+  <string id="cancel_label">取消</string>
+  <string id="confirm_label">確認</string>
+  <string id="about_label">關於</string>
+  <string id="main_menu_label">主選單</string>
+  <string id="load_label">加载</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">內核版本</string>
+  <string id="sus_path_label">SUS路徑</string>
+  <string id="sus_mount_label">SUS掛載</string>
+  <string id="try_umount_label">嘗試卸載</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">日誌</string>
+  <string id="sus_su_1_label">SUS SU 處於模式 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">啟用 SUS SU</string>
+  <string id="susfs_settings_label">自定義 SUSFS 設置</string>
+  <string id="auto_hide_label">自動隱藏設置</string>
+  <string id="default_mounts_label">自動隱藏默認掛載</string>
+  <string id="bind_mounts_label">自動隱藏綁定掛載</string>
+  <string id="try_umount_bind_label">自動嘗試卸載綁定掛載</string>
+  <string id="zygote_try_umount_label">嘗試卸載 Zygote 系统進程掛載</string>
+  <string id="kernel_uname_label">内核版本</string>
+  <string id="spoof_kernel_version_label">偽裝内核版本</string>
+  <string id="spoof_kernel_build_label">偽裝構建信息</string>
+  <string id="spoof_on_boot_label">啟用偽裝</string>
+  <string id="post_fs_data_label">在 post-fs-data 時偽裝（偽裝效果更好）</string>
+  <string id="uname_warning_label2">如果錯誤地啟用此選項，可能會導致裝置變磚或不穩定，您確定要在 post-fs-data 時偽裝嗎？</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">自定義設置</string>
+  <string id="hide_custom_rom_label">隱藏類原生 ROM 路徑</string>
+  <string id="hide_vendor_sepolicy_label">隱藏 Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">隱藏 Compat Matrix</string>
+  <string id="fake_service_list_label">偽造服務列表</string>
+  <string id="hide_gapps_label">隱藏 Gapps</string>
+  <string id="hide_revanced_label">隱藏 Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">偽裝 CMDLINE</string>
+  <string id="hide_ksu_loop_label">隱藏KSU循環</string>
+  <string id="force_hide_dex2oat_label">強制隱藏 Dex2oat 掛載</string>
+  <string id="custom_sus_path_label">自定義 SUS 路徑</string>
+  <string id="custom_sus_mount_label">自定義 SUS 掛載路徑</string>
+  <string id="custom_try_umount_label">自訂嘗試卸載路徑</string>
+</language>
