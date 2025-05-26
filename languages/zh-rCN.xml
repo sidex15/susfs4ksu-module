@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language id="zh-rCN">
   <!-- General -->
-  <string id="app_title">WebUI 菜单</string>
+  <string id="app_title">菜单</string>
   <string id="warning_label">警告！</string>
   <string id="cancel_label">取消</string>
   <string id="confirm_label">确认</string>
@@ -15,9 +15,9 @@
   
   <!-- Home Page -->
   <string id="kernel_version_label">内核版本</string>
-  <string id="sus_path_label">SUS 路径</string>
-  <string id="sus_mount_label">SUS 挂载</string>
-  <string id="try_umount_label">尝试取消挂载</string>
+  <string id="sus_path_label">SUS路径</string>
+  <string id="sus_mount_label">SUS挂载</string>
+  <string id="try_umount_label">尝试卸载</string>
   
   <!-- Settings -->
   <string id="susfs_log_label">SUSFS 日志</string>
@@ -32,7 +32,7 @@
   <string id="zygote_try_umount_label">尝试卸载 Zygote 系统进程</string>
   <string id="kernel_uname_label">内核信息</string>
   <string id="spoof_kernel_version_label">伪造内核信息</string>
-  <string id="spoof_kernel_build_label">伪造内核构建信息</string>
+  <string id="spoof_kernel_build_label">伪造构建信息</string>
   <string id="spoof_on_boot_label">在开机时自动伪造</string>
   <string id="post_fs_data_label">在 post-fs-data 时伪造（伪造效果更好）</string>
   <string id="uname_warning_label2">如果错误地启用此选项，可能会导致设备变砖或不稳定，您确定要在 post-fs-data 时伪造内核信息吗？</string>
@@ -43,7 +43,7 @@
   <string id="hide_vendor_sepolicy_label">隐藏 Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">隐藏 Compat Matrix</string>
   <string id="fake_service_list_label">伪造服务列表</string>
-  <string id="hide_gapps_label">隐藏谷歌应用</string>
+  <string id="hide_gapps_label">隐藏 Gapps</string>
   <string id="hide_revanced_label">隐藏 Revanced 的应用</string>
   <string id="spoof_cmdline_label">伪造 Cmdline</string>
   <string id="hide_ksu_loop_label">隐藏 KSU Loop</string>
@@ -53,6 +53,6 @@
   <string id="custom_try_umount_label">自定义尝试取消挂载</string>
 
   <!-- Credits -->
-  <string id="contrib_label">贡献者:</string>
-  <string id= "translators_label">翻译者:</string>
+  <string id="contrib_label">贡献人员:</string>
+  <string id= "translators_label">翻译人员:</string>
 </language>
