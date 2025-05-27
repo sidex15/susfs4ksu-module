@@ -2,7 +2,7 @@
 <language id="zh-rCN">
   <!-- General -->
   <string id="app_title">菜单</string>
-  <string id="warning_label">警告！</string>
+  <string id="warning_label">警告⚠️</string>
   <string id="cancel_label">取消</string>
   <string id="confirm_label">确认</string>
   <string id="about_label">关于</string>
@@ -10,8 +10,8 @@
   <string id="load_label">加载</string>
 
   <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">不好！是不支持的内核！</string>
-  <string id="susfs_error_desc">WebUI 访问被拒！请确认您的内核中是否有 SUSFS 补丁！</string>
+  <string id="susfs_error_label">不受支持的内核！</string>
+  <string id="susfs_error_desc">WebUI 访问被拒绝！请确保您使用的是已修补 SuSFS 的内核！</string>
   
   <!-- Home Page -->
   <string id="kernel_version_label">内核版本</string>
@@ -31,10 +31,10 @@
   <string id="try_umount_bind_label">自动尝试卸载默认绑定挂载</string>
   <string id="zygote_try_umount_label">尝试卸载 Zygote 系统进程</string>
   <string id="kernel_uname_label">内核信息</string>
-  <string id="spoof_kernel_version_label">伪造内核信息</string>
-  <string id="spoof_kernel_build_label">伪造构建信息</string>
-  <string id="spoof_on_boot_label">在开机时自动伪造</string>
-  <string id="post_fs_data_label">在 post-fs-data 时伪造（伪造效果更好）</string>
+  <string id="spoof_kernel_version_label">伪装内核信息</string>
+  <string id="spoof_kernel_build_label">伪装构建信息</string>
+  <string id="spoof_on_boot_label">在开机启动时伪装</string>
+  <string id="post_fs_data_label">在 post-fs-data 时伪装（伪装效果更好）</string>
   <string id="uname_warning_label2">如果错误地启用此选项，可能会导致设备变砖或不稳定，您确定要在 post-fs-data 时伪造内核信息吗？</string>
   
   <!-- Custom -->
@@ -45,12 +45,12 @@
   <string id="fake_service_list_label">伪造服务列表</string>
   <string id="hide_gapps_label">隐藏 Gapps</string>
   <string id="hide_revanced_label">隐藏 Revanced 的应用</string>
-  <string id="spoof_cmdline_label">伪造 Cmdline</string>
+  <string id="spoof_cmdline_label">伪装 Cmdline</string>
   <string id="hide_ksu_loop_label">隐藏 KSU Loop</string>
   <string id="force_hide_dex2oat_label">强制隐藏 Dex2oat 挂载</string>
   <string id="custom_sus_path_label">自定义 SUS 路径</string>
   <string id="custom_sus_mount_label">自定义 SUS 挂载</string>
-  <string id="custom_try_umount_label">自定义尝试取消挂载</string>
+  <string id="custom_try_umount_label">自定义尝试卸载</string>
 
   <!-- Credits -->
   <string id="contrib_label">贡献人员:</string>
