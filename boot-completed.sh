@@ -1,6 +1,7 @@
 #!/bin/sh
 MODDIR=/data/adb/modules/susfs4ksu
 SUSFS_BIN=/data/adb/ksu/bin/ksu_susfs
+KSU_BIN=/data/adb/ksu/bin/ksud
 . ${MODDIR}/utils.sh
 PERSISTENT_DIR=/data/adb/susfs4ksu
 tmpfolder=/data/adb/ksu/susfs4ksu
@@ -22,7 +23,11 @@ spoof_uname=0
 
 # update description
 if [ -f $tmpfolder/logs/susfs_active ] || dmesg | grep -q "susfs:"; then
-	description="description=status: ✅ SuS ඞ "
+	if ${KSU_BIN} module list | grep -q "Integrity-Box"; then
+		description="description=status: ✅ SuS ඞ ‼️ There's an impostor among us"
+	else
+		description="description=status: ✅ SuS ඞ"
+	fi
 else
 	description="description=status: failed 💢 - Make sure you're on a SuSFS patched kernel! 😭"
 	touch ${MODDIR}/disable

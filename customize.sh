@@ -1,5 +1,6 @@
 #!/bin/sh
 PATH=/data/adb/ksu/bin:/data/data/com.termux/files/usr/bin:$PATH
+KSU_BIN=/data/adb/ksu/bin/ksud
 DEST_BIN_DIR=/data/adb/ksu/bin
 
 if [ -z "$KSU" ] ; then
@@ -142,5 +143,12 @@ fi
 
 rm -rf ${MODPATH}/tools
 rm ${MODPATH}/customize.sh ${MODPATH}/README.md
+
+if ${KSU_BIN} module list | grep -q "Integrity-Box"; then
+	ui_print "⚠️ Integrity-Box detected!"
+	ui_print "⚠️ Integrity-Box Tampers with SUSFS4KSU custom settings without consent and may cause issues."
+	ui_print "⚠️ Please Double Check Your SUSFS4KSU Settings in the WebUI if you are using Integrity-Box."
+	ui_print "⚠️ If you are facing issues or you can't boot, please contact the Integrity-Box developer to disable tampering SUSFS Settings and paths"
+fi
 
 # EOF
