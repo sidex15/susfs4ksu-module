@@ -62,15 +62,37 @@ fi
 # echo "spoof_cmdline=1" >> /data/adb/susfs4ksu/config.sh
 [ $spoof_cmdline = 1 ] && {
 	echo "susfs4ksu/boot-completed: [spoof_cmdline]" >> $logfile1
-	sed 's|androidboot.verifiedbootstate=orange|androidboot.verifiedbootstate=green|g' /proc/cmdline > $mntfolder/cmdline
-        sed -i "s/androidboot.hwname=[^ ]*/androidboot.hwname=$(getprop ro.product.name)/; s/androidboot.product.hardware.sku=[^ ]*/androidboot.product.hardware.sku=$(getprop ro.product.name)/" $mntfolder/cmdline
+	
+	# Spoof cmdline and bootconfig
+	if grep -q "androidboot.verifiedbootstate" /proc/cmdline; then
+        sed 's|androidboot.verifiedbootstate=orange|androidboot.verifiedbootstate=green|g' /proc/cmdline > $mntfolder/cmdline
+    else
+		sed 's|androidboot.verifiedbootstate=orange|androidboot.verifiedbootstate=green|g' /proc/bootconfig > $mntfolder/bootconfig    
+	fi	
+		
+	if grep -q "androidboot.hwname\|androidboot.product.hardware.sku" /proc/cmdline; then
+		sed -i "s/androidboot.hwname=[^ ]*/androidboot.hwname=$(getprop ro.product.name)/; s/androidboot.product.hardware.sku=[^ ]*/androidboot.product.hardware.sku=$(getprop ro.product.name)/" $mntfolder/cmdline
+	else
+		sed -i "s/androidboot.hwname=[^ ]*/androidboot.hwname=$(getprop ro.product.name)/; s/androidboot.product.hardware.sku=[^ ]*/androidboot.product.hardware.sku=$(getprop ro.product.name)/" $mntfolder/bootconfig
+	fi
 	
 	#check for susfs version and use the appropriate method
-	if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 153 ] 2>/dev/null; then
+	if [ -f $mntfolder/cmdline ]; then
+		if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 153 ] 2>/dev/null; then
 		${SUSFS_BIN} set_cmdline_or_bootconfig $mntfolder/cmdline
-	else
-		${SUSFS_BIN} set_proc_cmdline $mntfolder/cmdline
+		else
+			${SUSFS_BIN} set_proc_cmdline $mntfolder/cmdline
+		fi
 	fi
+
+	if [ -f $mntfolder/bootconfig ]; then
+		if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 153 ] 2>/dev/null; then
+		${SUSFS_BIN} set_cmdline_or_bootconfig $mntfolder/bootconfig
+		else
+			${SUSFS_BIN} set_proc_cmdline $mntfolder/bootconfig
+		fi
+	fi
+	
 }
 
 # echo "hide_revanced=1" >> /data/adb/susfs4ksu/config.sh
