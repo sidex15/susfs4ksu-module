@@ -44,15 +44,49 @@ fi
 
 # if spoof_uname is on mode 1, set_uname will be called here
 [ $spoof_uname = 1 ] && spoof_uname
-# echo "hide_cusrom=1" >> /data/adb/susfs4ksu/config.sh
-[ $hide_cusrom = 1 ] && {
-    echo "susfs4ksu/boot-completed: [hide_cusrom]" >> $logfile1
-    
-    # Find lineage and crdroid paths
-    find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | while read -r path; do
+
+# Hide Custom ROM Paths
+[ $hide_cusrom -gt 0 ] && {
+    [ $hide_cusrom = 5 ] && {
+    # Find lineage and crdroid paths for all files and directories
+	echo "susfs4ksu/boot-completed: [hide_cusrom][5]" >> $logfile1
+    find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | while read -r path; do
         ${SUSFS_BIN} add_sus_path "$path"
         echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
     done
+	}
+	[ $hide_cusrom = 4 ] && {
+	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, and /vendor/bin/hw/ files
+	echo "susfs4ksu/boot-completed: [hide_cusrom][4]" >> $logfile1
+	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar)|/vendor/bin/hw/" | while read -r path; do
+		${SUSFS_BIN} add_sus_mount "$path"
+		echo "[sus_mount]: susfs4ksu/boot-completed $path" >> "$logfile1"
+	done
+	}
+	[ $hide_cusrom = 3 ] && {
+	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, and /vendor/bin/hw/ files
+	echo "susfs4ksu/boot-completed: [hide_cusrom][3]" >> $logfile1
+	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex)|/vendor/bin/hw/" | while read -r path; do
+		${SUSFS_BIN} add_sus_path "$path"
+		echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
+	done
+	}
+	[ $hide_cusrom = 2 ] && {
+	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, so, and /vendor/bin/hw/ files
+	echo "susfs4ksu/boot-completed: [hide_cusrom][2]" >> $logfile1
+	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex|so)|/vendor/bin/hw/" | while read -r path; do
+		${SUSFS_BIN} add_sus_path "$path"
+		echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
+	done
+	}
+	[ $hide_cusrom = 1 ] && {
+	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, so, rc, and /vendor/bin/hw/ files
+	echo "susfs4ksu/boot-completed: [hide_cusrom][1]" >> $logfile1
+	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex|so|rc)|/vendor/bin/hw/" | while read -r path; do
+		${SUSFS_BIN} add_sus_path "$path"
+		echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
+	done
+	}
 }
 
 # echo "hide_gapps=1" >> /data/adb/susfs4ksu/config.sh
