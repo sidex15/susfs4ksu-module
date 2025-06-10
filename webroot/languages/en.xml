@@ -40,6 +40,12 @@
   <!-- Custom -->
   <string id="custom_settings_label">Custom Settings</string>
   <string id="hide_custom_rom_label">Hide Custom Rom Paths</string>
+  <string id="hide_level_label">Hide Level</string>
+  <string id="hide_custom_rom_desc1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc2">Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc3">Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc4">Exclude .apk, .jar, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc5">Hide all custom rom paths ⚠️Risky and it could cause issues!</string>
   <string id="hide_vendor_sepolicy_label">Hide Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">Hide Compat Matrix</string>
   <string id="fake_service_list_label">Spoof Service List</string>
