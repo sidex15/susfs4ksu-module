@@ -43,7 +43,6 @@ enable_sus_su_mode_1(){
 
   rm -rf ${MODDIR}/system 2>/dev/null
   # Enable sus_su or abort the function if sus_su is not supported #
-  # Enable sus_su or abort the function if sus_su is not supported #
 	if ! ${SUSFS_BIN} sus_su 1; then
 		sed -i "s/^sus_su=.*/sus_su=-1/" ${PERSISTENT_DIR}/config.sh
 		return
@@ -65,7 +64,7 @@ enable_sus_su_mode_1(){
 # LSPosed
 # but this is probably not needed if auto_sus_bind_mount is enabled
 [ $force_hide_lsposed = 1 ] && {
-	echo "susfs4ksu/boot-completed: [force_hide_lsposed]" >> $logfile1
+	echo "susfs4ksu/post-fs-data: [force_hide_lsposed]" >> $logfile1
 	${SUSFS_BIN} add_try_umount /system/apex/com.android.art/bin/dex2oat 1
 	${SUSFS_BIN} add_try_umount /system/apex/com.android.art/bin/dex2oat32 1
 	${SUSFS_BIN} add_try_umount /system/apex/com.android.art/bin/dex2oat64 1
