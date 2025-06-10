@@ -28,11 +28,4 @@ if grep -v "#" "$PERSISTENT_DIR/try_umount.txt" > /dev/null; then
     done
 fi
 
-# to add paths
-# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path.txt
-# this'll make it easier for the webui to do stuff
-for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
-	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/post-mount $i" >> $logfile1
-done
-
 # EOF
