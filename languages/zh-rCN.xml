@@ -39,6 +39,7 @@
   
   <!-- Custom -->
   <string id="custom_settings_label">自定义设置</string>
+  <string id="hide_paths_label">隐藏自定义ROM设置</string>
   <string id="hide_custom_rom_label">隐藏自定义 ROM 路径</string>
   <string id="hide_vendor_sepolicy_label">隐藏 Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">隐藏 Compat Matrix</string>
