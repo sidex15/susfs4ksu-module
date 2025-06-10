@@ -241,7 +241,7 @@ async function auto_hide_settings() {
 	}
 
 	auto_mount.addEventListener("click",async function(){
-
+		is_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
 		if (is_auto_mount=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_sus_ksu_default_mount`);
 			is_auto_mount=="false";
@@ -255,7 +255,7 @@ async function auto_hide_settings() {
 	});
 
 	auto_bind.addEventListener("click",async function(){
-
+		is_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
 		if (is_auto_bind=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_sus_bind_mount`);
 			is_auto_bind=="false";
@@ -269,7 +269,7 @@ async function auto_hide_settings() {
 	});
 
 	auto_umount_bind.addEventListener("click",async function(){
-
+		is_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
 		if (is_auto_umount_bind=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
 			is_auto_umount_bind=="false";
@@ -283,7 +283,7 @@ async function auto_hide_settings() {
 	});
 
 	try_umount_zygote.addEventListener("click",async function(){
-
+		is_try_umount_zygote = await run(`[ -f data/adb/susfs_umount_for_zygote_system_process ] && echo true || echo false`);
 		if (is_try_umount_zygote=="true"){
 			await run(`rm -f data/adb/susfs_umount_for_zygote_system_process`);
 			is_try_umount_zygote=="false";
