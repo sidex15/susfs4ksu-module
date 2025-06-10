@@ -129,6 +129,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
     } else if (currentPath === '/custom.html') {
 		//console.log("in custom");
 		custom_toggles(settings);
+		custom_rom_settigs(settings);
 		custom_sus_mount();
 		custom_try_umount();
 		custom_sus_path();
@@ -485,36 +486,16 @@ async function susfs_log_toggle(settings) {
 
 // custom toggles
 async function custom_toggles(settings) {
-	const hide_custom_rom = document.getElementById("hide_custom_rom");
-	const more_custom_rom = document.getElementById("more_custom_rom");
 	const hide_gapps = document.getElementById("hide_gapps");
 	const hide_revanced = document.getElementById("hide_revanced");
 	const spoof_cmdline = document.getElementById("spoof_cmdline");
 	const hide_ksu_loop = document.getElementById("hide_ksu_loop");
 	const force_hide_lsposed = document.getElementById("force_hide_lsposed");
-	const hide_vendor_sepolicy = document.getElementById("hide_vendor_sepolicy");
-	const hide_compat_matrix = document.getElementById("hide_compat_matrix");
-	const fake_service_list = document.getElementById("fake_service_list");
 	//var config_sh = await run(`cat ${config}/config.sh`);
 
 	// Convert the string content to an object
 	const custom_settings = settings;
 
-	// Set initial state first
-	if (custom_settings.hide_cusrom==true){
-		hide_custom_rom.checked="checked";
-		more_custom_rom.classList.remove("hidden");
-	}
-	else{
-		hide_custom_rom.checked=false
-		more_custom_rom.classList.add("hidden");
-	}
-	if (custom_settings.hide_vendor_sepolicy==true) hide_vendor_sepolicy.checked="checked";
-	else hide_vendor_sepolicy.checked=false;
-	if (custom_settings.hide_compat_matrix==true) hide_compat_matrix.checked="checked";
-	else hide_compat_matrix.checked=false;
-	if (custom_settings.fake_service_list==true) fake_service_list.checked="checked";
-	else fake_service_list.checked=false;
 	if (custom_settings.hide_gapps==true) hide_gapps.checked="checked";
 	else hide_gapps.checked=false;
 	if (custom_settings.hide_revanced==true) hide_revanced.checked="checked";
@@ -525,79 +506,6 @@ async function custom_toggles(settings) {
 	else hide_ksu_loop.checked=false;
 	if (custom_settings.force_hide_lsposed==true) force_hide_lsposed.checked="checked";
 	else force_hide_lsposed.checked=false;
-
-	// custom rom toggle
-	hide_custom_rom.addEventListener("click",async function (){
-		//var vendor_sepolicy_toggle = await run(`grep -q 'hide_cusrom=1' ${config}/config.sh && echo true || echo false`);
-		const more_custom_rom = document.getElementById("more_custom_rom");
-		if (custom_settings.hide_cusrom==true){
-			run(`sed -i 's/hide_cusrom=1/hide_cusrom=0/' ${config}/config.sh`)
-			run (`sed -i 's/hide_vendor_sepolicy=1/hide_vendor_sepolicy=0/' ${config}/config.sh`)
-			run(`sed -i 's/hide_compat_matrix=1/hide_compat_matrix=0/' ${config}/config.sh`)
-			run(`sed -i 's/fake_service_list=1/fake_service_list=0/' ${config}/config.sh`)
-			custom_settings.hide_cusrom=false
-			hide_vendor_sepolicy.checked=false;
-			hide_compat_matrix.checked=false;
-			fake_service_list.checked=false;
-			more_custom_rom.classList.add("hidden");
-			toast("Reboot to take effect");
-		}
-		else {
-			//if (await run(`grep -q 'hide_cusrom' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_cusrom=1' >> ${config}/config.sh`)
-			/*else*/ run (`sed -i 's/hide_cusrom=0/hide_cusrom=1/' ${config}/config.sh`)
-			custom_settings.hide_cusrom=true
-			more_custom_rom.classList.remove("hidden");
-			toast("Reboot to take effect");
-		}
-	});
-
-	// vendor sepolicy toggle
-	hide_vendor_sepolicy.addEventListener("click",async function (){
-		//var vendor_sepolicy_toggle = await run(`grep -q 'hide_vendor_sepolicy=1' ${config}/config.sh && echo true || echo false`);
-		if (custom_settings.hide_vendor_sepolicy==true){
-			run(`sed -i 's/hide_vendor_sepolicy=1/hide_vendor_sepolicy=0/' ${config}/config.sh`)
-			custom_settings.hide_vendor_sepolicy=false
-			toast("Reboot to take effect");
-		}
-		else {
-			//if (await run(`grep -q 'hide_vendor_sepolicy' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_vendor_sepolicy=1' >> ${config}/config.sh`)
-			/*else*/ run (`sed -i 's/hide_vendor_sepolicy=0/hide_vendor_sepolicy=1/' ${config}/config.sh`)
-			custom_settings.hide_vendor_sepolicy=true
-			toast("Reboot to take effect");
-		}
-	});
-
-	// compat matrix toggle
-	hide_compat_matrix.addEventListener("click",async function (){
-		//var compat_matrix_toggle = await run(`grep -q 'hide_compat_matrix=1' ${config}/config.sh && echo true || echo false`);
-		if (custom_settings.hide_compat_matrix==true){
-			run(`sed -i 's/hide_compat_matrix=1/hide_compat_matrix=0/' ${config}/config.sh`)
-			custom_settings.hide_compat_matrix=false
-			toast("Reboot to take effect");
-		}
-		else {
-			/*if (await run(`grep -q 'hide_compat_matrix' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_compat_matrix=1' >> ${config}/config.sh`)
-			else*/ run (`sed -i 's/hide_compat_matrix=0/hide_compat_matrix=1/' ${config}/config.sh`)
-			custom_settings.hide_compat_matrix=true
-			toast("Reboot to take effect");
-		}
-	});
-
-	// fake service list toggle
-	fake_service_list.addEventListener("click",async function (){
-		//var fake_service_list_toggle = await run(`grep -q 'fake_service_list=1' ${config}/config.sh && echo true || echo false`);
-		if (custom_settings.fake_service_list==true){
-			run(`sed -i 's/fake_service_list=1/fake_service_list=0/' ${config}/config.sh`)
-			custom_settings.fake_service_list=false
-			toast("Reboot to take effect");
-		}
-		else {
-			/*if (await run(`grep -q 'fake_service_list' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'fake_service_list=1' >> ${config}/config.sh`)
-			else*/ run (`sed -i 's/fake_service_list=0/fake_service_list=1/' ${config}/config.sh`)
-			custom_settings.fake_service_list=true
-			toast("Reboot to take effect");
-		}
-	});
 
 	// gapps toggle
 	hide_gapps.addEventListener("click",async function (){
@@ -675,6 +583,174 @@ async function custom_toggles(settings) {
 			/*if (await run(`grep -q 'force_hide_lsposed' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'force_hide_lsposed=1' >> ${config}/config.sh`)
 			else*/ await run(`sed -i 's/force_hide_lsposed=0/force_hide_lsposed=1/' ${config}/config.sh`)
 			custom_settings.force_hide_lsposed=true
+			toast("Reboot to take effect");
+		}
+	});
+}
+
+async function custom_rom_settigs(settings) {
+	const hide_custom_rom = document.getElementById("hide_custom_rom");
+	const custom_rom_levels = document.getElementById("custom_rom_levels");
+	const hide_level= document.getElementById("hide_level");
+	const hide_level1 = document.getElementById("hide_level1");
+	const hide_level2 = document.getElementById("hide_level2");
+	const hide_level3 = document.getElementById("hide_level3");
+	const hide_level4 = document.getElementById("hide_level4");
+	const hide_level5 = document.getElementById("hide_level5");
+	const hide_vendor_sepolicy = document.getElementById("hide_vendor_sepolicy");
+	const hide_compat_matrix = document.getElementById("hide_compat_matrix");
+	const fake_service_list = document.getElementById("fake_service_list");
+
+	// Convert the string content to an object
+	const custom_settings = settings;
+
+	// Set initial state first
+	if (custom_settings.hide_cusrom>0){
+		hide_custom_rom.checked="checked";
+		custom_rom_levels.classList.remove("hidden");
+		if (custom_settings.hide_cusrom==1){
+			hide_level.value="0";	
+			hide_level1.classList.remove("hidden");
+		}
+		else if (custom_settings.hide_cusrom==2){
+			hide_level.value="25";
+			hide_level2.classList.remove("hidden");
+		}
+		else if (custom_settings.hide_cusrom==3){
+			hide_level.value="50";
+			hide_level3.classList.remove("hidden");
+		}
+		else if (custom_settings.hide_cusrom==4){
+			hide_level.value="75";
+			hide_level4.classList.remove("hidden");
+		}
+		else if (custom_settings.hide_cusrom==5){
+			hide_level.value="100";
+			hide_level5.classList.remove("hidden");
+		}
+	}
+	else{
+		hide_custom_rom.checked=false
+		custom_rom_levels.classList.add("hidden");
+	}
+	if (custom_settings.hide_vendor_sepolicy==true) hide_vendor_sepolicy.checked="checked";
+	else hide_vendor_sepolicy.checked=false;
+	if (custom_settings.hide_compat_matrix==true) hide_compat_matrix.checked="checked";
+	else hide_compat_matrix.checked=false;
+	if (custom_settings.fake_service_list==true) fake_service_list.checked="checked";
+	else fake_service_list.checked=false;
+
+	// custom rom toggle
+	hide_custom_rom.addEventListener("click",async function (){
+		//var vendor_sepolicy_toggle = await run(`grep -q 'hide_cusrom=1' ${config}/config.sh && echo true || echo false`);
+		const custom_rom_levels = document.getElementById("custom_rom_levels");
+		if (custom_settings.hide_cusrom>0){
+			run(`sed -i 's/hide_cusrom=.*/hide_cusrom=0/' ${config}/config.sh`)
+			custom_settings.hide_cusrom=0
+			custom_rom_levels.classList.add("hidden");
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.add("hidden");
+			toast("Reboot to take effect");
+		}
+		else {
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=1/' ${config}/config.sh`)
+			hide_level.value="0"
+			custom_settings.hide_cusrom=1
+			custom_rom_levels.classList.remove("hidden");
+			hide_level1.classList.remove("hidden");
+			toast("Reboot to take effect");
+		}
+	});
+
+	hide_level.addEventListener("change",async function (){
+		if (hide_level.value=="0"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=1/' ${config}/config.sh`);
+			hide_level1.classList.remove("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.add("hidden");
+		}
+		else if (hide_level.value=="25"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=2/' ${config}/config.sh`);
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.remove("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.add("hidden");
+		}
+		else if (hide_level.value=="50"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=3/' ${config}/config.sh`);
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.remove("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.add("hidden");
+		}
+		else if (hide_level.value=="75"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=4/' ${config}/config.sh`);
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.remove("hidden");
+			hide_level5.classList.add("hidden");
+		}
+		else if (hide_level.value=="100"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=5/' ${config}/config.sh`);
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.remove("hidden");
+		}
+	});
+		// vendor sepolicy toggle
+	hide_vendor_sepolicy.addEventListener("click",async function (){
+		//var vendor_sepolicy_toggle = await run(`grep -q 'hide_vendor_sepolicy=1' ${config}/config.sh && echo true || echo false`);
+		if (custom_settings.hide_vendor_sepolicy==true){
+			run(`sed -i 's/hide_vendor_sepolicy=1/hide_vendor_sepolicy=0/' ${config}/config.sh`)
+			custom_settings.hide_vendor_sepolicy=false
+			toast("Reboot to take effect");
+		}
+		else {
+			//if (await run(`grep -q 'hide_vendor_sepolicy' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_vendor_sepolicy=1' >> ${config}/config.sh`)
+			/*else*/ run (`sed -i 's/hide_vendor_sepolicy=0/hide_vendor_sepolicy=1/' ${config}/config.sh`)
+			custom_settings.hide_vendor_sepolicy=true
+			toast("Reboot to take effect");
+		}
+	});
+
+	// compat matrix toggle
+	hide_compat_matrix.addEventListener("click",async function (){
+		//var compat_matrix_toggle = await run(`grep -q 'hide_compat_matrix=1' ${config}/config.sh && echo true || echo false`);
+		if (custom_settings.hide_compat_matrix==true){
+			run(`sed -i 's/hide_compat_matrix=1/hide_compat_matrix=0/' ${config}/config.sh`)
+			custom_settings.hide_compat_matrix=false
+			toast("Reboot to take effect");
+		}
+		else {
+			/*if (await run(`grep -q 'hide_compat_matrix' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_compat_matrix=1' >> ${config}/config.sh`)
+			else*/ run (`sed -i 's/hide_compat_matrix=0/hide_compat_matrix=1/' ${config}/config.sh`)
+			custom_settings.hide_compat_matrix=true
+			toast("Reboot to take effect");
+		}
+	});
+
+	// fake service list toggle
+	fake_service_list.addEventListener("click",async function (){
+		//var fake_service_list_toggle = await run(`grep -q 'fake_service_list=1' ${config}/config.sh && echo true || echo false`);
+		if (custom_settings.fake_service_list==true){
+			run(`sed -i 's/fake_service_list=1/fake_service_list=0/' ${config}/config.sh`)
+			custom_settings.fake_service_list=false
+			toast("Reboot to take effect");
+		}
+		else {
+			/*if (await run(`grep -q 'fake_service_list' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'fake_service_list=1' >> ${config}/config.sh`)
+			else*/ run (`sed -i 's/fake_service_list=0/fake_service_list=1/' ${config}/config.sh`)
+			custom_settings.fake_service_list=true
 			toast("Reboot to take effect");
 		}
 	});

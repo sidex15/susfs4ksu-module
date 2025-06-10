@@ -32,35 +32,9 @@
 				</div>
 			</div>
 			<section class="flex flex-col justify-start items-center min-h-fit ml-4 mr-4 uppercase font-bold">
-				  <div class="stats flex flex-col white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] mt-5 border-2 border-white">
+				<div class="stats flex flex-col white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] mt-5 border-2 border-white">
 					<div class="stat">
 						<div class="w-[16.6rem]">
-							<div class="form-control">
-							  <label class="label cursor-pointer">
-                                    <span class="text-white text-base" data-i18n="hide_custom_rom_label">Hide Custom Rom Paths</span>
-								<input type="checkbox" id="hide_custom_rom" class="toggle toggle-md toggle-primary" checked="checked" />
-							  </label>
-							</div>
-                            <div class="hidden" id="more_custom_rom">
-                            <div class="form-control">
-                                <label class="label cursor-pointer">
-                                      <span class="text-white text-base" data-i18n="hide_vendor_sepolicy_label">Hide vendor sepolicy</span>
-                                  <input type="checkbox" id="hide_vendor_sepolicy" class="toggle toggle-md toggle-primary" checked="checked" />
-                                </label>
-                            </div>
-                            <div class="form-control">
-                                <label class="label cursor-pointer">
-                                      <span class="text-white text-base" data-i18n="hide_compat_matrix_label">Hide Compat Matrix</span>
-                                  <input type="checkbox" id="hide_compat_matrix" class="toggle toggle-md toggle-primary" checked="checked" />
-                                </label>
-                            </div>
-                            <div class="form-control">
-                                <label class="label cursor-pointer">
-                                      <span class="text-white text-base" data-i18n="fake_service_list_label">Spoof Service List</span>
-                                  <input type="checkbox" id="fake_service_list" class="toggle toggle-md toggle-primary" checked="checked" />
-                                </label>
-                            </div>
-                            </div>
                             <div class="form-control">
                             <label class="label cursor-pointer">
                                 <span class="text-white text-base" data-i18n="hide_gapps_label">Hide Gapps</span>
@@ -92,9 +66,58 @@
                                 </label>
                             </div>
                         </div>
-					</div>
-				  </div>
-				  <div class="stats flex flex-col justify-between items-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px] p-4 min-w-screen">
+				    </div>
+				</div>
+                <div class="stats flex flex-col white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] mt-5 border-2 border-white">
+					<div class="stat">
+                        <h2 class="text-white text-2xl font-bold mb-4" data-i18n="hide_paths_label">Hide Custom Rom Settings</h2>
+						<div class="w-[16.6rem]">
+                            <div class="form-control">
+							  <label class="label cursor-pointer">
+                                    <span class="text-white text-base" data-i18n="hide_custom_rom_label">Hide Custom Rom Paths</span>
+								    <input type="checkbox" id="hide_custom_rom" class="toggle toggle-md toggle-primary" checked="checked" />
+							  </label>
+							</div>
+                            <div id="custom_rom_levels" class="hidden pb-3">
+                                <label class="label cursor-pointer">
+                                <span class="text-white text-base" data-i18n="hide_level_label">Hide Level</span>
+                                </label>
+                                <input type="range" min="0" max="100" value="0" class="range range-xs" step="25" id="hide_level"/>
+                                <div class="flex w-full justify-between px-2 text-xs font-normal font-amongus text-white">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>5</span>
+                                </div>
+                                <p class="text-white text-sm hidden font-amongus2 mt-2" data-i18n="hide_custom_rom_desc1" id="hide_level1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</p>
+                                <p class="text-white text-sm hidden font-amongus2 mt-2" data-i18n="hide_custom_rom_desc2" id="hide_level2">Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</p>
+                                <p class="text-white text-sm hidden font-amongus2 mt-2" data-i18n="hide_custom_rom_desc3" id="hide_level3">Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</p>
+                                <p class="text-white text-sm hidden font-amongus2 mt-2" data-i18n="hide_custom_rom_desc4" id="hide_level4">Exclude .apk, .jar, and /vendor/bin/hw/ files</p>
+                                <p class="text-white text-sm hidden font-amongus2 mt-2" data-i18n="hide_custom_rom_desc5" id="hide_level5">Hide all custom rom paths (Risky and it could cause issues)</p>
+                            </div>
+                            <div class="form-control">
+                                <label class="label cursor-pointer">
+                                      <span class="text-white text-base" data-i18n="hide_vendor_sepolicy_label">Hide vendor sepolicy</span>
+                                  <input type="checkbox" id="hide_vendor_sepolicy" class="toggle toggle-md toggle-primary" checked="checked" />
+                                </label>
+                            </div>
+                            <div class="form-control">
+                                <label class="label cursor-pointer">
+                                      <span class="text-white text-base" data-i18n="hide_compat_matrix_label">Hide Compat Matrix</span>
+                                  <input type="checkbox" id="hide_compat_matrix" class="toggle toggle-md toggle-primary" checked="checked" />
+                                </label>
+                            </div>
+                            <div class="form-control">
+                                <label class="label cursor-pointer">
+                                      <span class="text-white text-base" data-i18n="fake_service_list_label">Spoof Service List</span>
+                                  <input type="checkbox" id="fake_service_list" class="toggle toggle-md toggle-primary" checked="checked" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="stats flex flex-col justify-between items-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px] p-4 min-w-screen">
                     <div class="form-control">
                         <label class="label cursor-pointer justify-between items-center flex gap-28">
                             <span class="text-white text-base" data-i18n="custom_sus_path_label">Custom SUS Path</span>
