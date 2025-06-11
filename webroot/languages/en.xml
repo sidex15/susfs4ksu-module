@@ -25,7 +25,6 @@
   <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
   
   <!-- Status Page -->
-  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
   <string id="kernel_features_label">Kernel Features Status</string>
   <string id="sus_path_feature_label">SUS Path Support</string>
   <string id="sus_mount_feature_label">SUS Mount Support</string>
