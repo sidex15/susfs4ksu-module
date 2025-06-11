@@ -67,9 +67,9 @@
   <string id="hide_custom_rom_desc3">排除 .apk, .jar, .odex, .vdex 以及 /vendor/bin/hw/ 文件</string>
   <string id="hide_custom_rom_desc4">排除 .apk, .jar 以及 /vendor/bin/hw/ 文件</string>
   <string id="hide_custom_rom_desc5">隐藏所有自定义 ROM 路径 ⚠️高风险！可能导致问题！</string>
-  <string id="hide_vendor_sepolicy_label">隐藏厂商 SEPolicy</string>
-  <string id="hide_compat_matrix_label">隐藏兼容性矩阵</string>
-  <string id="fake_service_list_label">欺骗服务列表</string>
+  <string id="hide_vendor_sepolicy_label">隐藏 Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">隐藏 Compat Matrix</string>
+  <string id="fake_service_list_label">欺骗 Service List</string>
   <string id="hide_gapps_label">隐藏 GApps</string>
   <string id="hide_revanced_label">隐藏 Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">欺骗 Cmdline</string>
