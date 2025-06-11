@@ -21,6 +21,8 @@
   <string id="sus_path_label">SUS PATH</string>
   <string id="sus_mount_label">SUS MOUNT</string>
   <string id="try_umount_label">TRY UMOUNT</string>
+  <string id="susfs_settings_label">Custom SUSFS Settings</string>
+  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
   
   <!-- Status Page -->
   <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
