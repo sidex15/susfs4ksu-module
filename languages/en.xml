@@ -23,6 +23,7 @@
   <string id="try_umount_label">TRY UMOUNT</string>
   
   <!-- Status Page -->
+  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
   <string id="kernel_features_label">Kernel Features Status</string>
   <string id="sus_path_feature_label">SUS Path Support</string>
   <string id="sus_mount_feature_label">SUS Mount Support</string>
@@ -58,6 +59,7 @@
   
   <!-- Custom -->
   <string id="custom_settings_label">Custom Settings</string>
+  <string id="hide_paths_label">Hide Custom Rom Settings</string>
   <string id="hide_custom_rom_label">Hide Custom Rom Paths</string>
   <string id="hide_level_label">Hide Level</string>
   <string id="hide_custom_rom_desc1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
