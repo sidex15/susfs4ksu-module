@@ -17,6 +17,13 @@ var susfs_version = await run(`grep version= ${moddir}/module.prop | cut -d '=' 
 var susfs_version_decimal=parseFloat(susfs_version.replace(/[v.]/g,""));
 const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
+const susfs_features = await run(`${susfs_bin} show enabled_features`);
+
+//susfs features
+if (susfs_version_decimal>152){
+	const susfs_features_tag = document.getElementById("susfs_kernel_status");
+	susfs_features_tag.classList.remove("hidden");
+}
 
 if(await run(`[ -f ${tmpfolder}/logs/susfs_active ] && echo true || echo false`)=="false"){
 	const susfs_error = document.getElementById("susfs_nos_dialog");
@@ -134,6 +141,10 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		custom_try_umount();
 		custom_sus_path();
     }
+	else if (currentPath === '/status.html') {
+		//console.log("in status");
+		loadKernelFeatureStatus(susfs_features);
+	}
 });
 
 //run function
@@ -857,6 +868,56 @@ async function custom_try_umount(){
 			ease: 'power1.out' 
 		});
 	});
+}
+
+// Load kernel feature status
+async function loadKernelFeatureStatus(susfs_features) {
+  const features = [
+    { id: 'status_sus_path', config: 'CONFIG_KSU_SUSFS_SUS_PATH' },
+    { id: 'status_sus_mount', config: 'CONFIG_KSU_SUSFS_SUS_MOUNT' },
+    { id: 'status_auto_default_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT' },
+    { id: 'status_auto_bind_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT' },
+    { id: 'status_sus_kstat', config: 'CONFIG_KSU_SUSFS_SUS_KSTAT' },
+    { id: 'status_try_umount', config: 'CONFIG_KSU_SUSFS_TRY_UMOUNT' },
+    { id: 'status_auto_try_umount_bind', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT' },
+    { id: 'status_spoof_uname', config: 'CONFIG_KSU_SUSFS_SPOOF_UNAME' },
+    { id: 'status_enable_log', config: 'CONFIG_KSU_SUSFS_ENABLE_LOG' },
+    { id: 'status_hide_symbols', config: 'CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS' },
+    { id: 'status_spoof_cmdline', config: 'CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG' },
+    { id: 'status_open_redirect', config: 'CONFIG_KSU_SUSFS_OPEN_REDIRECT' },
+    { id: 'status_magic_mount', config: 'CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT' },
+	{ id: 'status_overlayfs_auto_kstat', config: 'CONFIG_KSU_SUSFS_OVERLAYFS' }
+  ];
+
+  for (const feature of features) {
+    try {
+      // Check if the kernel feature is enabled
+      const result = susfs_features.includes(feature.config);
+      const statusElement = document.getElementById(feature.id);
+      
+      if (statusElement) {
+        const span = statusElement.querySelector('span');
+        if (result) {
+          statusElement.className = 'badge badge-sm badge-success text-xs ml-4';
+          span.textContent = 'Enabled';
+          span.setAttribute('data-i18n', 'enabled_label');
+        } else {
+          statusElement.className = 'badge badge-sm badge-error text-xs ml-4';
+          span.textContent = 'Disabled';
+          span.setAttribute('data-i18n', 'disabled_label');
+        }
+      }
+    } catch (error) {
+      // If we can't determine the status, mark as unknown
+      const statusElement = document.getElementById(feature.id);
+      if (statusElement) {
+        const span = statusElement.querySelector('span');
+        statusElement.className = 'badge badge-sm badge-warning text-xs ml-4';
+        span.textContent = 'Unknown';
+        span.setAttribute('data-i18n', 'unknown_label');
+      }
+    }
+  }
 }
 
 // Initialize the page
