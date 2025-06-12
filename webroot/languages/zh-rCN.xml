@@ -21,9 +21,10 @@
   <string id="sus_path_label">SUS 路径</string>
   <string id="sus_mount_label">SUS 挂载</string>
   <string id="try_umount_label">尝试卸载</string>
+  <string id="susfs_settings_label">自定义 SUSFS 设置</string>
+  <string id="susfs_kernel_status_label">SUSFS 内核状态</string>
   
   <!-- Status Page -->
-  <string id="susfs_kernel_status_label">SUSFS 内核状态</string>
   <string id="kernel_features_label">内核功能状态</string>
   <string id="sus_path_feature_label">SUS 路径支持</string>
   <string id="sus_mount_feature_label">SUS 挂载支持</string>
