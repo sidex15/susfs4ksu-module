@@ -8,6 +8,10 @@
   <string id="about_label">About</string>
   <string id="main_menu_label">Main Menu</string>
   <string id="load_label">Load</string>
+  <string id="enabled_label">Enabled</string>
+  <string id="disabled_label">Disabled</string>
+  <string id="unknown_label">Unknown</string>
+  <string id="help_label">Help</string>
 
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
@@ -18,6 +22,24 @@
   <string id="sus_path_label">SUS PATH</string>
   <string id="sus_mount_label">SUS MOUNT</string>
   <string id="try_umount_label">TRY UMOUNT</string>
+  <string id="susfs_settings_label">Custom SUSFS Settings</string>
+  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
+  
+  <!-- Status Page -->
+  <string id="kernel_features_label">Kernel Features Status</string>
+  <string id="sus_path_feature_label">SUS Path Support</string>
+  <string id="sus_mount_feature_label">SUS Mount Support</string>
+  <string id="try_umount_feature_label">Try Umount Support</string>
+  <string id="spoof_uname_feature_label">Spoof Uname Support</string>
+  <string id="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Open Redirect Support</string>
+  <string id="enable_log_feature_label">Logging Support</string>
+  <string id="auto_default_mount_feature_label">Auto Default Mount</string>
+  <string id="auto_bind_mount_feature_label">Auto Bind Mount</string>
+  <string id="auto_try_umount_bind_feature_label">Auto Try Umount Bind</string>
+  <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
+  <string id="magic_mount_feature_label">Magic Mount Support</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</string>
   
   <!-- Settings -->
   <string id="susfs_log_label">SUSFS Logs</string>
@@ -39,7 +61,14 @@
   
   <!-- Custom -->
   <string id="custom_settings_label">Custom Settings</string>
+  <string id="hide_paths_label">Hide Custom Rom Settings</string>
   <string id="hide_custom_rom_label">Hide Custom Rom Paths</string>
+  <string id="hide_level_label">Hide Level</string>
+  <string id="hide_custom_rom_desc1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc2">Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc3">Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc4">Exclude .apk, .jar, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc5">Hide all custom rom paths ⚠️Risky and it could cause issues!</string>
   <string id="hide_vendor_sepolicy_label">Hide Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">Hide Compat Matrix</string>
   <string id="fake_service_list_label">Spoof Service List</string>

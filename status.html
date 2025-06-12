@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="./index.css" type="text/css" rel="stylesheet">
+	<script type="module" src="index.js"></script>
+    <script type="module" src="i18n.js"></script>
+</head>
+
+<body class="min-h-screen" data-router-wrapper>
+    <main class="max-h-screen relative overflow-x-clip overflow-y-auto pb-14" data-router-view="credits">
+            <section class="flex flex-col gap-4 items-center justify-center pt-10">  
+                <!-- Add this section after the kernel uname section and before the closing </section> tag -->
+                <div class="stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px]">
+                    <div class="stat">
+                        <div class="stat-title text-lg text-white mb-3" data-i18n="kernel_features_label">Kernel Features Status</div>
+                        
+                        <!-- SUS Path -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="sus_path_feature_label">SUS Path Support</span>
+                            <div id="status_sus_path" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                        
+                        <!-- SUS Mount -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="sus_mount_feature_label">SUS Mount Support</span>
+                            <div id="status_sus_mount" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+
+                        <!-- Try Umount -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="try_umount_feature_label">Try Umount Support</span>
+                            <div id="status_try_umount" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Spoof Uname -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="spoof_uname_feature_label">Spoof Uname Support</span>
+                            <div id="status_spoof_uname" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Spoof Cmdline -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</span>
+                            <div id="status_spoof_cmdline" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+
+                        <!-- Open Redirect -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="open_redirect_feature_label">Open Redirect Support</span>
+                            <div id="status_open_redirect" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+
+                        <!-- Enable Log -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="enable_log_feature_label">Logging Support</span>
+                            <div id="status_enable_log" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+
+                        <!-- Auto Add Default Mount -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="auto_default_mount_feature_label">Auto hide Default Mount</span>
+                            <div id="status_auto_default_mount" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Auto Add Bind Mount -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="auto_bind_mount_feature_label">Auto hide Bind Mount</span>
+                            <div id="status_auto_bind_mount" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Auto Try Umount Bind -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="auto_try_umount_bind_feature_label">Auto hide Try Umount Bind</span>
+                            <div id="status_auto_try_umount_bind" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Hide KSU SUSFS Symbols -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="hide_symbols_feature_label">Hide KSU SUSFS Symbols</span>
+                            <div id="status_hide_symbols" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Magic Mount -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="magic_mount_feature_label">Magic Mount Support</span>
+                            <div id="status_magic_mount" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                        
+                        <!-- OverlayFS Auto Kstat -->
+                        <div class="flex justify-between items-center py-2 px-2">
+                            <span class="text-white text-base" data-i18n="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</span>
+                            <div id="status_overlayfs_auto_kstat" class="badge badge-warning text-sm ml-4">
+                                <span data-i18n="unknown_label">Unknown</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="index.html" class="text-white"><button class="btn btn-outline text-xl bg-cyan-100/30 dark:bg-black/30 backdrop-blur-sm text-white border-white" data-i18n="main_menu_label">Back to main menu</button></a>
+            </section>
+    </main>
+    <script>
+		// Initialize translations after DOM is loaded
+		document.addEventListener('DOMContentLoaded', () => {
+		  window.i18n.init();
+		});
+	</script>
+</body>
+</html>

@@ -12,6 +12,7 @@ export default defineConfig({
                 main: './index.html',
                 credits: './credits.html',
                 custom: './custom.html',
+                status: './status.html',
                 fade: './fade.js',
                 i18n: './i18n.js',
                 creditsjs: 'credits.js',

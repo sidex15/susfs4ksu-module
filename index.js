@@ -17,6 +17,13 @@ var susfs_version = await run(`grep version= ${moddir}/module.prop | cut -d '=' 
 var susfs_version_decimal=parseFloat(susfs_version.replace(/[v.]/g,""));
 const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
+const susfs_features = await run(`${susfs_bin} show enabled_features`);
+
+//susfs features
+if (susfs_version_decimal>152){
+	const susfs_features_tag = document.getElementById("susfs_kernel_status");
+	susfs_features_tag.classList.remove("hidden");
+}
 
 if(await run(`[ -f ${tmpfolder}/logs/susfs_active ] && echo true || echo false`)=="false"){
 	const susfs_error = document.getElementById("susfs_nos_dialog");
@@ -129,10 +136,15 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
     } else if (currentPath === '/custom.html') {
 		//console.log("in custom");
 		custom_toggles(settings);
+		custom_rom_settigs(settings);
 		custom_sus_mount();
 		custom_try_umount();
 		custom_sus_path();
     }
+	else if (currentPath === '/status.html') {
+		//console.log("in status");
+		loadKernelFeatureStatus(susfs_features);
+	}
 });
 
 //run function
@@ -240,7 +252,7 @@ async function auto_hide_settings() {
 	}
 
 	auto_mount.addEventListener("click",async function(){
-
+		is_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
 		if (is_auto_mount=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_sus_ksu_default_mount`);
 			is_auto_mount=="false";
@@ -254,7 +266,7 @@ async function auto_hide_settings() {
 	});
 
 	auto_bind.addEventListener("click",async function(){
-
+		is_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
 		if (is_auto_bind=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_sus_bind_mount`);
 			is_auto_bind=="false";
@@ -268,7 +280,7 @@ async function auto_hide_settings() {
 	});
 
 	auto_umount_bind.addEventListener("click",async function(){
-
+		is_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
 		if (is_auto_umount_bind=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
 			is_auto_umount_bind=="false";
@@ -282,7 +294,7 @@ async function auto_hide_settings() {
 	});
 
 	try_umount_zygote.addEventListener("click",async function(){
-
+		is_try_umount_zygote = await run(`[ -f data/adb/susfs_umount_for_zygote_system_process ] && echo true || echo false`);
 		if (is_try_umount_zygote=="true"){
 			await run(`rm -f data/adb/susfs_umount_for_zygote_system_process`);
 			is_try_umount_zygote=="false";
@@ -485,36 +497,16 @@ async function susfs_log_toggle(settings) {
 
 // custom toggles
 async function custom_toggles(settings) {
-	const hide_custom_rom = document.getElementById("hide_custom_rom");
-	const more_custom_rom = document.getElementById("more_custom_rom");
 	const hide_gapps = document.getElementById("hide_gapps");
 	const hide_revanced = document.getElementById("hide_revanced");
 	const spoof_cmdline = document.getElementById("spoof_cmdline");
 	const hide_ksu_loop = document.getElementById("hide_ksu_loop");
 	const force_hide_lsposed = document.getElementById("force_hide_lsposed");
-	const hide_vendor_sepolicy = document.getElementById("hide_vendor_sepolicy");
-	const hide_compat_matrix = document.getElementById("hide_compat_matrix");
-	const fake_service_list = document.getElementById("fake_service_list");
 	//var config_sh = await run(`cat ${config}/config.sh`);
 
 	// Convert the string content to an object
 	const custom_settings = settings;
 
-	// Set initial state first
-	if (custom_settings.hide_cusrom==true){
-		hide_custom_rom.checked="checked";
-		more_custom_rom.classList.remove("hidden");
-	}
-	else{
-		hide_custom_rom.checked=false
-		more_custom_rom.classList.add("hidden");
-	}
-	if (custom_settings.hide_vendor_sepolicy==true) hide_vendor_sepolicy.checked="checked";
-	else hide_vendor_sepolicy.checked=false;
-	if (custom_settings.hide_compat_matrix==true) hide_compat_matrix.checked="checked";
-	else hide_compat_matrix.checked=false;
-	if (custom_settings.fake_service_list==true) fake_service_list.checked="checked";
-	else fake_service_list.checked=false;
 	if (custom_settings.hide_gapps==true) hide_gapps.checked="checked";
 	else hide_gapps.checked=false;
 	if (custom_settings.hide_revanced==true) hide_revanced.checked="checked";
@@ -525,79 +517,6 @@ async function custom_toggles(settings) {
 	else hide_ksu_loop.checked=false;
 	if (custom_settings.force_hide_lsposed==true) force_hide_lsposed.checked="checked";
 	else force_hide_lsposed.checked=false;
-
-	// custom rom toggle
-	hide_custom_rom.addEventListener("click",async function (){
-		//var vendor_sepolicy_toggle = await run(`grep -q 'hide_cusrom=1' ${config}/config.sh && echo true || echo false`);
-		const more_custom_rom = document.getElementById("more_custom_rom");
-		if (custom_settings.hide_cusrom==true){
-			run(`sed -i 's/hide_cusrom=1/hide_cusrom=0/' ${config}/config.sh`)
-			run (`sed -i 's/hide_vendor_sepolicy=1/hide_vendor_sepolicy=0/' ${config}/config.sh`)
-			run(`sed -i 's/hide_compat_matrix=1/hide_compat_matrix=0/' ${config}/config.sh`)
-			run(`sed -i 's/fake_service_list=1/fake_service_list=0/' ${config}/config.sh`)
-			custom_settings.hide_cusrom=false
-			hide_vendor_sepolicy.checked=false;
-			hide_compat_matrix.checked=false;
-			fake_service_list.checked=false;
-			more_custom_rom.classList.add("hidden");
-			toast("Reboot to take effect");
-		}
-		else {
-			//if (await run(`grep -q 'hide_cusrom' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_cusrom=1' >> ${config}/config.sh`)
-			/*else*/ run (`sed -i 's/hide_cusrom=0/hide_cusrom=1/' ${config}/config.sh`)
-			custom_settings.hide_cusrom=true
-			more_custom_rom.classList.remove("hidden");
-			toast("Reboot to take effect");
-		}
-	});
-
-	// vendor sepolicy toggle
-	hide_vendor_sepolicy.addEventListener("click",async function (){
-		//var vendor_sepolicy_toggle = await run(`grep -q 'hide_vendor_sepolicy=1' ${config}/config.sh && echo true || echo false`);
-		if (custom_settings.hide_vendor_sepolicy==true){
-			run(`sed -i 's/hide_vendor_sepolicy=1/hide_vendor_sepolicy=0/' ${config}/config.sh`)
-			custom_settings.hide_vendor_sepolicy=false
-			toast("Reboot to take effect");
-		}
-		else {
-			//if (await run(`grep -q 'hide_vendor_sepolicy' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_vendor_sepolicy=1' >> ${config}/config.sh`)
-			/*else*/ run (`sed -i 's/hide_vendor_sepolicy=0/hide_vendor_sepolicy=1/' ${config}/config.sh`)
-			custom_settings.hide_vendor_sepolicy=true
-			toast("Reboot to take effect");
-		}
-	});
-
-	// compat matrix toggle
-	hide_compat_matrix.addEventListener("click",async function (){
-		//var compat_matrix_toggle = await run(`grep -q 'hide_compat_matrix=1' ${config}/config.sh && echo true || echo false`);
-		if (custom_settings.hide_compat_matrix==true){
-			run(`sed -i 's/hide_compat_matrix=1/hide_compat_matrix=0/' ${config}/config.sh`)
-			custom_settings.hide_compat_matrix=false
-			toast("Reboot to take effect");
-		}
-		else {
-			/*if (await run(`grep -q 'hide_compat_matrix' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_compat_matrix=1' >> ${config}/config.sh`)
-			else*/ run (`sed -i 's/hide_compat_matrix=0/hide_compat_matrix=1/' ${config}/config.sh`)
-			custom_settings.hide_compat_matrix=true
-			toast("Reboot to take effect");
-		}
-	});
-
-	// fake service list toggle
-	fake_service_list.addEventListener("click",async function (){
-		//var fake_service_list_toggle = await run(`grep -q 'fake_service_list=1' ${config}/config.sh && echo true || echo false`);
-		if (custom_settings.fake_service_list==true){
-			run(`sed -i 's/fake_service_list=1/fake_service_list=0/' ${config}/config.sh`)
-			custom_settings.fake_service_list=false
-			toast("Reboot to take effect");
-		}
-		else {
-			/*if (await run(`grep -q 'fake_service_list' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'fake_service_list=1' >> ${config}/config.sh`)
-			else*/ run (`sed -i 's/fake_service_list=0/fake_service_list=1/' ${config}/config.sh`)
-			custom_settings.fake_service_list=true
-			toast("Reboot to take effect");
-		}
-	});
 
 	// gapps toggle
 	hide_gapps.addEventListener("click",async function (){
@@ -675,6 +594,174 @@ async function custom_toggles(settings) {
 			/*if (await run(`grep -q 'force_hide_lsposed' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'force_hide_lsposed=1' >> ${config}/config.sh`)
 			else*/ await run(`sed -i 's/force_hide_lsposed=0/force_hide_lsposed=1/' ${config}/config.sh`)
 			custom_settings.force_hide_lsposed=true
+			toast("Reboot to take effect");
+		}
+	});
+}
+
+async function custom_rom_settigs(settings) {
+	const hide_custom_rom = document.getElementById("hide_custom_rom");
+	const custom_rom_levels = document.getElementById("custom_rom_levels");
+	const hide_level= document.getElementById("hide_level");
+	const hide_level1 = document.getElementById("hide_level1");
+	const hide_level2 = document.getElementById("hide_level2");
+	const hide_level3 = document.getElementById("hide_level3");
+	const hide_level4 = document.getElementById("hide_level4");
+	const hide_level5 = document.getElementById("hide_level5");
+	const hide_vendor_sepolicy = document.getElementById("hide_vendor_sepolicy");
+	const hide_compat_matrix = document.getElementById("hide_compat_matrix");
+	const fake_service_list = document.getElementById("fake_service_list");
+
+	// Convert the string content to an object
+	const custom_settings = settings;
+
+	// Set initial state first
+	if (custom_settings.hide_cusrom>0){
+		hide_custom_rom.checked="checked";
+		custom_rom_levels.classList.remove("hidden");
+		if (custom_settings.hide_cusrom==1){
+			hide_level.value="0";	
+			hide_level1.classList.remove("hidden");
+		}
+		else if (custom_settings.hide_cusrom==2){
+			hide_level.value="25";
+			hide_level2.classList.remove("hidden");
+		}
+		else if (custom_settings.hide_cusrom==3){
+			hide_level.value="50";
+			hide_level3.classList.remove("hidden");
+		}
+		else if (custom_settings.hide_cusrom==4){
+			hide_level.value="75";
+			hide_level4.classList.remove("hidden");
+		}
+		else if (custom_settings.hide_cusrom==5){
+			hide_level.value="100";
+			hide_level5.classList.remove("hidden");
+		}
+	}
+	else{
+		hide_custom_rom.checked=false
+		custom_rom_levels.classList.add("hidden");
+	}
+	if (custom_settings.hide_vendor_sepolicy==true) hide_vendor_sepolicy.checked="checked";
+	else hide_vendor_sepolicy.checked=false;
+	if (custom_settings.hide_compat_matrix==true) hide_compat_matrix.checked="checked";
+	else hide_compat_matrix.checked=false;
+	if (custom_settings.fake_service_list==true) fake_service_list.checked="checked";
+	else fake_service_list.checked=false;
+
+	// custom rom toggle
+	hide_custom_rom.addEventListener("click",async function (){
+		//var vendor_sepolicy_toggle = await run(`grep -q 'hide_cusrom=1' ${config}/config.sh && echo true || echo false`);
+		const custom_rom_levels = document.getElementById("custom_rom_levels");
+		if (custom_settings.hide_cusrom>0){
+			run(`sed -i 's/hide_cusrom=.*/hide_cusrom=0/' ${config}/config.sh`)
+			custom_settings.hide_cusrom=0
+			custom_rom_levels.classList.add("hidden");
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.add("hidden");
+			toast("Reboot to take effect");
+		}
+		else {
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=1/' ${config}/config.sh`)
+			hide_level.value="0"
+			custom_settings.hide_cusrom=1
+			custom_rom_levels.classList.remove("hidden");
+			hide_level1.classList.remove("hidden");
+			toast("Reboot to take effect");
+		}
+	});
+
+	hide_level.addEventListener("change",async function (){
+		if (hide_level.value=="0"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=1/' ${config}/config.sh`);
+			hide_level1.classList.remove("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.add("hidden");
+		}
+		else if (hide_level.value=="25"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=2/' ${config}/config.sh`);
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.remove("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.add("hidden");
+		}
+		else if (hide_level.value=="50"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=3/' ${config}/config.sh`);
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.remove("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.add("hidden");
+		}
+		else if (hide_level.value=="75"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=4/' ${config}/config.sh`);
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.remove("hidden");
+			hide_level5.classList.add("hidden");
+		}
+		else if (hide_level.value=="100"){
+			run (`sed -i 's/hide_cusrom=.*/hide_cusrom=5/' ${config}/config.sh`);
+			hide_level1.classList.add("hidden");
+			hide_level2.classList.add("hidden");
+			hide_level3.classList.add("hidden");
+			hide_level4.classList.add("hidden");
+			hide_level5.classList.remove("hidden");
+		}
+	});
+		// vendor sepolicy toggle
+	hide_vendor_sepolicy.addEventListener("click",async function (){
+		//var vendor_sepolicy_toggle = await run(`grep -q 'hide_vendor_sepolicy=1' ${config}/config.sh && echo true || echo false`);
+		if (custom_settings.hide_vendor_sepolicy==true){
+			run(`sed -i 's/hide_vendor_sepolicy=1/hide_vendor_sepolicy=0/' ${config}/config.sh`)
+			custom_settings.hide_vendor_sepolicy=false
+			toast("Reboot to take effect");
+		}
+		else {
+			//if (await run(`grep -q 'hide_vendor_sepolicy' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_vendor_sepolicy=1' >> ${config}/config.sh`)
+			/*else*/ run (`sed -i 's/hide_vendor_sepolicy=0/hide_vendor_sepolicy=1/' ${config}/config.sh`)
+			custom_settings.hide_vendor_sepolicy=true
+			toast("Reboot to take effect");
+		}
+	});
+
+	// compat matrix toggle
+	hide_compat_matrix.addEventListener("click",async function (){
+		//var compat_matrix_toggle = await run(`grep -q 'hide_compat_matrix=1' ${config}/config.sh && echo true || echo false`);
+		if (custom_settings.hide_compat_matrix==true){
+			run(`sed -i 's/hide_compat_matrix=1/hide_compat_matrix=0/' ${config}/config.sh`)
+			custom_settings.hide_compat_matrix=false
+			toast("Reboot to take effect");
+		}
+		else {
+			/*if (await run(`grep -q 'hide_compat_matrix' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'hide_compat_matrix=1' >> ${config}/config.sh`)
+			else*/ run (`sed -i 's/hide_compat_matrix=0/hide_compat_matrix=1/' ${config}/config.sh`)
+			custom_settings.hide_compat_matrix=true
+			toast("Reboot to take effect");
+		}
+	});
+
+	// fake service list toggle
+	fake_service_list.addEventListener("click",async function (){
+		//var fake_service_list_toggle = await run(`grep -q 'fake_service_list=1' ${config}/config.sh && echo true || echo false`);
+		if (custom_settings.fake_service_list==true){
+			run(`sed -i 's/fake_service_list=1/fake_service_list=0/' ${config}/config.sh`)
+			custom_settings.fake_service_list=false
+			toast("Reboot to take effect");
+		}
+		else {
+			/*if (await run(`grep -q 'fake_service_list' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'fake_service_list=1' >> ${config}/config.sh`)
+			else*/ run (`sed -i 's/fake_service_list=0/fake_service_list=1/' ${config}/config.sh`)
+			custom_settings.fake_service_list=true
 			toast("Reboot to take effect");
 		}
 	});
@@ -781,6 +868,56 @@ async function custom_try_umount(){
 			ease: 'power1.out' 
 		});
 	});
+}
+
+// Load kernel feature status
+async function loadKernelFeatureStatus(susfs_features) {
+  const features = [
+    { id: 'status_sus_path', config: 'CONFIG_KSU_SUSFS_SUS_PATH' },
+    { id: 'status_sus_mount', config: 'CONFIG_KSU_SUSFS_SUS_MOUNT' },
+    { id: 'status_auto_default_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT' },
+    { id: 'status_auto_bind_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT' },
+    { id: 'status_sus_kstat', config: 'CONFIG_KSU_SUSFS_SUS_KSTAT' },
+    { id: 'status_try_umount', config: 'CONFIG_KSU_SUSFS_TRY_UMOUNT' },
+    { id: 'status_auto_try_umount_bind', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT' },
+    { id: 'status_spoof_uname', config: 'CONFIG_KSU_SUSFS_SPOOF_UNAME' },
+    { id: 'status_enable_log', config: 'CONFIG_KSU_SUSFS_ENABLE_LOG' },
+    { id: 'status_hide_symbols', config: 'CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS' },
+    { id: 'status_spoof_cmdline', config: 'CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG' },
+    { id: 'status_open_redirect', config: 'CONFIG_KSU_SUSFS_OPEN_REDIRECT' },
+    { id: 'status_magic_mount', config: 'CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT' },
+	{ id: 'status_overlayfs_auto_kstat', config: 'CONFIG_KSU_SUSFS_SUS_OVERLAYFS' }
+  ];
+
+  for (const feature of features) {
+    try {
+      // Check if the kernel feature is enabled
+      const result = susfs_features.includes(feature.config);
+      const statusElement = document.getElementById(feature.id);
+      
+      if (statusElement) {
+        const span = statusElement.querySelector('span');
+        if (result) {
+          statusElement.className = 'badge badge-sm badge-success text-sm ml-4';
+          span.textContent = 'Enabled';
+          span.setAttribute('data-i18n', 'enabled_label');
+        } else {
+          statusElement.className = 'badge badge-sm badge-error text-sm ml-4';
+          span.textContent = 'Disabled';
+          span.setAttribute('data-i18n', 'disabled_label');
+        }
+      }
+    } catch (error) {
+      // If we can't determine the status, mark as unknown
+      const statusElement = document.getElementById(feature.id);
+      if (statusElement) {
+        const span = statusElement.querySelector('span');
+        statusElement.className = 'badge badge-sm badge-warning text-sm ml-4';
+        span.textContent = 'Unknown';
+        span.setAttribute('data-i18n', 'unknown_label');
+      }
+    }
+  }
 }
 
 // Initialize the page
