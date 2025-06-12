@@ -898,11 +898,11 @@ async function loadKernelFeatureStatus(susfs_features) {
       if (statusElement) {
         const span = statusElement.querySelector('span');
         if (result) {
-          statusElement.className = 'badge badge-sm badge-success text-xs ml-4';
+          statusElement.className = 'badge badge-sm badge-success text-sm ml-4';
           span.textContent = 'Enabled';
           span.setAttribute('data-i18n', 'enabled_label');
         } else {
-          statusElement.className = 'badge badge-sm badge-error text-xs ml-4';
+          statusElement.className = 'badge badge-sm badge-error text-sm ml-4';
           span.textContent = 'Disabled';
           span.setAttribute('data-i18n', 'disabled_label');
         }
@@ -912,7 +912,7 @@ async function loadKernelFeatureStatus(susfs_features) {
       const statusElement = document.getElementById(feature.id);
       if (statusElement) {
         const span = statusElement.querySelector('span');
-        statusElement.className = 'badge badge-sm badge-warning text-xs ml-4';
+        statusElement.className = 'badge badge-sm badge-warning text-sm ml-4';
         span.textContent = 'Unknown';
         span.setAttribute('data-i18n', 'unknown_label');
       }
