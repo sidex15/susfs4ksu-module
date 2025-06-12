@@ -11,6 +11,7 @@
   <string id="enabled_label">Enabled</string>
   <string id="disabled_label">Disabled</string>
   <string id="unknown_label">Unknown</string>
+  <string id="help_label">Help</string>
 
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
