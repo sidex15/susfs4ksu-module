@@ -1,3 +1,35 @@
+## v1.5.2+ Revision 19
+### WebUI
+* Introducing SuSFS Kernel Status
+  * This will provide insights of what are the SUSFS Features are enabled to your kernel (Requires susfs v1.5.3 kernel and higher)
+* Introducing Custom ROM path hide levels slider
+  * Provides 5 levels of custom rom path levels with description
+* Add Help Button in the Custom Settings
+* Localization:
+  * Add German Language (@Vndkbopp77)
+  * Add Polish Language (@ziomek3120)
+  * Add Italian Language (@luigimak)
+  * Add Japanese Language (@turbo-boo)
+  * Add Traditional Chinese Language (@mattchengg)
+  * Other Localization fixes
+* Separate Custom ROM settings to a new section
+* Rename Force Hide LSPosed Mounts to Force Hide Dex2oat Mounts
+### Scripts
+* scripts: boot-completed: implement custom rom path hide levels
+  * Level 1: Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files
+  * Level 2: Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files
+  * Level 3: Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files
+  * Level 4: Exclude .apk, .jar, and /vendor/bin/hw/ files
+  * Level 5: Hide all custom rom paths (Most Aggressive. Risky and it could cause issues)
+* scripts: customize: fix susfsd installation
+* scripts: post-mount/boot-completed: Move custom sus_path execution to boot-completed.sh
+* scripts: boot-completed: check if those props exists in /proc/cmdline else use /proc/bootconfig in spoof cmdline/bootconfig
+* scripts: boot-completed: add notice to the user if there's a module tampering susfs settings without consent
+* scripts: service: Hide cloudphone detection (Thanks @ReeViiS69)
+* scripts: service: Hide adb prop by removing sys.usb.adb.disabled
+* scripts: service: comment out HMA-Related Props
+  * You could enable it by removing the comments in `/data/adb/modules/susfs4ksu`
+
 ## v1.5.2+ Revision 18
 ### WebUI
 * Localization:
