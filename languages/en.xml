@@ -29,6 +29,7 @@
   <string id="kernel_features_label">Kernel Features Status</string>
   <string id="sus_path_feature_label">SUS Path Support</string>
   <string id="sus_mount_feature_label">SUS Mount Support</string>
+  <string id="sus_kstat_feature_label">SUS Kstat Support</string>
   <string id="try_umount_feature_label">Try Umount Support</string>
   <string id="spoof_uname_feature_label">Spoof Uname Support</string>
   <string id="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</string>
