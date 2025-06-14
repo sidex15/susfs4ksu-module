@@ -28,6 +28,7 @@
   <string id="kernel_features_label">内核功能状态</string>
   <string id="sus_path_feature_label">SUS 路径支持</string>
   <string id="sus_mount_feature_label">SUS 挂载支持</string>
+  <string id="sus_kstat_feature_label">SUS 内核统计支持</string>
   <string id="try_umount_feature_label">尝试卸载支持</string>
   <string id="spoof_uname_feature_label">欺骗 uname 支持</string>
   <string id="spoof_cmdline_feature_label">欺骗 Cmdline/Bootconfig</string>
