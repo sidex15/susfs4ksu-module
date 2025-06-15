@@ -11,6 +11,7 @@
   <string id="enabled_label">已启用</string>
   <string id="disabled_label">已禁用</string>
   <string id="unknown_label">未知</string>
+  <string id="help_label">帮助</string>
 
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">错误！不受支持的内核！</string>
@@ -28,8 +29,9 @@
   <string id="kernel_features_label">内核功能状态</string>
   <string id="sus_path_feature_label">SUS 路径支持</string>
   <string id="sus_mount_feature_label">SUS 挂载支持</string>
+  <string id="sus_kstat_feature_label">SUS 内核统计支持</string>
   <string id="try_umount_feature_label">尝试卸载支持</string>
-  <string id="spoof_uname_feature_label">伪装 内核名称 支持</string>
+  <string id="spoof_uname_feature_label">伪装内核名称支持</string>
   <string id="spoof_cmdline_feature_label">伪装 Cmdline/Bootconfig</string>
   <string id="open_redirect_feature_label">开放重定向支持</string>
   <string id="enable_log_feature_label">日志记录支持</string>
@@ -53,7 +55,7 @@
   <string id="zygote_try_umount_label">为 zygote 系统进程尝试卸载</string>
   <string id="kernel_uname_label">内核名称</string>
   <string id="spoof_kernel_version_label">伪装内核版本</string>
-  <string id="spoof_kernel_build_label">伪装内核构建日期</string>
+  <string id="spoof_kernel_build_label">伪装构建日期</string>
   <string id="spoof_on_boot_label">开机时伪装</string>
   <string id="post_fs_data_label">在 post-fs-data 阶段执行（伪装效果更好）</string>
   <string id="uname_warning_label2">如果伪装设置不正确，开启此选项可能导致设备变砖或系统不稳定。您确定要启用 post-fs-data 阶段执行吗？</string>
