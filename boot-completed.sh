@@ -42,6 +42,14 @@ fi
 
 # routines
 
+# Starting in SUSFS version v1.5.8, it needs to set the sdcard and android data root paths
+# This will start the sus_path process. Without this check, sus_path will not work
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 157 ] 2>/dev/null; then
+	until [ -d "/sdcard/Android" ]; do sleep 1; done
+	${SUSFS_BIN} set_sdcard_root_path /sdcard
+	${SUSFS_BIN} set_android_data_root_path /sdcard/Android/data
+fi
+
 # to add paths
 # echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path.txt
 # this'll make it easier for the webui to do stuff
