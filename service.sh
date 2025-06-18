@@ -13,6 +13,9 @@ SUSFS_DECIMAL=$(echo "$version" | sed 's/^v//; s/\.//g')
 [ -w /mnt ] && mntfolder=/mnt/susfs4ksu
 [ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
 
+post_mount=0
+[ -f $tmpfolder/logs/boot_stage_time.sh ] && . $tmpfolder/logs/boot_stage_time.sh
+
 hide_loops=1
 hide_vendor_sepolicy=0
 hide_compat_matrix=0
@@ -89,6 +92,11 @@ sus_su_2(){
 [ $susfs_log = 1 ] && {
 	${SUSFS_BIN} enable_log 1
 }
+
+# SUSFS Logging
+dmesg | sed -n "/^\[ *$post_mount/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
+endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
+echo "service=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 
 ## Props ##
 resetprop -w sys.boot_completed 0
@@ -202,18 +210,5 @@ fi
 	${SUSFS_BIN} update_sus_kstat /system/bin/service
 	${SUSFS_BIN} add_sus_mount /system/bin/service
 }
-
-sleep 15;
-dmesg | grep susfs_auto_add > $logfile
-dmesg | grep ksu_susfs >> $logfile
-# susfs stats
-rm ${tmpfolder}/susfs_stats.txt
-echo sus_path=$(dmesg | grep -c 'SUS_PATH_HLIST') >> ${tmpfolder}/susfs_stats.txt
-echo sus_mount=$(dmesg | grep -cE "set SUS_MOUNT|LH_SUS_MOUNT" ) >> ${tmpfolder}/susfs_stats.txt
-echo try_umount=$(dmesg | grep -c 'LH_TRY_UMOUNT_PATH') >> ${tmpfolder}/susfs_stats.txt
-rm ${tmpfolder}/susfs_stats1.txt
-echo sus_path=$(grep -ci 'sus_path' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
-echo sus_mount=$(grep -ci 'sus_mount' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
-echo try_umount=$(grep -ci 'try_umount' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
 
 # EOF

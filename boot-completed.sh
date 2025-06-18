@@ -15,6 +15,9 @@ kernel_ver=$(head -n 1 "$PERSISTENT_DIR/kernelversion.txt")
 [ -w /mnt ] && mntfolder=/mnt/susfs4ksu
 [ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
 
+service=0
+[ -f $tmpfolder/logs/boot_stage_time.sh ] && . $tmpfolder/logs/boot_stage_time.sh
+
 hide_cusrom=0
 hide_gapps=0
 hide_revanced=0
@@ -167,3 +170,20 @@ done
 	}
 	for i in $packages ; do hide_app $i ; done 
 } & # run in background
+
+# SUSFS Logging
+dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
+endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
+echo "boot_completed=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
+sleep 10; # this delay is to ensure that all of the susfs logs have been captured
+dmesg | sed -n "/^\[ *$endmsg/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
+
+# Generate susfs stats
+rm ${tmpfolder}/susfs_stats.txt
+echo sus_path=$(grep -ciE 'SUS_PATH_HLIST|LH_SUS_PATH' $logfile ) >> ${tmpfolder}/susfs_stats.txt
+echo sus_mount=$(grep -ciE "set SUS_MOUNT|LH_SUS_MOUNT" $logfile ) >> ${tmpfolder}/susfs_stats.txt
+echo try_umount=$(grep -ci 'LH_TRY_UMOUNT_PATH' $logfile ) >> ${tmpfolder}/susfs_stats.txt
+rm ${tmpfolder}/susfs_stats1.txt
+echo sus_path=$(grep -ci 'sus_path' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
+echo sus_mount=$(grep -ci 'sus_mount' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
+echo try_umount=$(grep -ci 'try_umount' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt

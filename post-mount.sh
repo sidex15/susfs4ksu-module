@@ -11,6 +11,9 @@ logfile1="$tmpfolder/logs/susfs1.log"
 [ -w /mnt ] && mntfolder=/mnt/susfs4ksu
 [ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
 
+post_fs_data=0
+[ -f $tmpfolder/logs/boot_stage_time.sh ] && . $tmpfolder/logs/boot_stage_time.sh
+
 # to add mounts
 # echo "/system" >> /data/adb/susfs4ksu/sus_mount.txt
 # this'll make it easier for the webui to do stuff
@@ -28,4 +31,8 @@ if grep -v "#" "$PERSISTENT_DIR/try_umount.txt" > /dev/null; then
     done
 fi
 
+# SUSFS Logging
+dmesg | sed -n "/^\[ *$post_fs_data/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
+endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
+echo "post_mount=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 # EOF

@@ -73,3 +73,7 @@ enable_sus_su_mode_1(){
 	${SUSFS_BIN} add_try_umount /apex/com.android.art/bin/dex2oat64 1
 }
 
+# SUSFS Logging
+dmesg | grep -iE "susfs_auto_add|ksu_susfs" > $logfile
+endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
+echo "post_fs_data=$endmsg" > $tmpfolder/logs/boot_stage_time.sh
