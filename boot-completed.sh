@@ -57,7 +57,7 @@ fi
 # echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path.txt
 # this'll make it easier for the webui to do stuff
 for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
-	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/post-mount $i" >> $logfile1
+	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
 done
 
 # if spoof_uname is on mode 1, set_uname will be called here
@@ -69,40 +69,35 @@ done
     # Find lineage and crdroid paths for all files and directories
 	echo "susfs4ksu/boot-completed: [hide_cusrom][5]" >> $logfile1
     find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | while read -r path; do
-        ${SUSFS_BIN} add_sus_path "$path"
-        echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
+        ${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
     done
 	}
 	[ $hide_cusrom = 4 ] && {
 	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, and /vendor/bin/hw/ files
 	echo "susfs4ksu/boot-completed: [hide_cusrom][4]" >> $logfile1
 	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar)|/vendor/bin/hw/" | while read -r path; do
-		${SUSFS_BIN} add_sus_path "$path"
-		echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
+		${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
 	done
 	}
 	[ $hide_cusrom = 3 ] && {
 	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, and /vendor/bin/hw/ files
 	echo "susfs4ksu/boot-completed: [hide_cusrom][3]" >> $logfile1
 	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex)|/vendor/bin/hw/" | while read -r path; do
-		${SUSFS_BIN} add_sus_path "$path"
-		echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
+		${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
 	done
 	}
 	[ $hide_cusrom = 2 ] && {
 	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, so, and /vendor/bin/hw/ files
 	echo "susfs4ksu/boot-completed: [hide_cusrom][2]" >> $logfile1
 	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex|so)|/vendor/bin/hw/" | while read -r path; do
-		${SUSFS_BIN} add_sus_path "$path"
-		echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
+		${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
 	done
 	}
 	[ $hide_cusrom = 1 ] && {
 	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, so, rc, and /vendor/bin/hw/ files
 	echo "susfs4ksu/boot-completed: [hide_cusrom][1]" >> $logfile1
 	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex|so|rc)|/vendor/bin/hw/" | while read -r path; do
-		${SUSFS_BIN} add_sus_path "$path"
-		echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
+		${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
 	done
 	}
 }
@@ -111,8 +106,7 @@ done
 [ $hide_gapps = 1 ] && {
 	echo "susfs4ksu/boot-completed: [hide_gapps]" >> $logfile1
 	for i in $(find /system /vendor /system_ext /product -iname *gapps*xml -o -type d -iname *gapps*) ; do 
-		${SUSFS_BIN} add_sus_path $i 
-		echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
+		${SUSFS_BIN} add_sus_path $i && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
 	done
 }
 
@@ -175,12 +169,12 @@ done
 dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
 endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
 echo "boot_completed=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
-sleep 10; # this delay is to ensure that all of the susfs logs have been captured
+sleep 15; # this delay is to ensure that all of the susfs logs have been captured
 dmesg | sed -n "/^\[ *$endmsg/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
 
 # Generate susfs stats
 rm ${tmpfolder}/susfs_stats.txt
-echo sus_path=$(grep -ciE 'SUS_PATH_HLIST|LH_SUS_PATH' $logfile ) >> ${tmpfolder}/susfs_stats.txt
+echo sus_path=$(grep -ci 'sus_path' $logfile1 ) >> ${tmpfolder}/susfs_stats.txt
 echo sus_mount=$(grep -ciE "set SUS_MOUNT|LH_SUS_MOUNT" $logfile ) >> ${tmpfolder}/susfs_stats.txt
 echo try_umount=$(grep -ci 'LH_TRY_UMOUNT_PATH' $logfile ) >> ${tmpfolder}/susfs_stats.txt
 rm ${tmpfolder}/susfs_stats1.txt
