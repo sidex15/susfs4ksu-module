@@ -22,6 +22,7 @@ hide_cusrom=0
 hide_gapps=0
 hide_revanced=0
 spoof_uname=0
+hide_sus_mnts_for_all_procs=1
 [ -f $PERSISTENT_DIR/config.sh ] && . $PERSISTENT_DIR/config.sh
 
 # update description
@@ -44,6 +45,12 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 152 ] 2>/dev/null; then
 fi
 
 # routines
+
+# hide sus mounts for all processes v1.5.7+
+[ $hide_sus_mnts_for_all_procs -lt 1 ] && [ "$SUSFS_DECIMAL" -gt 156 ] 2>/dev/null && {
+	# Hide sus mounts for all processes
+	${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
+}
 
 # Starting in SUSFS version v1.5.8, it needs to set the sdcard and android data root paths
 # This will start the sus_path process. Without this check, sus_path will not work
