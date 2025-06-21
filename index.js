@@ -97,7 +97,7 @@ else{
 //v1.5.4+ auto hide settings
 if(susfs_version_decimal>=154){
 	sus_su_154.classList.remove("hidden")
-	auto_hide_settings();
+	auto_hide_settings(settings,susfs_version_decimal);
 }
 
 //highway transition
@@ -131,7 +131,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		console.log("in index");
 		set_uname(settings);
 		susfs_log_toggle(settings);
-		if (susfs_version_decimal>=154) auto_hide_settings();
+		if (susfs_version_decimal>=154) auto_hide_settings(settings,susfs_version_decimal);
 		sus_su_toggle(settings);
     } else if (currentPath === '/custom.html') {
 		//console.log("in custom");
@@ -228,15 +228,18 @@ async function sus_su_toggle(settings) {
 	});
 }
 
-async function auto_hide_settings() {
+//Auto hide settings
+async function auto_hide_settings(settings,susfs_version_decimal) {
 	const auto_mount = document.getElementById("auto_mount");
 	const auto_bind = document.getElementById("auto_bind");
 	const auto_umount_bind = document.getElementById("auto_umount_bind");
 	const try_umount_zygote = document.getElementById("try_umount_zygote");
+	const hide_sus_mnts_for_all_procs = document.getElementById("hide_sus_mnts_for_all_procs");
 	var is_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
 	var is_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
 	var is_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
 	var is_try_umount_zygote = await run(`[ -f data/adb/susfs_umount_for_zygote_system_process ] && echo true || echo false`);
+	var custom_settings = settings;
 
 	if(is_auto_mount=="true"){
 		auto_mount.checked=false;
@@ -249,6 +252,15 @@ async function auto_hide_settings() {
 	}
 	if(is_try_umount_zygote=="false"){
 		try_umount_zygote.checked=false;
+	}
+	if (susfs_version_decimal>=157){
+		hide_sus_mnts_for_all_procs.removeAttribute("disabled");
+		if (custom_settings.hide_sus_mnts_for_all_procs==1){
+		hide_sus_mnts_for_all_procs.checked="checked";
+		}
+		else{
+			hide_sus_mnts_for_all_procs.checked=false;
+		}
 	}
 
 	auto_mount.addEventListener("click",async function(){
@@ -304,6 +316,23 @@ async function auto_hide_settings() {
 			await run(`touch data/adb/susfs_umount_for_zygote_system_process`);
 			is_try_umount_zygote=="true";
 			toast("Reboot to take effect");
+		}
+	});
+
+	hide_sus_mnts_for_all_procs.addEventListener("click",async function(){
+		if (custom_settings.hide_sus_mnts_for_all_procs==1){
+			await run(`sed -i 's/hide_sus_mnts_for_all_procs=.*/hide_sus_mnts_for_all_procs=0/' ${config}/config.sh`);
+			await run(`${susfs_bin} hide_sus_mnts_for_all_procs 0`);
+			custom_settings.hide_sus_mnts_for_all_procs=0;
+			toast("Hide SUS mounts for all processes disabled! No need to reboot");
+			hide_sus_mnts_for_all_procs.checked=false;
+		}
+		else{
+			await run(`sed -i 's/hide_sus_mnts_for_all_procs=.*/hide_sus_mnts_for_all_procs=1/' ${config}/config.sh`);
+			await run(`${susfs_bin} hide_sus_mnts_for_all_procs 1`);
+			custom_settings.hide_sus_mnts_for_all_procs=1;
+			toast("Hide SUS mounts for all processes enabled! No need to reboot");
+			hide_sus_mnts_for_all_procs.checked="checked";
 		}
 	});
 

@@ -52,6 +52,7 @@
   <string id="default_mounts_label">auto hide default mounts</string>
   <string id="bind_mounts_label">auto hide bind mounts</string>
   <string id="try_umount_bind_label">auto try umount bind mounts</string>
+  <string id="hide_sus_mnts_for_all_procs_label">Hide sus_mounts for all processes</string>
   <string id="zygote_try_umount_label">try umount for zygote system process</string>
   <string id="kernel_uname_label">Kernel Uname</string>
   <string id="spoof_kernel_version_label">Spoof Kernel Version</string>

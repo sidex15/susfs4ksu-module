@@ -115,7 +115,7 @@
 					<a href="custom.html" class="text-white"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_settings_label">custom susfs settings</button></a>
 					<a href="status.html" class="text-white hidden" id="susfs_kernel_status"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_kernel_status_label">SUSFS Kernel Status</button></a>
 				  </div>
-				  <div id="sus_su_154" class="hidden">
+				  <div id="sus_su_154" class="">
 				  <div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
 					<div class="stat p-0 mt-0">
 						<div class="stat-title text-lg text-white pb-1" data-i18n="auto_hide_label">auto hide settings</div>
@@ -135,6 +135,12 @@
 								<label class="label cursor-pointer">
 								  <span class="text-white text-base" data-i18n="try_umount_bind_label">auto try umount bind mounts</span>
 								  <input type="checkbox" id="auto_umount_bind" class="toggle toggle-md toggle-accent" checked="checked" />
+								</label>
+							  </div>
+							  <div class="form-control">
+								<label class="label cursor-pointer">
+								  <span class="text-white text-base" data-i18n="hide_sus_mnts_for_all_procs_label">Hide sus_mounts for all processes</span>
+								  <input type="checkbox" id="hide_sus_mnts_for_all_procs" class="toggle toggle-md toggle-warning" checked="checked" disabled/>
 								</label>
 							  </div>
 							  <div class="form-control">
