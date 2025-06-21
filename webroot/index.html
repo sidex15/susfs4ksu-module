@@ -7,8 +7,8 @@
   <script type="module" crossorigin src="/assets/fade-4ApaDT9x.js"></script>
   <script type="module" crossorigin src="/assets/creditsjs-BfjoyHvA.js"></script>
   <script type="module" crossorigin src="/assets/i18n-BqJdyLAD.js"></script>
-  <script type="module" crossorigin src="/assets/index-DY450urU.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-C3NymA62.css">
+  <script type="module" crossorigin src="/assets/index-B0vusxNT.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CRPPkXqk.css">
 </head>
 
 <style>
@@ -117,7 +117,7 @@
 					<a href="custom.html" class="text-white"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_settings_label">custom susfs settings</button></a>
 					<a href="status.html" class="text-white hidden" id="susfs_kernel_status"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_kernel_status_label">SUSFS Kernel Status</button></a>
 				  </div>
-				  <div id="sus_su_154" class="hidden">
+				  <div id="sus_su_154" class="">
 				  <div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
 					<div class="stat p-0 mt-0">
 						<div class="stat-title text-lg text-white pb-1" data-i18n="auto_hide_label">auto hide settings</div>
@@ -141,6 +141,12 @@
 							  </div>
 							  <div class="form-control">
 								<label class="label cursor-pointer">
+								  <span class="text-white text-base" data-i18n="hide_sus_mnts_for_all_procs_label">Hide sus_mounts for all processes</span>
+								  <input type="checkbox" id="hide_sus_mnts_for_all_procs" class="toggle toggle-md toggle-warning" checked="checked" disabled/>
+								</label>
+							  </div>
+							  <div class="form-control">
+								<label class="label cursor-pointer">
 								  <span class="text-white text-base" data-i18n="zygote_try_umount_label">try umount for zygote system process</span>
 								  <input type="checkbox" id="try_umount_zygote" class="toggle toggle-md toggle-success" checked="checked" />
 								</label>
@@ -156,6 +162,14 @@
 						<p class="text-white text-sm break-all font-sans normal-case font-normal" id="kernel_version"></p>
 					</div>
 					<div class="stat">
+						<div class="text-sm flex flex-col text-white">
+							<p data-i18n="spoofed_kernel_version_label">Spoofed Kernel Version</p>
+							<p class="text-white text-xs break-all font-sans normal-case font-normal ml-1" id="spoofed_kernel_version"></p> 
+						</div>
+						<div class="text-sm flex flex-col pb-2 text-white">
+							<p data-i18n="spoofed_kernel_build_label">Spoofed Kernel Build</p>
+							<p class="text-white text-xs break-all font-sans normal-case font-normal ml-1" id="spoofed_kernel_build"></p>
+						</div>
 						<div class="stat-title text-base text-white" data-i18n="spoof_kernel_version_label">Spoof Kernel Version</div>
 						<input type="text" id="sus_uname" placeholder="default" class="input input-sm text-sm font-sans w-full font-normal"/>
 						<div class="stat-title text-base text-white" data-i18n="spoof_kernel_build_label">Spoof Kernel Build</div>
