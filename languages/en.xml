@@ -55,7 +55,9 @@
   <string id="zygote_try_umount_label">try umount for zygote system process</string>
   <string id="kernel_uname_label">Kernel Uname</string>
   <string id="spoof_kernel_version_label">Spoof Kernel Version</string>
+  <string id="spoofed_kernel_version_label">Spoofed Kernel Version</string>
   <string id="spoof_kernel_build_label">Spoof Kernel Build</string>
+  <string id="spoofed_kernel_build_label">Spoofed Kernel Build</string>
   <string id="spoof_on_boot_label">Spoof on boot</string>
   <string id="post_fs_data_label">Execute on post-fs-data (spoofs better)</string>
   <string id="uname_warning_label2">Setting this on may cause a bootloop or instability if spoofed incorrectly. Are you sure you want to enable post-fs-data execution?</string>
