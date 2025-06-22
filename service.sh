@@ -171,15 +171,20 @@ fi
 # echo "hide_vendor_sepolicy=1" >> /data/adb/susfs4ksu/config.sh
 [ $hide_vendor_sepolicy = 1 ] && {
 	echo "susfs4ksu/service: [hide_vendor_sepolicy]" >> $logfile1
-	sepolicy_cil=/vendor/etc/selinux/vendor_sepolicy.cil
-	grep -q lineage $sepolicy_cil && {
-		grep -v "lineage" $sepolicy_cil > $mntfolder/vendor_sepolicy.cil
-		${SUSFS_BIN} add_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
-		susfs_clone_perm $mntfolder/vendor_sepolicy.cil $sepolicy_cil
-		mount --bind $mntfolder/vendor_sepolicy.cil $sepolicy_cil
-		${SUSFS_BIN} update_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
-		${SUSFS_BIN} add_sus_mount $sepolicy_cil && echo "[sus_mount]: susfs4ksu/service $sepolicy_cil" >> $logfile1
-	}
+	for sepolicy_cil in \
+		/vendor/etc/selinux/vendor_sepolicy.cil \
+		/system_ext/etc/selinux/system_ext_sepolicy.cil
+	do
+		grep -q lineage $sepolicy_cil && {
+			cil_name=`basename "$sepolicy_cil"`
+			grep -v "lineage" $sepolicy_cil > $mntfolder/$cil_name
+			${SUSFS_BIN} add_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
+			susfs_clone_perm $mntfolder/$cil_name $sepolicy_cil
+			mount --bind $mntfolder/$cil_name $sepolicy_cil
+			${SUSFS_BIN} update_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
+			${SUSFS_BIN} add_sus_mount $sepolicy_cil && echo "[sus_mount]: susfs4ksu/service $sepolicy_cil" >> $logfile1
+		}
+	done
 }
 
 # echo "hide_compat_matrix=1" >> /data/adb/susfs4ksu/config.sh
