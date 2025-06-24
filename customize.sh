@@ -90,23 +90,29 @@ chmod 644 ${MODPATH}/post-fs-data.sh ${MODPATH}/post-mount.sh ${MODPATH}/service
 
 prop_value=$(getprop ro.boot.vbmeta.digest)
 HASH_DIR=/data/adb/VerifiedBootHash
-
-if [ -z "$prop_value" ]; then
-    ui_print "[!] Property ro.boot.vbmeta.digest is empty, generate VerifiedBootHash directory"
-	if [ ! -d "$HASH_DIR" ]; then
-	  ui_print "[-] Creating VerifiedBootHash directory"
-	  mkdir -p "$HASH_DIR"
-	  [ ! -f "$HASH_DIR/VerifiedBootHash.txt" ] && touch "$HASH_DIR/VerifiedBootHash.txt"
-	fi
+if ${KSU_BIN} module list | grep -qE "vbmeta-fixer|TA_utl"; then
 	ui_print "*********************************************************"
-	ui_print "! Please copy your VerifiedBootHash in Key Attestation demo"
-	ui_print "! And Paste it to /data/adb/VerifiedBootHash/VerifiedBootHash.txt"
+	ui_print "! vbmeta-fixer or Tricky Addon module detected"
+	ui_print "! skipping VerifiedBootHash creation"
 	ui_print "*********************************************************"
 else
-    ui_print "*********************************************************"
-	ui_print "! Property ro.boot.vbmeta.digest has a value"
-    ui_print "! skipping VerifiedBootHash creation"
-	ui_print "*********************************************************"
+	if [ -z "$prop_value" ]; then
+		ui_print "[!] Property ro.boot.vbmeta.digest is empty, generate VerifiedBootHash directory"
+		if [ ! -d "$HASH_DIR" ]; then
+		ui_print "[-] Creating VerifiedBootHash directory"
+		mkdir -p "$HASH_DIR"
+		[ ! -f "$HASH_DIR/VerifiedBootHash.txt" ] && touch "$HASH_DIR/VerifiedBootHash.txt"
+		fi
+		ui_print "*********************************************************"
+		ui_print "! Please copy your VerifiedBootHash in Key Attestation demo"
+		ui_print "! And Paste it to /data/adb/VerifiedBootHash/VerifiedBootHash.txt"
+		ui_print "*********************************************************"
+	else
+		ui_print "*********************************************************"
+		ui_print "! Property ro.boot.vbmeta.digest has a value"
+		ui_print "! skipping VerifiedBootHash creation"
+		ui_print "*********************************************************"
+	fi
 fi
 
 ui_print "[-] Preparing susfs4ksu persistent directory"
