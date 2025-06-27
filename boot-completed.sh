@@ -58,14 +58,18 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 157 ] 2>/dev/null; then
 	until [ -d "/sdcard/Android" ]; do sleep 1; done
 	${SUSFS_BIN} set_sdcard_root_path /sdcard
 	${SUSFS_BIN} set_android_data_root_path /sdcard/Android/data
+	# to add paths
+	# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path.txt
+	# this'll make it easier for the webui to do stuff
+	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
+	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
+	done
+else
+	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
+	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
+	done
 fi
 
-# to add paths
-# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path.txt
-# this'll make it easier for the webui to do stuff
-for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
-	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
-done
 
 # if spoof_uname is on mode 1, set_uname will be called here
 [ $spoof_uname = 1 ] && spoof_uname
@@ -177,6 +181,12 @@ dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $l
 endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
 echo "boot_completed=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 sleep 15; # this delay is to ensure that all of the susfs logs have been captured
+# Just to be sure, set sdcard and android data root paths again
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 157 ] 2>/dev/null; then
+	${SUSFS_BIN} set_sdcard_root_path /sdcard
+	${SUSFS_BIN} set_android_data_root_path /sdcard/Android/data
+fi
+# Last dmesg logs
 dmesg | sed -n "/^\[ *$endmsg/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
 
 # Generate susfs stats
