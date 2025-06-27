@@ -58,5 +58,5 @@ fi
 echo "[-] Checking hash of susfs binaries..."
 echo "[-] Kernel is using susfs $SUSFS_VERSION_RAW"
 hash=$(sha256sum ${SUSFS_BIN} | awk '{print $1}')
-cloudhash=$(curl -sS https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/$SUSFS_DECIMAL/$KERNEL_VERSION/ksu_susfs_arm64 | sha256sum | awk '{print $1}')
+cloudhash=$(download https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/$SUSFS_DECIMAL/$KERNEL_VERSION/ksu_susfs_arm64 | sha256sum | awk '{print $1}')
 [ $hash = $cloudhash > /dev/null 2>&1 ] && echo "[-] Local and Cloud Version match, no need to update" || susfsupdate $SUSFS_DECIMAL $KERNEL_VERSION $SUSFS_VERSION_RAW
