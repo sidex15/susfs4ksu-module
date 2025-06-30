@@ -1,86 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language id="zh-rTW">
   <!-- General -->
-  <string id="app_title">選單</string>
+  <string id="app_title">WebUI選單</string>
   <string id="warning_label">警告！</string>
-  <string id="cancel_label">取消！</string>
+  <string id="cancel_label">取消</string>
   <string id="confirm_label">確認</string>
   <string id="about_label">關於</string>
   <string id="main_menu_label">主選單</string>
   <string id="load_label">載入</string>
-  <string id="enabled_label">啟用</string>
-  <string id="disabled_label">關閉</string>
+  <string id="enabled_label">已啟用</string>
+  <string id="disabled_label">已停用</string>
   <string id="unknown_label">未知</string>
   <string id="help_label">幫助</string>
 
   <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">不支援的內核！</string>
-  <string id="susfs_error_desc">WebUI 存取被拒絕！確保您使用的是 SuSFS 修補的核心！</string>
+  <string id="susfs_error_label">錯誤！不支援的核心！</string>
+  <string id="susfs_error_desc">WebUI存取被拒絕！請確保您使用的是SuSFS修補核心！</string>
   
   <!-- Home Page -->
-  <string id="kernel_version_label">內核版本</string>
-  <string id="sus_path_label">SUS 路徑</string>
-  <string id="sus_mount_label">SUS 掛載</string>
-  <string id="try_umount_label">嘗試取消掛載</string>
-  <string id="susfs_settings_label">自訂 SUSFS 設定</string>
-  <string id="susfs_kernel_status_label">SUSFS 內核狀態</string>
+  <string id="kernel_version_label">核心版本</string>
+  <string id="sus_path_label">SUS路徑</string>
+  <string id="sus_mount_label">SUS掛載</string>
+  <string id="try_umount_label">嘗試卸載</string>
+  <string id="susfs_settings_label">自訂SUSFS設定</string>
+  <string id="susfs_kernel_status_label">SUSFS核心狀態</string>
   
   <!-- Status Page -->
-  <string id="kernel_features_label">內核功能狀態</string>
-  <string id="sus_path_feature_label">SUS 路徑</string>
-  <string id="sus_mount_feature_label">SUS 掛載</string>
-  <string id="try_umount_feature_label">嘗試卸載</string>
-  <string id="spoof_uname_feature_label">欺騙 Uname</string>
-  <string id="spoof_cmdline_feature_label">欺騙 命令行/啟動配置</string>
-  <string id="open_redirect_feature_label">打開重定向</string>
-  <string id="enable_log_feature_label">日誌記錄</string>
+  <string id="kernel_features_label">核心功能狀態</string>
+  <string id="sus_path_feature_label">SUS路徑支援</string>
+  <string id="sus_mount_feature_label">SUS掛載支援</string>
+  <string id="sus_kstat_feature_label">SUS 核心統計支援</string>
+  <string id="try_umount_feature_label">嘗試卸載支援</string>
+  <string id="spoof_uname_feature_label">偽裝Uname支援</string>
+  <string id="spoof_cmdline_feature_label">偽裝Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">開放重新導向支援</string>
+  <string id="enable_log_feature_label">日誌記錄支援</string>
   <string id="auto_default_mount_feature_label">自動預設掛載</string>
-  <string id="auto_bind_mount_feature_label">自動綁定掛載</string>
-  <string id="auto_try_umount_bind_feature_label">自動嘗試卸載綁定</string>
-  <string id="hide_symbols_feature_label">隱藏 KSU SUSFS 符號</string>
-  <string id="magic_mount_feature_label">Magic Mount</string>
-  <string id="overlayfs_auto_kstat_feature_label">OverlayFS 自動內核統計</string>
+  <string id="auto_bind_mount_feature_label">自動繫結掛載</string>
+  <string id="auto_try_umount_bind_feature_label">自動嘗試卸載繫結</string>
+  <string id="hide_symbols_feature_label">隱藏KSU SUSFS符號</string>
+  <string id="magic_mount_feature_label">魔法掛載支援</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS自動核心統計支援</string>
   
   <!-- Settings -->
-  <string id="susfs_log_label">SUSFS 日誌</string>
-  <string id="sus_su_1_label">SUS SU 處於模式 1</string>
+  <string id="susfs_log_label">SUSFS日誌</string>
+  <string id="sus_su_1_label">SUS SU處於模式1</string>
   <string id="sus_su_label">SUS SU</string>
-  <string id="sus_su_boot_label">開機掛載 SUS SU</string>
-  <string id="susfs_settings_label">自訂 susfs 設定</string>
+  <string id="sus_su_boot_label">開機時啟動SUS SU</string>
+  <string id="susfs_settings_label">自訂susfs設定</string>
   <string id="auto_hide_label">自動隱藏設定</string>
   <string id="default_mounts_label">自動隱藏預設掛載</string>
-  <string id="bind_mounts_label">自動隱藏綁定掛載</string>
-  <string id="try_umount_bind_label">自動嘗試卸載綁定掛載</string>
-  <string id="zygote_try_umount_label">嘗試卸載 zygote 系統進程</string>
-  <string id="kernel_uname_label">Kernel Uname</string>
-  <string id="spoof_kernel_version_label">欺騙內核版本</string>
-  <string id="spoof_kernel_build_label">欺騙內核構建</string>
-  <string id="spoof_on_boot_label">啟動時欺騙</string>
-  <string id="post_fs_data_label">在 post-fs-data 時欺騙（效果更好）</string>
-  <string id="uname_warning_label2">如果錯誤地啟用此選項，可能會導致啟動循環或不穩定。您確定要啟用後檔案系統資料執行嗎？</string>
+  <string id="bind_mounts_label">自動隱藏繫結掛載</string>
+  <string id="try_umount_bind_label">自動嘗試卸載繫結掛載</string>
+  <string id="hide_sus_mnts_for_all_procs_label">對所有行程隱藏sus_mounts</string>
+  <string id="zygote_try_umount_label">為zygote系統行程嘗試卸載</string>
+  <string id="umount_for_zygote_iso_service_label">為zygote隔離服務嘗試卸載</string>
+  <string id="kernel_uname_label">核心Uname</string>
+  <string id="spoof_kernel_version_label">偽裝核心名稱</string>
+  <string id="spoofed_kernel_version_label">偽裝的核心名稱</string>
+  <string id="spoof_kernel_build_label">偽建造置日期</string>
+  <string id="spoofed_kernel_build_label">偽裝的建置日期</string>
+  <string id="spoof_on_boot_label">開機時偽裝</string>
+  <string id="post_fs_data_label">在post-fs-data階段執行（偽裝效果更好）</string>
+  <string id="uname_warning_label2">若偽裝設定不正確，啟用此選項可能導致裝置變磚或系統不穩定。您確定要啟用 post-fs-data 階段執行嗎？</string>
+  
   <!-- Custom -->
   <string id="custom_settings_label">自訂設定</string>
-  <string id="hide_paths_label">隱藏自訂 ROM 設定</string>
-  <string id="hide_custom_rom_label">隱藏自訂 Rom 路徑</string>
-  <string id="hide_level_label">Hide Level</string>
-  <string id="hide_custom_rom_desc1">排除 .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/</string>
-  <string id="hide_custom_rom_desc2">排除 .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/</string>
-  <string id="hide_custom_rom_desc3">排除 .apk, .jar, .odex, .vdex, and /vendor/bin/hw/</string>
-  <string id="hide_custom_rom_desc4">排除 .apk, .jar, and /vendor/bin/hw/</string>
-  <string id="hide_custom_rom_desc5">隱藏所有自訂 rom 路徑 ⚠️有風險並且可能會導致問題！</string>
-  <string id="hide_vendor_sepolicy_label">隱藏供應商 SEPolicy</string>
-  <string id="hide_compat_matrix_label">隱藏相容性矩陣</string>
-  <string id="fake_service_list_label">欺騙服務列表</string>
+  <string id="hide_paths_label">隱藏自訂ROM設定</string>
+  <string id="hide_custom_rom_label">隱藏自訂ROM路徑</string>
+  <string id="hide_level_label">隱藏級別</string>
+  <string id="hide_custom_rom_desc1">排除 .apk, .jar, .odex, .vdex, .so, .rc 和 /vendor/bin/hw/ 檔案</string>
+  <string id="hide_custom_rom_desc2">排除 .apk, .jar, .odex, .vdex, .so 和 /vendor/bin/hw/ 檔案</string>
+  <string id="hide_custom_rom_desc3">排除 .apk, .jar, .odex, .vdex 和 /vendor/bin/hw/ 檔案</string>
+  <string id="hide_custom_rom_desc4">排除 .apk, .jar 和 /vendor/bin/hw/ 檔案</string>
+  <string id="hide_custom_rom_desc5">隱藏所有自訂ROM路徑 ⚠️高風險，可能導致問題！</string>
+  <string id="hide_vendor_sepolicy_label">隱藏 Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">隱藏 Compat Matrix</string>
+  <string id="fake_service_list_label">偽裝 Service List</string>
   <string id="hide_gapps_label">隱藏 GApps</string>
   <string id="hide_revanced_label">隱藏 Revanced (YT/YTM)</string>
-  <string id="spoof_cmdline_label">欺騙命令行</string>
-  <string id="hide_ksu_loop_label">隱藏 KSU 循環</string>
+  <string id="spoof_cmdline_label">偽裝 Cmdline</string>
+  <string id="hide_ksu_loop_label">隱藏 KSU Loop</string>
   <string id="force_hide_dex2oat_label">強制隱藏 Dex2oat 掛載</string>
-  <string id="custom_sus_path_label">自訂 SUS 路徑</string>
-  <string id="custom_sus_mount_label">自訂 SUS 掛載</string>
+  <string id="custom_sus_path_label">自訂SUS路徑</string>
+  <string id="custom_sus_mount_label">自訂SUS掛載</string>
   <string id="custom_try_umount_label">自訂嘗試卸載</string>
 
   <!-- Credits -->
   <string id="contrib_label">貢獻者：</string>
-  <string id= "translators_label">翻譯人員：</string>
+  <string id="translators_label">翻譯人員：</string>
 </language>
