@@ -235,10 +235,12 @@ async function auto_hide_settings(settings,susfs_version_decimal) {
 	const auto_umount_bind = document.getElementById("auto_umount_bind");
 	const try_umount_zygote = document.getElementById("try_umount_zygote");
 	const hide_sus_mnts_for_all_procs = document.getElementById("hide_sus_mnts_for_all_procs");
+	const umount_for_zygote_iso_service = document.getElementById("umount_for_zygote_iso_service");
 	var is_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
 	var is_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
 	var is_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
 	var is_try_umount_zygote = await run(`[ -f data/adb/susfs_umount_for_zygote_system_process ] && echo true || echo false`);
+	var is_umount_for_zygote_iso_service = await run(`[ -f data/adb/susfs_umount_for_zygote_iso_service ] && echo true || echo false`);
 	var custom_settings = settings;
 
 	if(is_auto_mount=="true"){
@@ -260,6 +262,15 @@ async function auto_hide_settings(settings,susfs_version_decimal) {
 		}
 		else{
 			hide_sus_mnts_for_all_procs.checked=false;
+		}
+	}
+	if (susfs_version_decimal>=158){
+		umount_for_zygote_iso_service.removeAttribute("disabled");
+		if (is_umount_for_zygote_iso_service=="true"){
+			umount_for_zygote_iso_service.checked="checked";
+		}
+		else{
+			umount_for_zygote_iso_service.checked=false;
 		}
 	}
 
@@ -316,6 +327,22 @@ async function auto_hide_settings(settings,susfs_version_decimal) {
 			await run(`touch data/adb/susfs_umount_for_zygote_system_process`);
 			is_try_umount_zygote=="true";
 			toast("Reboot to take effect");
+		}
+	});
+
+	umount_for_zygote_iso_service.addEventListener("click",async function(){
+		is_umount_for_zygote_iso_service = await run(`[ -f data/adb/susfs_umount_for_zygote_iso_service ] && echo true || echo false`);
+		if (is_umount_for_zygote_iso_service=="true"){
+			await run(`rm -f data/adb/susfs_umount_for_zygote_iso_service`);
+			await run(`${susfs_bin} umount_for_zygote_iso_service 1`);
+			is_umount_for_zygote_iso_service=="false";
+			toast("Try umount for zygote isolation service disabled! No need to reboot");
+		}
+		else{
+			await run(`touch data/adb/susfs_umount_for_zygote_iso_service`);
+			await run(`${susfs_bin} umount_for_zygote_iso_service 1`);
+			is_umount_for_zygote_iso_service=="true";
+			toast("Try umount for zygote isolation service enabled! No need to reboot");
 		}
 	});
 
