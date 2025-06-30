@@ -334,7 +334,7 @@ async function auto_hide_settings(settings,susfs_version_decimal) {
 		is_umount_for_zygote_iso_service = await run(`[ -f data/adb/susfs_umount_for_zygote_iso_service ] && echo true || echo false`);
 		if (is_umount_for_zygote_iso_service=="true"){
 			await run(`rm -f data/adb/susfs_umount_for_zygote_iso_service`);
-			await run(`${susfs_bin} umount_for_zygote_iso_service 1`);
+			await run(`${susfs_bin} umount_for_zygote_iso_service 0`);
 			is_umount_for_zygote_iso_service=="false";
 			toast("Try umount for zygote isolation service disabled! No need to reboot");
 		}
