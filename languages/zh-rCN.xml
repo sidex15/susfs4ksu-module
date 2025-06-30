@@ -54,6 +54,7 @@
   <string id="try_umount_bind_label">自动尝试卸载绑定挂载</string>
   <string id="hide_sus_mnts_for_all_procs_label">对所有进程隐藏sus_mounts</string>
   <string id="zygote_try_umount_label">为zygote系统进程尝试卸载</string>
+  <string id="umount_for_zygote_iso_service_label">为zygote隔离服务尝试卸载</string>
   <string id="kernel_uname_label">内核Uname</string>
   <string id="spoof_kernel_version_label">伪装内核名称</string>
   <string id="spoofed_kernel_version_label">伪装的内核名称</string>
