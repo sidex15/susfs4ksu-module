@@ -11,7 +11,7 @@ const tmpfolder="/data/adb/ksu/susfs4ksu"
 const moddir="/data/adb/modules/susfs4ksu"
 const config="/data/adb/susfs4ksu"
 const susfs_bin="/data/adb/ksu/bin/ksu_susfs"
-const susfsd="/data/adb/ksu/bin/susfsd";
+const susfsd="/data/adb/ksu/bin/susfsd"
 const settings = catToObject(await run(`cat ${config}/config.sh`));
 
 //susfs version and kernel variant
@@ -21,19 +21,6 @@ const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
 const susfs_features = await run(`${susfs_bin} show enabled_features || ${susfsd} features`);
 const kernel_variant = await run(`${susfsd} variant || ${susfs_bin} show variant`);
-
-//susfs binary check
-const susfs_bin_hash= await run(`sha256sum ${susfs_bin} | awk '{print $1}'`);
-const susfs_cloud_hash = await run (`curl "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/${susfs_version_decimal.toString()}/${kernel_variant.toLowerCase()}/ksu_susfs_arm64" | sha256sum | awk '{print $1}'`)
-const susfs_command = `busybox wget -T 10 --no-check-certificate -qO - "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/${susfs_version_decimal.toString()}/${kernel_variant.toLowerCase()}/ksu_susfs_arm64" | sha256sum | awk '{print $1}'`
-//console.log(`SUSFS Version: ${susfs_version_decimal}`);
-//console.log(`SUSFS kernel variant: ${kernel_variant.toLowerCase()}`);
-//console.log(`SUSFS binary SHA256: ${susfs_bin_hash}`);
-//console.log(`SUSFS cloud SHA256: ${susfs_cloud_hash}`);
-
-if (susfs_bin_hash!=susfs_cloud_hash){
-	susfs_bin_update(susfs_version_decimal, kernel_variant);
-}
 
 //susfs features
 if (susfs_version_decimal>152){
@@ -215,10 +202,10 @@ async function susfs_bin_update(susfs_version, kernel_variant) {
 			try {
 				await run(`sh ${moddir}/susfs-bin-update.sh ${susfs_version.toString()} ${kernel_variant.toLowerCase()}`);
 				susfs_update_dialog.close();
-				toast(`SUSFS binary updated to version ${susfs_version} for ${kernel_variant} kernel variant!`);
+				toast(`SUSFS binary updated to version ${susfs_version} for ${kernel_variant} kernel!`);
 			}
 			catch (error) {
-				toast(`Error updating SUSFS binary: ${error}`);
+				toast(`Error updating SUSFS binary!`);
 			}
 		}, 500);
 	});
@@ -1066,3 +1053,9 @@ async function loadKernelFeatureStatus(susfs_features) {
 // Initialize the page
 set_uname(settings);
 susfs_log_toggle(settings);
+
+// Susfs binary check and update
+const susfs_check=await run (`sh ${moddir}/susfs-bin-check.sh ${susfs_version_decimal.toString()} ${kernel_variant.toLowerCase()}`)
+if (susfs_check=="mismatch"){
+	susfs_bin_update(susfs_version_decimal, kernel_variant);
+}
