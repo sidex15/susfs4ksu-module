@@ -16,6 +16,14 @@
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">错误！不支持的内核！</string>
   <string id="susfs_error_desc">WebUI访问被拒绝！请确保您使用的是SuSFS补丁内核！</string>
+
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS 用户空间更新！</string>
+  <string id="susfs_update_desc">您的 SUSFS 用户空间二进制文件有可用更新！</string>
+  <string id="susfs_update2_desc">请更新至最新版本，以确保与模块和 WebUI 的兼容性。</string>
+  <string id="susfs_updating_label">正在更新...</string>
+  <string id="skip_btn_label">跳过</string>
+  <string id="update_btn_label">更新</string>
   
   <!-- Home Page -->
   <string id="kernel_version_label">内核版本</string>
