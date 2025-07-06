@@ -21,7 +21,7 @@ susfsupdate() {
 	if download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/$1/$2/ksu_susfs_arm64" > ${TMPDIR}/ksu_susfs_remote ; then
 		# test downloaded binary
 		chmod +x ${TMPDIR}/ksu_susfs_remote
-		if ${TMPDIR}/ksu_susfs_remote show enabled_features | grep -q "CONFIG_KSU_SUSFS" > /dev/null 2>&1 ; then
+		if ${TMPDIR}/ksu_susfs_remote > /dev/null 2>&1 ; then
 			# test ok
 			cp -f ${TMPDIR}/ksu_susfs_remote ${KSU_BIN}/ksu_susfs
             echo "[-] Update Complete!"

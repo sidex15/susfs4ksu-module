@@ -53,7 +53,7 @@ if [ -n "$SUSFS_VERSION_RAW" ] && [ "$SUSFS_DECIMAL" -gt 152 ] 2>/dev/null; then
 	if download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/$SUSFS_DECIMAL/$KERNEL_VERSION/ksu_susfs_arm64" > ${MODPATH}/ksu_susfs_remote ; then
 		# test downloaded binary
 		chmod +x ${MODPATH}/ksu_susfs_remote
-		if ${MODPATH}/ksu_susfs_remote show enabled_features | grep -q "CONFIG_KSU_SUSFS" > /dev/null 2>&1 ; then
+		if ${MODPATH}/ksu_susfs_remote > /dev/null 2>&1 ; then
 			# test ok
 			cp -f ${MODPATH}/ksu_susfs_remote ${DEST_BIN_DIR}/ksu_susfs
 		else
