@@ -14,6 +14,12 @@ jobs:
           persist-credentials: false
           ref: webui
 
+      - name: Get latest commit message
+        id: commit_message
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          echo "message=$COMMIT_MSG" >> $GITHUB_OUTPUT
+
       - name: Build webui branch
         run: |
            npm install
@@ -43,6 +49,5 @@ jobs:
           github_token: ${{ secrets.SUSFS4KSU_SECRET }}
           author_email: "24408329+sidex15@users.noreply.github.com"
           author_name: "sidex15"
-          message: 'WebUI: Update webroot with latest build from webui branch (Automated commit)'
+          message: ${{ steps.commit_message.outputs.message }}
           branch: 'v1.5.2+'
-          
