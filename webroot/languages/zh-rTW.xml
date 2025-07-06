@@ -16,6 +16,14 @@
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">錯誤！不支援的核心！</string>
   <string id="susfs_error_desc">WebUI存取被拒絕！請確保您使用的是SuSFS修補核心！</string>
+
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS 用戶空間更新！</string>
+  <string id="susfs_update_desc">您的 SUSFS 用戶空間二進位檔案有可用更新！</string>
+  <string id="susfs_update2_desc">請更新至最新版本，以確保與模組和 WebUI 的相容性。</string>
+  <string id="susfs_updating_label">正在更新...</string>
+  <string id="skip_btn_label">跳過</string>
+  <string id="update_btn_label">更新</string>
   
   <!-- Home Page -->
   <string id="kernel_version_label">核心版本</string>
@@ -58,7 +66,7 @@
   <string id="kernel_uname_label">核心Uname</string>
   <string id="spoof_kernel_version_label">偽裝核心名稱</string>
   <string id="spoofed_kernel_version_label">偽裝的核心名稱</string>
-  <string id="spoof_kernel_build_label">偽建造置日期</string>
+  <string id="spoof_kernel_build_label">偽裝建置日期</string>
   <string id="spoofed_kernel_build_label">偽裝的建置日期</string>
   <string id="spoof_on_boot_label">開機時偽裝</string>
   <string id="post_fs_data_label">在post-fs-data階段執行（偽裝效果更好）</string>
