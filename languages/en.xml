@@ -17,6 +17,14 @@
   <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
   <string id="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</string>
   
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS Userspace Update!</string>
+  <string id="susfs_update_desc">There's an update to your SUSFS Userspace Binaries!</string>
+  <string id="susfs_update2_desc">Please update to the latest version to ensure compatibility with the Module and the WebUI.</string>
+  <string id="susfs_updating_label">Updating...</string>
+  <string id="skip_btn_label">Skip</string>
+  <string id="update_btn_label">Update</string>
+
   <!-- Home Page -->
   <string id="kernel_version_label">Kernel Version</string>
   <string id="sus_path_label">SUS PATH</string>

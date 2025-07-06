@@ -13,12 +13,27 @@ const config="/data/adb/susfs4ksu"
 const susfs_bin="/data/adb/ksu/bin/ksu_susfs"
 const susfsd="/data/adb/ksu/bin/susfsd";
 const settings = catToObject(await run(`cat ${config}/config.sh`));
-//susfs_version
+
+//susfs version and kernel variant
 var susfs_version = await run(`grep version= ${moddir}/module.prop | cut -d '=' -f 2`);
 var susfs_version_decimal=parseFloat(susfs_version.replace(/[v.]/g,""));
 const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
 const susfs_features = await run(`${susfs_bin} show enabled_features || ${susfsd} features`);
+const kernel_variant = await run(`${susfsd} variant || ${susfs_bin} show variant`);
+
+//susfs binary check
+const susfs_bin_hash= await run(`sha256sum ${susfs_bin} | awk '{print $1}'`);
+const susfs_cloud_hash = await run (`curl "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/${susfs_version_decimal.toString()}/${kernel_variant.toLowerCase()}/ksu_susfs_arm64" | sha256sum | awk '{print $1}'`)
+const susfs_command = `busybox wget -T 10 --no-check-certificate -qO - "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/${susfs_version_decimal.toString()}/${kernel_variant.toLowerCase()}/ksu_susfs_arm64" | sha256sum | awk '{print $1}'`
+//console.log(`SUSFS Version: ${susfs_version_decimal}`);
+//console.log(`SUSFS kernel variant: ${kernel_variant.toLowerCase()}`);
+//console.log(`SUSFS binary SHA256: ${susfs_bin_hash}`);
+//console.log(`SUSFS cloud SHA256: ${susfs_cloud_hash}`);
+
+if (susfs_bin_hash!=susfs_cloud_hash){
+	susfs_bin_update(susfs_version_decimal, kernel_variant);
+}
 
 //susfs features
 if (susfs_version_decimal>152){
@@ -34,7 +49,6 @@ if(await run(`[ -f ${tmpfolder}/logs/susfs_active ] && echo true || echo false`)
 //susfs stats and kernel version
 var is_log_empty=await run (`[ -s ${tmpfolder}/logs/susfs.log ] && echo false || echo true`);
 var susfs_stats = catToObject(await run(`cat ${tmpfolder}/susfs_stats.txt`));
-const kernel_variant = await run(`${susfs_bin} show variant`);
 if (is_log_empty=="true"){
 	susfs_stats = catToObject(await run(`cat ${tmpfolder}/susfs_stats1.txt`));
 	toast("/data/adb/ksu/susfs4ksu/logs/susfs.log is empty/missing.");
@@ -157,6 +171,39 @@ async function run(cmd) {
 	} else {
 		return stdout;
 	}
+}
+
+//susfs binary update
+async function susfs_bin_update(susfs_version, kernel_variant) {
+	const susfs_update_dialog = document.getElementById("susfs_update_dialog");
+	const susfs_update_btn = document.getElementById("susfs_update_btn");
+	const susfs_update = document.getElementById("susfs_update");
+	const susfs_updating = document.getElementById("susfs_updating");
+	const susfs_update_desc1 = document.getElementById("susfs_update_desc1");
+	const susfs_update_desc2 = document.getElementById("susfs_update_desc2");
+	const susfs_loading_icon = document.getElementById("susfs_loading_icon");
+	const susfs_update_buttons = document.getElementById("susfs_update_buttons");
+
+	susfs_update_dialog.showModal();
+	susfs_update_btn.addEventListener("click",async function(){
+		susfs_update.classList.add("hidden");
+		susfs_update_desc1.classList.add("hidden");
+		susfs_update_desc2.classList.add("hidden");
+		susfs_update_buttons.classList.add("hidden");
+		susfs_loading_icon.classList.remove("hidden");
+		susfs_updating.classList.remove("hidden");
+
+		setTimeout(async () => {
+			try {
+				await run(`sh ${moddir}/susfs-bin-update.sh ${susfs_version.toString()} ${kernel_variant.toLowerCase()}`);
+				susfs_update_dialog.close();
+				toast(`SUSFS binary updated to version ${susfs_version} for ${kernel_variant} kernel variant!`);
+			}
+			catch (error) {
+				toast(`Error updating SUSFS binary: ${error}`);
+			}
+		}, 500);
+	});
 }
 
 //sus_su toggle
