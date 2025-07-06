@@ -163,14 +163,32 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 });
 
 //run function
-async function run(cmd) {
-	const { errno, stdout, stderr } = await exec(cmd);
-	if (errno != 0) {
-		toast(`stderr: ${stderr}`);
-		return undefined;
-	} else {
-		return stdout;
-	}
+/**
+ * Executes a shell command with KernelSU privileges
+ * @param {string} command - The shell command to execute
+ * @returns {Promise<string>} A promise that resolves with stdout content
+ * @throws {Error} If command execution fails with:
+ *   - stderr in error message
+ */
+export async function run(command) {
+    return new Promise((resolve, reject) => {
+        const callbackName = `exec_callback_${Date.now()}`;
+        window[callbackName] = (errno, stdout, stderr) => {
+            delete window[callbackName];
+            if (errno === 0) {
+                resolve(stdout);
+            } else {
+                console.error(`Error executing command: ${stderr}`);
+                reject(stderr);
+            }
+        };
+        try {
+            ksu.exec(command, "{}", callbackName);
+        } catch (error) {
+            console.error(`Execution error: ${error}`);
+            reject(error);
+        }
+    });
 }
 
 //susfs binary update
