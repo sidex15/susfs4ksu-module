@@ -7,8 +7,8 @@
   <script type="module" crossorigin src="/assets/fade-4ApaDT9x.js"></script>
   <script type="module" crossorigin src="/assets/creditsjs-BfjoyHvA.js"></script>
   <script type="module" crossorigin src="/assets/i18n-BqJdyLAD.js"></script>
-  <script type="module" crossorigin src="/assets/index-DUs2X5Oz.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CRPPkXqk.css">
+  <script type="module" crossorigin src="/assets/index-BDvhOYhG.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C9VpSQPu.css">
 </head>
 
 <style>
@@ -28,6 +28,23 @@
 		  <div class="flex flex-row justify-center items-center gap-2">
 		  <button class="btn border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] text-white" data-i18n="close_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -d https://gitlab.com/simonpunk/susfs4ksu`)">SUSFS Repo</button>
 		  <button class="btn border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] text-white" data-i18n="close_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -d https://github.com/WildKernels`)">GKI Kernel With SUSFS</button>
+		  </div>
+		</div>
+	</dialog>
+	<!-- susfs update dialog -->
+	 <dialog id="susfs_update_dialog" class="modal">
+		<div class="modal-box flex flex-col items-center border-2 border-white bg-black">
+		  <img src="/assets/susfs_update-BC5m6nLp.png" class="w-auto h-24 mx-auto mb-2"/>
+		  <h3 class="text-lg font-bold text-center text-white font-amongus2 pb-4" data-i18n="susfs_update_label" id="susfs_update">SUSFS Userspace Update!</h3>
+		  <h3 class="text-lg font-bold text-center text-white font-amongus2 pb-4 hidden" data-i18n="susfs_updating_label" id="susfs_updating">Updating...</h3>
+		  <p class="text-center font-normal text-white font-amongus2" data-i18n="susfs_update_desc" id="susfs_update_desc1">There's an update to your SUSFS Userspace Binaries!</p>
+		  <p class="text-center font-normal text-white font-amongus2" data-i18n="susfs_update2_desc" id="susfs_update_desc2">Please update to the latest version to ensure compatibility with the Module and the WebUI.</p>
+		  <div class="loading loading-spinner loading-lg hidden" id="susfs_loading_icon"></div> 
+		  <div class="flex flex-row justify-center items-center pt-4 gap-2" id="susfs_update_buttons">
+		  <form method="dialog">
+			<button class="btn border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] text-white" data-i18n="skip_btn_label">Skip</button>
+		  </form>
+		  <button class="btn border-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] text-white" data-i18n="update_btn_label" id="susfs_update_btn">Update</button>
 		  </div>
 		</div>
 	</dialog>
