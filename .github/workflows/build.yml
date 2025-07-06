@@ -49,5 +49,5 @@ jobs:
           github_token: ${{ secrets.SUSFS4KSU_SECRET }}
           author_email: "24408329+sidex15@users.noreply.github.com"
           author_name: "sidex15"
-          message: ${{ steps.commit_message.outputs.message }}
+          message: "WebUI: ${{ steps.commit_message.outputs.message }}"
           branch: 'v1.5.2+'
