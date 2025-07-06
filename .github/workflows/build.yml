@@ -17,7 +17,7 @@ jobs:
       - name: Get latest commit message
         id: commit_message
         run: |
-          COMMIT_MSG=$(git log -1 --pretty=%B)
+          COMMIT_MSG=$(git log -1 --pretty=%s)
           echo "message=$COMMIT_MSG" >> $GITHUB_OUTPUT
 
       - name: Build webui branch
