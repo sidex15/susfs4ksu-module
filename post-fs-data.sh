@@ -24,7 +24,6 @@ else
 fi
 
 # for people that is on legacy with broken dmesg or disabled logging
-# actually first, fuck you
 # second, heres your override
 # touch /data/adb/susfs4ksu/susfs_force_override
 [ -f $PERSISTENT_DIR/susfs_force_override ] && touch $tmpfolder/logs/susfs_active
