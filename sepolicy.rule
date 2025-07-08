@@ -1,0 +1,1 @@
+allow netd adb_data_file dir {search}
