@@ -177,7 +177,7 @@ fi
 } & # run in background
 
 # SUSFS Logging
-dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
+dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
 endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
 echo "boot_completed=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 sleep 15; # this delay is to ensure that all of the susfs logs have been captured
@@ -187,7 +187,7 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 157 ] 2>/dev/null; then
 	${SUSFS_BIN} set_android_data_root_path /sdcard/Android/data
 fi
 # Last dmesg logs
-dmesg | sed -n "/^\[ *$endmsg/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
+dmesg | sed -n "/^\[ *$endmsg/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
 
 # Generate susfs stats
 rm ${tmpfolder}/susfs_stats.txt

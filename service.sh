@@ -94,7 +94,7 @@ sus_su_2(){
 }
 
 # SUSFS Logging
-dmesg | sed -n "/^\[ *$post_mount/,\$p" | grep -iE "susfs_auto_add|ksu_susfs" >> $logfile
+dmesg | sed -n "/^\[ *$post_mount/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
 endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
 echo "service=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 
