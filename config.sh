@@ -12,5 +12,6 @@ force_hide_lsposed=0
 spoof_uname=0
 fake_service_list=0
 hide_sus_mnts_for_all_procs=1
+umount_for_zygote_iso_service=0
 kernel_version='default'
 kernel_build='default'
