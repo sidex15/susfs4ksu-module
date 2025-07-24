@@ -142,6 +142,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		custom_sus_mount();
 		custom_try_umount();
 		custom_sus_path();
+		custom_sus_path_loop(susfs_version_decimal);
     }
 	else if (currentPath === '/status.html') {
 		//console.log("in status");
@@ -916,6 +917,41 @@ async function custom_sus_path(){
 		} 
 		else{
 			await run(`echo '${save_sus_path_val}' > ${config}/sus_path.txt`);
+			toast("Custom SUS PATH saved!");
+			toast("Reboot to take effect");
+		}
+	})
+}
+
+// custom sus path loop
+async function custom_sus_path_loop(susfs_version_decimal){
+	const load_sus_path_loop = document.getElementById("load_sus_path_loop");
+	const sus_path_loop_area = document.getElementById("custom_sus_path_loop");
+	const save_sus_path_loop = document.getElementById("save_sus_path_loop");
+	const sus_path_loop_section = document.getElementById("sus_path_loop_section");
+
+	// Check if the susfs version is 1.5.9 or higher
+	if (susfs_version_decimal > 158) {
+		sus_path_loop_section.classList.remove("hidden");
+	}
+	else {
+		return;
+	}
+	// Load the custom SUS PATH
+	load_sus_path_loop.addEventListener("click",async ()=>{
+		sus_path_loop_area.innerHTML=await run(`cat ${config}/sus_path_loop.txt`);
+	})
+
+	// Save the custom SUS PATH
+	save_sus_path_loop.addEventListener("click",async ()=>{
+		var save_sus_path_loop_val=sus_path_loop_area.value;
+		//console.log(save_sus_path_val);
+		// Check if the input is empty
+		if (save_sus_path_loop_val=='') {
+			toast('please press load first!');
+		} 
+		else{
+			await run(`echo '${save_sus_path_loop_val}' > ${config}/sus_path.txt`);
 			toast("Custom SUS PATH saved!");
 			toast("Reboot to take effect");
 		}
