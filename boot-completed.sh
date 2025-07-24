@@ -70,6 +70,15 @@ else
 	done
 fi
 
+# Add sus_path_loop paths (late v1.5.9+)
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 158 ] 2>/dev/null; then
+	# to add paths
+	# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path_loop.txt
+	# this'll make it easier for the webui to do stuff
+	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path_loop.txt); do
+	${SUSFS_BIN} add_sus_path_loop "$i" && echo "[sus_path_loop]: susfs4ksu/boot-completed $i" >> $logfile1
+	done
+fi
 
 # if spoof_uname is on mode 1, set_uname will be called here
 [ $spoof_uname = 1 ] && spoof_uname

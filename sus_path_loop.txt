@@ -1,0 +1,6 @@
+# this contains suspicious paths you want 
+# hidden at boot-completed.sh
+# example
+# /system/addon.d
+# /vendor/bin/install-recovery.sh
+# /system/bin/install-recovery.sh
