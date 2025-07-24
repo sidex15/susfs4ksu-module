@@ -932,7 +932,7 @@ async function custom_sus_path_loop(susfs_version_decimal){
 
 	// Check if the susfs version is 1.5.9 or higher
 	if (susfs_version_decimal > 158) {
-		sus_path_loop_section.removeAttribute("hidden");
+		sus_path_loop_section.classList.remove("hidden");
 	}
 	else {
 		return;
