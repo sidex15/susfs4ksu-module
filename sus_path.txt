@@ -1,5 +1,5 @@
 # this contains suspicious paths you want 
-# hidden at post-fs-data.sh
+# hidden at boot-completed.sh
 # example
 # /system/addon.d
 # /vendor/bin/install-recovery.sh
