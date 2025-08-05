@@ -431,6 +431,8 @@ async function set_uname(settings) {
 	const mainContainer = document.querySelector('main');
 	var sus_uname=document.getElementById("sus_uname");
 	var sus_uname_build=document.getElementById("sus_uname_build");
+	var sus_uname_checkbox=document.getElementById("sus_uname_checkbox");
+	var sus_uname_build_checkbox=document.getElementById("sus_uname_build_checkbox");
 	var spoofed_kernel_version = document.getElementById("spoofed_kernel_version");
 	var spoofed_kernel_build = document.getElementById("spoofed_kernel_build");
 
@@ -454,59 +456,99 @@ async function set_uname(settings) {
 	set_uname.addEventListener("click",async function(){
 		sus_uname=document.getElementById("sus_uname");
 		sus_uname_build=document.getElementById("sus_uname_build");
-		if (sus_uname.value.includes(' ')) {
-			toast('Spaces are not allowed in the input!');
-		} 
+		sus_uname_checkbox=document.getElementById("sus_uname_checkbox");
+		sus_uname_build_checkbox=document.getElementById("sus_uname_build_checkbox");
+
+		if (sus_uname.value.includes(' ')&&sus_uname_checkbox.checked==true) {
+				toast('Spaces are not allowed in the input!');
+			} 
 		else {
-			if(sus_uname.value=='' && sus_uname_build.value==''){
-				console.log("default kernel version");
-				run(`${susfs_bin} set_uname 'default' 'default'`)
-				custom_settings.kernel_version = "default";
-				custom_settings.kernel_build = "default";
-				await run(`sed -i 's/kernel_version=.*/kernel_version="default"/' ${config}/config.sh`);
-				await run(`sed -i 's/kernel_build=.*/kernel_build="default"/' ${config}/config.sh`);
-				document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
-				spoofed_kernel_version.innerHTML="default";
-				spoofed_kernel_build.innerHTML="default";
-				set_uname.blur();
-			}
-			else{
-				console.log(`sets to ${sus_uname.value}`);
-				if(sus_uname_build.value==''){
-					custom_settings.kernel_version = sus_uname.value;
-					custom_settings.kernel_build = "default";
-					run(`${susfs_bin} set_uname '${sus_uname.value}' 'default'`)
-					await run(`sed -i 's/kernel_version=.*/kernel_version="${sus_uname.value}"/' ${config}/config.sh`);
-					await run(`sed -i 's/kernel_build=.*/kernel_build="default"/' ${config}/config.sh`);
-					spoofed_kernel_version.innerHTML=sus_uname.value;
-					spoofed_kernel_build.innerHTML="default";
-				}
-				else if(sus_uname.value==''){
-					custom_settings.kernel_version = "default";
-					custom_settings.kernel_build = sus_uname_build.value;
-					run(`${susfs_bin} set_uname 'default' '${sus_uname_build.value}'`);
+			if (sus_uname_checkbox.checked==true && sus_uname_build_checkbox.checked==false){
+				if(sus_uname.value==''){
+					run(`${susfs_bin} set_uname 'default' '${custom_settings.kernel_build}'`)
 					await run(`sed -i 's/kernel_version=.*/kernel_version="default"/' ${config}/config.sh`);
-					await run(`sed -i 's/kernel_build=.*/kernel_build="${sus_uname_build.value}"/' ${config}/config.sh`);
+					document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+					custom_settings.kernel_version = "default";
 					spoofed_kernel_version.innerHTML="default";
-					spoofed_kernel_build.innerHTML=sus_uname_build.value;
+					set_uname.blur();
 				}
 				else{
-					custom_settings.kernel_version = sus_uname.value;
-					custom_settings.kernel_build = sus_uname_build.value;
-					run(`${susfs_bin} set_uname '${sus_uname.value}' '${sus_uname_build.value}'`);
+					run(`${susfs_bin} set_uname '${sus_uname.value}' '${custom_settings.kernel_build}'`)
 					await run(`sed -i 's/kernel_version=.*/kernel_version="${sus_uname.value}"/' ${config}/config.sh`);
-					await run(`sed -i 's/kernel_build=.*/kernel_build="${sus_uname_build.value}"/' ${config}/config.sh`);
+					custom_settings.kernel_version = sus_uname.value;
 					spoofed_kernel_version.innerHTML=sus_uname.value;
-					spoofed_kernel_build.innerHTML=sus_uname_build.value;
+					set_uname.blur();
 				}
-				document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+				sus_uname.value='';
+			}
+			else if (sus_uname_checkbox.checked==false && sus_uname_build_checkbox.checked==true){
+				if(sus_uname_build.value==''){
+					run(`${susfs_bin} set_uname '${custom_settings.kernel_version}' 'default'`)
+					await run(`sed -i 's/kernel_build=.*/kernel_build="default"/' ${config}/config.sh`);
+					custom_settings.kernel_build = "default";
+					spoofed_kernel_build.innerHTML="default";
+					set_uname.blur();
+				}
+				else{
+					run(`${susfs_bin} set_uname '${custom_settings.kernel_version}' '${sus_uname_build.value}'`);
+					await run(`sed -i 's/kernel_build=.*/kernel_build="${sus_uname_build.value}"/' ${config}/config.sh`);
+					custom_settings.kernel_build = sus_uname_build.value;
+					spoofed_kernel_build.innerHTML=sus_uname_build.value;
+					set_uname.blur();
+				}
+				sus_uname_build.value='';
+			}
+			else if (sus_uname_checkbox.checked==true && sus_uname_build_checkbox.checked==true){
+				if(sus_uname.value=='' && sus_uname_build.value==''){
+					console.log("default kernel version");
+					run(`${susfs_bin} set_uname 'default' 'default'`)
+					custom_settings.kernel_version = "default";
+					custom_settings.kernel_build = "default";
+					await run(`sed -i 's/kernel_version=.*/kernel_version="default"/' ${config}/config.sh`);
+					await run(`sed -i 's/kernel_build=.*/kernel_build="default"/' ${config}/config.sh`);
+					document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+					spoofed_kernel_version.innerHTML="default";
+					spoofed_kernel_build.innerHTML="default";
+					set_uname.blur();
+				}
+				else{
+					console.log(`sets to ${sus_uname.value}`);
+					if(sus_uname_build.value==''){
+						custom_settings.kernel_version = sus_uname.value;
+						custom_settings.kernel_build = "default";
+						run(`${susfs_bin} set_uname '${sus_uname.value}' 'default'`)
+						await run(`sed -i 's/kernel_version=.*/kernel_version="${sus_uname.value}"/' ${config}/config.sh`);
+						await run(`sed -i 's/kernel_build=.*/kernel_build="default"/' ${config}/config.sh`);
+						spoofed_kernel_version.innerHTML=sus_uname.value;
+						spoofed_kernel_build.innerHTML="default";
+					}
+					else if(sus_uname.value==''){
+						custom_settings.kernel_version = "default";
+						custom_settings.kernel_build = sus_uname_build.value;
+						run(`${susfs_bin} set_uname 'default' '${sus_uname_build.value}'`);
+						await run(`sed -i 's/kernel_version=.*/kernel_version="default"/' ${config}/config.sh`);
+						await run(`sed -i 's/kernel_build=.*/kernel_build="${sus_uname_build.value}"/' ${config}/config.sh`);
+						spoofed_kernel_version.innerHTML="default";
+						spoofed_kernel_build.innerHTML=sus_uname_build.value;
+					}
+					else{
+						custom_settings.kernel_version = sus_uname.value;
+						custom_settings.kernel_build = sus_uname_build.value;
+						run(`${susfs_bin} set_uname '${sus_uname.value}' '${sus_uname_build.value}'`);
+						await run(`sed -i 's/kernel_version=.*/kernel_version="${sus_uname.value}"/' ${config}/config.sh`);
+						await run(`sed -i 's/kernel_build=.*/kernel_build="${sus_uname_build.value}"/' ${config}/config.sh`);
+						spoofed_kernel_version.innerHTML=sus_uname.value;
+						spoofed_kernel_build.innerHTML=sus_uname_build.value;
+					}
+				}
 				sus_uname.value='';
 				sus_uname_build.value='';
-				set_uname.blur();
 			}
 		}
-	});	
-	
+		document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+		set_uname.blur();
+	});
+
 	spoof_on_boot.addEventListener('change', async function(event) {
 		const postfsdata_toggle = document.getElementById('uname-at-postfs');
 		event.preventDefault();

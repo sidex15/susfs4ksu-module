@@ -192,9 +192,15 @@
 							<p class="text-white text-xs break-all font-sans normal-case font-normal ml-1" id="spoofed_kernel_build"></p>
 						</div>
 						<div class="stat-title text-base text-white" data-i18n="spoof_kernel_version_label">Spoof Kernel Version</div>
-						<input type="text" id="sus_uname" placeholder="default" class="input input-sm text-sm font-sans w-full font-normal"/>
+						<div class="flex items-center gap-2">
+							<input type="text" id="sus_uname" placeholder="default" class="input input-sm text-sm font-sans flex-1 font-normal"/>
+							<input type="checkbox" id="sus_uname_checkbox" class="checkbox checkbox-sm checkbox-primary"/>
+						</div>
 						<div class="stat-title text-base text-white" data-i18n="spoof_kernel_build_label">Spoof Kernel Build</div>
-						<input type="text" id="sus_uname_build" placeholder="default" class="input input-sm text-sm font-sans w-full font-normal"/>
+						<div class="flex items-center gap-2">
+							<input type="text" id="sus_uname_build" placeholder="default" class="input input-sm text-sm font-sans flex-1 font-normal"/>
+							<input type="checkbox" id="sus_uname_build_checkbox" class="checkbox checkbox-sm checkbox-primary"/>
+						</div>
 						<div class="form-control">
 							<label class="label cursor-pointer">
 							<span class="text-white text-sm font-amongus2" data-i18n="spoof_on_boot_label">Spoof on boot</span>
