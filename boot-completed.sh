@@ -27,7 +27,7 @@ hide_sus_mnts_for_all_procs=1
 
 # update description
 if [ -f $tmpfolder/logs/susfs_active ] || dmesg | grep -q "susfs:"; then
-	if ${KSU_BIN} module list | grep -q "Integrity-Box"; then
+	if ${KSU_BIN} module list | grep -qiE integrity\.box; then
 		description="description=status: ✅ SuS ඞ ‼️ There's an impostor among us"
 	else
 		description="description=status: ✅ SuS ඞ"

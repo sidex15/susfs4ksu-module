@@ -150,7 +150,7 @@ fi
 rm -rf ${MODPATH}/tools
 rm ${MODPATH}/customize.sh ${MODPATH}/README.md
 
-if ${KSU_BIN} module list | grep -q "Integrity-Box"; then
+if ${KSU_BIN} module list | grep -qiE "integrity\.box"; then
 	ui_print "⚠️ Integrity-Box detected!"
 	ui_print "⚠️ Integrity-Box Tampers with SUSFS4KSU custom settings without consent and may cause issues."
 	ui_print "⚠️ Please Double Check Your SUSFS4KSU Settings in the WebUI if you are using Integrity-Box."
