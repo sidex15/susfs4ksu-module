@@ -993,7 +993,7 @@ async function custom_sus_path_loop(susfs_version_decimal){
 			toast('please press load first!');
 		} 
 		else{
-			await run(`echo '${save_sus_path_loop_val}' > ${config}/sus_path.txt`);
+			await run(`echo '${save_sus_path_loop_val}' > ${config}/sus_path_loop.txt`);
 			toast("Custom SUS PATH saved!");
 			toast("Reboot to take effect");
 		}
