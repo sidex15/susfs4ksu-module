@@ -994,7 +994,7 @@ async function custom_sus_path_loop(susfs_version_decimal){
 		} 
 		else{
 			await run(`echo '${save_sus_path_loop_val}' > ${config}/sus_path_loop.txt`);
-			toast("Custom SUS PATH saved!");
+			toast("Custom SUS_PATH_LOOP saved!");
 			toast("Reboot to take effect");
 		}
 	})
