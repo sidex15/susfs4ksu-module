@@ -673,6 +673,7 @@ async function custom_toggles(settings) {
 	const spoof_cmdline = document.getElementById("spoof_cmdline");
 	const hide_ksu_loop = document.getElementById("hide_ksu_loop");
 	const force_hide_lsposed = document.getElementById("force_hide_lsposed");
+	const avc_log_spoofing = document.getElementById("avc_log_spoofing");
 	//var config_sh = await run(`cat ${config}/config.sh`);
 
 	// Convert the string content to an object
@@ -688,7 +689,11 @@ async function custom_toggles(settings) {
 	else hide_ksu_loop.checked=false;
 	if (custom_settings.force_hide_lsposed==true) force_hide_lsposed.checked="checked";
 	else force_hide_lsposed.checked=false;
-
+	if (susfs_version_decimal<159) avc_log_spoofing.disabled=true;
+	else{
+		if (custom_settings.avc_log_spoofing==true) avc_log_spoofing.checked="checked";
+		else avc_log_spoofing.checked=false;
+	}
 	// gapps toggle
 	hide_gapps.addEventListener("click",async function (){
 		//var gapps_toggle = await run(`grep -q 'hide_gapps=1' ${config}/config.sh && echo true || echo false`);
@@ -768,6 +773,25 @@ async function custom_toggles(settings) {
 			toast("Reboot to take effect");
 		}
 	});
+
+	// avc log spoofing toggle
+	avc_log_spoofing.addEventListener("click",async function (){
+		//var avc_log_spoofing_toggle = await run(`grep -q 'avc_log_spoofing=1' ${config}/config.sh && echo true || echo false`);
+		if (custom_settings.avc_log_spoofing==true){
+			await run(`sed -i 's/avc_log_spoofing=.*/avc_log_spoofing=0/' ${config}/config.sh`)
+			await run(`${susfs_bin} enable_avc_log_spoofing 0`);
+			custom_settings.avc_log_spoofing=false
+			toast("AVC Log Spoofing off! no need to reboot");
+		}
+		else {
+			/*if (await run(`grep -q 'avc_log_spoofing' ${config}/config.sh && echo true || echo false`)=="false") run(`echo 'avc_log_spoofing=1' >> ${config}/config.sh`)
+			else*/ await run(`sed -i 's/avc_log_spoofing=.*/avc_log_spoofing=1/' ${config}/config.sh`)
+			await run(`${susfs_bin} enable_avc_log_spoofing 1`);
+			custom_settings.avc_log_spoofing=true
+			toast("AVC Log Spoofing on! no need to reboot");
+		}
+	});
+
 }
 
 async function custom_rom_settigs(settings) {
