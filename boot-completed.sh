@@ -23,6 +23,7 @@ hide_gapps=0
 hide_revanced=0
 spoof_uname=0
 hide_sus_mnts_for_all_procs=1
+emulate_vold_app_data=0
 [ -f $PERSISTENT_DIR/config.sh ] && . $PERSISTENT_DIR/config.sh
 
 # update description
@@ -64,6 +65,15 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 157 ] 2>/dev/null; then
 	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
 	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
 	done
+
+	# Emulate Vold app data
+	[ $emulate_vold_app_data = 1 ] && {
+		# Emulate Vold app data by using sus_path on /sdcard/Android/data/<pkg name> for all third-party apps (-3)
+		for i in $(pm list packages -3 | cut -d: -f2); do
+			${SUSFS_BIN} add_sus_path "/sdcard/Android/data/$i" && echo "[sus_path]: susfs4ksu/boot-completed /sdcard/Android/data/$i" >> $logfile1
+		done
+	}
+
 else
 	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
 	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
