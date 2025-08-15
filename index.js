@@ -674,6 +674,7 @@ async function custom_toggles(settings) {
 	const hide_ksu_loop = document.getElementById("hide_ksu_loop");
 	const force_hide_lsposed = document.getElementById("force_hide_lsposed");
 	const avc_log_spoofing = document.getElementById("avc_log_spoofing");
+	const emulate_vold_app_data = document.getElementById("emulate_vold_app_data");
 	//var config_sh = await run(`cat ${config}/config.sh`);
 
 	// Convert the string content to an object
@@ -689,6 +690,11 @@ async function custom_toggles(settings) {
 	else hide_ksu_loop.checked=false;
 	if (custom_settings.force_hide_lsposed==true) force_hide_lsposed.checked="checked";
 	else force_hide_lsposed.checked=false;
+	if (susfs_version_decimal<157) emulate_vold_app_data.disabled=true;
+	else{
+		if (custom_settings.emulate_vold_app_data==true) emulate_vold_app_data.checked="checked";
+		else emulate_vold_app_data.checked=false;
+	}
 	if (susfs_version_decimal<159) avc_log_spoofing.disabled=true;
 	else{
 		if (custom_settings.avc_log_spoofing==true) avc_log_spoofing.checked="checked";
@@ -792,6 +798,21 @@ async function custom_toggles(settings) {
 		}
 	});
 
+	// emulate vold app data isolation toggle
+	emulate_vold_app_data.addEventListener("click",async function (){
+		if (custom_settings.emulate_vold_app_data==true){
+			await run(`sed -i 's/emulate_vold_app_data=.*/emulate_vold_app_data=0/' ${config}/config.sh`)
+			await run(`${susfs_bin} enable_vold_app_data 0`);
+			custom_settings.emulate_vold_app_data=false
+			toast("Reboot to take effect");
+		}
+		else {
+			await run(`sed -i 's/emulate_vold_app_data=.*/emulate_vold_app_data=1/' ${config}/config.sh`)
+			await run(`${susfs_bin} enable_vold_app_data 1`);
+			custom_settings.emulate_vold_app_data=true
+			toast("Reboot to take effect");
+		}
+	});
 }
 
 async function custom_rom_settings(settings) {
