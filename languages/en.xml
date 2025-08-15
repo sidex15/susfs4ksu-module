@@ -91,6 +91,7 @@
   <string id="hide_ksu_loop_label">Hide KSU Loop</string>
   <string id="force_hide_dex2oat_label">Force Hide Dex2oat Mounts</string>
   <string id="avc_log_spoofing_label">AVC Log Spoofing</string>
+  <string id="emulate_vold_app_data_label">Emulate Vold App Data Isolation</string>
   <string id="custom_sus_path_label">Custom SUS Path</string>
   <string id="custom_sus_path_loop_label">Custom SUS Path Loop</string>
   <string id="custom_sus_mount_label">Custom SUS Mount</string>
