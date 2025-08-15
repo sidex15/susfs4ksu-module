@@ -138,7 +138,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
     } else if (currentPath === '/custom.html') {
 		//console.log("in custom");
 		custom_toggles(settings);
-		custom_rom_settigs(settings);
+		custom_rom_settings(settings);
 		custom_sus_mount();
 		custom_try_umount();
 		custom_sus_path();
@@ -794,7 +794,7 @@ async function custom_toggles(settings) {
 
 }
 
-async function custom_rom_settigs(settings) {
+async function custom_rom_settings(settings) {
 	const hide_custom_rom = document.getElementById("hide_custom_rom");
 	const custom_rom_levels = document.getElementById("custom_rom_levels");
 	const hide_level= document.getElementById("hide_level");
