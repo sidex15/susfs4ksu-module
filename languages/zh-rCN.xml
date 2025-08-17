@@ -90,7 +90,9 @@
   <string id="spoof_cmdline_label">伪装 Cmdline</string>
   <string id="hide_ksu_loop_label">隐藏 KSU Loop</string>
   <string id="force_hide_dex2oat_label">强制隐藏 Dex2oat 挂载</string>
+  <string id="avc_log_spoofing_label">AVC日志欺骗</string>
   <string id="custom_sus_path_label">自定义SUS路径</string>
+  <string id="custom_sus_path_loop_label">自定义SUS路径Loop</string>
   <string id="custom_sus_mount_label">自定义SUS挂载</string>
   <string id="custom_try_umount_label">自定义尝试卸载</string>
 
