@@ -1176,7 +1176,9 @@ set_uname(settings);
 susfs_log_toggle(settings);
 
 // Susfs binary check and update
-const susfs_check=await run (`sh ${moddir}/susfs-bin-check.sh ${susfs_version_decimal.toString()} ${kernel_variant.toLowerCase()}`)
-if (susfs_check=="mismatch"){
-	susfs_bin_update(susfs_version_decimal, kernel_variant);
+if (settings.disable_webui_bin_update==false) {
+	const susfs_check=await run (`sh ${moddir}/susfs-bin-check.sh ${susfs_version_decimal.toString()} ${kernel_variant.toLowerCase()}`)
+	if (susfs_check=="mismatch"){
+		susfs_bin_update(susfs_version_decimal, kernel_variant);
+	}
 }
