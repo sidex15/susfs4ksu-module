@@ -15,5 +15,6 @@ hide_sus_mnts_for_all_procs=1
 umount_for_zygote_iso_service=0
 avc_log_spoofing=0
 emulate_vold_app_data=0
+disable_webui_bin_update=0
 kernel_version='default'
 kernel_build='default'
