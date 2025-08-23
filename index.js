@@ -675,10 +675,19 @@ async function custom_toggles(settings) {
 	const force_hide_lsposed = document.getElementById("force_hide_lsposed");
 	const avc_log_spoofing = document.getElementById("avc_log_spoofing");
 	const emulate_vold_app_data = document.getElementById("emulate_vold_app_data");
+	var is_avc_log_spoofing_enabled = true;
 	//var config_sh = await run(`cat ${config}/config.sh`);
 
 	// Convert the string content to an object
 	const custom_settings = settings;
+
+	// Try to see if AVC log spoofing is supported
+	try {
+		await run(`${susfs_bin} enable_avc_log_spoofing ${custom_settings.avc_log_spoofing}`);
+	} catch (error) {
+		console.error("Error enabling AVC log spoofing:", error);
+		is_avc_log_spoofing_enabled = false;
+	}
 
 	if (custom_settings.hide_gapps==true) hide_gapps.checked="checked";
 	else hide_gapps.checked=false;
@@ -695,7 +704,7 @@ async function custom_toggles(settings) {
 		if (custom_settings.emulate_vold_app_data==true) emulate_vold_app_data.checked="checked";
 		else emulate_vold_app_data.checked=false;
 	}
-	if (susfs_version_decimal<159) avc_log_spoofing.disabled=true;
+	if (susfs_version_decimal<159 || !is_avc_log_spoofing_enabled) avc_log_spoofing.disabled=true;
 	else{
 		if (custom_settings.avc_log_spoofing==true) avc_log_spoofing.checked="checked";
 		else avc_log_spoofing.checked=false;
