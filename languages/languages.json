@@ -1,10 +1,18 @@
 {
+  "ar": "العربية",
+  "de": "Deutsch",
   "en": "English",
   "es": "Español",
+  "fa": "پارسی",
   "fr": "Français",
-  "ptbr": "Português", 
-  "tr": "Türkçe",
   "id": "Indonesia",
-  "zh-rCN": "中文",
-  "ru": "Russian"
+  "it": "Italiano",
+  "pl": "Polski",
+  "ptbr": "Português", 
+  "ru": "Russian",
+  "tr": "Türkçe",
+  "vi": "Tiếng Việt",
+  "ja": "日本語",
+  "zh-rCN": "简体中文",
+  "zh-rTW": "繁體中文"
 }
