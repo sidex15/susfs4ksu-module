@@ -43,7 +43,7 @@
   <string id="hide_revanced_label">Sembunyikan Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Spoof Cmdline</string>
   <string id="hide_ksu_loop_label">Sembunyikan Loop KSU</string>
-  <string id="force_hide_lsposed_label">Paksa Sembunyikan LSPosed</string>
+  <string id="force_hide_dex2oat_label">Paksa Sembunyikan Dex2oat</string>
   <string id="custom_sus_path_label">SUS Path Kustom</string>
   <string id="custom_sus_mount_label">SUS Mount Kustom</string>
   <string id="custom_try_umount_label">Try Umount Kustom</string>

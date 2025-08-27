@@ -8,12 +8,47 @@
   <string id="about_label">About</string>
   <string id="main_menu_label">Main Menu</string>
   <string id="load_label">Load</string>
+  <string id="enabled_label">Enabled</string>
+  <string id="disabled_label">Disabled</string>
+  <string id="unknown_label">Unknown</string>
+  <string id="help_label">Help</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
+  <string id="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</string>
   
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS Userspace Update!</string>
+  <string id="susfs_update_desc">There's an update to your SUSFS Userspace Binaries!</string>
+  <string id="susfs_update2_desc">Please update to the latest version to ensure compatibility with the Module and the WebUI.</string>
+  <string id="susfs_updating_label">Updating...</string>
+  <string id="skip_btn_label">Skip</string>
+  <string id="update_btn_label">Update</string>
+
   <!-- Home Page -->
   <string id="kernel_version_label">Kernel Version</string>
   <string id="sus_path_label">SUS PATH</string>
   <string id="sus_mount_label">SUS MOUNT</string>
   <string id="try_umount_label">TRY UMOUNT</string>
+  <string id="susfs_settings_label">Custom SUSFS Settings</string>
+  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
+  
+  <!-- Status Page -->
+  <string id="kernel_features_label">Kernel Features Status</string>
+  <string id="sus_path_feature_label">SUS Path Support</string>
+  <string id="sus_mount_feature_label">SUS Mount Support</string>
+  <string id="sus_kstat_feature_label">SUS Kstat Support</string>
+  <string id="try_umount_feature_label">Try Umount Support</string>
+  <string id="spoof_uname_feature_label">Spoof Uname Support</string>
+  <string id="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Open Redirect Support</string>
+  <string id="enable_log_feature_label">Logging Support</string>
+  <string id="auto_default_mount_feature_label">Auto Default Mount</string>
+  <string id="auto_bind_mount_feature_label">Auto Bind Mount</string>
+  <string id="auto_try_umount_bind_feature_label">Auto Try Umount Bind</string>
+  <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
+  <string id="magic_mount_feature_label">Magic Mount Support</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</string>
   
   <!-- Settings -->
   <string id="susfs_log_label">SUSFS Logs</string>
@@ -25,17 +60,28 @@
   <string id="default_mounts_label">auto hide default mounts</string>
   <string id="bind_mounts_label">auto hide bind mounts</string>
   <string id="try_umount_bind_label">auto try umount bind mounts</string>
+  <string id="hide_sus_mnts_for_all_procs_label">Hide sus_mounts for all processes</string>
   <string id="zygote_try_umount_label">try umount for zygote system process</string>
+  <string id="umount_for_zygote_iso_service_label">try umount for zygote isolation service</string>
   <string id="kernel_uname_label">Kernel Uname</string>
   <string id="spoof_kernel_version_label">Spoof Kernel Version</string>
+  <string id="spoofed_kernel_version_label">Spoofed Kernel Version</string>
   <string id="spoof_kernel_build_label">Spoof Kernel Build</string>
+  <string id="spoofed_kernel_build_label">Spoofed Kernel Build</string>
   <string id="spoof_on_boot_label">Spoof on boot</string>
   <string id="post_fs_data_label">Execute on post-fs-data (spoofs better)</string>
   <string id="uname_warning_label2">Setting this on may cause a bootloop or instability if spoofed incorrectly. Are you sure you want to enable post-fs-data execution?</string>
   
   <!-- Custom -->
   <string id="custom_settings_label">Custom Settings</string>
-  <string id="hide_custom_rom_label">Hide Custom ROM</string>
+  <string id="hide_paths_label">Hide Custom Rom Settings</string>
+  <string id="hide_custom_rom_label">Hide Custom Rom Paths</string>
+  <string id="hide_level_label">Hide Level</string>
+  <string id="hide_custom_rom_desc1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc2">Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc3">Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc4">Exclude .apk, .jar, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc5">Hide all custom rom paths ⚠️Risky and it could cause issues!</string>
   <string id="hide_vendor_sepolicy_label">Hide Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">Hide Compat Matrix</string>
   <string id="fake_service_list_label">Spoof Service List</string>
@@ -43,8 +89,11 @@
   <string id="hide_revanced_label">Hide Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Spoof Cmdline</string>
   <string id="hide_ksu_loop_label">Hide KSU Loop</string>
-  <string id="force_hide_lsposed_label">Force Hide LSPosed</string>
+  <string id="force_hide_dex2oat_label">Force Hide Dex2oat Mounts</string>
+  <string id="avc_log_spoofing_label">AVC Log Spoofing</string>
+  <string id="emulate_vold_app_data_label">Emulate Vold App Data Isolation</string>
   <string id="custom_sus_path_label">Custom SUS Path</string>
+  <string id="custom_sus_path_loop_label">Custom SUS Path Loop</string>
   <string id="custom_sus_mount_label">Custom SUS Mount</string>
   <string id="custom_try_umount_label">Custom Try Umount</string>
 

@@ -7,7 +7,8 @@ import cyan from '/assets/amongus/cyan.png';
 import cyan1 from '/assets/amongus/cyan1.png';
 import orange from '/assets/amongus/orange.png';
 import orange1 from '/assets/amongus/orange1.png';
-import yellow from '/assets/amongus/yellow.png'; 
+import yellow from '/assets/amongus/yellow.png';
+import yellow1 from '/assets/amongus/yellow1.png'; 
 import green from '/assets/amongus/green.png';
 import lime from '/assets/amongus/lime.png';
 import pink from '/assets/amongus/pink.png';
@@ -36,6 +37,7 @@ const ICON_PATHS = [
     orange,
     orange1,
     yellow,
+    yellow1,
     green,
     lime,
     pink,

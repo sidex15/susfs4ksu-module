@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="en">
+  <!-- General -->
+  <string id="app_title">WebUI menü</string>
+  <string id="warning_label">Warnung!</string>
+  <string id="cancel_label">Abbruch</string>
+  <string id="confirm_label">Bestätige</string>
+  <string id="about_label">Über</string>
+  <string id="main_menu_label">Hauptmenü</string>
+  <string id="load_label">Laden</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">NUH UH! Nicht unterstützter Kernel!</string>
+  <string id="susfs_error_desc">WebUI Zugang verwehrt! Stelle sicher das du einen SuSFS gepatchden kernel nutzt!</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">Kernel Version</string>
+  <string id="sus_path_label">SUS PFAD</string>
+  <string id="sus_mount_label">SUS MOUNT</string>
+  <string id="try_umount_label">TRY UMOUNT</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">SUSFS Protokoll</string>
+  <string id="sus_su_1_label">SUS SU ist im Modus 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU beim booten</string>
+  <string id="susfs_settings_label">benutzerdefinierte susfs Einstellungen</string>
+  <string id="auto_hide_label">verstecke Einstellungen automatisch</string>
+  <string id="default_mounts_label">Automatisches Ausblenden von Standard-Mounts</string>
+  <string id="bind_mounts_label">Automatisches Ausblenden von Bind mounts</string>
+  <string id="try_umount_bind_label">Automatisches Versuchen von umount bind mounts</string>
+  <string id="zygote_try_umount_label">Versuche umount für zygote System Prozess</string>
+  <string id="kernel_uname_label">Kernel Uname</string>
+  <string id="spoof_kernel_version_label">spoofe Kernel Version</string>
+  <string id="spoof_kernel_build_label">spoofe Kernel Build</string>
+  <string id="spoof_on_boot_label">Spoofe beim booten</string>
+  <string id="post_fs_data_label">In post-fs-data Ausführen (spoofed besser)</string>
+  <string id="uname_warning_label2">Wenn diese Option aktiviert ist, kann es zu einer Bootschleife oder Instabilität kommen, wenn sie nicht korrekt ausgeführt wird. Sind Sie sicher, dass Sie die Ausführung von post-fs-data aktivieren wollen?</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">Benutzerdefinierte Einstellungen</string>
+  <string id="hide_custom_rom_label">Verstecke Custom ROM</string>
+  <string id="hide_vendor_sepolicy_label">Verstecke Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">Verstecke Compat Matrix</string>
+  <string id="fake_service_list_label">Spoofe Service List</string>
+  <string id="hide_gapps_label">Verstecke GApps</string>
+  <string id="hide_revanced_label">Verstecke Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Spoofe Cmdline</string>
+  <string id="hide_ksu_loop_label">Hide KSU Loop</string>
+  <string id="force_hide_dex2oat_label">Force Hide Dex2oat</string>
+  <string id="custom_sus_path_label">Benutzerdefinierter SUS Pfad</string>
+  <string id="custom_sus_mount_label">Benutzerdefinierter SUS Mount</string>
+  <string id="custom_try_umount_label">Benutzerdefinierter Versuch Umount</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Beitragende:</string>
+  <string id= "translators_label">Übersetzer:</string>
+</language>

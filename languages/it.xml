@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="it">
+  <!-- General -->
+  <string id="app_title">Menu WebUI</string>
+  <string id="warning_label">Attenzione!</string>
+  <string id="cancel_label">Annulla</string>
+  <string id="confirm_label">Conferma</string>
+  <string id="about_label">About</string>
+  <string id="main_menu_label">Menu Principale</string>
+  <string id="load_label">Carica</string>
+  
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">NUH UH! Kernel non supportato!</string>
+  <string id="susfs_error_desc">Accesso WebUI negato! Assicurati di avere un kernel con patch SuSFS!</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">Versione Kernel</string>
+  <string id="sus_path_label">SUS PATH</string>
+  <string id="sus_mount_label">SUS MOUNT</string>
+  <string id="try_umount_label">TRY UMOUNT</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">SUSFS Logs</string>
+  <string id="sus_su_1_label">SUS SU è in Modalità 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU all\'avvio</string>
+  <string id="susfs_settings_label">impostazioni susfs personalizzate</string>
+  <string id="auto_hide_label">auto nascondimento impostazioni </string>
+  <string id="default_mounts_label">auto nascondimento montaggi predefiniti</string>
+  <string id="bind_mounts_label">auto nascondimento montaggi bind</string>
+  <string id="try_umount_bind_label">prova automaticamente a smontare i supporti bind</string>
+  <string id="zygote_try_umount_label">prova a smontare il processo di sistema zigote</string>
+  <string id="kernel_uname_label">Kernel senza nome</string>
+  <string id="spoof_kernel_version_label">Falsifica Versione Kernel</string>
+  <string id="spoof_kernel_build_label">Falsifica Kernel Build</string>
+  <string id="spoof_on_boot_label">Falsifica all\'avvio</string>
+  <string id="post_fs_data_label">Esegui su post-fs-data (migliore falsificazione)</string>
+  <string id="uname_warning_label2">Attivare questa opzione potrebbe causare bootloop o instabilità se falsificato in modo errato. Vuoi davvero abilitare l\'esecuzione post-fs-data?</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">Impostazioni personalizzate</string>
+  <string id="hide_custom_rom_label">Nascondi ROM personalizzata</string>
+  <string id="hide_vendor_sepolicy_label">Nascondi Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">Nascondi Compat Matrix</string>
+  <string id="fake_service_list_label">Spoof Lista Servizi</string>
+  <string id="hide_gapps_label">Nascondi GApps</string>
+  <string id="hide_revanced_label">Nascondi Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Spoof Cmdline</string>
+  <string id="hide_ksu_loop_label">Nascondi KSU Loop</string>
+  <string id="force_hide_dex2oat_label">Forza Nascondi Dex2oat</string>
+  <string id="custom_sus_path_label">SUS Path Personalizzato</string>
+  <string id="custom_sus_mount_label">SUS Mount Personalizzato</string>
+  <string id="custom_try_umount_label">Try Umount Personalizzato</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Collaboratori:</string>
+  <string id= "translators_label">Traduttori:</string>
+</language>

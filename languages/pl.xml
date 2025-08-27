@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="pl">
+  <!-- General -->
+  <string id="app_title">Menu WebUI</string>
+  <string id="warning_label">Ostrzeżenie!</string>
+  <string id="cancel_label">Anuluj</string>
+  <string id="confirm_label">Potwierdź</string>
+  <string id="about_label">O aplikacji</string>
+  <string id="main_menu_label">Menu główne</string>
+  <string id="load_label">Wczytaj</string>
+  <string id="enabled_label">Włączone</string>
+  <string id="disabled_label">Wyłączone</string>
+  <string id="unknown_label">Nieznane</string>
+  <string id="help_label">Pomoc</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">NUH UH! Nieobsługiwany kernel!</string>
+  <string id="susfs_error_desc">Dostęp do WebUI zabroniony! Upewnij się, że używasz kernela z patchami SuSFS!</string>
+  
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">Aktualizacja przestrzeni użytkownika SUSFS!</string>
+  <string id="susfs_update_desc">Dostępna jest aktualizacja plików binarnych przestrzeni użytkownika SUSFS!</string>
+  <string id="susfs_update2_desc">Zaktualizuj do najnowszej wersji, aby zapewnić zgodność z modułem i WebUI.</string>
+  <string id="susfs_updating_label">Aktualizowanie...</string>
+  <string id="skip_btn_label">Pomiń</string>
+  <string id="update_btn_label">Aktualizuj</string>
+
+  <!-- Home Page -->
+  <string id="kernel_version_label">Wersja kernela</string>
+  <string id="sus_path_label">ŚCIEŻKA SUS</string>
+  <string id="sus_mount_label">MOUNT SUS</string>
+  <string id="try_umount_label">SPRÓBUJ ODMONTOWAĆ</string>
+  <string id="susfs_settings_label">Niestandardowe ustawienia SUSFS</string>
+  <string id="susfs_kernel_status_label">Status kernela SUSFS</string>
+
+  <!-- Status Page -->
+  <string id="kernel_features_label">Status funkcji kernela</string>
+  <string id="sus_path_feature_label">Obsługa ścieżki SUS</string>
+  <string id="sus_mount_feature_label">Obsługa montowania SUS</string>
+  <string id="sus_kstat_feature_label">Obsługa SUS Kstat</string>
+  <string id="try_umount_feature_label">Obsługa opcji Try Umount</string>
+  <string id="spoof_uname_feature_label">Obsługa podszywania się pod Uname</string>
+  <string id="spoof_cmdline_feature_label">Podszywanie się pod Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Obsługa przekierowań</string>
+  <string id="enable_log_feature_label">Obsługa logowania</string>
+  <string id="auto_default_mount_feature_label">Automatyczne domyślne montowanie</string>
+  <string id="auto_bind_mount_feature_label">Automatyczne bind mounty</string>
+  <string id="auto_try_umount_bind_feature_label">Automatyczne próby odmontowania bindów</string>
+  <string id="hide_symbols_feature_label">Ukryj symbole KSU SUSFS</string>
+  <string id="magic_mount_feature_label">Obsługa Magic Mount</string>
+  <string id="overlayfs_auto_kstat_feature_label">Obsługa OverlayFS Auto Kstat</string>
+
+  <!-- Settings -->
+  <string id="susfs_log_label">Logi SUSFS</string>
+  <string id="sus_su_1_label">SUS SU w trybie 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU przy uruchamianiu</string>
+  <string id="auto_hide_label">Ustawienia automatycznego ukrywania</string>
+  <string id="default_mounts_label">Automatyczne ukrywanie domyślnych montowań</string>
+  <string id="bind_mounts_label">Automatyczne ukrywanie bind mountów</string>
+  <string id="try_umount_bind_label">Automatyczna próba odmontowania bind mountów</string>
+  <string id="hide_sus_mnts_for_all_procs_label">Ukryj sus_mounts dla wszystkich procesów</string>
+  <string id="zygote_try_umount_label">Spróbuj odmontować proces systemowy zygote</string>
+  <string id="umount_for_zygote_iso_service_label">Spróbuj odmontować usługę izolacji zygote</string>
+  <string id="kernel_uname_label">Kernel Uname</string>
+  <string id="spoof_kernel_version_label">Podszyj się pod wersję kernela</string>
+  <string id="spoofed_kernel_version_label">Podmieniona wersja kernela</string>
+  <string id="spoof_kernel_build_label">Podszyj się pod kompilację kernela</string>
+  <string id="spoofed_kernel_build_label">Podmieniona kompilacja kernela</string>
+  <string id="spoof_on_boot_label">Podszyj się przy starcie systemu</string>
+  <string id="post_fs_data_label">Wykonaj w post-fs-data (lepiej podszyte)</string>
+  <string id="uname_warning_label2">Włączenie tej opcji może spowodować bootloop lub niestabilność, jeśli nie zostanie poprawnie wykonane. Czy na pewno chcesz aktywować wykonanie w post-fs-data?</string>
+
+  <!-- Custom -->
+  <string id="custom_settings_label">Niestandardowe ustawienia</string>
+  <string id="hide_paths_label">Ukryj ustawienia Custom ROM</string>
+  <string id="hide_custom_rom_label">Ukryj ścieżki Custom ROM</string>
+  <string id="hide_level_label">Poziom ukrycia</string>
+  <string id="hide_custom_rom_desc1">Wyklucz pliki .apk, .jar, .odex, .vdex, .so, .rc i /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc2">Wyklucz pliki .apk, .jar, .odex, .vdex, .so i /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc3">Wyklucz pliki .apk, .jar, .odex, .vdex i /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc4">Wyklucz pliki .apk, .jar i /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc5">Ukryj wszystkie ścieżki Custom ROM ⚠️Ryzykowne, może powodować problemy!</string>
+  <string id="hide_vendor_sepolicy_label">Ukryj Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">Ukryj Compat Matrix</string>
+  <string id="fake_service_list_label">Podszyj listę usług</string>
+  <string id="hide_gapps_label">Ukryj GApps</string>
+  <string id="hide_revanced_label">Ukryj Revanced (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Podszyj się pod Cmdline</string>
+  <string id="hide_ksu_loop_label">Ukryj pętlę KSU</string>
+  <string id="force_hide_dex2oat_label">Wymuś ukrycie Dex2oat</string>
+  <string id="custom_sus_path_label">Niestandardowa ścieżka SUS</string>
+  <string id="custom_sus_mount_label">Niestandardowy mount SUS</string>
+  <string id="custom_try_umount_label">Niestandardowa próba odmontowania</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Współtwórcy:</string>
+  <string id="translators_label">Tłumacze:</string>
+</language>

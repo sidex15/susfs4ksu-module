@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <language id="fa">
+  <!-- General -->
+   <string id="app_title">فهرست وب</string>
+   <string id="warning_label">آگاهی!</string>
+   <string id="cancel_label">بازایست</string>
+   <string id="confirm_label">پذیرفتن</string>
+   <string id="about_label">درباره</string>
+   <string id="main_menu_label">فهرست اصلی</string>
+   <string id="load_label">بارگذاری</string>
+   
+  <!-- Home Page -->
+   <string id="kernel_version_label">نسخه هسته</string>
+   <string id="sus_path_label">مسیر SUS</string>
+   <string id="sus_mount_label">پیوست SUS</string>
+   <string id="try_umount_label">کوشش برای جداکردن</string>
+   
+   <!-- Settings -->
+   <string id="susfs_log_label">گزاره‌های SUSFS</string>
+   <string id="sus_su_1_label">SUS SU در گونه ۱ است</string>
+   <string id="sus_su_label">SUS SU</string>
+   <string id="sus_su_boot_label">SUS SU هنگام راه‌اندازی</string>
+   <string id="susfs_settings_label">ساماندهی ویژه SUSFS</string>
+   <string id="auto_hide_label">نهان‌سازی خودکار</string>
+   <string id="default_mounts_label">نهان‌سازی خودکار پیوست‌های پیش‌گزیده</string>
+   <string id="bind_mounts_label">نهان‌سازی خودکار پیوست‌های پیوندی</string>
+   <string id="try_umount_bind_label">کوشش خودکار برای جداکردن پیوست‌های پیوندی</string>
+   <string id="zygote_try_umount_label">کوشش برای جداکردن فرآیند سیستمی Zygote</string>
+   <string id="kernel_uname_label">نام هسته</string>
+   <string id="spoof_kernel_version_label">ساختگی کردن نسخه هسته</string>
+   <string id="spoof_kernel_build_label">ساختگی کردن ساخت هسته</string>
+   <string id="spoof_on_boot_label">ساختگی کردن هنگام راه‌اندازی</string>
+   <string id="post_fs_data_label">اجرا در پسا-داده‌های سامانه پرونده (ساختگی بهتر)</string>
+   <string id="uname_warning_label2">فراچیدن این گزینه ممکن است ناپایداری یا چرخه راه‌اندازی پدید آورد اگر ساختگی نادرست باشد. آیا اطمینان دارید که اجرای پسا-داده‌های سامانه پرونده را فراچیده کنید؟</string>
+   
+   <!-- Custom -->
+   <string id="custom_settings_label">ساماندهی ویژه</string>
+   <string id="hide_custom_rom_label">نهان‌سازی رام ویژه</string>
+   <string id="hide_vendor_sepolicy_label">نهان‌سازی سیاست امنیتی فروشنده</string>
+   <string id="hide_compat_matrix_label">نهان‌سازی آرایه سازگاری</string>
+   <string id="fake_service_list_label">ساختگی کردن فهرست خدمت‌ها</string>
+   <string id="hide_gapps_label">نهان‌سازی برنامه‌های گوگل</string>
+   <string id="hide_revanced_label">نهان‌سازی ری‌ونسد (یوتیوب/موسیقی یوتیوب)</string>
+   <string id="spoof_cmdline_label">ساختگی کردن خط فرمان</string>
+   <string id="hide_ksu_loop_label">نهان‌سازی چرخه KSU</string>
+   <string id="force_hide_dex2oat_label">نهان‌سازی ناگزیر Dex2oat</string>
+   <string id="custom_sus_path_label">مسیر ویژه SUS</string>
+   <string id="custom_sus_mount_label">پیوست ویژه SUS</string>
+   <string id="custom_try_umount_label">کوشش ویژه برای جداکردن</string>
+ 
+   <!-- Credits -->
+   <string id="contrib_label">همکاران:</string>
+   <string id="translators_label">برگردانندگان:</string>
+ </language>

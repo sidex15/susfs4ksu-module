@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="ja">
+  <!-- General -->
+  <string id="app_title">WebUI Menu</string>
+  <string id="warning_label">警告！</string>
+  <string id="cancel_label">キャンセル</string>
+  <string id="confirm_label">確認</string>
+  <string id="about_label">情報</string>
+  <string id="main_menu_label">メインメニュー</string>
+  <string id="load_label">読み込み</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">アクセス不可！サポートされていないカーネルです！</string>
+  <string id="susfs_error_desc">WebUIへのアクセスが拒否されました！SuSFSパッチが適用されたカーネルを使用していることを確認してください！</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">カーネルバージョン</string>
+  <string id="sus_path_label">SUS Path</string>
+  <string id="sus_mount_label">SUS Mount</string>
+  <string id="try_umount_label">アンマウント試行</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">SUSFSログ</string>
+  <string id="sus_su_1_label">SUS SUはモード1です</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">起動時にSUS SUを有効化</string>
+  <string id="susfs_settings_label">カスタムSUSFS設定</string>
+  <string id="auto_hide_label">自動非表示設定</string>
+  <string id="default_mounts_label">デフォルトマウントを自動で隠す</string>
+  <string id="bind_mounts_label">バインドマウントを自動で隠す</string>
+  <string id="try_umount_bind_label">バインドマウントのアンマウントを自動試行</string>
+  <string id="zygote_try_umount_label">Zygoteシステムプロセスのアンマウント試行</string>
+  <string id="kernel_uname_label">カーネルuname情報</string>
+  <string id="spoof_kernel_version_label">カーネルバージョンを偽装</string>
+  <string id="spoof_kernel_build_label">カーネルビルド情報を偽装</string>
+  <string id="spoof_on_boot_label">起動時に偽装を有効化</string>
+  <string id="post_fs_data_label">post-fs-dataで実行 (偽装効果向上)</string>
+  <string id="uname_warning_label2">この設定を有効にすると、偽装が正しくない場合にブートループや不安定性を引き起こす可能性があります。post-fs-dataでの実行を有効にしてもよろしいですか？</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">カスタム設定</string>
+  <string id="hide_custom_rom_label">カスタムROMパスを隠す</string>
+  <string id="hide_vendor_sepolicy_label">Vendor SEPolicyを隠す</string>
+  <string id="hide_compat_matrix_label">互換性マトリックスを隠す</string>
+  <string id="fake_service_list_label">サービスリストを偽装</string>
+  <string id="hide_gapps_label">GAppsを隠す</string>
+  <string id="hide_revanced_label">Revanced (YT/YTM) を隠す</string>
+  <string id="spoof_cmdline_label">cmdlineを偽装</string>
+  <string id="hide_ksu_loop_label">KSUループデバイスを隠す</string>
+  <string id="force_hide_dex2oat_label">Dex2oatマウントを強制的に隠す</string>
+  <string id="custom_sus_path_label">カスタムSUSパス</string>
+  <string id="custom_sus_mount_label">カスタムSUSマウント</string>
+  <string id="custom_try_umount_label">カスタムアンマウント試行</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">貢献者：</string>
+  <string id="translators_label">翻訳者：</string>
+</language>

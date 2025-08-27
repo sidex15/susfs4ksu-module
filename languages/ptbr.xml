@@ -43,7 +43,7 @@
   <string id="hide_revanced_label">Ocultar revanced (yt/ytm)</string>
   <string id="spoof_cmdline_label">Falsificar linha de comando</string>
   <string id="hide_ksu_loop_label">Ocultar loop do KSU</string>
-  <string id="force_hide_lsposed_label">Forçar ocultação do LSPosed</string>
+  <string id="force_hide_dex2oat_label">Forçar ocultação do Dex2oat</string>
   <string id="custom_sus_path_label">Caminho SUS personalizado</string>
   <string id="custom_sus_mount_label">Montagem SUS personalizada</string>
   <string id="custom_try_umount_label">Tentar desmontar personalizado</string>

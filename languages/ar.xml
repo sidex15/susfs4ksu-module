@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="en">
+  <!-- General -->
+  <string id="app_title">قائمة واجهة الويب</string>
+  <string id="warning_label">تحذير!</string>
+  <string id="cancel_label">إلغاء</string>
+  <string id="confirm_label">تأكيد</string>
+  <string id="about_label">حول</string>
+  <string id="main_menu_label">القائمة الرئيسية</string>
+  <string id="load_label">تحميل</string>
+  
+  <!-- Home Page -->
+  <string id="kernel_version_label">إصدار الكيرنيل</string>
+  <string id="sus_path_label">SUS PATH</string>
+  <string id="sus_mount_label">SUS MOUNT</string>
+  <string id="try_umount_label">TRY UMOUNT</string>
+  
+  <!-- Settings -->
+  <string id="susfs_log_label">سجلات SUSFS</string>
+  <string id="sus_su_1_label">SUS SU في الوضع 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU أثناء التمهيد</string>
+  <string id="susfs_settings_label">إعدادات SUSFS مخصصة</string>
+  <string id="auto_hide_label">إخفاء الإعدادات تلقائيا</string>
+  <string id="default_mounts_label">إخفاء mounts تلقائيا</string>
+  <string id="bind_mounts_label">إخفاء bind mounts تلقائيا</string>
+  <string id="try_umount_bind_label">إلغاء bind mounts تلقائيا</string>
+  <string id="zygote_try_umount_label">محاولة unmount على عملية النواة (zygote)</string>
+  <string id="kernel_uname_label">Kernel Uname</string>
+  <string id="spoof_kernel_version_label">تزييف إصدار الكيرنيل</string>
+  <string id="spoof_kernel_build_label">تزييف بناء الكيرنيل</string>
+  <string id="spoof_on_boot_label">تزييف أثناء التمهيد</string>
+  <string id="post_fs_data_label">تزييف في مرحلة ما قبل تمهيد الجهاز</string>
+  <string id="uname_warning_label2">تفعيل هذا الخيار قد يتسبب في تعطل الجهاز. هل انت متأكد؟</string>
+  
+  <!-- Custom -->
+  <string id="custom_settings_label">إعدادات مخصصة</string>
+  <string id="hide_custom_rom_label">إخفاء الروم المعدل</string>
+  <string id="hide_vendor_sepolicy_label">إخفاء vendor SEpolicy</string>
+  <string id="hide_compat_matrix_label">إخفاء compat matrix</string>
+  <string id="fake_service_list_label">تزييف قائمة الخدمات</string>
+  <string id="hide_gapps_label">إخفاء تطبيقات جوجل</string>
+  <string id="hide_revanced_label">إخفاء YouTube/YT-Music (Revanced)</string>
+  <string id="spoof_cmdline_label">تزييف cmdline</string>
+  <string id="hide_ksu_loop_label">إخفاء حلقة KSU</string>
+  <string id="force_hide_dex2oat_label">إخفاء Dex2oat إجباريّا</string>
+  <string id="custom_sus_path_label">مسار SUS مخصص</string>
+  <string id="custom_sus_mount_label">SUS mount مخصص</string>
+  <string id="custom_try_umount_label">TRY umount مخصص</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">المساهمين:</string>
+  <string id= "translators_label">المترجمين:</string>
+</language>
