@@ -77,7 +77,8 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 157 ] 2>/dev/null; then
 
 else
 	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
-	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
+		until [ -d "/sdcard/Android" ]; do sleep 1; done
+		${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
 	done
 fi
 
