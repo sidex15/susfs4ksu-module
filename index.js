@@ -1013,7 +1013,7 @@ async function custom_sus_path(){
 		} 
 		else{
 			await run(`echo '${save_sus_path_val}' > ${config}/sus_path.txt`);
-			toast("Custom SUS PATH saved!");
+			toast("Custom SUS_PATH saved!");
 			toast("Reboot to take effect");
 		}
 	})
@@ -1075,7 +1075,7 @@ async function custom_sus_mount(){
 		} 
 		else{
 			await run(`echo '${save_sus_mount_val}' > ${config}/sus_mount.txt`);
-			toast("Custom SUS MOUNT saved!");
+			toast("Custom SUS_MOUNT saved!");
 			toast("Reboot to take effect");
 		}
 	})
@@ -1103,7 +1103,7 @@ async function custom_try_umount(){
 		} 
 		else{
 			await run(`echo '${save_try_umount_val}' > ${config}/try_umount.txt`);
-			toast("Custom SUS MOUNT saved!");
+			toast("Custom TRY_UMOUNT saved!");
 			toast("Reboot to take effect");
 		}
 	})
