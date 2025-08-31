@@ -64,3 +64,6 @@ PayPal: `sidex15.official@gmail.com`
 <br>USDT (TRC20): `TAUbxzug7cygExFunhFBiG6ntmbJwz7Skn`
 <br>USDT (ERC20): 
 `0xa52151ebd2718a00af9e1dfcacfb30e1d3a94860`
+
+## Stars 🌟
+[![Stars 🌟](https://starchart.cc/sidex15/susfs4ksu-module.svg?variant=adaptive)](https://starchart.cc/sidex15/susfs4ksu-module)
