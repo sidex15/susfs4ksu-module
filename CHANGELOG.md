@@ -1,29 +1,32 @@
-## v1.5.2+ Revision 20
+## v1.5.2+ Revision 21
 ### WebUI
-* Implement SUSFS Userspace Binaries Update Dialog
-* Add Hide sus_mounts for all processes toggle for v1.5.7+
-* Add Try umount for zygote isolation service toggle (V1.5.8+)
-* Use susfsd features if ksu_susfs show enabled_features throws an error 
-* Show spoofed kernel uname label and values in spoof kernel uname
-* Fix auto overlayfs kstat status
-* Add SUS Kstat support status
-* Use @KOWX712 exec function for WebUI
-* Fix Russian credits
+* Introduce custom sus_path_loop section for latest v1.5.9+
+* Add checkbox for uname version and build date in Spoof Uname section
+* Use hide_sus_mnts_for_all_procs config instead of creating /data/adb/susfs_umount_for_zygote_iso_service
+* Implement AVC Log Spoofing toggle for v1.5.9+
+* Add Emulate Vold App Data Emulation Toggle v1.5.8+
+* Add capability to disable webui binary update if disable_webui_bin_update=1
+* Fix toast messages in custom settings   
 * Localization:
-  * Fix Various translations (@mehu3dhokia, @mattchengg)
+  * Fix Various translations (@mehu3dhokia, @Alohaa666, @ziomek3120)
 ### Scripts
-* scripts: Implement SUSFS Binary Update Script for WebUI
-* scripts: improve SUSFS logging and stats Instead of using sleep function
-* scripts: boot-completed: set first the sdcard and android data root path first for sus_path (v1.5.8)
-* scripts: add susfs binary check script for WebUI
-* scripts: customize/action: change test download binary command
-* scripts: post-fs-data: use susfsd to check if susfs is supported
-* scripts: service: comment out add_sus_kstat and update_sus_kstat in hide vendor, compat matrix, and spoof service.
-* scripts: action: use download function instead of curl for checking susfs hashes
-* scripts: boot-completed: refactor custom sus_path handling
-* scripts: customize: skip verifiedboothash creation if vbmeta-fixer or tricky addon is installed
-* scripts: service: fix sus system_ext sepolicy (Thanks @devnoname120)
-* scripts: config/boot-completed: implement hide sus mounts for all processes for susfs v1.5.7+
-* scripts: boot-completed: always count sus_path on boot-scripts execution instead of finding in dmesg.
+* scripts: boot-completed: introduce custom sus_path_loop configuration for latest v1.5.9+
+* scripts: customize: add sus_path_loop.txt
+* scripts: config: add disable_webui_bin_update config
+* scripts: boot-completed/config: implement vold app data emulation
+* scripts: post-fs-data/config: implement avc log spoofing feature
+* scripts: post-fs-data/config: implement umount for zygote isolated service config
+* scripts: customize/boot-completed: improve search for the SuSpicious module
+* scripts: boot-completed: tighten search for LH_SUS_MOUNT and LH_TRY_UMOUNT_PATH string
+* scripts: add 'susfs:' search string in susfs logs
+* scripts: boot-completed: use susfsd for checking susfs version
+* scripts: boot-completed: wait for /sdcard/Android/data (@backslashxx)
+* scripts: boot-completed: wait for decrypt before sus_path (@backslashxx)
+* scripts: post-fs-data: follow the rules of GitHub Community guidelines.
 ### Misc
-* Add SUSFS banner
+* selinux: allow netd rule for bindhosts susfs open redirect mode
+* sepolicy: allow zygote apk_data_file dir
+* sepolicy: add rule for sus_path_loop
+* config: update sus_path.txt
+
+## Note: If you have a problem with YouTube/YouTube Music Revanced not working after updating this module, you should disable the umount toggle in the YouTube app, or see issue [here](https://github.com/sidex15/susfs4ksu-module/issues/160)
