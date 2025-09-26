@@ -128,13 +128,6 @@ check_reset_prop "ro.vendor.boot.warranty_bit" "0"
 check_reset_prop "ro.vendor.warranty_bit" "0"
 check_reset_prop "sys.oem_unlock_allowed" "0"
 
-#Hide adb debugging traces
-resetprop "sys.usb.adb.disabled" " "
-
-# HMA/L specific (Uncomment if you want to use it)
-#check_reset_prop "persist.sys.vold_app_data_isolation_enabled" "0"
-#check_reset_prop "persist.zygote.app_data_isolation" "0"
-
 # MIUI specific
 check_reset_prop "ro.secureboot.lockstate" "locked"
 
