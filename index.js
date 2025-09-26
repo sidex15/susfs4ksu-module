@@ -16,7 +16,7 @@ const settings = catToObject(await run(`cat ${config}/config.sh`));
 
 //susfs version and kernel variant
 var susfs_version = await run(`grep version= ${moddir}/module.prop | cut -d '=' -f 2`);
-var susfs_version_decimal=parseFloat(susfs_version.replace(/[v.]/g,""));
+var susfs_version_decimal=parseFloat(await run(`echo "${susfs_version}" | sed 's/^v//; s/\.//g'`));
 const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
 const susfs_features = await run(`${susfs_bin} show enabled_features || ${susfsd} features`);
