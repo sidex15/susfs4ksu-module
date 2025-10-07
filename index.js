@@ -1149,6 +1149,11 @@ async function loadKernelFeatureStatus(susfs_features) {
 	{ id: 'status_overlayfs_auto_kstat', config: 'CONFIG_KSU_SUSFS_SUS_OVERLAYFS' }
   ];
 
+  const deprecated_features = [
+	{ id: 'status_overlayfs_auto_kstat', config: 'CONFIG_KSU_SUSFS_SUS_OVERLAYFS', version: 158 },
+	{ id: 'status_magic_mount', config: 'CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT', version: 1511 },
+  ];
+
   for (const feature of features) {
     try {
       // Check if the kernel feature is enabled
@@ -1162,9 +1167,15 @@ async function loadKernelFeatureStatus(susfs_features) {
           span.textContent = 'Enabled';
           span.setAttribute('data-i18n', 'enabled_label');
         } else {
-          statusElement.className = 'badge badge-sm badge-error text-sm ml-4';
-          span.textContent = 'Disabled';
-          span.setAttribute('data-i18n', 'disabled_label');
+			if (deprecated_features.some(df => df.id === feature.id && susfs_version_decimal >= df.version)) {
+				statusElement.className = 'badge badge-sm badge-secondary text-sm ml-4';
+				span.textContent = 'Deprecated';
+				span.setAttribute('data-i18n', 'deprecated_label');
+			} else {
+				statusElement.className = 'badge badge-sm badge-error text-sm ml-4';
+				span.textContent = 'Disabled';
+				span.setAttribute('data-i18n', 'disabled_label');
+			}
         }
       }
     } catch (error) {
