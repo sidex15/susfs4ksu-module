@@ -10,6 +10,7 @@
   <string id="load_label">Load</string>
   <string id="enabled_label">Enabled</string>
   <string id="disabled_label">Disabled</string>
+  <string id="deprecated_label">Deprecated</string>
   <string id="unknown_label">Unknown</string>
   <string id="help_label">Help</string>
 
