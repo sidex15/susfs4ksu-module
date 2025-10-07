@@ -47,7 +47,6 @@
   <string id="auto_bind_mount_feature_label">自动绑定挂载</string>
   <string id="auto_try_umount_bind_feature_label">自动尝试卸载绑定</string>
   <string id="hide_symbols_feature_label">隐藏KSU SUSFS符号</string>
-  <string id="magic_mount_feature_label">魔法挂载支持</string>
   <string id="overlayfs_auto_kstat_feature_label">OverlayFS自动内核统计支持</string>
   
   <!-- Settings -->

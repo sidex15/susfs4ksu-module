@@ -47,7 +47,6 @@
   <string id="auto_bind_mount_feature_label">Automatyczne bind mounty</string>
   <string id="auto_try_umount_bind_feature_label">Automatyczne próby odmontowania bindów</string>
   <string id="hide_symbols_feature_label">Ukryj symbole KSU SUSFS</string>
-  <string id="magic_mount_feature_label">Obsługa Magic Mount</string>
   <string id="overlayfs_auto_kstat_feature_label">Obsługa OverlayFS Auto Kstat</string>
 
   <!-- Settings -->
