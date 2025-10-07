@@ -39,7 +39,6 @@
   <string id="auto_bind_mount_feature_label">Автоматический Bind Mount</string>
   <string id="auto_try_umount_bind_feature_label">Автоматический Try Umount Bind</string>
   <string id="hide_symbols_feature_label">Скрытие символов KSU SUSFS</string>
-  <string id="magic_mount_feature_label">Поддержка Magic Mount</string>
   <string id="overlayfs_auto_kstat_feature_label">Поддержка OverlayFS Auto Kstat</string>
   <string id="susfs_log_label">Логи SUSFS</string>
   <string id="sus_su_1_label">SUS SU в режиме 1</string>
