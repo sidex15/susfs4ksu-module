@@ -20,7 +20,7 @@
   
   <!-- Finestra di dialogo aggiornamento SUSFS -->
   <string id="susfs_update_label">Aggiornamento spazio utente SUSFS!</string>
-  <string id="susfs_update_desc">C'è un aggiornamento per i binari dello spazio utente SUSFS!</string>
+  <string id="susfs_update_desc">C\'è un aggiornamento per i binari dello spazio utente SUSFS!</string>
   <string id="susfs_update2_desc">Aggiornare alla versione più recente per garantire la compatibilità con il Modulo e la WebUI.</string>
   <string id="susfs_updating_label">Aggiornamento in corso...</string>
   <string id="skip_btn_label">Salta</string>
