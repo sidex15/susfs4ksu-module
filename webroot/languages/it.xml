@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language id="it">
-  <!-- General -->
+  <!-- Generale -->
   <string id="app_title">Menu WebUI</string>
   <string id="warning_label">Attenzione!</string>
   <string id="cancel_label">Annulla</string>
@@ -8,18 +8,50 @@
   <string id="about_label">About</string>
   <string id="main_menu_label">Menu Principale</string>
   <string id="load_label">Carica</string>
-  
-  <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">NUH UH! Kernel non supportato!</string>
+  <string id="enabled_label">Abilitato</string>
+  <string id="disabled_label">Disabilitato</string>
+  <string id="deprecated_label">Obsoleto</string>
+  <string id="unknown_label">Sconosciuto</string>
+  <string id="help_label">Aiuto</string>
+
+  <!-- Errore SUSFS non supportato-->
+  <string id="susfs_error_label">OH NO! Kernel non supportato!</string>
   <string id="susfs_error_desc">Accesso WebUI negato! Assicurati di avere un kernel con patch SuSFS!</string>
   
-  <!-- Home Page -->
+  <!-- Finestra di dialogo aggiornamento SUSFS -->
+  <string id="susfs_update_label">Aggiornamento spazio utente SUSFS!</string>
+  <string id="susfs_update_desc">C\'è un aggiornamento per i binari dello spazio utente SUSFS!</string>
+  <string id="susfs_update2_desc">Aggiornare alla versione più recente per garantire la compatibilità con il Modulo e la WebUI.</string>
+  <string id="susfs_updating_label">Aggiornamento in corso...</string>
+  <string id="skip_btn_label">Salta</string>
+  <string id="update_btn_label">Aggiornamento</string>
+
+  <!-- Pagina Iniziale -->
   <string id="kernel_version_label">Versione Kernel</string>
   <string id="sus_path_label">SUS PATH</string>
   <string id="sus_mount_label">SUS MOUNT</string>
   <string id="try_umount_label">TRY UMOUNT</string>
+  <string id="susfs_settings_label">Impostazioni SUSFS personalizzate</string>
+  <string id="susfs_kernel_status_label">Stato kernel SUSFS</string>
   
-  <!-- Settings -->
+  <!-- Pagina di Stato -->
+  <string id="kernel_features_label">Stato Funzionalità kernel</string>
+  <string id="sus_path_feature_label">Supporto SUS Path</string>
+  <string id="sus_mount_feature_label">Supporto SUS Mount</string>
+  <string id="sus_kstat_feature_label">Supporto SUS Kstat</string>
+  <string id="try_umount_feature_label">Supporto Try Umount</string>
+  <string id="spoof_uname_feature_label">Supporto Falsifica Uname</string>
+  <string id="spoof_cmdline_feature_label">Falsifica Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Supporto Reindirizzamento aperto</string>
+  <string id="enable_log_feature_label">Supporto Logging</string>
+  <string id="auto_default_mount_feature_label">Auto Default Mount</string>
+  <string id="auto_bind_mount_feature_label">Auto Bind Mount</string>
+  <string id="auto_try_umount_bind_feature_label">Auto Try Umount Bind</string>
+  <string id="hide_symbols_feature_label">Nascondi simboli KSU SUSFS</string>
+  <string id="magic_mount_feature_label">Supporto Magic Mount</string>
+  <string id="overlayfs_auto_kstat_feature_label">Supporto OverlayFS Auto Kstat</string>
+  
+  <!-- Impostazioni -->
   <string id="susfs_log_label">SUSFS Logs</string>
   <string id="sus_su_1_label">SUS SU è in Modalità 1</string>
   <string id="sus_su_label">SUS SU</string>
@@ -29,30 +61,44 @@
   <string id="default_mounts_label">auto nascondimento montaggi predefiniti</string>
   <string id="bind_mounts_label">auto nascondimento montaggi bind</string>
   <string id="try_umount_bind_label">prova automaticamente a smontare i supporti bind</string>
-  <string id="zygote_try_umount_label">prova a smontare il processo di sistema zigote</string>
-  <string id="kernel_uname_label">Kernel senza nome</string>
+  <string id="hide_sus_mnts_for_all_procs_label">Nascondi sus_mounts per tutti i processi</string>
+  <string id="zygote_try_umount_label">try umount per processo di sistema zigote</string>
+  <string id="umount_for_zygote_iso_service_label">try umount per servizio isolamento zygote</string>
+  <string id="kernel_uname_label">Nome Kernel</string>
   <string id="spoof_kernel_version_label">Falsifica Versione Kernel</string>
+  <string id="spoofed_kernel_version_label">Versione Kernel Falsificata</string>
   <string id="spoof_kernel_build_label">Falsifica Kernel Build</string>
+  <string id="spoofed_kernel_build_label">Kernel Build Falsificato</string>
   <string id="spoof_on_boot_label">Falsifica all\'avvio</string>
   <string id="post_fs_data_label">Esegui su post-fs-data (migliore falsificazione)</string>
   <string id="uname_warning_label2">Attivare questa opzione potrebbe causare bootloop o instabilità se falsificato in modo errato. Vuoi davvero abilitare l\'esecuzione post-fs-data?</string>
   
-  <!-- Custom -->
+  <!-- Personalizzato -->
   <string id="custom_settings_label">Impostazioni personalizzate</string>
+  <string id="hide_paths_label">Nascondi impostazioni personalizzate Rom</string>
   <string id="hide_custom_rom_label">Nascondi ROM personalizzata</string>
+  <string id="hide_level_label">Livello Nascondi</string>
+  <string id="hide_custom_rom_desc1">Esclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc2">Esclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc3">Esclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc4">Esclude .apk, .jar, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc5">Nascondi tutti i percorsi rom personalizzati ⚠️ È rischioso e potrebbe causare problemi!</string>
   <string id="hide_vendor_sepolicy_label">Nascondi Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">Nascondi Compat Matrix</string>
-  <string id="fake_service_list_label">Spoof Lista Servizi</string>
+  <string id="fake_service_list_label">Falsifica Lista Servizi</string>
   <string id="hide_gapps_label">Nascondi GApps</string>
   <string id="hide_revanced_label">Nascondi Revanced (YT/YTM)</string>
-  <string id="spoof_cmdline_label">Spoof Cmdline</string>
+  <string id="spoof_cmdline_label">Falsifica Cmdline</string>
   <string id="hide_ksu_loop_label">Nascondi KSU Loop</string>
   <string id="force_hide_dex2oat_label">Forza Nascondi Dex2oat</string>
+  <string id="avc_log_spoofing_label">AVC Log Spoofing</string>
+  <string id="emulate_vold_app_data_label">Emula Isolamento Vold App Data</string>
   <string id="custom_sus_path_label">SUS Path Personalizzato</string>
+  <string id="custom_sus_path_loop_label">SUS Path Loop Personalizzato</string>
   <string id="custom_sus_mount_label">SUS Mount Personalizzato</string>
   <string id="custom_try_umount_label">Try Umount Personalizzato</string>
 
-  <!-- Credits -->
+  <!-- Crediti -->
   <string id="contrib_label">Collaboratori:</string>
   <string id= "translators_label">Traduttori:</string>
 </language>
