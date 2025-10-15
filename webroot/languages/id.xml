@@ -8,43 +8,97 @@
   <string id="about_label">Tentang</string>
   <string id="main_menu_label">Menu Utama</string>
   <string id="load_label">Muat</string>
+  <string id="enabled_label">Diaktifkan</string>
+  <string id="disabled_label">Dinonaktifkan</string>
+  <string id="deprecated_label">Tidak digunakan</string>
+  <string id="unknown_label">Tidak diketahui</string>
+  <string id="help_label">Bantuan</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">OH TIDAK! Kernel Tidak Didukung!</string>
+  <string id="susfs_error_desc">Akses WebUI Ditolak! Pastikan anda menggunakan kernel yang mengintegrasikan SuSFS!</string>
   
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">Pembaruan Userspace SUSFS!</string>
+  <string id="susfs_update_desc">Ada pembaruan pada Biner Userspace SUSFS anda!</string>
+  <string id="susfs_update2_desc">Harap perbarui ke versi terbaru untuk memastikan kompatibilitas dengan Modul dan WebUI.</string>
+  <string id="susfs_updating_label">Memperbarui...</string>
+  <string id="skip_btn_label">Lewati</string>
+  <string id="update_btn_label">Perbarui</string>
+
   <!-- Home Page -->
   <string id="kernel_version_label">Versi Kernel</string>
   <string id="sus_path_label">SUS PATH</string>
   <string id="sus_mount_label">SUS MOUNT</string>
   <string id="try_umount_label">TRY UMOUNT</string>
+  <string id="susfs_settings_label">Kustom Setelan SUSFS</string>
+  <string id="susfs_kernel_status_label">Status Kernel SUSFS</string>
+  
+  <!-- Status Page -->
+  <string id="kernel_features_label">Status Fitur Kernel</string>
+  <string id="sus_path_feature_label">SUS Path Didukung</string>
+  <string id="sus_mount_feature_label">SUS Mount Didukung</string>
+  <string id="sus_kstat_feature_label">SUS Kstat Didukung</string>
+  <string id="try_umount_feature_label">Try Umount Didukung</string>
+  <string id="spoof_uname_feature_label">Spoof Uname Didukung</string>
+  <string id="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Open Redirect Didukung</string>
+  <string id="enable_log_feature_label">Logging Didukung</string>
+  <string id="auto_default_mount_feature_label">Auto Default Mount</string>
+  <string id="auto_bind_mount_feature_label">Auto Bind Mount</string>
+  <string id="auto_try_umount_bind_feature_label">Auto Try Umount Bind</string>
+  <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
+  <string id="magic_mount_feature_label">Magic Mount Didukung</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Didukung</string>
   
   <!-- Settings -->
-  <string id="susfs_log_label">Log SUSFS</string>
+  <string id="susfs_log_label">SUSFS Logs</string>
   <string id="sus_su_1_label">SUS SU ada di Mode 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU saat boot</string>
-  <string id="susfs_settings_label">setelan kustom susfs</string>
-  <string id="auto_hide_label">setelan auto hide</string>
-  <string id="default_mounts_label">otomatis sembunyikan mount awal</string>
+  <string id="susfs_settings_label">kustom setelan susfs</string>
+  <string id="auto_hide_label">setelan otomatis penyembunyian</string>
+  <string id="default_mounts_label">otomatis sembunyikan default mounts</string>
   <string id="bind_mounts_label">otomatis sembunyikan bind mounts</string>
-  <string id="try_umount_bind_label">otomatis coba umount bind mount</string>
-  <string id="zygote_try_umount_label">coba umount untuk proses sistem zygote</string>
-  <string id="kernel_uname_label">Kernel Uname</string>
+  <string id="try_umount_bind_label">otomatis try umount bind mounts</string>
+  <string id="hide_sus_mnts_for_all_procs_label">Sembunyikan sus_mounts untuk semua proses</string>
+  <string id="zygote_try_umount_label">try umount untuk proses zygote sistem</string>
+  <string id="umount_for_zygote_iso_service_label">try umount untuk layanan isolasi zygote</string>
+  <string id="kernel_uname_label">Uname Kernel</string>
   <string id="spoof_kernel_version_label">Spoof Versi Kernel</string>
-  <string id="spoof_kernel_build_label">Spoof Build Kernel</string>
+  <string id="spoofed_kernel_version_label">Spoofed Versi Kernel</string>
+  <string id="spoof_kernel_build_label">Spoof Kernel Build</string>
+  <string id="spoofed_kernel_build_label">Spoofed Kernel Build</string>
   <string id="spoof_on_boot_label">Spoof saat boot</string>
   <string id="post_fs_data_label">Dieksekusi pada post-fs-data (lebih baik dalam spoofing)</string>
-  <string id="uname_warning_label2">Mengaktifkan ini dapat menyebabkan bootloop atau ketidakstabilan jika dispoof secara tidak benar. Apakah kamu yakin ingin mengaktifkan eksekusi post-fs-data?</string>
+  <string id="uname_warning_label2">Mengaktifkan fitur ini dapat menyebabkan bootloop atau ketidakstabilan jika di-spoof secara tidak benar. Apakah anda yakin ingin mengaktifkan eksekusi post-fs-data?</string>
   
   <!-- Custom -->
-  <string id="custom_settings_label">Setelan Kustom</string>
-  <string id="hide_custom_rom_label">Sembunyikan Custom ROM</string>
-  <string id="hide_vendor_sepolicy_label">Sembunyikan SEPolicy Vendor</string>
+  <string id="custom_settings_label">Kustom Setelan</string>
+  <string id="hide_paths_label">Sembunyikan Setelan Custom Rom</string>
+  <string id="hide_custom_rom_label">Sembunyikan Custom Rom Path</string>
+  <string id="hide_level_label">Level Penyembunyian</string>
+  <string id="hide_custom_rom_desc1">Kecualikan berkas .apk, .jar, .odex, .vdex, .so, .rc, dan /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc2">Kecualikan berkas .apk, .jar, .odex, .vdex, .so, dan /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc3">Kecualikan berkas .apk, .jar, .odex, .vdex, dan /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc4">Kecualikan berkas .apk, .jar, dan /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc5">Sembunyikan semua custom rom paths ⚠️Berisiko dan dapat menyebabkan masalah!</string>
+  <string id="hide_vendor_sepolicy_label">Sembunyikan Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">Sembunyikan Compat Matrix</string>
-  <string id="fake_service_list_label">Spoof Daftar Service</string>
+  <string id="fake_service_list_label">Spoof Daftar Layanan</string>
   <string id="hide_gapps_label">Sembunyikan GApps</string>
   <string id="hide_revanced_label">Sembunyikan Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Spoof Cmdline</string>
-  <string id="hide_ksu_loop_label">Sembunyikan Loop KSU</string>
-  <string id="force_hide_dex2oat_label">Paksa Sembunyikan Dex2oat</string>
-  <string id="custom_sus_path_label">SUS Path Kustom</string>
-  <string id="custom_sus_mount_label">SUS Mount Kustom</string>
-  <string id="custom_try_umount_label">Try Umount Kustom</string>
+  <string id="hide_ksu_loop_label">Sembunyikan KSU Loop</string>
+  <string id="force_hide_dex2oat_label">Paksa Sembunyikan Dex2oat Mounts</string>
+  <string id="avc_log_spoofing_label">AVC Log Spoofing</string>
+  <string id="emulate_vold_app_data_label">Emulasikan Isolasi Data Apl Vold</string>
+  <string id="custom_sus_path_label">Setelan SUS Path</string>
+  <string id="custom_sus_path_loop_label">Kustom SUS Path Loop</string>
+  <string id="custom_sus_mount_label">Kustom SUS Mount</string>
+  <string id="custom_try_umount_label">Kustom TRY Umount</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Kontributor:</string>
+  <string id= "translators_label">Penerjemah:</string>
 </language>
