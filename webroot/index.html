@@ -7,8 +7,8 @@
   <script type="module" crossorigin src="/assets/fade-4ApaDT9x.js"></script>
   <script type="module" crossorigin src="/assets/creditsjs-BfjoyHvA.js"></script>
   <script type="module" crossorigin src="/assets/i18n-BqJdyLAD.js"></script>
-  <script type="module" crossorigin src="/assets/index-wOnDWlgp.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-BGbUv-FH.css">
+  <script type="module" crossorigin src="/assets/index-Ez81gFd8.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-8HINShga.css">
 </head>
 
 <style>
@@ -56,6 +56,17 @@
 			<div class="modal-action">
 				<button class="btn btn-md btn-error font-sans" id="modal_cancel" data-i18n="cancel_label">Cancel</button>
 				<button class="btn btn-md btn-primary font-sans" id="modal_confirm" data-i18n="confirm_label">Confirm</button>
+			</div>
+		</div>
+	</dialog>
+	<!--Reset dialog-->
+	<dialog id="confirm_reset_modal" class="modal modal-bottom sm:modal-middle">
+		<div class="modal-box">
+			<h3 class="font-bold text-base font-sans" data-i18n="warning_label">Warning!</h3>
+			<p class="py-4 font-sans" data-i18n="reset_warning_label">This will reset all configurations to their default values. Are you sure you want to proceed?</p>
+			<div class="modal-action">
+				<button class="btn btn-md btn-error font-sans" id="reset_modal_cancel" data-i18n="cancel_label">Cancel</button>
+				<button class="btn btn-md btn-primary font-sans" id="reset_modal_confirm" data-i18n="confirm_label">Confirm</button>
 			</div>
 		</div>
 	</dialog>
@@ -218,6 +229,7 @@
 						<button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-sm font-normal" id="set_uname">Make it SuS</button>
 					</div>
 				  </div>
+				  <button class="btn btn-md btn-outline w-full mt-2 border-red-500 text-white text-sm font-normal font-sans" id="susfs_reset" data-i18n="reset_label">Reset All Config</button>
 			</section>
 		</div>
 	</main>
