@@ -13,6 +13,8 @@
   <string id="deprecated_label">Deprecated</string>
   <string id="unknown_label">Unknown</string>
   <string id="help_label">Help</string>
+  <string id="send_logs_label">Send Logs</string>
+  <string id="reset_config_label">Reset All Config</string>
 
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
