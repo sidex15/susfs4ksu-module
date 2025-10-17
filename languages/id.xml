@@ -13,6 +13,8 @@
   <string id="deprecated_label">Usang</string>
   <string id="unknown_label">Tidak diketahui</string>
   <string id="help_label">Bantuan</string>
+  <string id="send_logs_label">Kirim Logs</string>
+  <string id="reset_config_label">Reset Semua Konfig</string>
 
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">OH TIDAK! Kernel Tidak Didukung!</string>
