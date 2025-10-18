@@ -69,6 +69,7 @@ function catToObject(cat){
 }
 
 document.getElementById("sus_path").innerHTML= susfs_stats.sus_path;
+document.getElementById("sus_map").innerHTML= susfs_stats.sus_map;
 document.getElementById("sus_mount").innerHTML= susfs_stats.sus_mount;
 document.getElementById("try_umount").innerHTML= susfs_stats.try_umount;
 document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
@@ -144,6 +145,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		custom_try_umount();
 		custom_sus_path();
 		custom_sus_path_loop(susfs_version_decimal);
+		custom_sus_maps(susfs_features);
     }
 	else if (currentPath === '/status.html') {
 		//console.log("in status");
@@ -1055,6 +1057,41 @@ async function custom_sus_path_loop(susfs_version_decimal){
 	})
 }
 
+// custom sus maps
+async function custom_sus_maps(susfs_features){
+	const sus_maps_section = document.getElementById("sus_maps_section");
+	const load_sus_maps = document.getElementById("load_sus_maps");
+	const sus_maps_area = document.getElementById("custom_sus_maps");
+	const save_sus_maps = document.getElementById("save_sus_maps");
+
+	// check if sus_maps is enabled in kernel
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_SUS_MAP")) {
+		sus_maps_section.classList.remove("hidden");
+	}
+	else {
+		return;
+	}
+
+	// Load the custom SUS MAPS
+	load_sus_maps.addEventListener("click",async ()=>{
+		sus_maps_area.innerHTML=await run(`cat ${config}/sus_maps.txt`);
+	})
+
+	// Save the custom SUS MAPS
+	save_sus_maps.addEventListener("click",async ()=>{
+		var save_sus_maps_val=sus_maps_area.value;
+		// Check if the input is empty
+		if (save_sus_maps_val=='') {
+			toast('please press load first!');
+		}
+		else{
+			await run(`echo '${save_sus_maps_val}' > ${config}/sus_maps.txt`);
+			toast("Custom SUS_MAPS saved!");
+			toast("Reboot to take effect");
+		}
+	})
+}
+
 // custom sus mount
 async function custom_sus_mount(){
 	const load_sus_mount = document.getElementById("load_sus_mount");
@@ -1135,6 +1172,7 @@ async function custom_try_umount(){
 async function loadKernelFeatureStatus(susfs_features) {
   const features = [
     { id: 'status_sus_path', config: 'CONFIG_KSU_SUSFS_SUS_PATH' },
+	{ id: 'status_sus_map', config: 'CONFIG_KSU_SUSFS_SUS_MAP' },
     { id: 'status_sus_mount', config: 'CONFIG_KSU_SUSFS_SUS_MOUNT' },
     { id: 'status_auto_default_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT' },
     { id: 'status_auto_bind_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT' },
