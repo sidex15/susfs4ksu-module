@@ -92,6 +92,13 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 158 ] 2>/dev/null; then
 	done
 fi
 
+# Add sus_maps (late v1.5.12+)
+if ${SUSFS_BIN} show enabled_features | grep -q "CONFIG_KSU_SUSFS_SUS_MAP"; then
+	for i in $(grep -v "#" $PERSISTENT_DIR/sus_maps.txt); do
+		${SUSFS_BIN} add_sus_map "$i" && echo "[sus_map]: susfs4ksu/boot-completed $i" >> $logfile1
+	done
+fi
+
 # if spoof_uname is on mode 1, set_uname will be called here
 [ $spoof_uname = 1 ] && spoof_uname
 
@@ -213,9 +220,11 @@ dmesg | sed -n "/^\[ *$endmsg/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:"
 # Generate susfs stats
 rm ${tmpfolder}/susfs_stats.txt
 echo sus_path=$(grep -ci 'sus_path' $logfile1 ) >> ${tmpfolder}/susfs_stats.txt
+echo sus_map=$(grep -ci 'AS_FLAGS_SUS_MAP' $logfile ) >> ${tmpfolder}/susfs_stats.txt
 echo sus_mount=$(grep -ciE "set SUS_MOUNT|to LH_SUS_MOUNT" $logfile ) >> ${tmpfolder}/susfs_stats.txt
 echo try_umount=$(grep -ci 'to LH_TRY_UMOUNT_PATH' $logfile ) >> ${tmpfolder}/susfs_stats.txt
 rm ${tmpfolder}/susfs_stats1.txt
 echo sus_path=$(grep -ci 'sus_path' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
+echo sus_map=$(grep -ci 'sus_map' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
 echo sus_mount=$(grep -ci 'sus_mount' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
 echo try_umount=$(grep -ci 'try_umount' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
