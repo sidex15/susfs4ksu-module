@@ -1,5 +1,5 @@
 # this contains suspicious mounts you want 
-# sus_mounted at post-mount.sh
+# to be sus_mounted at post-mount.sh
 # example
 # /system
 # /system_ext

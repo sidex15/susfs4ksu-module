@@ -1,5 +1,5 @@
 # this contains suspicious paths that are in the maps you want 
-# hidden at boot-completed.sh
+# to be hidden at boot-completed.sh
 # example
 # /system/font/Roboto-Regular.ttf
 # /system/font/Roboto-Bold.ttf

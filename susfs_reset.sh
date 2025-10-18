@@ -19,13 +19,15 @@ while IFS= read -r line; do
 done < "$config/config.sh"
 
 # Reset sus_path.txt
-echo -e "# this contains suspicious paths you want \n# hidden at boot-completed.sh\n# example\n# /system/addon.d\n# /vendor/bin/install-recovery.sh\n# /system/bin/install-recovery.sh" > "$config/sus_path.txt"
+echo -e "# this contains suspicious paths you want \n# to be hidden at boot-completed.sh\n# example\n# /system/addon.d\n# /vendor/bin/install-recovery.sh\n# /system/bin/install-recovery.sh" > "$config/sus_path.txt"
 # Reset sus_path_loop.txt
-echo -e "# this contains suspicious paths you want \n# hidden at boot-completed.sh\n# example\n# /system/addon.d\n# /vendor/bin/install-recovery.sh\n# /system/bin/install-recovery.sh" > "$config/sus_path_loop.txt"
+echo -e "# this contains suspicious paths you want \n# to be hidden at boot-completed.sh\n# example\n# /system/addon.d\n# /vendor/bin/install-recovery.sh\n# /system/bin/install-recovery.sh" > "$config/sus_path_loop.txt"
+# Reset sus_maps.txt
+echo -e "# this contains suspicious paths that are in the maps you want \n# to be hidden at boot-completed.sh\n# example\n# /system/font/Roboto-Regular.ttf\n# /system/font/Roboto-Bold.ttf\n# /vendor/lib/libsuspicious.so" > "$config/sus_maps.txt"
 # Reset sus_mount.txt
-echo -e "# this contains suspicious mounts you want \n# sus_mounted at post-mount.sh\n# example\n# /system\n# /system_ext\n# /data/adb/modules\n# /debug_ramdisk" > "$config/sus_mount.txt"
+echo -e "# this contains suspicious mounts you want \n# to be sus_mounted at post-mount.sh\n# example\n# /system\n# /system_ext\n# /data/adb/modules\n# /debug_ramdisk" > "$config/sus_mount.txt"
 # Reset try_umount.txt
-echo -e "# this contains suspicious mounts you want \n# sus_mounted at post-mount.sh\n# example\n# /system\n# /system_ext\n# /debug_ramdisk" > "$config/try_umount.txt"
+echo -e "# this contains suspicious mounts you want \n# to be try_umounted at post-mount.sh\n# example\n# /system\n# /system_ext\n# /debug_ramdisk" > "$config/try_umount.txt"
 
 # Reset auto hide settings
 [ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] || rm -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount
