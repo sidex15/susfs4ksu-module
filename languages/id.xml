@@ -31,6 +31,7 @@
   <!-- Home Page -->
   <string id="kernel_version_label">Versi Kernel</string>
   <string id="sus_path_label">SUS PATH</string>
+  <string id="sus_map_label">SUS MAPS</string>
   <string id="sus_mount_label">SUS MOUNT</string>
   <string id="try_umount_label">TRY UMOUNT</string>
   <string id="susfs_settings_label">Kustom Setelan SUSFS</string>
@@ -39,6 +40,7 @@
   <!-- Status Page -->
   <string id="kernel_features_label">Status Fitur Kernel</string>
   <string id="sus_path_feature_label">SUS Path Didukung</string>
+  <string id="sus_map_feature_label">SUS Maps Didukung</string>
   <string id="sus_mount_feature_label">SUS Mount Didukung</string>
   <string id="sus_kstat_feature_label">SUS Kstat Didukung</string>
   <string id="try_umount_feature_label">Try Umount Didukung</string>
@@ -98,6 +100,7 @@
   <string id="emulate_vold_app_data_label">Emulasikan Isolasi Data Apl Vold</string>
   <string id="custom_sus_path_label">Setelan SUS Path</string>
   <string id="custom_sus_path_loop_label">Kustom SUS Path Loop</string>
+  <string id="custom_sus_maps_label">Kustom SUS Maps</string>
   <string id="custom_sus_mount_label">Kustom SUS Mount</string>
   <string id="custom_try_umount_label">Kustom TRY Umount</string>
 
