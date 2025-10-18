@@ -7,8 +7,8 @@
   <script type="module" crossorigin src="/assets/fade-4ApaDT9x.js"></script>
   <script type="module" crossorigin src="/assets/creditsjs-BfjoyHvA.js"></script>
   <script type="module" crossorigin src="/assets/i18n-BqJdyLAD.js"></script>
-  <script type="module" crossorigin src="/assets/index-C23Zu5G7.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-8HINShga.css">
+  <script type="module" crossorigin src="/assets/index-C20cZycH.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-ChPId2Oy.css">
 </head>
 
 <style>
@@ -90,24 +90,46 @@
 				</div>
 			</div>
 			<section class="flex flex-col justify-start items-center min-h-fit ml-4 mr-4 uppercase">
-				<div class="stats stats-horizontal border-2 border-white divide-white bg-cyan-100/20 dark:bg-black/20 backdrop-blur-[2.5px] lg:stats-horizontal mt-6">
-					<div class="stat">
-					  <div class="stat-title text-white text-base text-wrap text-center" data-i18n="sus_path_label">SUS PATH</div>
-					  <div class="stat-value text-white text-base text-ellipsis overflow-hidden text-center font-amongus" id="sus_path"></div>
+				<div class="w-full mt-5">
+					<div class="grid grid-cols-2 gap-3 sm:grid-cols-4 w-full">
+						<!-- SUS PATH Card -->
+						<div class="relative overflow-hidden border-2 border-white bg-gradient-to-br from-cyan-500/30 to-purple-500/20 backdrop-blur-[2.5px] rounded-lg p-4 hover:scale-105 transition-transform duration-200">
+							<div class="flex flex-col items-center justify-center gap-2">
+								<div class="text-white/70 text-lg font-amongus2 font-bold tracking-wider" data-i18n="sus_path_label">SUS PATH</div>
+								<div class="text-white text-lg font-bold font-amongus" id="sus_path">0</div>
+							</div>
+							<div class="absolute top-0 right-0 w-16 h-16 bg-white/5 rounded-full -mr-8 -mt-8"></div>
+						</div>
+
+						<!-- SUS MAPS Card -->
+						<div class="relative overflow-hidden border-2 border-white bg-gradient-to-br from-purple-500/30 to-pink-500/20 backdrop-blur-[2.5px] rounded-lg p-4 hover:scale-105 transition-transform duration-200">
+							<div class="flex flex-col items-center justify-center gap-2">
+								<div class="text-white/70 text-lg font-amongus2 font-bold tracking-wider" data-i18n="sus_map_label">SUS MAPS</div>
+								<div class="text-white text-lg font-bold font-amongus" id="sus_map">0</div>
+							</div>
+							<div class="absolute top-0 right-0 w-16 h-16 bg-white/5 rounded-full -mr-8 -mt-8"></div>
+						</div>
+
+						<!-- SUS MOUNT Card -->
+						<div class="relative overflow-hidden border-2 border-white bg-gradient-to-br from-pink-500/30 to-red-500/20 backdrop-blur-[2.5px] rounded-lg p-4 hover:scale-105 transition-transform duration-200">
+							<div class="flex flex-col items-center justify-center gap-2">
+								<div class="text-white/70 text-lg font-amongus2 font-bold tracking-wider" data-i18n="sus_mount_label">SUS MOUNT</div>
+								<div class="text-white text-lg font-bold font-amongus" id="sus_mount">0</div>
+							</div>
+							<div class="absolute top-0 right-0 w-16 h-16 bg-white/5 rounded-full -mr-8 -mt-8"></div>
+						</div>
+
+						<!-- TRY UMOUNT Card -->
+						<div class="relative overflow-hidden border-2 border-white bg-gradient-to-br from-red-500/30 to-orange-500/20 backdrop-blur-[2.5px] rounded-lg p-4 hover:scale-105 transition-transform duration-200">
+							<div class="flex flex-col items-center justify-center gap-2">
+								<div class="text-white/70 text-lg font-amongus2 font-bold tracking-wider" data-i18n="try_umount_label">TRY UMOUNT</div>
+								<div class="text-white text-lg font-bold font-amongus" id="try_umount">0</div>
+							</div>
+							<div class="absolute top-0 right-0 w-16 h-16 bg-white/5 rounded-full -mr-8 -mt-8"></div>
+						</div>
 					</div>
-				  
-					<div class="stat">
-					  <div class="stat-title text-white text-base text-wrap text-center" data-i18n="sus_mount_label">SUS MOUNT</div>
-					  <div class="stat-value text-white text-base text-ellipsis overflow-hidden text-center font-amongus" id="sus_mount"></div>
-					</div>
-				  
-					<div class="stat">
-					  <div class="stat-title text-white text-base text-wrap text-center" data-i18n="try_umount_label">TRY UMOUNT</div>
-					  <div class="stat-value text-white text-base text-ellipsis overflow-hidden text-center font-amongus" id="try_umount"></div>
-					</div>
-				  </div>
-				  
-				  <div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
+				</div>
+				<div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
 					<div class="stat p-0 mt-0">
 						<div class="w-[18.6rem]">
 							<div class="form-control">
@@ -144,8 +166,8 @@
 					</div>
 					<a href="custom.html" class="text-white"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_settings_label">custom susfs settings</button></a>
 					<a href="status.html" class="text-white hidden" id="susfs_kernel_status"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_kernel_status_label">SUSFS Kernel Status</button></a>
-				  </div>
-				  <div id="sus_su_154" class="">
+				</div>
+				<div id="sus_su_154" class="">
 				  <div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
 					<div class="stat p-0 mt-0">
 						<div class="stat-title text-lg text-white pb-1" data-i18n="auto_hide_label">auto hide settings</div>
@@ -189,8 +211,8 @@
 						</div>
 					  </div>
 				    </div>
-				  </div>
-				  <div class="stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px]">
+				</div>
+				<div class="stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px]">
 					<div class="stat">
 						<div class="stat-title text-lg text-white" data-i18n="kernel_uname_label">Kernel Uname</div>
 						<p class="text-white text-sm break-all font-sans normal-case font-normal" id="kernel_version"></p>
@@ -228,9 +250,9 @@
 						</div>
 						<button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-sm font-normal" id="set_uname">Make it SuS</button>
 					</div>
-				  </div>
-				  <button class="btn btn-md btn-outline w-full mt-2 border-white text-white text-sm font-normal font-sans" id="susfs_send_logs" data-i18n="send_logs_label">Send Logs</button>
-				  <button class="btn btn-md btn-outline w-full mt-2 border-red-500 text-white text-sm font-normal font-sans" id="susfs_reset" data-i18n="reset_config_label">Reset All Config</button>
+				</div>
+				<button class="btn btn-md btn-outline w-full mt-2 border-white text-white text-sm font-normal font-sans" id="susfs_send_logs" data-i18n="send_logs_label">Send Logs</button>
+				<button class="btn btn-md btn-outline w-full mt-2 border-red-500 text-white text-sm font-normal font-sans" id="susfs_reset" data-i18n="reset_config_label">Reset All Config</button>
 			</section>
 		</div>
 	</main>
