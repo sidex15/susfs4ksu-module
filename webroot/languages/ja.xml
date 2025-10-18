@@ -1,54 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language id="ja">
   <!-- General -->
-  <string id="app_title">WebUI Menu</string>
+  <string id="app_title">WebUIメニュー</string>
   <string id="warning_label">警告！</string>
   <string id="cancel_label">キャンセル</string>
   <string id="confirm_label">確認</string>
-  <string id="about_label">情報</string>
+  <string id="about_label">概要</string>
   <string id="main_menu_label">メインメニュー</string>
   <string id="load_label">読み込み</string>
+  <string id="enabled_label">有効</string>
+  <string id="disabled_label">無効</string>
+  <string id="deprecated_label">非推奨</string>
+  <string id="unknown_label">不明</string>
+  <string id="help_label">ヘルプ</string>
+  <string id="send_logs_label">ログ送信</string>
+  <string id="reset_config_label">全設定リセット</string>
 
   <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">アクセス不可！サポートされていないカーネルです！</string>
-  <string id="susfs_error_desc">WebUIへのアクセスが拒否されました！SuSFSパッチが適用されたカーネルを使用していることを確認してください！</string>
+  <string id="susfs_error_label">エラー！未対応カーネル！</string>
+  <string id="susfs_error_desc">WebUIアクセス拒否！SuSFSパッチ適用カーネルをご使用ください！</string>
+
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS ユーザー空間更新！</string>
+  <string id="susfs_update_desc">SUSFS ユーザー空間バイナリに更新があります！</string>
+  <string id="susfs_update2_desc">モジュールとWebUIとの互換性を確保するため、最新版に更新してください。</string>
+  <string id="susfs_updating_label">更新中...</string>
+  <string id="skip_btn_label">スキップ</string>
+  <string id="update_btn_label">更新</string>
   
   <!-- Home Page -->
   <string id="kernel_version_label">カーネルバージョン</string>
-  <string id="sus_path_label">SUS Path</string>
-  <string id="sus_mount_label">SUS Mount</string>
+  <string id="sus_path_label">SUSパス</string>
+  <string id="sus_map_label">SUSマップ</string>
+  <string id="sus_mount_label">SUSマウント</string>
   <string id="try_umount_label">アンマウント試行</string>
+  <string id="susfs_settings_label">カスタムSUSFS設定</string>
+  <string id="susfs_kernel_status_label">SUSFSカーネル状態</string>
+  
+  <!-- Status Page -->
+  <string id="kernel_features_label">カーネル機能状態</string>
+  <string id="sus_path_feature_label">SUSパス対応</string>
+  <string id="sus_map_feature_label">SUSマップ対応</string>
+  <string id="sus_mount_feature_label">SUSマウント対応</string>
+  <string id="sus_kstat_feature_label">SUSカーネル統計対応</string>
+  <string id="try_umount_feature_label">アンマウント試行対応</string>
+  <string id="spoof_uname_feature_label">Uname偽装対応</string>
+  <string id="spoof_cmdline_feature_label">Cmdline/Bootconfig偽装</string>
+  <string id="open_redirect_feature_label">オープンリダイレクト対応</string>
+  <string id="enable_log_feature_label">ログ記録対応</string>
+  <string id="auto_default_mount_feature_label">自動デフォルトマウント</string>
+  <string id="auto_bind_mount_feature_label">自動バインドマウント</string>
+  <string id="auto_try_umount_bind_feature_label">自動バインドアンマウント試行</string>
+  <string id="hide_symbols_feature_label">KSU SUSFSシンボル非表示</string>
+  <string id="magic_mount_feature_label">マジックマウント対応</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS自動カーネル統計対応</string>
   
   <!-- Settings -->
   <string id="susfs_log_label">SUSFSログ</string>
-  <string id="sus_su_1_label">SUS SUはモード1です</string>
+  <string id="sus_su_1_label">SUS SUモード1</string>
   <string id="sus_su_label">SUS SU</string>
-  <string id="sus_su_boot_label">起動時にSUS SUを有効化</string>
-  <string id="susfs_settings_label">カスタムSUSFS設定</string>
+  <string id="sus_su_boot_label">起動時SUS SU実行</string>
+  <string id="susfs_settings_label">カスタムsusfs設定</string>
   <string id="auto_hide_label">自動非表示設定</string>
-  <string id="default_mounts_label">デフォルトマウントを自動で隠す</string>
-  <string id="bind_mounts_label">バインドマウントを自動で隠す</string>
-  <string id="try_umount_bind_label">バインドマウントのアンマウントを自動試行</string>
-  <string id="zygote_try_umount_label">Zygoteシステムプロセスのアンマウント試行</string>
-  <string id="kernel_uname_label">カーネルuname情報</string>
-  <string id="spoof_kernel_version_label">カーネルバージョンを偽装</string>
-  <string id="spoof_kernel_build_label">カーネルビルド情報を偽装</string>
-  <string id="spoof_on_boot_label">起動時に偽装を有効化</string>
-  <string id="post_fs_data_label">post-fs-dataで実行 (偽装効果向上)</string>
-  <string id="uname_warning_label2">この設定を有効にすると、偽装が正しくない場合にブートループや不安定性を引き起こす可能性があります。post-fs-dataでの実行を有効にしてもよろしいですか？</string>
+  <string id="default_mounts_label">自動非表示デフォルトマウント</string>
+  <string id="bind_mounts_label">自動非表示バインドマウント</string>
+  <string id="try_umount_bind_label">自動バインドアンマウント試行</string>
+  <string id="hide_sus_mnts_for_all_procs_label">全プロセスのsusマウントを非表示</string>
+  <string id="zygote_try_umount_label">zygoteシステムプロセスのアンマウント試行</string>
+  <string id="umount_for_zygote_iso_service_label">zygote分離サービスのアンマウント試行</string>
+  <string id="kernel_uname_label">カーネルUname</string>
+  <string id="spoof_kernel_version_label">カーネルバージョン偽装</string>
+  <string id="spoofed_kernel_version_label">偽装カーネルバージョン</string>
+  <string id="spoof_kernel_build_label">ビルド日時偽装</string>
+  <string id="spoofed_kernel_build_label">偽装ビルド日時</string>
+  <string id="spoof_on_boot_label">起動時偽装</string>
+  <string id="post_fs_data_label">post-fs-data段階で実行（偽装効果向上）</string>
+  <string id="uname_warning_label2">偽装設定が正しくない場合、このオプションを有効にするとブートループやシステム不安定を引き起こす可能性があります。post-fs-data実行を有効にしてもよろしいですか？</string>
+  <string id="reset_warning_label">全ての設定がデフォルト値にリセットされます。続行してもよろしいですか？</string>
   
   <!-- Custom -->
   <string id="custom_settings_label">カスタム設定</string>
-  <string id="hide_custom_rom_label">カスタムROMパスを隠す</string>
-  <string id="hide_vendor_sepolicy_label">Vendor SEPolicyを隠す</string>
-  <string id="hide_compat_matrix_label">互換性マトリックスを隠す</string>
-  <string id="fake_service_list_label">サービスリストを偽装</string>
-  <string id="hide_gapps_label">GAppsを隠す</string>
-  <string id="hide_revanced_label">Revanced (YT/YTM) を隠す</string>
-  <string id="spoof_cmdline_label">cmdlineを偽装</string>
-  <string id="hide_ksu_loop_label">KSUループデバイスを隠す</string>
-  <string id="force_hide_dex2oat_label">Dex2oatマウントを強制的に隠す</string>
+  <string id="hide_paths_label">カスタムROM設定非表示</string>
+  <string id="hide_custom_rom_label">カスタムROMパス非表示</string>
+  <string id="hide_level_label">非表示レベル</string>
+  <string id="hide_custom_rom_desc1">.apk, .jar, .odex, .vdex, .so, .rc, /vendor/bin/hw/ ファイルを除外</string>
+  <string id="hide_custom_rom_desc2">.apk, .jar, .odex, .vdex, .so, /vendor/bin/hw/ ファイルを除外</string>
+  <string id="hide_custom_rom_desc3">.apk, .jar, .odex, .vdex, /vendor/bin/hw/ ファイルを除外</string>
+  <string id="hide_custom_rom_desc4">.apk, .jar, /vendor/bin/hw/ ファイルを除外</string>
+  <string id="hide_custom_rom_desc5">全カスタムROMパスを非表示 ⚠️高リスク、問題発生の可能性あり！</string>
+  <string id="hide_vendor_sepolicy_label">Vendor SEPolicy非表示</string>
+  <string id="hide_compat_matrix_label">Compat Matrix非表示</string>
+  <string id="fake_service_list_label">サービスリスト偽装</string>
+  <string id="hide_gapps_label">GApps非表示</string>
+  <string id="hide_revanced_label">Revanced (YT/YTM) 非表示</string>
+  <string id="spoof_cmdline_label">Cmdline偽装</string>
+  <string id="hide_ksu_loop_label">KSUループ非表示</string>
+  <string id="force_hide_dex2oat_label">Dex2oatマウント強制非表示</string>
+  <string id="avc_log_spoofing_label">AVCログ偽装</string>
+  <string id="emulate_vold_app_data_label">Voldアプリデータ分離エミュレート</string>
   <string id="custom_sus_path_label">カスタムSUSパス</string>
+  <string id="custom_sus_path_loop_label">カスタムSUSパスループ</string>
+  <string id="custom_sus_maps_label">カスタムSUSマップ</string>
   <string id="custom_sus_mount_label">カスタムSUSマウント</string>
   <string id="custom_try_umount_label">カスタムアンマウント試行</string>
 
