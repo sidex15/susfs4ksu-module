@@ -8,6 +8,7 @@
   <string id="about_label">About</string>
   <string id="main_menu_label">Main Menu</string>
   <string id="load_label">Load</string>
+  <string id="open_label">Open with</string>
   <string id="enabled_label">Enabled</string>
   <string id="disabled_label">Disabled</string>
   <string id="deprecated_label">Deprecated</string>
