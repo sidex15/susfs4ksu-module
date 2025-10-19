@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta charset="UTF-8" name="viewport" name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link href="./index.css" type="text/css" rel="stylesheet">
@@ -127,90 +127,84 @@
 						</div>
 					</div>
 				</div>
-				<div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
+				<div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]">
 					<div class="stat p-0 mt-0">
-						<div class="w-[18.6rem]">
+						<div class="form-control">
+							<label class="label cursor-pointer">
+							<span class="text-white text-base" data-i18n="susfs_log_label">SUSFS Logs</span>
+							<input type="checkbox" id="susfs_log" class="toggle toggle-md toggle-primary" checked="checked" />
+							</label>
+						</div>
+						<!--this one is for 1.5.2+ if the user force enables sus_su 1-->
+						<div id="sus_su_1" class="form-control hidden">
+							<label class="label cursor-pointer">
+								<span class="text-white text-base font-amongus2" data-i18n="sus_su_1_label">SUS SU is on Mode 1</span>
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-yellow-500 dark:text-yellow-500">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+								</svg>																		
+							</label>
+						</div>
+						<!--this one is for 1.4.2-->
+						<div id="sus_su_142" class="hidden">
 							<div class="form-control">
-							  <label class="label cursor-pointer">
-								<span class="text-white text-base" data-i18n="susfs_log_label">SUSFS Logs</span>
-								<input type="checkbox" id="susfs_log" class="toggle toggle-md toggle-primary" checked="checked" />
-							  </label>
+							<label class="label cursor-pointer">
+								<span class="text-white text-lg" data-i18n="sus_su_label">SUS SU</span>
+								<input type="checkbox" id="sus_su" class="toggle toggle-md toggle-secondary" checked="checked" />
+							</label>
 							</div>
-							<!--this one is for 1.5.2+ if the user force enables sus_su 1-->
-							<div id="sus_su_1" class="form-control hidden">
+							<div class="form-control">
 								<label class="label cursor-pointer">
-								  <span class="text-white text-base font-amongus2" data-i18n="sus_su_1_label">SUS SU is on Mode 1</span>
-								  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-yellow-500 dark:text-yellow-500">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-								  </svg>																		
+								<span class="text-white text-base" data-i18n="sus_su_boot_label">SUS SU on boot</span>
+								<input type="checkbox" id="enable_sus_su" class="toggle toggle-md toggle-accent" checked="checked" />
 								</label>
-							</div>
-							<!--this one is for 1.4.2-->
-							<div id="sus_su_142" class="hidden">
-								<div class="form-control">
-								<label class="label cursor-pointer">
-									<span class="text-white text-lg" data-i18n="sus_su_label">SUS SU</span>
-									<input type="checkbox" id="sus_su" class="toggle toggle-md toggle-secondary" checked="checked" />
-								</label>
-								</div>
-								<div class="form-control">
-									<label class="label cursor-pointer">
-									<span class="text-white text-base" data-i18n="sus_su_boot_label">SUS SU on boot</span>
-									<input type="checkbox" id="enable_sus_su" class="toggle toggle-md toggle-accent" checked="checked" />
-									</label>
-								</div>
 							</div>
 						</div>
 					</div>
 					<a href="custom.html" class="text-white"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_settings_label">custom susfs settings</button></a>
 					<a href="status.html" class="text-white hidden" id="susfs_kernel_status"><button class="btn btn-md btn-outline text-base border-white mt-2 text-white" data-i18n="susfs_kernel_status_label">SUSFS Kernel Status</button></a>
 				</div>
-				<div id="sus_su_154" class="">
-				  <div class="stats flex flex-col divide-x-0 divide-y-0 items-center justify-center white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-2 border-white backdrop-blur-[2.5px] w-max">
-					<div class="stat p-0 mt-0">
-						<div class="stat-title text-lg text-white pb-1" data-i18n="auto_hide_label">auto hide settings</div>
-						<div class="w-[18.6rem]">
-							<div class="form-control">
-							  <label class="label cursor-pointer">
-								<span class="text-white text-base" data-i18n="default_mounts_label">auto hide default mounts</span>
-								<input type="checkbox" id="auto_mount" class="toggle toggle-md toggle-primary" checked="checked" />
-							  </label>
-							  <div class="form-control">
-								<label class="label cursor-pointer">
-								  <span class="text-white text-base" data-i18n="bind_mounts_label">auto hide bind mounts</span>
-								  <input type="checkbox" id="auto_bind" class="toggle toggle-md toggle-secondary" checked="checked" />
-								</label>
-							  </div>
-							  <div class="form-control">
-								<label class="label cursor-pointer">
-								  <span class="text-white text-base" data-i18n="try_umount_bind_label">auto try umount bind mounts</span>
-								  <input type="checkbox" id="auto_umount_bind" class="toggle toggle-md toggle-accent" checked="checked" />
-								</label>
-							  </div>
-							  <div class="form-control">
-								<label class="label cursor-pointer">
-								  <span class="text-white text-base" data-i18n="hide_sus_mnts_for_all_procs_label">Hide sus_mounts for all processes</span>
-								  <input type="checkbox" id="hide_sus_mnts_for_all_procs" class="toggle toggle-md toggle-warning" checked="checked" disabled/>
-								</label>
-							  </div>
-							  <div class="form-control">
-								<label class="label cursor-pointer">
-								  <span class="text-white text-base" data-i18n="zygote_try_umount_label">try umount for zygote system process</span>
-								  <input type="checkbox" id="try_umount_zygote" class="toggle toggle-md toggle-success" checked="checked" />
-								</label>
-							  </div>
-							  <div class="form-control">
-								<label class="label cursor-pointer">
-								  <span class="text-white text-base" data-i18n="umount_for_zygote_iso_service_label">try umount for zygote isolation service</span>
-								  <input type="checkbox" id="umount_for_zygote_iso_service" class="toggle toggle-md toggle-success" checked="checked" disabled/>
-								</label>
-							  </div>
-							</div>
+				<div id="sus_su_154" class="min-w-full sm:min-w-[400px]">
+				  <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px]">
+						<div class="text-white text-xl font-bold mb-3" data-i18n="auto_hide_label">auto hide settings</div>
+						<div class="form-control">
+						<label class="label cursor-pointer">
+							<span class="text-white text-base" data-i18n="default_mounts_label">auto hide default mounts</span>
+							<input type="checkbox" id="auto_mount" class="toggle toggle-md toggle-primary" checked="checked" />
+						</label>
 						</div>
-					  </div>
+						<div class="form-control">
+						<label class="label cursor-pointer">
+							<span class="text-white text-base" data-i18n="bind_mounts_label">auto hide bind mounts</span>
+							<input type="checkbox" id="auto_bind" class="toggle toggle-md toggle-secondary" checked="checked" />
+						</label>
+						</div>
+						<div class="form-control">
+						<label class="label cursor-pointer">
+							<span class="text-white text-base" data-i18n="try_umount_bind_label">auto try umount bind mounts</span>
+							<input type="checkbox" id="auto_umount_bind" class="toggle toggle-md toggle-accent" checked="checked" />
+						</label>
+						</div>
+						<div class="form-control">
+						<label class="label cursor-pointer">
+							<span class="text-white text-base" data-i18n="hide_sus_mnts_for_all_procs_label">Hide sus_mounts for all processes</span>
+							<input type="checkbox" id="hide_sus_mnts_for_all_procs" class="toggle toggle-md toggle-warning" checked="checked" disabled/>
+						</label>
+						</div>
+						<div class="form-control">
+						<label class="label cursor-pointer">
+							<span class="text-white text-base" data-i18n="zygote_try_umount_label">try umount for zygote system process</span>
+							<input type="checkbox" id="try_umount_zygote" class="toggle toggle-md toggle-success" checked="checked" />
+						</label>
+						</div>
+						<div class="form-control">
+						<label class="label cursor-pointer">
+							<span class="text-white text-base" data-i18n="umount_for_zygote_iso_service_label">try umount for zygote isolation service</span>
+							<input type="checkbox" id="umount_for_zygote_iso_service" class="toggle toggle-md toggle-success" checked="checked" disabled/>
+						</label>
+						</div>
 				    </div>
 				</div>
-				<div class="stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px]">
+				<div class="stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]">
 					<div class="stat">
 						<div class="stat-title text-lg text-white" data-i18n="kernel_uname_label">Kernel Uname</div>
 						<p class="text-white text-sm break-all font-sans normal-case font-normal" id="kernel_version"></p>
@@ -249,8 +243,13 @@
 						<button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-sm font-normal" id="set_uname">Make it SuS</button>
 					</div>
 				</div>
-				<button class="btn btn-md btn-outline w-full mt-2 border-white text-white text-sm font-normal font-sans" id="susfs_send_logs" data-i18n="send_logs_label">Send Logs</button>
-				<button class="btn btn-md btn-outline w-full mt-2 border-red-500 text-white text-sm font-normal font-sans" id="susfs_reset" data-i18n="reset_config_label">Reset All Config</button>
+				<div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-3 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]">
+					<div class="stat-title pb-2 text-lg text-white" data-i18n="danger_zone_label">Danger Zone</div>
+					<div class="form-control">
+						<button class="btn btn-md btn-outline w-full mt-2 border-white text-white text-sm font-normal font-sans" id="susfs_send_logs" data-i18n="send_logs_label">Send Logs</button>
+						<button class="btn btn-md btn-outline w-full mt-2 border-red-500 text-white text-sm font-normal font-sans" id="susfs_reset" data-i18n="reset_config_label">Reset All Config</button>
+					</div>
+				</div>
 			</section>
 		</div>
 	</main>
