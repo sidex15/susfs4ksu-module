@@ -133,6 +133,8 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
     if (currentPath === '/index.html') {
 		console.log("in index");
 		susfs_reset();
+		susfs_export_config();
+		susfs_send_logs();
 		set_uname(settings);
 		susfs_log_toggle(settings);
 		if (susfs_version_decimal>=154) auto_hide_settings(settings,susfs_version_decimal);
@@ -1272,8 +1274,22 @@ function susfs_send_logs(){
 	});
 }
 
+function susfs_export_config(){
+	const susfs_export_config_btn = document.getElementById('susfs_export');
+	susfs_export_config_btn.addEventListener('click', async function(event) {
+		try{
+			await run(`tar -C /data/adb/susfs4ksu/ -czvf /sdcard/susfs_settings.tar.gz .`);
+			toast("Settings exported to /sdcard/susfs_settings.tar.gz");
+		}
+		catch{
+			toast("Failed to export settings");
+		}
+	});
+}
+
 // Initialize the page
 susfs_send_logs();
+susfs_export_config();
 susfs_reset();
 set_uname(settings);
 susfs_log_toggle(settings);
