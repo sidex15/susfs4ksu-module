@@ -7,8 +7,8 @@
   <script type="module" crossorigin src="/assets/fade-4ApaDT9x.js"></script>
   <script type="module" crossorigin src="/assets/creditsjs-BfjoyHvA.js"></script>
   <script type="module" crossorigin src="/assets/i18n-BqJdyLAD.js"></script>
-  <script type="module" crossorigin src="/assets/index-CASzXG3S.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Dddh9QBP.css">
+  <script type="module" crossorigin src="/assets/index-_Sf--sg-.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BkZPgubJ.css">
 </head>
 
 <style>
@@ -129,6 +129,7 @@
                         <label class="label cursor-pointer justify-between items-center flex">
                             <span class="text-white text-base" data-i18n="custom_sus_path_label">Custom SUS Path</span>
                             <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_path" data-i18n="load_label">load</button>
+                            <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="open_label" onclick="ksu.exec(`am start -a android.intent.action.EDIT -t text/plain -d file:///data/adb/susfs4ksu/sus_path.txt`)">Open with</button>
                         </label>
                     </div>
                     <div class="stat flex flex-col justify-center items-center p-0">
@@ -141,6 +142,7 @@
                         <label class="label cursor-pointer justify-between items-center flex">
                             <span class="text-white text-base" data-i18n="custom_sus_path_loop_label">Custom SUS Path Loop</span>
                             <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_path_loop" data-i18n="load_label">load</button>
+                            <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="open_label" onclick="ksu.exec(`am start -a android.intent.action.EDIT -t text/plain -d file:///data/adb/susfs4ksu/sus_path_loop.txt`)">Open with</button>
                         </label>
                     </div>
                     <div class="stat flex flex-col justify-center items-center p-0">
@@ -153,6 +155,7 @@
                         <label class="label cursor-pointer justify-between items-center flex">
                             <span class="text-white text-base" data-i18n="custom_sus_maps_label">Custom SUS Maps</span>
                             <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_maps" data-i18n="load_label">load</button>
+                             <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="open_label" onclick="ksu.exec(`am start -a android.intent.action.EDIT -t text/plain -d file:///data/adb/susfs4ksu/sus_maps.txt`)">Open with</button>
                         </label>
                     </div>
                     <div class="stat flex flex-col justify-center items-center p-0">
@@ -165,6 +168,7 @@
                         <label class="label cursor-pointer justify-between items-center flex">
                             <span class="text-white text-base" data-i18n="custom_sus_mount_label">Custom SUS Mount</span>
                             <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_mount" data-i18n="load_label">load</button>
+                             <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="open_label" onclick="ksu.exec(`am start -a android.intent.action.EDIT -t text/plain -d file:///data/adb/susfs4ksu/sus_mount.txt`)">Open with</button>
                         </label>
                     </div>
                     <div class="stat flex flex-col justify-center items-center p-0">
@@ -177,6 +181,7 @@
                         <label class="label cursor-pointer justify-between items-center flex">
                             <span class="text-white text-base" data-i18n="custom_try_umount_label">Custom Try umount</span>
                             <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_try_umount" data-i18n="load_label">load</button>
+                             <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="open_label" onclick="ksu.exec(`am start -a android.intent.action.EDIT -t text/plain -d file:///data/adb/susfs4ksu/try_umount.txt`)">Open with</button>
                         </label>
                     </div>
                     <div class="stat flex flex-col justify-center items-center p-0">

@@ -14,6 +14,7 @@
   <string id="unknown_label">Unknown</string>
   <string id="help_label">Help</string>
   <string id="send_logs_label">Send Logs</string>
+  <string id="export_config_label">Export Config</string>
   <string id="reset_config_label">Reset All Config</string>
 
   <!-- SUSFS Not supported error-->
