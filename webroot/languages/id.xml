@@ -8,12 +8,14 @@
   <string id="about_label">Tentang</string>
   <string id="main_menu_label">Menu Utama</string>
   <string id="load_label">Muat</string>
+  <string id="edit_label">Ubah Via</string>
   <string id="enabled_label">Diaktifkan</string>
   <string id="disabled_label">Dinonaktifkan</string>
   <string id="deprecated_label">Usang</string>
   <string id="unknown_label">Tidak diketahui</string>
   <string id="help_label">Bantuan</string>
   <string id="send_logs_label">Kirim Logs</string>
+  <string id="export_config_label">Ekspor Konfig</string>
   <string id="reset_config_label">Reset Semua Konfig</string>
 
   <!-- SUSFS Not supported error-->
