@@ -261,7 +261,7 @@ async function sus_su_toggle(settings) {
 		sus_su.checked=false;
 	}
 	enable_sus_su.addEventListener("click",async function(){
-		if ((sus_su_check.sus_su==1 || sus_su_check.sus_su==2) && enable_sus_su.checked=="checked"){
+		if (sus_su_check.sus_su==1 || sus_su_check.sus_su==2){
 			console.log("false")
 			sus_su_check.sus_su=0
 			toast("Reboot to take effect");
