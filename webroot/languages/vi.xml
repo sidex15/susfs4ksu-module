@@ -1,54 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language id="en">
+<language id="vi">
   <!-- General -->
-  <string id="app_title">WebUI menu</string>
+  <string id="app_title">Trình đơn WebUI</string>
   <string id="warning_label">Cảnh báo!</string>
-  <string id="cancel_label">Hủy bỏ</string>
+  <string id="cancel_label">Hủy</string>
   <string id="confirm_label">Xác nhận</string>
-  <string id="about_label">Khác</string>
-  <string id="main_menu_label">Menu chính</string>
+  <string id="about_label">Giới thiệu</string>
+  <string id="main_menu_label">Trình đơn chính</string>
   <string id="load_label">Tải</string>
+  <string id="edit_label">Chỉnh sửa bằng</string>
+  <string id="enabled_label">Đã bật</string>
+  <string id="disabled_label">Đã tắt</string>
+  <string id="deprecated_label">Không còn hỗ trợ</string>
+  <string id="unknown_label">Không xác định</string>
+  <string id="help_label">Trợ giúp</string>
+  <string id="send_logs_label">Gửi nhật ký</string>
+  <string id="export_config_label">Xuất cấu hình</string>
+  <string id="reset_config_label">Đặt lại toàn bộ cấu hình</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">Không được hỗ trợ!</string>
+  <string id="susfs_error_desc">Truy cập WebUI bị từ chối! Hãy đảm bảo bạn đang sử dụng kernel đã vá SuSFS!</string>
   
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">Cập nhật SUSFS Userspace!</string>
+  <string id="susfs_update_desc">Có bản cập nhật mới cho các tệp nhị phân SUSFS Userspace của bạn!</string>
+  <string id="susfs_update2_desc">Vui lòng cập nhật lên phiên bản mới nhất để đảm bảo tương thích với Module và WebUI.</string>
+  <string id="susfs_updating_label">Đang cập nhật...</string>
+  <string id="skip_btn_label">Bỏ qua</string>
+  <string id="update_btn_label">Cập nhật</string>
+
   <!-- Home Page -->
-  <string id="kernel_version_label">Phiên bản kernel</string>
-  <string id="sus_path_label">SUS PATH</string>
-  <string id="sus_mount_label">SUS MOUNT</string>
-  <string id="try_umount_label">TRY UMOUNT</string>
+  <string id="kernel_version_label">Phiên bản Kernel</string>
+  <string id="sus_path_label">Đường dẫn SUS</string>
+  <string id="sus_map_label">Bản đồ SUS</string>
+  <string id="sus_mount_label">Gắn kết SUS</string>
+  <string id="try_umount_label">Thử gỡ gắn kết</string>
+  <string id="susfs_settings_label">Tùy chỉnh SUSFS</string>
+  <string id="susfs_kernel_status_label">Trạng thái Kernel SUSFS</string>
+  
+  <!-- Status Page -->
+  <string id="kernel_features_label">Trạng thái tính năng Kernel</string>
+  <string id="sus_path_feature_label">Hỗ trợ đường dẫn SUS</string>
+  <string id="sus_map_feature_label">Hỗ trợ bản đồ SUS</string>
+  <string id="sus_mount_feature_label">Hỗ trợ gắn kết SUS</string>
+  <string id="sus_kstat_feature_label">Hỗ trợ SUS Kstat</string>
+  <string id="try_umount_feature_label">Hỗ trợ thử gỡ gắn kết</string>
+  <string id="spoof_uname_feature_label">Giả mạo uname</string>
+  <string id="spoof_cmdline_feature_label">Giả mạo Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Hỗ trợ chuyển hướng mở</string>
+  <string id="enable_log_feature_label">Hỗ trợ ghi nhật ký</string>
+  <string id="auto_default_mount_feature_label">Tự động gắn kết mặc định</string>
+  <string id="auto_bind_mount_feature_label">Tự động gắn kết liên kết</string>
+  <string id="auto_try_umount_bind_feature_label">Tự động thử gỡ gắn kết liên kết</string>
+  <string id="hide_symbols_feature_label">Ẩn ký hiệu KSU SUSFS</string>
+  <string id="magic_mount_feature_label">Hỗ trợ Magic Mount</string>
+  <string id="overlayfs_auto_kstat_feature_label">Hỗ trợ OverlayFS Auto Kstat</string>
   
   <!-- Settings -->
   <string id="susfs_log_label">Nhật ký SUSFS</string>
   <string id="sus_su_1_label">SUS SU đang ở chế độ 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU khi khởi động</string>
-  <string id="susfs_settings_label">Thiết lập susfs</string>
-  <string id="auto_hide_label">tự động ẩn cài đặt</string>
-  <string id="default_mounts_label">tự động ẩn các liên kết mặc định</string>
-  <string id="bind_mounts_label">tự động ẩn liên kết bind</string>
-  <string id="try_umount_bind_label">tự động thử umount các liên kết bind</string>
-  <string id="zygote_try_umount_label">thử umount cho hệ thống zygote</string>
-  <string id="kernel_uname_label">Tên Kernel</string>
-  <string id="spoof_kernel_version_label">Giả mạo phiên bản Kernel</string>
-  <string id="spoof_kernel_build_label">Giả mạo phiên bản Kernel build</string>
-  <string id="spoof_on_boot_label">Giả mạo khi khởi động</string>
-  <string id="post_fs_data_label">Thực hiện trên post-fs-data (giả mạo tốt hơn)</string>
-  <string id="uname_warning_label2">Bật tính năng này có thể gây ra treo máy hoặc mất ổn định nếu giả mạo không đúng cách. Bạn có chắc chắn muốn bật thực thi không?</string>
+  <string id="susfs_settings_label">Tùy chỉnh SUSFS</string>
+  <string id="auto_hide_label">Tự động ẩn</string>
+  <string id="default_mounts_label">Tự động ẩn gắn kết mặc định</string>
+  <string id="bind_mounts_label">Tự động ẩn gắn kết liên kết</string>
+  <string id="try_umount_bind_label">Tự động thử gỡ gắn kết liên kết</string>
+  <string id="hide_sus_mnts_for_all_procs_label">Ẩn sus_mounts cho tất cả tiến trình</string>
+  <string id="zygote_try_umount_label">Thử gỡ gắn kết cho tiến trình hệ thống zygote</string>
+  <string id="umount_for_zygote_iso_service_label">Thử gỡ gắn kết cho dịch vụ cách ly zygote</string>
+  <string id="kernel_uname_label">Tên Kernel (Uname)</string>
+  <string id="spoof_kernel_version_label">Giả phiên bản Kernel</string>
+  <string id="spoofed_kernel_version_label">Phiên bản Kernel đã giả</string>
+  <string id="spoof_kernel_build_label">Giả bản dựng Kernel</string>
+  <string id="spoofed_kernel_build_label">Bản dựng Kernel đã giả</string>
+  <string id="spoof_on_boot_label">Giả khi khởi động</string>
+  <string id="post_fs_data_label">Thực thi ở giai đoạn post-fs-data (giả chính xác hơn)</string>
+  <string id="uname_warning_label2">Bật tùy chọn này có thể gây bootloop hoặc mất ổn định nếu giả sai. Bạn có chắc muốn bật thực thi post-fs-data không?</string>
+  <string id="reset_warning_label">Thao tác này sẽ đặt lại toàn bộ cấu hình về mặc định. Bạn có chắc muốn tiếp tục không?</string>
   
   <!-- Custom -->
   <string id="custom_settings_label">Cài đặt tùy chỉnh</string>
-  <string id="hide_custom_rom_label">Ẩn ROM tùy chỉnh</string>
+  <string id="hide_paths_label">Ẩn cài đặt ROM tùy chỉnh</string>
+  <string id="hide_custom_rom_label">Ẩn đường dẫn ROM tùy chỉnh</string>
+  <string id="hide_level_label">Mức độ ẩn</string>
+  <string id="hide_custom_rom_desc1">Loại trừ tệp .apk, .jar, .odex, .vdex, .so, .rc và /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc2">Loại trừ tệp .apk, .jar, .odex, .vdex, .so và /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc3">Loại trừ tệp .apk, .jar, .odex, .vdex và /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc4">Loại trừ tệp .apk, .jar và /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc5">Ẩn toàn bộ đường dẫn ROM tùy chỉnh ⚠️ Có thể gây lỗi hệ thống!</string>
   <string id="hide_vendor_sepolicy_label">Ẩn Vendor SEPolicy</string>
-  <string id="hide_compat_matrix_label">Ẩn Compat Matrix</string>
-  <string id="fake_service_list_label">Danh sách dịch vụ giả mạo</string>
+  <string id="hide_compat_matrix_label">Ẩn ma trận tương thích</string>
+  <string id="fake_service_list_label">Giả danh sách dịch vụ</string>
   <string id="hide_gapps_label">Ẩn GApps</string>
   <string id="hide_revanced_label">Ẩn Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Giả mạo Cmdline</string>
-  <string id="hide_ksu_loop_label">Ẩn KSU Loop</string>
-  <string id="force_hide_dex2oat_label">Buộc ẩn Dex2oat</string>
-  <string id="custom_sus_path_label">Tùy chỉnh SUS Path</string>
-  <string id="custom_sus_mount_label">Tùy chỉnh SUS Mount</string>
-  <string id="custom_try_umount_label">Tùy chỉnh Try Umount</string>
+  <string id="hide_ksu_loop_label">Ẩn vòng lặp KSU</string>
+  <string id="force_hide_dex2oat_label">Buộc ẩn các gắn kết Dex2oat</string>
+  <string id="avc_log_spoofing_label">Giả nhật ký AVC</string>
+  <string id="emulate_vold_app_data_label">Mô phỏng cách ly dữ liệu ứng dụng của Vold</string>
+  <string id="custom_sus_path_label">Đường dẫn SUS tùy chỉnh</string>
+  <string id="custom_sus_path_loop_label">Vòng lặp đường dẫn SUS tùy chỉnh</string>
+  <string id="custom_sus_maps_label">Bản đồ SUS tùy chỉnh</string>
+  <string id="custom_sus_mount_label">Gắn kết SUS tùy chỉnh</string>
+  <string id="custom_try_umount_label">Thử gỡ gắn kết tùy chỉnh</string>
 
   <!-- Credits -->
   <string id="contrib_label">Người đóng góp:</string>
-  <string id= "translators_label">Người dịch:</string>
+  <string id="translators_label">Người dịch:</string>
 </language>
