@@ -322,6 +322,9 @@ async function auto_hide_settings(settings,susfs_version_decimal) {
 			hide_sus_mnts_for_all_procs.checked=false;
 		}
 	}
+	else{
+		hide_sus_mnts_for_all_procs.checked=false;
+	}
 	if (susfs_version_decimal>=158){
 		umount_for_zygote_iso_service.removeAttribute("disabled");
 		if (custom_settings.umount_for_zygote_iso_service==true){
@@ -330,6 +333,9 @@ async function auto_hide_settings(settings,susfs_version_decimal) {
 		else{
 			umount_for_zygote_iso_service.checked=false;
 		}
+	}
+	else{
+		hide_sus_mnts_for_all_procs.checked=false;
 	}
 
 	auto_mount.addEventListener("click",async function(){
@@ -704,7 +710,10 @@ async function custom_toggles(settings) {
 	else hide_ksu_loop.checked=false;
 	if (custom_settings.force_hide_lsposed==true) force_hide_lsposed.checked="checked";
 	else force_hide_lsposed.checked=false;
-	if (susfs_version_decimal<157) emulate_vold_app_data.disabled=true;
+	if (susfs_version_decimal<157) {
+		emulate_vold_app_data.checked=false;
+		emulate_vold_app_data.disabled=true;
+	}
 	else{
 		if (custom_settings.emulate_vold_app_data==true) emulate_vold_app_data.checked="checked";
 		else emulate_vold_app_data.checked=false;
