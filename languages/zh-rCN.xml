@@ -8,12 +8,14 @@
   <string id="about_label">关于</string>
   <string id="main_menu_label">主菜单</string>
   <string id="load_label">加载</string>
+  <string id="edit_label">编辑使用</string>
   <string id="enabled_label">已启用</string>
   <string id="disabled_label">已禁用</string>
   <string id="deprecated_label">已弃用</string>
   <string id="unknown_label">未知</string>
   <string id="help_label">帮助</string>
   <string id="send_logs_label">发送日志</string>
+  <string id="export_config_label">导出配置</string>
   <string id="reset_config_label">重置所有配置</string>
 
   <!-- SUSFS Not supported error-->
