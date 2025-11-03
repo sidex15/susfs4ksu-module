@@ -19,7 +19,7 @@
   <string id="reset_config_label">Tüm Yapılandırmaları Sıfırla</string>
 
   <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">Hadi oradan! Desteklenmeyen Çekirdek!</string>
+  <string id="susfs_error_label">:( Desteklenmeyen Çekirdek!</string>
   <string id="susfs_error_desc">WebUI Erişimi Reddedildi! SuSFS yamalı bir kernel kullandığınızdan emin olun!</string>
   
   <!-- SUSFS Update Dialog -->
