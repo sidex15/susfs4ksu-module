@@ -5,54 +5,108 @@
   <string id="warning_label">Uyarı!</string>
   <string id="cancel_label">İptal</string>
   <string id="confirm_label">Onayla</string>
-  <string id="about_label">Hakkında</string>
+  <string id="about_label">Hakkımızda</string>
   <string id="main_menu_label">Ana Menü</string>
   <string id="load_label">Yükle</string>
+  <string id="edit_label">Şununla Düzenle</string>
+  <string id="enabled_label">Etkinleştirildi</string>
+  <string id="disabled_label">Devre dışı bırakıldı</string>
+  <string id="deprecated_label">Kullanımdan kaldırıldı</string>
+  <string id="unknown_label">Bilinmeyen</string>
+  <string id="help_label">Yardım</string>
+  <string id="send_logs_label">Günlük Kayıtlarını Gönder</string>
+  <string id="export_config_label">Yapılandırma Dosyasını Dışa Aktar</string>
+  <string id="reset_config_label">Tüm Yapılandırmaları Sıfırla</string>
 
   <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">HAYIR! Desteklenmeyen Çekirdek!</string>
-  <string id="susfs_error_desc">WebUI Erişimi Reddedildi! SuSFS yaması uygulanmış bir çekirdek kullandığınızdan emin olun!</string>
+  <string id="susfs_error_label">Hadi oradan! Desteklenmeyen Çekirdek!</string>
+  <string id="susfs_error_desc">WebUI Erişimi Reddedildi! SuSFS yamalı bir kernel kullandığınızdan emin olun!</string>
+  
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS Kullanıcı Alanı Güncellemesi!</string>
+  <string id="susfs_update_desc">SUSFS Kullanıcı Alanı Bileşenleriniz için yeni bir güncelleme mevcut!</string>
+  <string id="susfs_update2_desc">Modül ve WebUI ile uyumluluğu sağlamak için lütfen en son sürüme güncelleyin.</string>
+  <string id="susfs_updating_label">Güncelleniyor...</string>
+  <string id="skip_btn_label">Atla</string>
+  <string id="update_btn_label">Güncelle</string>
 
   <!-- Home Page -->
-  <string id="kernel_version_label">Çekirdek Sürümü</string>
-  <string id="sus_path_label">SUS Yolu</string>
-  <string id="sus_mount_label">SUS Bağlama</string>
-  <string id="try_umount_label">Bağlantıyı Kaldırmayı Dene</string>
-
+  <string id="kernel_version_label">Kernel sürümü</string>
+  <string id="sus_path_label">SUS DİZİNİ</string>
+  <string id="sus_map_label">SUS YÖNLENDİRMESİ</string>
+  <string id="sus_mount_label">SUS BAĞLANTISI</string>
+  <string id="try_umount_label">BAĞLANTIYI KALDIRMAYI DENEYİN</string>
+  <string id="susfs_settings_label">Özel SUSFS Ayarları</string>
+  <string id="susfs_kernel_status_label">SUSFS Çekirdek Durumu</string>
+  
+  <!-- Status Page -->
+  <string id="kernel_features_label">Çekirdek Özellikleri Durumu</string>
+  <string id="sus_path_feature_label">SUS Dizin Desteği</string>
+  <string id="sus_map_feature_label">SUS Yönlendirme Desteği</string>
+  <string id="sus_mount_feature_label">SUS Bağlantı Desteği</string>
+  <string id="sus_kstat_feature_label">SUS Çekirdek İstatistiği Desteği</string>
+  <string id="try_umount_feature_label">Bağlantı Kaldırma Desteğini Deneyin</string>
+  <string id="spoof_uname_feature_label">Sahte Bilgi Desteği</string>
+  <string id="spoof_cmdline_feature_label">Kandır Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Yönlendirme Desteğini Aç</string>
+  <string id="enable_log_feature_label">Günlük Kaydı Desteği</string>
+  <string id="auto_default_mount_feature_label">Otomatik Varsayılan Bağlama</string>
+  <string id="auto_bind_mount_feature_label">Otomatik Dizin Montajı</string>
+  <string id="auto_try_umount_bind_feature_label">Dizin Bağlantısını Otomatik Kaldırma Denemesi</string>
+  <string id="hide_symbols_feature_label">KSU SUSFS Sembollerini Gizle</string>
+  <string id="magic_mount_feature_label">Sihirli Montaj Desteği</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS Otomatik Kstat Desteği</string>
+  
   <!-- Settings -->
   <string id="susfs_log_label">SUSFS Günlükleri</string>
-  <string id="sus_su_1_label">SUS SU Mod 1\'de</string>
+  <string id="sus_su_1_label">SUS SU, Mod 1 &apos;de</string>
   <string id="sus_su_label">SUS SU</string>
-  <string id="sus_su_boot_label">Başlangıçta SUS SU</string>
-  <string id="susfs_settings_label">Özel SUSFS Ayarları</string>
-  <string id="auto_hide_label">Otomatik Gizleme Ayarları</string>
-  <string id="default_mounts_label">Varsayılan Bağlantıları Otomatik Gizle</string>
-  <string id="bind_mounts_label">Bağlantı Bağlantılarını Otomatik Gizle</string>
-  <string id="try_umount_bind_label">Bağlantı Bağlantılarını Otomatik Kaldırmayı Dene</string>
-  <string id="zygote_try_umount_label">Zygote Sistem Süreci için Bağlantı Kaldırmayı Dene</string>
-  <string id="kernel_uname_label">Çekirdek (Kernel) Uname</string>
-  <string id="spoof_kernel_version_label">Çekirdek Sürümünü Taklit Et</string>
-  <string id="spoof_kernel_build_label">Çekirdek Derlemesini Taklit Et</string>
-  <string id="spoof_on_boot_label">Başlangıçta Taklit Et</string>
-  <string id="post_fs_data_label">Post-fs-data\'da Çalıştır (daha iyi taklit eder)</string>
-  <string id="uname_warning_label2">Bu ayarı açmak, yanlış taklit edilmesi durumunda önyükleme döngüsüne veya kararsızlığa neden olabilir. Post-fs-data çalıştırmasını etkinleştirmek istediğinizden emin misiniz?</string>
-
+  <string id="sus_su_boot_label">Önyüklemede SUS SU</string>
+  <string id="susfs_settings_label">özel susfs ayarları</string>
+  <string id="auto_hide_label">ayarları otomatik gizle</string>
+  <string id="default_mounts_label">varsayılan montajları otomatik olarak gizle</string>
+  <string id="bind_mounts_label">dizin bağlantılarını otomatik gizle</string>
+  <string id="try_umount_bind_label">dizin bağlantısını otomatik kaldırma denemesi</string>
+  <string id="hide_sus_mnts_for_all_procs_label">Tüm işlemler için sus_mounts gizle</string>
+  <string id="zygote_try_umount_label">zygote sistem süreci için bağlantı kaldırmayı deneyin</string>
+  <string id="umount_for_zygote_iso_service_label">zygote izolasyon hizmeti için bağlantı kaldırmayı deneyin</string>
+  <string id="kernel_uname_label">Çekirdek Bilgisi</string>
+  <string id="spoof_kernel_version_label">Sahte Çekirdek Sürümü</string>
+  <string id="spoofed_kernel_version_label">Sahte Çekirdek Sürümü</string>
+  <string id="spoof_kernel_build_label">Sahte Çekirdek Oluşturma</string>
+  <string id="spoofed_kernel_build_label">Sahte Çekirdek Oluşturma</string>
+  <string id="spoof_on_boot_label">Önyüklemede kandır</string>
+  <string id="post_fs_data_label">Post-fs-data üzerinde yürüt (daha iyi taklit)</string>
+  <string id="uname_warning_label2">Bu seçeneği açmak, yanlış şekilde kandırma ayarlanırsa cihazın önyükleme döngüsüne girmesine veya kararsız çalışmasına yol açabilir. Post-fs-data yürütmeyi etkinleştirmek istediğinizden emin misiniz?</string>
+  <string id="reset_warning_label">Bu, tüm yapılandırmaları varsayılan değerlerine sıfırlayacaktır. Devam etmek istediğinizden emin misiniz?</string>
+  
   <!-- Custom -->
   <string id="custom_settings_label">Özel Ayarlar</string>
-  <string id="hide_custom_rom_label">Özel ROM\'u Gizle</string>
-  <string id="hide_vendor_sepolicy_label">Satıcı SEPolicy\'sini Gizle</string>
-  <string id="hide_compat_matrix_label">Uyumluluk Matrisini Gizle</string>
-  <string id="fake_service_list_label">Servis Listesini Taklit Et</string>
-  <string id="hide_gapps_label">GApps\'i Gizle</string>
-  <string id="hide_revanced_label">Revanced\'ı Gizle (YT/YTM)</string>
-  <string id="spoof_cmdline_label">Komut Satırını Taklit Et</string>
+  <string id="hide_paths_label">Özel Rom Ayarlarını Gizle</string>
+  <string id="hide_custom_rom_label">Özel Rom Dizinini Gizle</string>
+  <string id="hide_level_label">Seviyeyi Gizle</string>
+  <string id="hide_custom_rom_desc1">.apk, .jar, .odex, .vdex, .so, .rc ve /vendor/bin/hw/ dosyalarını hariç tutun</string>
+  <string id="hide_custom_rom_desc2">.apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ dosyalarını hariç tutun</string>
+  <string id="hide_custom_rom_desc3">.apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files dosyalarını hariç tutun</string>
+  <string id="hide_custom_rom_desc4">.apk, .jar, and /vendor/bin/hw/ dosyalarını hariç tutun</string>
+  <string id="hide_custom_rom_desc5">Tüm özel rom dizilerini gizle ⚠️Riskli ve sorunlara yol açabilir!</string>
+  <string id="hide_vendor_sepolicy_label">Vendor SEPolicy&apos;yi gizle</string>
+  <string id="hide_compat_matrix_label">Uyum Matrisini Gizle</string>
+  <string id="fake_service_list_label">Sahte Hizmet Listesi</string>
+  <string id="hide_gapps_label">GApp&apos;leri gizle</string>
+  <string id="hide_revanced_label">Revanced&apos;i Gizle (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Sahte Cmdline</string>
   <string id="hide_ksu_loop_label">KSU Döngüsünü Gizle</string>
-  <string id="force_hide_dex2oat_label">Dex2oat\'ı Zorla Gizle</string>
-  <string id="custom_sus_path_label">Özel SUS Yolu</string>
-  <string id="custom_sus_mount_label">Özel SUS Bağlama</string>
-  <string id="custom_try_umount_label">Özel Bağlantı Kaldırmayı Dene</string>
+  <string id="force_hide_dex2oat_label">Dex2oat Bağlantısını Gizlemeye Zorla</string>
+  <string id="avc_log_spoofing_label">AVC Günlük Sahteciliği</string>
+  <string id="emulate_vold_app_data_label">Vold Uygulama Veri İzolasyonunu Emüle Et</string>
+  <string id="custom_sus_path_label">Özel SUS Dizini</string>
+  <string id="custom_sus_path_loop_label">Özel SUS Dizin Döngüsü</string>
+  <string id="custom_sus_maps_label">Özel SUS Yönlendirmesi</string>
+  <string id="custom_sus_mount_label">Özel SUS Montajı</string>
+  <string id="custom_try_umount_label">Özel Bağlantıyı Kaldırmayı Dene</string>
 
   <!-- Credits -->
-  <string id="contrib_label">Katkıda bulunanlar:</string>
+  <string id="contrib_label">Katkı Sağlayanlar:</string>
   <string id= "translators_label">Çevirmenler:</string>
 </language>
