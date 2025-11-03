@@ -20,7 +20,7 @@
 
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">:( Desteklenmeyen Çekirdek!</string>
-  <string id="susfs_error_desc">WebUI Erişimi Reddedildi! SuSFS yamalı bir kernel kullandığınızdan emin olun!</string>
+  <string id="susfs_error_desc">WebUI Erişimi Reddedildi! SuSFS yamalı bir çekirdek kullandığınızdan emin olun!</string>
   
   <!-- SUSFS Update Dialog -->
   <string id="susfs_update_label">SUSFS Kullanıcı Alanı Güncellemesi!</string>
@@ -31,7 +31,7 @@
   <string id="update_btn_label">Güncelle</string>
 
   <!-- Home Page -->
-  <string id="kernel_version_label">Kernel sürümü</string>
+  <string id="kernel_version_label">Çekirdek sürümü</string>
   <string id="sus_path_label">SUS DİZİNİ</string>
   <string id="sus_map_label">SUS YÖNLENDİRMESİ</string>
   <string id="sus_mount_label">SUS BAĞLANTISI</string>
