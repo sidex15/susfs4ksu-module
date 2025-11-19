@@ -41,14 +41,14 @@ ver=$(uname -r | cut -d. -f1)
 if [ ${ver} -lt 5 ]; then
     KERNEL_VERSION=non-gki
 	echo "[-] Non-GKI kernel detected... use non-GKI susfs bins..."
-    SUSFS_VERSION_RAW=$(${SUSFSD} version)
+    SUSFS_VERSION_RAW=$(${SUSFS_BIN} show version)
     # Example output = 'v1.5.3'
     SUSFS_DECIMAL=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//; s/\.//g')
     # SUSFS_DECIMAL = '153'
 else
 	KERNEL_VERSION=gki
 	echo "[-] GKI kernel detected... use GKI susfs bins..."
-    SUSFS_VERSION_RAW=$(${SUSFSD} version)
+    SUSFS_VERSION_RAW=$(${SUSFS_BIN} show version)
     # Example output = 'v1.5.3'
     SUSFS_DECIMAL=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//; s/\.//g')
     # SUSFS_DECIMAL = '153'

@@ -8,7 +8,7 @@ PERSISTENT_DIR=/data/adb/susfs4ksu
 tmpfolder=/data/adb/ksu/susfs4ksu
 logfile="$tmpfolder/logs/susfs.log"
 logfile1="$tmpfolder/logs/susfs1.log"
-version=$(${SUSFSD} version)
+version=$(${SUSFS_BIN} show version)
 SUSFS_DECIMAL=$(echo "$version" | sed 's/^v//; s/\.//g')
 kernel_ver=$(head -n 1 "$PERSISTENT_DIR/kernelversion.txt")
 
