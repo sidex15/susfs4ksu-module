@@ -20,7 +20,7 @@ var susfs_version_decimal=await run(`echo "${susfs_version}" | cut -d '-' -f 1 |
 const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
 const susfs_features = await run(`${susfs_bin} show enabled_features || ${susfsd} features`);
-const kernel_variant = await run(`${susfsd} variant || ${susfs_bin} show variant`);
+const kernel_variant = await run(`${susfs_bin} show variant`);
 
 //susfs features
 if (susfs_version_decimal>152){
