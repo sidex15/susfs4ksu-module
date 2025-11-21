@@ -20,13 +20,23 @@ if command -v curl > /dev/null 2>&1; then
 	download() { curl --connect-timeout 10 -Ls "$1"; }
 fi
 
+# Checking KernelSU Version
+ksuver=$(${KSU_BIN} debug version | cut -d' ' -f3)
+ui_print "[-] Detected KernelSU version: $ksuver"
+susfs_temp_bin="pre-20000"
+
+if [ ${ksuver} -gt 19999 ] 2>/dev/null; then
+	ui_print "[-] KernelSU version is using supercalls, using v2.0.0 binary for checking"
+	susfs_temp_bin="20000"
+fi
+
 ver=$(uname -r | cut -d. -f1)
 if [ ${ver} -lt 5 ]; then
     KERNEL_VERSION=non-gki
 	ui_print "[-] Non-GKI kernel detected... use non-GKI susfs bins..."
-	chmod +x "${TMPDIR}/susfs/tools/latest/${KERNEL_VERSION}/ksu_susfs_arm64"
+	chmod +x "${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64"
 	if [ ${ARCH} = "arm64" ]; then
-		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/latest/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
+		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
 		# Example output = 'v1.5.3'
 		SUSFS_DECIMAL=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//; s/\.//g')
 		# SUSFS_DECIMAL = '153'
@@ -34,9 +44,9 @@ if [ ${ver} -lt 5 ]; then
 else
 	KERNEL_VERSION=gki
 	ui_print "[-] GKI kernel detected... use GKI susfs bins..."
-	chmod +x "${TMPDIR}/susfs/tools/latest/${KERNEL_VERSION}/ksu_susfs_arm64"
+	chmod +x "${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64"
 	if [ ${ARCH} = "arm64" ]; then
-		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/latest/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
+		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
 		# Example output = 'v1.5.3'
 		SUSFS_DECIMAL=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//; s/\.//g')
 		# SUSFS_DECIMAL = '153'
@@ -58,13 +68,13 @@ if [ -n "$SUSFS_VERSION_RAW" ] && [ "$SUSFS_DECIMAL" -gt 152 ] 2>/dev/null; then
 			cp -f ${MODPATH}/ksu_susfs_remote ${DEST_BIN_DIR}/ksu_susfs
 		else
 			# test failed
-			cp ${TMPDIR}/susfs/tools/latest/${KERNEL_VERSION}/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
+			cp ${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
 		fi
 	else
 		# failed
 		echo "[!] No internet connection or susfs binaries not found"
 		echo "[-] Using local susfs binaries"
-		cp ${TMPDIR}/susfs/tools/latest/${KERNEL_VERSION}/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
+		cp ${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
 	fi		
 else
 	ui_print "[-] Kernel is using susfs v1.5.2"
