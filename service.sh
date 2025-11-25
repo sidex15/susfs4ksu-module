@@ -166,6 +166,7 @@ fi
 	echo "susfs4ksu/service: [hide_vendor_sepolicy]" >> $logfile1
 	for sepolicy_cil in \
 		/vendor/etc/selinux/vendor_sepolicy.cil \
+		/vendor/etc/selinux/vendor_file_contexts \
 		/system_ext/etc/selinux/system_ext_sepolicy.cil
 	do
 		grep -q lineage $sepolicy_cil && {
