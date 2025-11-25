@@ -16,7 +16,7 @@ jobs:
       - name: Checkout v1.5.2+ branch
         uses: actions/checkout@v4
         with:
-          ref: v1.5.2+
+          ref: meta
 
       - name: grab zig
         run: |
