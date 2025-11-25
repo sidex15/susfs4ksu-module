@@ -16,10 +16,10 @@ kernel_ver=$(head -n 1 "$PERSISTENT_DIR/kernelversion.txt")
 [ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
 mkdir -p $mntfolder
 
-# use susfsd to check if susfs is supported
-if ${SUSFSD} support | grep -q "Supported"; then
+# use ksu_susfs show enabled_features to check if susfs is supported, if it returns an error, then susfs is not supported
+if ${SUSFS_BIN} show enabled_features; then
 	touch $tmpfolder/logs/susfs_active
-else
+else # check dmesg for susfs indication
 	dmesg | grep -q "susfs:" > /dev/null && touch $tmpfolder/logs/susfs_active || rm -f $tmpfolder/logs/susfs_active
 fi
 
