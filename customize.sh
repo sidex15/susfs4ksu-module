@@ -85,14 +85,22 @@ fi
 rm -f ${MODPATH}/ksu_susfs_remote > /dev/null 2>&1
 
 # copy sus_su and susfsd over
-ui_print "[-] Installing sus_su"
-cp ${TMPDIR}/susfs/tools/sus_su_arm64 ${DEST_BIN_DIR}/sus_su
-if [ -f ${DEST_BIN_DIR}/susfsd ]; then
-	ui_print "[-] Susfsd already exists, skipping installation"
+if { [ -n "$SUSFS_DECIMAL" ] && [ "$SUSFS_DECIMAL" -ge 200 ] && [ "$SUSFS_DECIMAL" -le 299 ]; } \
+   || { [ -n "$SUSFS_DECIMAL" ] && [ "$SUSFS_DECIMAL" -ge 2000 ]; }; then
+	ui_print "[!] Susfs version v2.0.0+ detected, sus_su is deprecated"
+	ui_print "[!] Susfs version v2.0.0+ detected, susfsd won't work properly"
+	ui_print "[-] Skipping sus_su installation"
+	ui_print "[-] Skipping susfsd installation"
 else
-	ui_print "[-] Installing susfsd"
-	cp ${TMPDIR}/susfs/tools/susfsd ${DEST_BIN_DIR}/susfsd
-	chmod 755 ${DEST_BIN_DIR}/susfsd
+	ui_print "[-] Installing sus_su"
+	cp ${TMPDIR}/susfs/tools/sus_su_arm64 ${DEST_BIN_DIR}/sus_su
+	if [ -f ${DEST_BIN_DIR}/susfsd ]; then
+		ui_print "[-] Susfsd already exists, skipping installation"
+	else
+		ui_print "[-] Installing susfsd"
+		cp ${TMPDIR}/susfs/tools/susfsd ${DEST_BIN_DIR}/susfsd
+		chmod 755 ${DEST_BIN_DIR}/susfsd
+	fi
 fi
 
 chmod 755 ${DEST_BIN_DIR}/ksu_susfs ${DEST_BIN_DIR}/sus_su
