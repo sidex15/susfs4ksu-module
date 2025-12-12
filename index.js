@@ -1023,9 +1023,16 @@ async function custom_rom_settings(settings) {
 
 // custom sus path
 async function custom_sus_path(){
+	const sus_path_section = document.getElementById("sus_path_section");
 	const load_sus_path = document.getElementById("load_sus_path");
 	const sus_path_area = document.getElementById("custom_sus_path");
 	const save_sus_path = document.getElementById("save_sus_path");
+
+	// Check if the sus_path feature is enabled in kernel
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_SUS_PATH")==false) {
+		sus_path_section.classList.add("hidden");
+		return;
+	}
 
 	// Load the custom SUS PATH
 	load_sus_path.addEventListener("click",async ()=>{
