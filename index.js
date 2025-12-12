@@ -287,7 +287,7 @@ async function sus_su_toggle(settings) {
 }
 
 //Auto hide settings
-async function auto_hide_settings(settings,susfs_version_decimal) {
+async function auto_hide_settings(settings,susfs_version_decimal,susfs_features) {
 	const auto_mount = document.getElementById("auto_mount");
 	const auto_bind = document.getElementById("auto_bind");
 	const auto_umount_bind = document.getElementById("auto_umount_bind");
@@ -335,6 +335,22 @@ async function auto_hide_settings(settings,susfs_version_decimal) {
 	}
 	else{
 		hide_sus_mnts_for_all_procs.checked=false;
+	}
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT")==false){
+		auto_mount.checked=false;
+		auto_mount.setAttribute("disabled","");
+	}
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT")==false){
+		auto_bind.checked=false;
+		auto_bind.setAttribute("disabled","");
+	}
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT")==false){
+		auto_umount_bind.checked=false;
+		auto_umount_bind.setAttribute("disabled","");
+	}
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT")==false){
+		try_umount_zygote.checked=false;
+		try_umount_zygote.setAttribute("disabled","");
 	}
 
 	auto_mount.addEventListener("click",async function(){
@@ -1104,10 +1120,17 @@ async function custom_sus_maps(susfs_features){
 
 // custom sus mount
 async function custom_sus_mount(){
+	const sus_mount_section = document.getElementById("sus_mount_section");
 	const load_sus_mount = document.getElementById("load_sus_mount");
 	const sus_mount_area = document.getElementById("custom_sus_mount");
 	const save_sus_mount = document.getElementById("save_sus_mount");
 	//const mainContainer = document.querySelector('main');
+
+	// check if try_umount is enabled in kernel
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_SUS_MOUNT")==false || (susfs_version_decimal>=200 && susfs_version_decimal<1000)) {
+		sus_mount_section.classList.add("hidden");
+		return;
+	}
 
 	// Load the custom SUS MOUNT
 	load_sus_mount.addEventListener("click",async ()=>{
@@ -1131,10 +1154,17 @@ async function custom_sus_mount(){
 
 // custom try umount
 async function custom_try_umount(){
+	const try_umount_section = document.getElementById("try_umount_section");
 	const load_try_umount = document.getElementById("load_try_umount");
 	const try_umount_area = document.getElementById("custom_try_umount");
 	const save_try_umount = document.getElementById("save_try_umount");
 	const mainContainer = document.querySelector('main');
+
+	// check if try_umount is enabled in kernel
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT")==false) {
+		try_umount_section.classList.add("hidden");
+		return;
+	}
 
 	// Load the custom SUS MOUNT
 	load_try_umount.addEventListener("click",async ()=>{
