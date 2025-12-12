@@ -1201,6 +1201,10 @@ async function loadKernelFeatureStatus(susfs_features) {
   const deprecated_features = [
 	{ id: 'status_overlayfs_auto_kstat', config: 'CONFIG_KSU_SUSFS_SUS_OVERLAYFS', version: 158 },
 	{ id: 'status_magic_mount', config: 'CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT', version: 1511 },
+	{ id: 'status_auto_try_umount_bind', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT', version: 200 },
+	{ id: 'status_auto_default_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT', version: 200 },
+	{ id: 'status_auto_bind_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT', version: 200 },
+	{ id: 'status_try_umount', config: 'CONFIG_KSU_SUSFS_TRY_UMOUNT', version: 200 },
   ];
 
   for (const feature of features) {
