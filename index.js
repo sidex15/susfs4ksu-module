@@ -11,7 +11,6 @@ const tmpfolder="/data/adb/ksu/susfs4ksu"
 const moddir="/data/adb/modules/susfs4ksu"
 const config="/data/adb/susfs4ksu"
 const susfs_bin="/data/adb/ksu/bin/ksu_susfs"
-const susfsd="/data/adb/ksu/bin/susfsd"
 const settings = catToObject(await run(`cat ${config}/config.sh`));
 
 //susfs version and kernel variant
@@ -19,7 +18,7 @@ var susfs_version = await run(`grep version= ${moddir}/module.prop | cut -d '=' 
 var susfs_version_decimal=await run(`echo "${susfs_version}" | cut -d '-' -f 1 | sed 's/^v//; s/\\.//g'`);
 const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
-const susfs_features = await run(`${susfs_bin} show enabled_features || ${susfsd} features`);
+const susfs_features = await run(`${susfs_bin} show enabled_features`);
 const kernel_variant = await run(`${susfs_bin} show variant`);
 
 //susfs features
