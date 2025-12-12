@@ -1,6 +1,5 @@
 #!/bin/sh
 SUSFS_BIN=/data/adb/ksu/bin/ksu_susfs
-SUSFSD=/data/adb/ksu/bin/susfsd
 TMPDIR=/data/adb/ksu/susfs4ksu
 
 download() { busybox wget -T 1 --no-check-certificate -qO - "$1"; }

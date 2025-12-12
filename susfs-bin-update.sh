@@ -1,6 +1,5 @@
 #!/bin/sh
 SUSFS_BIN=/data/adb/ksu/bin/ksu_susfs
-SUSFSD=/data/adb/ksu/bin/susfsd
 KSU_BIN=/data/adb/ksu/bin/
 TMPDIR=/data/adb/ksu/susfs4ksu
 
