@@ -36,20 +36,28 @@ if [ ${ver} -lt 5 ]; then
 	ui_print "[-] Non-GKI kernel detected... use non-GKI susfs bins..."
 	chmod +x "${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64"
 	if [ ${ARCH} = "arm64" ]; then
-		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
 		# Example output = 'v1.5.3'
-		SUSFS_DECIMAL=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//; s/\.//g')
-		# SUSFS_DECIMAL = '153'
+		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
+		# SUSFS_DECIMAL_MAIN = '1'
+		SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
+		# SUSFS_DECIMAL_SUB = '5'
+		SUSFS_DECIMAL_SUB=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f2)
+		# SUSFS_DECIMAL_PATCH = '3'
+		SUSFS_DECIMAL_PATCH=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f3)
 	fi
 else
 	KERNEL_VERSION=gki
 	ui_print "[-] GKI kernel detected... use GKI susfs bins..."
 	chmod +x "${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64"
 	if [ ${ARCH} = "arm64" ]; then
-		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
 		# Example output = 'v1.5.3'
-		SUSFS_DECIMAL=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//; s/\.//g')
-		# SUSFS_DECIMAL = '153'
+		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
+		# SUSFS_DECIMAL_MAIN = '1'
+		SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
+		# SUSFS_DECIMAL_SUB = '5'
+		SUSFS_DECIMAL_SUB=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f2)
+		# SUSFS_DECIMAL_PATCH = '3'
+		SUSFS_DECIMAL_PATCH=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f3)
 	fi
 fi
 
@@ -57,10 +65,10 @@ fi
 # download remote
 #    test binary; if fail use whats shipped
 # if dl fail; use whats shipped
-if [ -n "$SUSFS_VERSION_RAW" ] && [ "$SUSFS_DECIMAL" -gt 152 ] 2>/dev/null; then
+if [ -n "$SUSFS_VERSION_RAW" ] 2>/dev/null; then
 	ui_print "[-] Kernel is using susfs $SUSFS_VERSION_RAW"
 	ui_print "[-] Downloading susfs $SUSFS_VERSION_RAW from the internet"
-	if download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/$SUSFS_DECIMAL/$KERNEL_VERSION/ksu_susfs_arm64" > ${MODPATH}/ksu_susfs_remote ; then
+	if download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/new/$SUSFS_DECIMAL_MAIN/$SUSFS_DECIMAL_SUB/$SUSFS_DECIMAL_PATCH/$KERNEL_VERSION/ksu_susfs_arm64" > ${MODPATH}/ksu_susfs_remote ; then
 		# test downloaded binary
 		chmod +x ${MODPATH}/ksu_susfs_remote
 		if ${MODPATH}/ksu_susfs_remote > /dev/null 2>&1 ; then
@@ -85,16 +93,16 @@ fi
 rm -f ${MODPATH}/ksu_susfs_remote > /dev/null 2>&1
 
 # copy sus_su over
-if { [ -n "$SUSFS_DECIMAL" ] && [ "$SUSFS_DECIMAL" -ge 200 ] && [ "$SUSFS_DECIMAL" -le 299 ]; } \
-   || { [ -n "$SUSFS_DECIMAL" ] && [ "$SUSFS_DECIMAL" -ge 2000 ]; }; then
+if [ -n "$SUSFS_DECIMAL_MAIN" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 2 ]; then
 	ui_print "[!] Susfs version v2.0.0+ detected, sus_su is deprecated"
 	ui_print "[-] Skipping sus_su installation"
 else
 	ui_print "[-] Installing sus_su"
 	cp ${TMPDIR}/susfs/tools/sus_su_arm64 ${DEST_BIN_DIR}/sus_su
+	chmod 755 ${DEST_BIN_DIR}/ksu_susfs ${DEST_BIN_DIR}/sus_su
 fi
 
-chmod 755 ${DEST_BIN_DIR}/ksu_susfs ${DEST_BIN_DIR}/sus_su
+# set permissions
 chmod 644 ${MODPATH}/post-fs-data.sh ${MODPATH}/post-mount.sh ${MODPATH}/service.sh ${MODPATH}/boot-completed.sh ${MODPATH}/action.sh ${MODPATH}/uninstall.sh ${MODPATH}/susfs-bin-update.sh ${MODPATH}/susfs_reset.sh
 
 prop_value=$(getprop ro.boot.vbmeta.digest)

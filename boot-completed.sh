@@ -8,7 +8,12 @@ tmpfolder=/data/adb/ksu/susfs4ksu
 logfile="$tmpfolder/logs/susfs.log"
 logfile1="$tmpfolder/logs/susfs1.log"
 version=$(${SUSFS_BIN} show version)
-SUSFS_DECIMAL=$(echo "$version" | sed 's/^v//; s/\.//g')
+# SUSFS_DECIMAL_MAIN = '1'
+SUSFS_DECIMAL_MAIN=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f1)
+# SUSFS_DECIMAL_SUB = '5'
+SUSFS_DECIMAL_SUB=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f2)
+# SUSFS_DECIMAL_PATCH = '3'
+SUSFS_DECIMAL_PATCH=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f3)
 kernel_ver=$(head -n 1 "$PERSISTENT_DIR/kernelversion.txt")
 
 # Mount folder of susfs4ksu
@@ -40,7 +45,7 @@ fi
 sed -i "s/^description=.*/$description/g" $MODDIR/module.prop
 
 # Detect susfs version
-if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 152 ] 2>/dev/null; then
+if [ -n "$version" ] 2>/dev/null; then
     # Replace only version number, keep suffix
     sed -i "s/^version=v[0-9.]*/version=$version/" $MODDIR/module.prop
 fi
@@ -48,14 +53,14 @@ fi
 # routines
 
 # hide sus mounts for all processes v1.5.7+
-[ $hide_sus_mnts_for_all_procs -lt 1 ] && [ "$SUSFS_DECIMAL" -gt 156 ] 2>/dev/null && {
+[ $hide_sus_mnts_for_all_procs -lt 1 ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null && {
 	# Hide sus mounts for all processes
 	${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
 }
 
 # Starting in SUSFS version v1.5.8, it needs to set the sdcard and android data root paths
 # This will start the sus_path process. Without this check, sus_path will not work
-if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 157 ] 2>/dev/null; then
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 8 ] 2>/dev/null; then
 	until [ -d "/sdcard/Android/data" ]; do sleep 1; done
 	${SUSFS_BIN} set_sdcard_root_path /sdcard
 	${SUSFS_BIN} set_android_data_root_path /sdcard/Android/data
@@ -82,7 +87,7 @@ else
 fi
 
 # Add sus_path_loop paths (late v1.5.9+)
-if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 158 ] 2>/dev/null; then
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 9 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ]  2>/dev/null; then
 	# to add paths
 	# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path_loop.txt
 	# this'll make it easier for the webui to do stuff
@@ -167,7 +172,7 @@ fi
 	
 	#check for susfs version and use the appropriate method
 	if [ -f $mntfolder/cmdline ]; then
-		if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 153 ] 2>/dev/null; then
+		if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 4 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 		${SUSFS_BIN} set_cmdline_or_bootconfig $mntfolder/cmdline
 		else
 			${SUSFS_BIN} set_proc_cmdline $mntfolder/cmdline
@@ -175,7 +180,7 @@ fi
 	fi
 
 	if [ -f $mntfolder/bootconfig ]; then
-		if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 153 ] 2>/dev/null; then
+		if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 4 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 		${SUSFS_BIN} set_cmdline_or_bootconfig $mntfolder/bootconfig
 		else
 			${SUSFS_BIN} set_proc_cmdline $mntfolder/bootconfig
@@ -209,7 +214,7 @@ endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d
 echo "boot_completed=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 sleep 15; # this delay is to ensure that all of the susfs logs have been captured
 # Just to be sure, set sdcard and android data root paths again
-if [ -n "$version" ] && [ "$SUSFS_DECIMAL" -gt 157 ] 2>/dev/null; then
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 8 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 	${SUSFS_BIN} set_sdcard_root_path /sdcard
 	${SUSFS_BIN} set_android_data_root_path /sdcard/Android/data
 fi

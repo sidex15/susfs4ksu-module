@@ -16,12 +16,12 @@ fi
 # download remote
 #    test binary; if fail use whats shipped
 # if dl fail; use whats shipped
-if download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/main/$1/$2/ksu_susfs_arm64" > ${TMPDIR}/ksu_susfs_remote ; then
+if download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/new/$1/$2/$3/$4/ksu_susfs_arm64" > ${TMPDIR}/ksu_susfs_remote ; then
     # test downloaded binary
     chmod +x ${TMPDIR}/ksu_susfs_remote
     if ${TMPDIR}/ksu_susfs_remote > /dev/null 2>&1 ; then
 		# test ok
-		cp -f ${TMPDIR}/ksu_susfs_remote ${KSU_BIN}/ksu_susfs
+		mv -f ${TMPDIR}/ksu_susfs_remote ${KSU_BIN}/ksu_susfs
 		echo "[-] Update Complete!"
     else
 		# test failed
