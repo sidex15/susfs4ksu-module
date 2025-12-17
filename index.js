@@ -16,13 +16,18 @@ const settings = catToObject(await run(`cat ${config}/config.sh`));
 //susfs version and kernel variant
 var susfs_version = await run(`grep version= ${moddir}/module.prop | cut -d '=' -f 2`);
 var susfs_version_decimal=await run(`echo "${susfs_version}" | cut -d '-' -f 1 | sed 's/^v//; s/\\.//g'`);
+var susfs_versions = {
+	main: await run(`echo "${susfs_version}" | cut -d '-' -f 1 | sed 's/^v//;' | cut -d '.' -f 1`),
+	sub: await run(`echo "${susfs_version}" | cut -d '-' -f 1 | sed 's/^v//;' | cut -d '.' -f 2`),
+	patch: await run(`echo "${susfs_version}" | cut -d '-' -f 1 | sed 's/^v//;' | cut -d '.' -f 3`)
+}
 const susfs_version_tag = document.getElementById("susfs_version");
 susfs_version_tag.innerHTML=susfs_version
 const susfs_features = await run(`${susfs_bin} show enabled_features`);
 const kernel_variant = await run(`${susfs_bin} show variant`);
 
 //susfs features
-if (susfs_version_decimal>152){
+if ((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=3) || (susfs_versions.main>=2)){
 	const susfs_features_tag = document.getElementById("susfs_kernel_status");
 	susfs_features_tag.classList.remove("hidden");
 }
@@ -87,7 +92,7 @@ if (is_sus_su_exists==-1){
 	enable_sus_su.setAttribute("disabled","");
 }
 else{
-	if(susfs_version_decimal>=150){
+	if((susfs_versions.main>=1 && susfs_versions.sub>=5) || (susfs_versions.main>=2)){
 		if(is_sus_su_exists==1){
 			sus_su_1.classList.remove("hidden")
 		}
@@ -97,9 +102,9 @@ else{
 }
 
 //v1.5.4+ auto hide settings
-if(susfs_version_decimal>=154){
+if((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=4) || (susfs_versions.main>=2)){
 	sus_su_154.classList.remove("hidden")
-	auto_hide_settings(settings,susfs_version_decimal);
+	auto_hide_settings(settings,susfs_features);
 }
 
 //highway transition
@@ -136,7 +141,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		susfs_send_logs();
 		set_uname(settings);
 		susfs_log_toggle(settings);
-		if (susfs_version_decimal>=154) auto_hide_settings(settings,susfs_version_decimal);
+		if ((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=4) || (susfs_versions.main>=2)) auto_hide_settings(settings,susfs_features);
 		sus_su_toggle(settings);
     } else if (currentPath === '/custom.html') {
 		//console.log("in custom");
@@ -145,7 +150,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		custom_sus_mount();
 		custom_try_umount();
 		custom_sus_path();
-		custom_sus_path_loop(susfs_version_decimal);
+		custom_sus_path_loop(susfs_versions);
 		custom_sus_maps(susfs_features);
     }
 	else if (currentPath === '/status.html') {
@@ -184,7 +189,7 @@ export async function run(command) {
 }
 
 //susfs binary update
-async function susfs_bin_update(susfs_version, kernel_variant) {
+async function susfs_bin_update(susfs_versions, kernel_variant) {
 	const susfs_update_dialog = document.getElementById("susfs_update_dialog");
 	const susfs_update_btn = document.getElementById("susfs_update_btn");
 	const susfs_update = document.getElementById("susfs_update");
@@ -205,9 +210,9 @@ async function susfs_bin_update(susfs_version, kernel_variant) {
 
 		setTimeout(async () => {
 			try {
-				await run(`sh ${moddir}/susfs-bin-update.sh ${susfs_version.toString()} ${kernel_variant.toLowerCase()}`);
+				await run(`sh ${moddir}/susfs-bin-update.sh ${susfs_versions.main.toString()} ${susfs_versions.sub.toString()} ${susfs_versions.patch.toString()} ${kernel_variant.toLowerCase()}`);
 				susfs_update_dialog.close();
-				toast(`SUSFS binary updated to version ${susfs_version} for ${kernel_variant} kernel!`);
+				toast(`SUSFS binary updated to version v${susfs_versions.main}.${susfs_versions.sub}.${susfs_versions.patch} for ${kernel_variant} kernel!`);
 			}
 			catch (error) {
 				toast(`Error updating SUSFS binary!`);
@@ -236,7 +241,7 @@ async function sus_su_toggle(settings) {
 		}
 		else{
 			console.log("true")
-			if(susfs_version_decimal>=150){
+			if(susfs_versions.main>=1 && susfs_versions.sub>=5){
 				sus_su_check.sus_su_active=2
 				run(`${susfs_bin} sus_su 2`)
 				exec(`sed -i 's/sus_su_active=.*/sus_su_active=2/' ${config}/config.sh`)
@@ -272,7 +277,7 @@ async function sus_su_toggle(settings) {
 		else{
 			console.log("true")
 			toast("Reboot to take effect");
-			if(susfs_version_decimal>=150){
+			if(susfs_versions.main>=1 && susfs_versions.sub>=5){
 				sus_su_check.sus_su=2
 				run(`sed -i 's/sus_su=.*/sus_su=2/' ${config}/config.sh`);
 			}
@@ -287,7 +292,7 @@ async function sus_su_toggle(settings) {
 }
 
 //Auto hide settings
-async function auto_hide_settings(settings,susfs_version_decimal,susfs_features) {
+async function auto_hide_settings(settings,susfs_features) {
 	const auto_mount = document.getElementById("auto_mount");
 	const auto_bind = document.getElementById("auto_bind");
 	const auto_umount_bind = document.getElementById("auto_umount_bind");
@@ -312,7 +317,7 @@ async function auto_hide_settings(settings,susfs_version_decimal,susfs_features)
 	if(is_try_umount_zygote=="false"){
 		try_umount_zygote.checked=false;
 	}
-	if (susfs_version_decimal>=157){
+	if ((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=7) || (susfs_versions.main>=2)){
 		hide_sus_mnts_for_all_procs.removeAttribute("disabled");
 		if (custom_settings.hide_sus_mnts_for_all_procs==true){
 		hide_sus_mnts_for_all_procs.checked="checked";
@@ -324,7 +329,7 @@ async function auto_hide_settings(settings,susfs_version_decimal,susfs_features)
 	else{
 		hide_sus_mnts_for_all_procs.checked=false;
 	}
-	if (susfs_version_decimal>=158){
+	if (((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=8) || (susfs_versions.main>=2)) && (await run(`${susfs_bin} umount_for_zygote_iso_service ${custom_settings.umount_for_zygote_iso_service} > /dev/null 2>&1 && echo true || echo false`))=="true"){
 		umount_for_zygote_iso_service.removeAttribute("disabled");
 		if (custom_settings.umount_for_zygote_iso_service==true){
 			umount_for_zygote_iso_service.checked="checked";
@@ -334,7 +339,7 @@ async function auto_hide_settings(settings,susfs_version_decimal,susfs_features)
 		}
 	}
 	else{
-		hide_sus_mnts_for_all_procs.checked=false;
+		umount_for_zygote_iso_service.checked=false;
 	}
 	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT")==false){
 		auto_mount.checked=false;
@@ -725,7 +730,7 @@ async function custom_toggles(settings) {
 	else hide_ksu_loop.checked=false;
 	if (custom_settings.force_hide_lsposed==true) force_hide_lsposed.checked="checked";
 	else force_hide_lsposed.checked=false;
-	if (susfs_version_decimal<157) {
+	if (susfs_versions.main == 1 && susfs_versions.sub == 5 && susfs_versions.patch <= 8){
 		emulate_vold_app_data.checked=false;
 		emulate_vold_app_data.disabled=true;
 	}
@@ -733,7 +738,7 @@ async function custom_toggles(settings) {
 		if (custom_settings.emulate_vold_app_data==true) emulate_vold_app_data.checked="checked";
 		else emulate_vold_app_data.checked=false;
 	}
-	if (susfs_version_decimal<159 || !is_avc_log_spoofing_enabled) avc_log_spoofing.disabled=true;
+	if ((susfs_versions.main == 1 && susfs_versions.sub == 5 && susfs_versions.patch <= 8) || !is_avc_log_spoofing_enabled) avc_log_spoofing.disabled=true;
 	else{
 		if (custom_settings.avc_log_spoofing==true) avc_log_spoofing.checked="checked";
 		else avc_log_spoofing.checked=false;
@@ -1056,14 +1061,14 @@ async function custom_sus_path(){
 }
 
 // custom sus path loop
-async function custom_sus_path_loop(susfs_version_decimal){
+async function custom_sus_path_loop(){
 	const load_sus_path_loop = document.getElementById("load_sus_path_loop");
 	const sus_path_loop_area = document.getElementById("custom_sus_path_loop");
 	const save_sus_path_loop = document.getElementById("save_sus_path_loop");
 	const sus_path_loop_section = document.getElementById("sus_path_loop_section");
 
 	// Check if the susfs version is 1.5.9 or higher
-	if (susfs_version_decimal > 158) {
+	if ((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=9) || (susfs_versions.main>=2)) {
 		sus_path_loop_section.classList.remove("hidden");
 	}
 	else {
@@ -1134,7 +1139,7 @@ async function custom_sus_mount(){
 	//const mainContainer = document.querySelector('main');
 
 	// check if try_umount is enabled in kernel
-	if (susfs_features.includes("CONFIG_KSU_SUSFS_SUS_MOUNT")==false || (susfs_version_decimal>=200 && susfs_version_decimal<1000)) {
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_SUS_MOUNT")==false || ((susfs_versions.main>=2))) {
 		sus_mount_section.classList.add("hidden");
 		return;
 	}
@@ -1236,12 +1241,12 @@ async function loadKernelFeatureStatus(susfs_features) {
   ];
 
   const deprecated_features = [
-	{ id: 'status_overlayfs_auto_kstat', config: 'CONFIG_KSU_SUSFS_SUS_OVERLAYFS', version: 158 },
-	{ id: 'status_magic_mount', config: 'CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT', version: 1511 },
-	{ id: 'status_auto_try_umount_bind', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT', version: 200 },
-	{ id: 'status_auto_default_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT', version: 200 },
-	{ id: 'status_auto_bind_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT', version: 200 },
-	{ id: 'status_try_umount', config: 'CONFIG_KSU_SUSFS_TRY_UMOUNT', version: 200 },
+	{ id: 'status_overlayfs_auto_kstat', config: 'CONFIG_KSU_SUSFS_SUS_OVERLAYFS', version_main: 1, version_sub: 5, version_patch: 8 },
+	{ id: 'status_magic_mount', config: 'CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT',  version_main: 1, version_sub: 5, version_patch: 11 },
+	{ id: 'status_auto_try_umount_bind', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT',  version_main: 2, version_sub: 0, version_patch: 0 },
+	{ id: 'status_auto_default_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT', version_main: 2, version_sub: 0, version_patch: 0 },
+	{ id: 'status_auto_bind_mount', config: 'CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT', version_main: 2, version_sub: 0, version_patch: 0 },
+	{ id: 'status_try_umount', config: 'CONFIG_KSU_SUSFS_TRY_UMOUNT', version_main: 2, version_sub: 0, version_patch: 0 },
   ];
 
   for (const feature of features) {
@@ -1257,7 +1262,7 @@ async function loadKernelFeatureStatus(susfs_features) {
           span.textContent = 'Enabled';
           span.setAttribute('data-i18n', 'enabled_label');
         } else {
-			if (deprecated_features.some(df => df.id === feature.id && susfs_version_decimal >= df.version)) {
+			if (deprecated_features.some(df => df.id === feature.id && ((susfs_versions.main>df.version_main)||(susfs_versions.main >= df.version_main && susfs_versions.sub >= df.version_sub && susfs_versions.patch >= df.version_patch)))) {
 				statusElement.className = 'badge badge-sm badge-secondary text-sm ml-4';
 				span.textContent = 'Deprecated';
 				span.setAttribute('data-i18n', 'deprecated_label');
@@ -1346,8 +1351,8 @@ susfs_log_toggle(settings);
 
 // Susfs binary check and update
 if (settings.disable_webui_bin_update==false) {
-	const susfs_check=await run (`sh ${moddir}/susfs-bin-check.sh ${susfs_version_decimal.toString()} ${kernel_variant.toLowerCase()}`)
+	const susfs_check=await run (`sh ${moddir}/susfs-bin-check.sh ${susfs_versions.main.toString()} ${susfs_versions.sub.toString()} ${susfs_versions.patch.toString()} ${kernel_variant.toLowerCase()}`)
 	if (susfs_check=="mismatch"){
-		susfs_bin_update(susfs_version_decimal, kernel_variant);
+		susfs_bin_update(susfs_versions, kernel_variant);
 	}
 }
