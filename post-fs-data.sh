@@ -8,7 +8,6 @@ mkdir -p $tmpfolder/logs
 mkdir -p $tmpfolder
 logfile="$tmpfolder/logs/susfs.log"
 logfile1="$tmpfolder/logs/susfs1.log"
-kernel_ver=$(head -n 1 "$PERSISTENT_DIR/kernelversion.txt")
 
 # Mount folder of susfs4ksu
 [ -w /mnt ] && mntfolder=/mnt/susfs4ksu
