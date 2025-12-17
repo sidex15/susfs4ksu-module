@@ -43,7 +43,7 @@ sus_su_2(){
 
 # sus_su #
 [ $sus_su = -1 ] && {
-	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 3 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 3 ] 2>/dev/null; then
 		# Check if sus_su is supported
 		if ${SUSFS_BIN} show enabled_features 2>/dev/null | grep -q "CONFIG_KSU_SUSFS_SUS_SU"; then
   			sed -i "s/^sus_su=.*/sus_su=0/" ${PERSISTENT_DIR}/config.sh
@@ -59,7 +59,7 @@ sus_su_2(){
 }
 
 [ $sus_su = 0 ] && {
-	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 3 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 3 ] 2>/dev/null; then
 		# Check if sus_su is supported
 		if ! ${SUSFS_BIN} show enabled_features 2>/dev/null | grep -q "CONFIG_KSU_SUSFS_SUS_SU"; then
 			sed -i "s/^sus_su=.*/sus_su=-1/" ${PERSISTENT_DIR}/config.sh
@@ -91,6 +91,11 @@ sus_su_2(){
 	# this one is for older verisons of susfs
 		sus_su_2
 	fi
+}
+
+[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null && {
+	# sus_su is deprecated in susfs v2.0.0 and above
+	sed -i "s/^sus_su=.*/sus_su=-1/" ${PERSISTENT_DIR}/config.sh
 }
 
 ## Disable susfs kernel log ##
