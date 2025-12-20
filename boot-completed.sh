@@ -52,10 +52,12 @@ fi
 # routines
 
 # hide sus mounts for all processes v1.5.7+
-[ $hide_sus_mnts_for_all_procs -lt 1 ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null && {
-	# Hide sus mounts for all processes
-	${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
-}
+ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+	if [ $hide_sus_mnts_for_all_procs -lt 1 ]; then
+		# Hide sus mounts for all processes
+		${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
+	fi
+fi
 
 # Starting in SUSFS version v1.5.8, it needs to set the sdcard and android data root paths
 # This will start the sus_path process. Without this check, sus_path will not work
