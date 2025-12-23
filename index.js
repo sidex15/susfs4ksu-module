@@ -296,23 +296,43 @@ async function auto_hide_settings(settings,susfs_features) {
 	const auto_mount = document.getElementById("auto_mount");
 	const auto_bind = document.getElementById("auto_bind");
 	const auto_umount_bind = document.getElementById("auto_umount_bind");
+	const auto_try_umount = document.getElementById("auto_try_umount");
 	const try_umount_zygote = document.getElementById("try_umount_zygote");
 	const hide_sus_mnts_for_all_procs = document.getElementById("hide_sus_mnts_for_all_procs");
 	const umount_for_zygote_iso_service = document.getElementById("umount_for_zygote_iso_service");
-	var is_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
-	var is_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
-	var is_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
+	var is_no_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
+	var is_no_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
+	var is_no_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
 	var is_try_umount_zygote = await run(`[ -f data/adb/susfs_umount_for_zygote_system_process ] && echo true || echo false`);
 	var custom_settings = settings;
 
-	if(is_auto_mount=="true"){
+	if(is_no_auto_mount=="true"){
 		auto_mount.checked=false;
 	}
-	if(is_auto_bind=="true"){
+	if(is_no_auto_bind=="true"){
 		auto_bind.checked=false;
 	}
-	if(is_auto_umount_bind=="true"){
+	if(is_no_auto_umount_bind=="true"){
 		auto_umount_bind.checked=false;
+	}
+	else{
+		auto_umount_bind.checked="checked";
+		if (custom_settings.auto_try_umount==true){
+			await run(`sed -i 's/auto_try_umount=.*/auto_try_umount=0/' ${config}/config.sh`);
+			auto_try_umount.checked=false;
+			custom_settings.auto_try_umount=false;
+		}
+	}
+	if(custom_settings.auto_try_umount==true){
+		auto_try_umount.checked="checked";
+		if (is_no_auto_umount_bind=="false"){
+			await run(`touch data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
+			is_no_auto_umount_bind="true";
+			auto_umount_bind.checked=false;
+		}
+	}
+	else{
+		auto_try_umount.checked=false;
 	}
 	if(is_try_umount_zygote=="false"){
 		try_umount_zygote.checked=false;
@@ -356,46 +376,79 @@ async function auto_hide_settings(settings,susfs_features) {
 	if(susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT")==false){
 		try_umount_zygote.checked=false;
 		try_umount_zygote.setAttribute("disabled","");
+		// only grey out auto try umount (userspace) for susfs v1.5.5+ but not for susfs v2.0.0+
+		if (susfs_versions.main==1 && susfs_versions.sub>=5 && susfs_versions.patch>=5){
+			auto_try_umount.checked=false;
+			auto_try_umount.setAttribute("disabled","");
+		}
 	}
 
 	auto_mount.addEventListener("click",async function(){
-		is_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
-		if (is_auto_mount=="true"){
+		is_no_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
+		if (is_no_auto_mount=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_sus_ksu_default_mount`);
-			is_auto_mount=="false";
+			is_no_auto_mount="false";
 			toast("Reboot to take effect");
 		}
 		else{
 			await run(`touch data/adb/susfs_no_auto_add_sus_ksu_default_mount`);
-			is_auto_mount=="true"
+			is_no_auto_mount="true";
 			toast("Reboot to take effect");
 		}
 	});
 
 	auto_bind.addEventListener("click",async function(){
-		is_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
-		if (is_auto_bind=="true"){
+		is_no_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
+		if (is_no_auto_bind=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_sus_bind_mount`);
-			is_auto_bind=="false";
+			is_no_auto_bind="false";
 			toast("Reboot to take effect");
 		}
 		else{
 			await run(`touch data/adb/susfs_no_auto_add_sus_bind_mount`);
-			is_auto_bind=="true";
+			is_no_auto_bind="true";
 			toast("Reboot to take effect");
 		}
 	});
 
 	auto_umount_bind.addEventListener("click",async function(){
-		is_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
-		if (is_auto_umount_bind=="true"){
+		is_no_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
+		if (is_no_auto_umount_bind=="true"){
 			await run(`rm -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
-			is_auto_umount_bind=="false";
+			is_no_auto_umount_bind="false";
+			// disable auto try umount (userspace) if it's enabled
+			if (custom_settings.auto_try_umount==1){
+				await run(`sed -i 's/auto_try_umount=.*/auto_try_umount=0/' ${config}/config.sh`);
+				auto_try_umount.checked=false;
+				custom_settings.auto_try_umount=false;
+				toast("Auto try umount (userspace) disabled as auto umount for bind mount is enabled");
+			}
 			toast("Reboot to take effect");
 		}
 		else{
 			await run(`touch data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
-			is_auto_umount_bind=="true";
+			is_no_auto_umount_bind="true";
+			toast("Reboot to take effect");
+		}
+	});
+
+	auto_try_umount.addEventListener("click",async function(){
+		if (custom_settings.auto_try_umount==1){
+			await run(`sed -i 's/auto_try_umount=.*/auto_try_umount=0/' ${config}/config.sh`);
+			custom_settings.auto_try_umount=0;
+			auto_try_umount.checked=false;
+			toast("Reboot to take effect");
+		}
+		else{
+			await run(`sed -i 's/auto_try_umount=.*/auto_try_umount=1/' ${config}/config.sh`);
+			custom_settings.auto_try_umount=1;
+			// disable auto umount for bind mount if it's enabled
+			if (susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT") && is_no_auto_umount_bind=="false"){
+				await run(`touch data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
+				is_no_auto_umount_bind="true";
+				auto_umount_bind.checked=false;
+				toast("Auto umount for bind mount disabled as auto try umount (userspace) is enabled");
+			}
 			toast("Reboot to take effect");
 		}
 	});
