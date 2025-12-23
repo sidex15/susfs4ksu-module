@@ -8,6 +8,7 @@ tmpfolder=/data/adb/ksu/susfs4ksu
 logfile="$tmpfolder/logs/susfs.log"
 logfile1="$tmpfolder/logs/susfs1.log"
 version=$(${SUSFS_BIN} show version)
+susfs_features=$(${SUSFS_BIN} show enabled_features)
 # SUSFS_DECIMAL_MAIN = '1'
 SUSFS_DECIMAL_MAIN=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f1)
 # SUSFS_DECIMAL_SUB = '5'
@@ -98,11 +99,26 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 fi
 
 # Add sus_maps (late v1.5.12+)
-if ${SUSFS_BIN} show enabled_features | grep -q "CONFIG_KSU_SUSFS_SUS_MAP"; then
+if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_SUS_MAP"; then
 	for i in $(grep -v "#" $PERSISTENT_DIR/sus_maps.txt); do
 		${SUSFS_BIN} add_sus_map "$i" && echo "[sus_map]: susfs4ksu/boot-completed $i" >> $logfile1
 	done
 fi
+
+# Auto try_umount (v1.5.5+)
+[ $auto_try_umount = 1 ] && {
+	sus_mounts=$(cat /proc/1/mountinfo | grep -E "^100000 .* KSU .*$|^100000 .* shared:.*$|^300000 .* KSU .*$|^300000 .* shared:.*$|^500000 .* KSU .*$|^500000 .* shared:.*$" | awk '{print $5}')
+	for LINE in $sus_mounts; do
+		if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+			${SUSFS_BIN} add_try_umount "${LINE}" 1 && echo "[try_umount (SUSFS)]: susfs4ksu/boot-completed ${LINE}" >> $logfile1
+		elif [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+			${KSU_BIN} kernel umount add "${LINE}" --flags 2 && echo "[try_umount (KSUD)]: susfs4ksu/boot-completed ${LINE}" >> $logfile1
+		fi
+	done
+	if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+		${KSU_BIN} feature set 1 1 && echo "[ksud umount enabled]: susfs4ksu/boot-completed" >> $logfile1
+	fi
+}
 
 # if spoof_uname is on mode 1, set_uname will be called here
 [ $spoof_uname = 1 ] && spoof_uname
