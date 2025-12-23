@@ -115,7 +115,7 @@ fi
 		fi
 	fi
 	# Get all susfs mounts from /proc/1/mountinfo
-	sus_mounts=$(cat /proc/1/mountinfo | grep -E "^100000 .* KSU .*$|^100000 .* shared:.*$|^300000 .* KSU .*$|^300000 .* shared:.*$|^500000 .* KSU .*$|^500000 .* shared:.*$" | awk '{print $5}')
+	sus_mounts=$(cat /proc/1/mountinfo | grep -E "^[1-5][0-9]{5} .* (KSU|shared):.*$" | awk '{print $5}')
 	for LINE in $sus_mounts; do
 		if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
 			${SUSFS_BIN} add_try_umount "${LINE}" 1 && echo "[try_umount (SUSFS)]: susfs4ksu/boot-completed ${LINE}" >> $logfile1
