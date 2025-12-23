@@ -107,6 +107,14 @@ fi
 
 # Auto try_umount (v1.5.5+)
 [ $auto_try_umount = 1 ] && {
+	# Skip if the disable file is present
+	if [ "$SUSFS_DECIMAL_MAIN" = 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 5 ]; then
+		if [ ! -f "/data/adb/susfs_no_auto_add_try_umount_for_bind_mount" ]; then
+			sed -i 's/auto_try_umount=.*/auto_try_umount=0/' $PERSISTENT_DIR/config.sh
+			return
+		fi
+	fi
+	# Get all susfs mounts from /proc/1/mountinfo
 	sus_mounts=$(cat /proc/1/mountinfo | grep -E "^100000 .* KSU .*$|^100000 .* shared:.*$|^300000 .* KSU .*$|^300000 .* shared:.*$|^500000 .* KSU .*$|^500000 .* shared:.*$" | awk '{print $5}')
 	for LINE in $sus_mounts; do
 		if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
