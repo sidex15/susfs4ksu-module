@@ -227,8 +227,15 @@ fi
 	packages="com.google.android.youtube com.google.android.apps.youtube.music"
 	hide_app () {
 		for path in $(pm path $1 | cut -d: -f2) ; do 
-		${SUSFS_BIN} add_sus_mount $path && echo "[sus_mount] susfs4ksu/boot-completed: [add_sus_mount] $i" >> $logfile1
-		${SUSFS_BIN} add_try_umount $path 1 && echo "[try_umount] susfs4ksu/boot-completed: [add_try_umount] $i" >> $logfile1
+		if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_SUS_MOUNT"; then
+			${SUSFS_BIN} add_sus_mount $path && echo "[sus_mount] susfs4ksu/boot-completed: $path [add_sus_mount] $i" >> $logfile1
+		fi
+		if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+			${SUSFS_BIN} add_try_umount $path 1 && echo "[try_umount] susfs4ksu/boot-completed: $path [add_try_umount] $i" >> $logfile1
+		fi
+		if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+			${KSU_BIN} kernel umount add $path --flags 2 && echo "[try_umount (KSUD)] susfs4ksu/boot-completed: $path [add_try_umount] $i" >> $logfile1
+		fi
 		done
 	}
 	for i in $packages ; do hide_app $i ; done 

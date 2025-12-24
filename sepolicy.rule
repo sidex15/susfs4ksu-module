@@ -1,3 +1,4 @@
 allow netd adb_data_file dir {search}
 allow zygote apk_data_file dir {search}
 allow zygote shell_data_file dir {search}
+allow zygote labeledfs filesystem unmount
