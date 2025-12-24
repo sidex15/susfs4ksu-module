@@ -127,9 +127,6 @@ fi
 			${KSU_BIN} kernel umount add "${LINE}" --flags 2 && echo "[try_umount (KSUD)]: susfs4ksu/boot-completed ${LINE}" >> $logfile1
 		fi
 	done
-	if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
-		${KSU_BIN} feature set 1 1 && echo "[ksud umount enabled]: susfs4ksu/boot-completed" >> $logfile1
-	fi
 }
 
 # if spoof_uname is on mode 1, set_uname will be called here
@@ -236,6 +233,11 @@ fi
 	}
 	for i in $packages ; do hide_app $i ; done 
 } & # run in background
+
+# Enable ksud umount feature for susfs mounts (SUSFS v2.0.0+)
+if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+		${KSU_BIN} feature set 1 1 && echo "[ksud umount enabled]: susfs4ksu/boot-completed" >> $logfile1
+fi
 
 # SUSFS Logging
 dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
