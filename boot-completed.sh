@@ -257,7 +257,11 @@ rm ${tmpfolder}/susfs_stats.txt
 echo sus_path=$(grep -ci 'sus_path' $logfile1 ) >> ${tmpfolder}/susfs_stats.txt
 echo sus_map=$(grep -ci 'AS_FLAGS_SUS_MAP' $logfile ) >> ${tmpfolder}/susfs_stats.txt
 echo sus_mount=$(grep -ciE "set SUS_MOUNT|to LH_SUS_MOUNT" $logfile ) >> ${tmpfolder}/susfs_stats.txt
-echo try_umount=$(grep -ci 'to LH_TRY_UMOUNT_PATH' $logfile ) >> ${tmpfolder}/susfs_stats.txt
+if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+	echo try_umount=$(grep -ci 'try_umount (KSUD)' $logfile1 ) >> ${tmpfolder}/susfs_stats.txt
+else
+	echo try_umount=$(grep -ci 'to LH_TRY_UMOUNT_PATH' $logfile ) >> ${tmpfolder}/susfs_stats.txt
+fi
 rm ${tmpfolder}/susfs_stats1.txt
 echo sus_path=$(grep -ci 'sus_path' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
 echo sus_map=$(grep -ci 'sus_map' $logfile1 ) >> ${tmpfolder}/susfs_stats1.txt
