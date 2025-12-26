@@ -317,7 +317,7 @@ async function auto_hide_settings(settings,susfs_features) {
 	}
 	else{
 		auto_umount_bind.checked="checked";
-		if (custom_settings.auto_try_umount==true){
+		if (custom_settings.auto_try_umount==true && susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT")){
 			await run(`sed -i 's/auto_try_umount=.*/auto_try_umount=0/' ${config}/config.sh`);
 			auto_try_umount.checked=false;
 			custom_settings.auto_try_umount=false;
@@ -1408,4 +1408,5 @@ if (settings.disable_webui_bin_update==false) {
 	if (susfs_check=="mismatch"){
 		susfs_bin_update(susfs_versions, kernel_variant);
 	}
+
 }
