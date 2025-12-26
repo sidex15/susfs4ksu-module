@@ -911,6 +911,7 @@ async function custom_toggles(settings) {
 	});
 }
 
+// custom rom settings
 async function custom_rom_settings(settings) {
 	const hide_custom_rom = document.getElementById("hide_custom_rom");
 	const custom_rom_levels = document.getElementById("custom_rom_levels");
@@ -1339,6 +1340,7 @@ async function loadKernelFeatureStatus(susfs_features) {
   }
 }
 
+// reset susfs
 function susfs_reset(){
 	const susfs_reset_btn = document.getElementById('susfs_reset');
 	const confirm_reset_modal = document.getElementById('confirm_reset_modal');
@@ -1363,6 +1365,7 @@ function susfs_reset(){
 	});
 }
 
+// send logs
 function susfs_send_logs(){
 	const susfs_send_logs_btn = document.getElementById('susfs_send_logs');
 	susfs_send_logs_btn.addEventListener('click', async function(event) {
@@ -1382,6 +1385,7 @@ function susfs_send_logs(){
 	});
 }
 
+// export config
 function susfs_export_config(){
 	const susfs_export_config_btn = document.getElementById('susfs_export');
 	susfs_export_config_btn.addEventListener('click', async function(event) {
