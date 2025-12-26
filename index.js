@@ -325,7 +325,7 @@ async function auto_hide_settings(settings,susfs_features) {
 	}
 	if(custom_settings.auto_try_umount==true){
 		auto_try_umount.checked="checked";
-		if (is_no_auto_umount_bind=="false"){
+		if (is_no_auto_umount_bind=="false" && susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT")){
 			await run(`touch data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
 			is_no_auto_umount_bind="true";
 			auto_umount_bind.checked=false;
