@@ -1227,7 +1227,7 @@ async function custom_try_umount(){
 	const mainContainer = document.querySelector('main');
 
 	// check if try_umount is enabled in kernel
-	if (susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT")==false || susfs_versions.main>=2) {
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT")==false && susfs_versions.main<2) {
 		try_umount_section.classList.add("hidden");
 		return;
 	}
