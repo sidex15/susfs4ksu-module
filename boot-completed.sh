@@ -133,6 +133,15 @@ fi
 	done
 }
 
+# Check and process try_umount paths (KSUD) (susfs v2.0.0+)
+if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+	if grep -v "#" "$PERSISTENT_DIR/try_umount.txt" > /dev/null; then
+		for i in $(grep -v "#" "$PERSISTENT_DIR/try_umount.txt"); do
+			${KSU_BIN} kernel umount add "$i" --flags 2 && echo "[try_umount (KSUD)]: susfs4ksu/boot-completed $i" >> "$logfile1"
+		done
+	fi
+fi
+
 # if spoof_uname is on mode 1, set_uname will be called here
 [ $spoof_uname = 1 ] && spoof_uname
 
