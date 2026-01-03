@@ -52,6 +52,11 @@ fi
 
 # routines
 
+# Enable ksud umount feature for susfs mounts (SUSFS v2.0.0+)
+if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
+		${KSU_BIN} feature set 1 1 && echo "[ksud umount enabled]: susfs4ksu/boot-completed" >> $logfile1
+fi
+
 # hide sus mounts for all processes v1.5.7+
  if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 	if [ $hide_sus_mnts_for_all_procs -lt 1 ]; then
@@ -239,11 +244,6 @@ fi
 	}
 	for i in $packages ; do hide_app $i ; done 
 } & # run in background
-
-# Enable ksud umount feature for susfs mounts (SUSFS v2.0.0+)
-if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
-		${KSU_BIN} feature set 1 1 && echo "[ksud umount enabled]: susfs4ksu/boot-completed" >> $logfile1
-fi
 
 # SUSFS Logging
 dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
