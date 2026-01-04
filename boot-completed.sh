@@ -57,14 +57,6 @@ if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG
 		${KSU_BIN} feature set 1 1 && echo "[ksud umount enabled]: susfs4ksu/boot-completed" >> $logfile1
 fi
 
-# hide sus mounts for all processes v1.5.7+
- if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
-	if [ $hide_sus_mnts_for_all_procs -lt 1 ]; then
-		# Hide sus mounts for all processes
-		${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
-	fi
-fi
-
 # Starting in SUSFS version v1.5.8, it needs to set the sdcard and android data root paths
 # This will start the sus_path process. Without this check, sus_path will not work
 if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 8 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
@@ -139,6 +131,14 @@ if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG
 		for i in $(grep -v "#" "$PERSISTENT_DIR/try_umount.txt"); do
 			${KSU_BIN} kernel umount add "$i" --flags 2 && echo "[try_umount (KSUD)]: susfs4ksu/boot-completed $i" >> "$logfile1"
 		done
+	fi
+fi
+
+# hide sus mounts for all processes v1.5.7+
+ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+	if [ $hide_sus_mnts_for_all_procs -lt 1 ]; then
+		# Hide sus mounts for all processes
+		${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
 	fi
 fi
 
