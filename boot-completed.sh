@@ -254,6 +254,18 @@ fi
 	for i in $packages ; do hide_app $i ; done 
 } & # run in background
 
+# LSPosed
+# This is for SUSFS v2.0.0+ where ksud umount feature is used
+[ $force_hide_lsposed = 1 ] && [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && {
+	echo "susfs4ksu/post-fs-data: [force_hide_lsposed]" >> $logfile1
+	${KSU_BIN} kernel umount add /system/apex/com.android.art/bin/dex2oat --flags 2
+	${KSU_BIN} kernel umount add /system/apex/com.android.art/bin/dex2oat32 --flags 2
+	${KSU_BIN} kernel umount add /system/apex/com.android.art/bin/dex2oat64 --flags 2
+	${KSU_BIN} kernel umount add /apex/com.android.art/bin/dex2oat --flags 2
+	${KSU_BIN} kernel umount add /apex/com.android.art/bin/dex2oat32 --flags 2
+	${KSU_BIN} kernel umount add /apex/com.android.art/bin/dex2oat64 --flags 2
+}
+
 # SUSFS Logging
 dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
 endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)

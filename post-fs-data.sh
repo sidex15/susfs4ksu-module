@@ -8,6 +8,14 @@ mkdir -p $tmpfolder/logs
 mkdir -p $tmpfolder
 logfile="$tmpfolder/logs/susfs.log"
 logfile1="$tmpfolder/logs/susfs1.log"
+susfs_features=$(${SUSFS_BIN} show enabled_features)
+version=$(${SUSFS_BIN} show version)
+# SUSFS_DECIMAL_MAIN = '1'
+SUSFS_DECIMAL_MAIN=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f1)
+# SUSFS_DECIMAL_SUB = '5'
+SUSFS_DECIMAL_SUB=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f2)
+# SUSFS_DECIMAL_PATCH = '3'
+SUSFS_DECIMAL_PATCH=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f3)
 
 # Mount folder of susfs4ksu
 [ -w /mnt ] && mntfolder=/mnt/susfs4ksu
@@ -66,7 +74,7 @@ enable_sus_su_mode_1(){
 
 # LSPosed
 # but this is probably not needed if auto_sus_bind_mount is enabled
-[ $force_hide_lsposed = 1 ] && {
+if [ $force_hide_lsposed = 1 ] && echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then 
 	echo "susfs4ksu/post-fs-data: [force_hide_lsposed]" >> $logfile1
 	${SUSFS_BIN} add_try_umount /system/apex/com.android.art/bin/dex2oat 1
 	${SUSFS_BIN} add_try_umount /system/apex/com.android.art/bin/dex2oat32 1
@@ -74,7 +82,7 @@ enable_sus_su_mode_1(){
 	${SUSFS_BIN} add_try_umount /apex/com.android.art/bin/dex2oat 1
 	${SUSFS_BIN} add_try_umount /apex/com.android.art/bin/dex2oat32 1
 	${SUSFS_BIN} add_try_umount /apex/com.android.art/bin/dex2oat64 1
-}
+fi
 
 # - set to 1 to enable umount for all zygote spawned services, but be reminded that
 #   it may break some modules that overlay framework files / overlay apks. Boot into
