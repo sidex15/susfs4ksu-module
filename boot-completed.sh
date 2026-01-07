@@ -58,7 +58,7 @@ if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG
 fi
 
 # hide sus mounts for all processes v1.5.7+
- if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 	if [ $hide_sus_mnts_for_all_procs -lt 1 ]; then
 		# Hide sus mounts for all processes
 		${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
@@ -118,6 +118,14 @@ fi
 		return
 	fi
 
+	# Temporarily disable hide sus mounts for all processes to read /proc/1/mountinfo
+	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+		# Disable hide sus mounts for all processes if hide_sus_mnts_for_all_procs is enabled
+		if [ $hide_sus_mnts_for_all_procs -ge 1 ]; then
+			${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
+		fi
+	fi
+
 	# Get all susfs mounts from /proc/1/mountinfo
 	sus_mounts=$(cat /proc/1/mountinfo | grep -E "^[5][0-9]{5} .* (KSU|shared).*$" | awk '{print $5}') # Newer susfs mount IDs start with 500k
 	# Fallback to older susfs mount IDs if no mounts found within 500k range
@@ -131,6 +139,13 @@ fi
 			${KSU_BIN} kernel umount add "${LINE}" --flags 2 && echo "[try_umount (KSUD)]: susfs4ksu/boot-completed ${LINE}" >> $logfile1
 		fi
 	done
+
+	# Re-enable hide sus mounts for all processes
+	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+		if [ $hide_sus_mnts_for_all_procs -ge 1 ]; then
+			${SUSFS_BIN} hide_sus_mnts_for_all_procs 1 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
+		fi
+	fi
 }
 
 # Check and process try_umount paths (KSUD) (susfs v2.0.0+)
