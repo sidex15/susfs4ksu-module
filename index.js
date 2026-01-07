@@ -300,6 +300,13 @@ async function auto_hide_settings(settings,susfs_features) {
 	const try_umount_zygote = document.getElementById("try_umount_zygote");
 	const hide_sus_mnts_for_all_procs = document.getElementById("hide_sus_mnts_for_all_procs");
 	const umount_for_zygote_iso_service = document.getElementById("umount_for_zygote_iso_service");
+	const auto_mount_toggle = document.getElementById("auto_mount_toggle");
+	const auto_bind_toggle = document.getElementById("auto_bind_toggle");
+	const auto_umount_bind_toggle = document.getElementById("auto_umount_bind_toggle");
+	const auto_try_umount_toggle = document.getElementById("auto_try_umount_toggle");
+	const try_umount_zygote_toggle = document.getElementById("try_umount_zygote_toggle");
+	const hide_sus_mnts_for_all_procs_toggle = document.getElementById("hide_sus_mnts_for_all_procs_toggle");
+	const umount_for_zygote_iso_service_toggle = document.getElementById("umount_for_zygote_iso_service_toggle");
 	var is_no_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
 	var is_no_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
 	var is_no_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
@@ -338,7 +345,7 @@ async function auto_hide_settings(settings,susfs_features) {
 		try_umount_zygote.checked=false;
 	}
 	if ((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=7) || (susfs_versions.main>=2)){
-		hide_sus_mnts_for_all_procs.removeAttribute("disabled");
+		hide_sus_mnts_for_all_procs_toggle.classList.remove("hidden");
 		if (custom_settings.hide_sus_mnts_for_all_procs==true){
 		hide_sus_mnts_for_all_procs.checked="checked";
 		}
@@ -350,7 +357,7 @@ async function auto_hide_settings(settings,susfs_features) {
 		hide_sus_mnts_for_all_procs.checked=false;
 	}
 	if (((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=8) || (susfs_versions.main>=2)) && (await run(`${susfs_bin} umount_for_zygote_iso_service ${custom_settings.umount_for_zygote_iso_service} > /dev/null 2>&1 && echo true || echo false`))=="true"){
-		umount_for_zygote_iso_service.removeAttribute("disabled");
+		umount_for_zygote_iso_service_toggle.classList.remove("hidden");
 		if (custom_settings.umount_for_zygote_iso_service==true){
 			umount_for_zygote_iso_service.checked="checked";
 		}
@@ -361,26 +368,20 @@ async function auto_hide_settings(settings,susfs_features) {
 	else{
 		umount_for_zygote_iso_service.checked=false;
 	}
-	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT")==false){
-		auto_mount.checked=false;
-		auto_mount.setAttribute("disabled","");
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT")){
+		auto_mount_toggle.classList.remove("hidden");
 	}
-	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT")==false){
-		auto_bind.checked=false;
-		auto_bind.setAttribute("disabled","");
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT")){
+		auto_bind_toggle.classList.remove("hidden");
 	}
-	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT")==false){
-		auto_umount_bind.checked=false;
-		auto_umount_bind.setAttribute("disabled","");
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT")){
+		auto_umount_bind_toggle.classList.remove("hidden");
 	}
-	if(susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT")==false){
-		try_umount_zygote.checked=false;
-		try_umount_zygote.setAttribute("disabled","");
-		// only grey out auto try umount (userspace) for susfs v1.5.5+ but not for susfs v2.0.0+
-		if (susfs_versions.main==1 && susfs_versions.sub>=5 && susfs_versions.patch>=5){
-			auto_try_umount.checked=false;
-			auto_try_umount.setAttribute("disabled","");
-		}
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT")){
+		try_umount_zygote_toggle.classList.remove("hidden");
+	}
+	if ((susfs_versions.main==1 && susfs_versions.sub>=5 && susfs_versions.patch>=5) || (susfs_versions.main>=2)){
+			auto_try_umount_toggle.classList.remove("hidden");
 	}
 
 	auto_mount.addEventListener("click",async function(){
@@ -532,7 +533,7 @@ async function set_uname(settings) {
 	}
 	else{
 		spoof_on_boot.checked=false
-		postfsdata_toggle.classList.add("hidden");
+		postfsdata_toggle.classList.remove("hidden");
 	}
 	if (custom_settings.spoof_uname>1) boot_on_postfsdata.checked="checked";
 	else boot_on_postfsdata.checked=false;
@@ -647,7 +648,7 @@ async function set_uname(settings) {
 			custom_settings.spoof_uname=0;
 			boot_on_postfsdata.checked = false;
 			toast("Reboot to take effect");
-			postfsdata_toggle.classList.add("hidden");
+			postfsdata_toggle.classList.remove("hidden");
 		}
 	});
 

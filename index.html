@@ -166,46 +166,46 @@
 				<div id="sus_su_154" class="min-w-full sm:min-w-[400px]">
 				  <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px]">
 						<div class="text-white text-xl font-bold mb-3" data-i18n="auto_hide_label">auto hide settings</div>
-						<div class="form-control">
+						<div id="auto_mount_toggle" class="form-control hidden">
 						<label class="label cursor-pointer">
 							<span class="text-white text-base" data-i18n="default_mounts_label">auto hide default mounts</span>
 							<input type="checkbox" id="auto_mount" class="toggle toggle-md toggle-primary" checked="checked" />
 						</label>
 						</div>
-						<div class="form-control">
+						<div id="auto_bind_toggle" class="form-control hidden">
 						<label class="label cursor-pointer">
 							<span class="text-white text-base" data-i18n="bind_mounts_label">auto hide bind mounts</span>
 							<input type="checkbox" id="auto_bind" class="toggle toggle-md toggle-secondary" checked="checked" />
 						</label>
 						</div>
-						<div class="form-control">
+						<div id="auto_umount_bind_toggle" class="form-control hidden">
 						<label class="label cursor-pointer">
 							<span class="text-white text-base" data-i18n="try_umount_bind_label">auto try umount bind mounts</span>
 							<input type="checkbox" id="auto_umount_bind" class="toggle toggle-md toggle-accent" checked="checked" />
 						</label>
 						</div>
-						<div class="form-control">
+						<div id="auto_try_umount_toggle" class="form-control hidden">
 						<label class="label cursor-pointer">
 							<span class="text-white text-base" data-i18n="auto_try_umount_label">auto try umount (userspace)</span>
 							<input type="checkbox" id="auto_try_umount" class="toggle toggle-md toggle-primary" checked="checked" />
 						</label>
 						</div>
-						<div class="form-control">
+						<div id="hide_sus_mnts_for_all_procs_toggle" class="form-control hidden">
 						<label class="label cursor-pointer">
 							<span class="text-white text-base" data-i18n="hide_sus_mnts_for_all_procs_label">Hide sus_mounts for all processes</span>
-							<input type="checkbox" id="hide_sus_mnts_for_all_procs" class="toggle toggle-md toggle-warning" checked="checked" disabled/>
+							<input type="checkbox" id="hide_sus_mnts_for_all_procs" class="toggle toggle-md toggle-warning" checked="checked"/>
 						</label>
 						</div>
-						<div class="form-control">
+						<div id="try_umount_zygote_toggle" class="form-control hidden">
 						<label class="label cursor-pointer">
 							<span class="text-white text-base" data-i18n="zygote_try_umount_label">try umount for zygote system process</span>
 							<input type="checkbox" id="try_umount_zygote" class="toggle toggle-md toggle-success" checked="checked" />
 						</label>
 						</div>
-						<div class="form-control">
+						<div id="umount_for_zygote_iso_service_toggle" class="form-control hidden">
 						<label class="label cursor-pointer">
 							<span class="text-white text-base" data-i18n="umount_for_zygote_iso_service_label">try umount for zygote isolation service</span>
-							<input type="checkbox" id="umount_for_zygote_iso_service" class="toggle toggle-md toggle-success" checked="checked" disabled/>
+							<input type="checkbox" id="umount_for_zygote_iso_service" class="toggle toggle-md toggle-success" checked="checked"/>
 						</label>
 						</div>
 				    </div>
