@@ -46,3 +46,8 @@
 ### Notes
 * Sorry for the very late update :( I was very busy for my Master studies and testing susfs v2.0.0 on non-gki
 * I just wanna thank to all [susfs4ksu module CI](https://github.com/sidex15/susfs4ksu-module/actions) testers there for testing the new features and bug hunting my module 🫡
+
+### Hotfix (1/08/2026)
+* WebUI: hide auto hide features if it is not supported, disabled, or deprecated in the susfs kernel
+* boot-completed: temporarily disable hide sus mounts for all processes in auto try umount (userspace)
+* scripts boot-completed/post-fs-data: add support for ksud umount in hide dex2oat mounts
