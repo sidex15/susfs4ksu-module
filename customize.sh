@@ -35,30 +35,26 @@ if [ ${ver} -lt 5 ]; then
     KERNEL_VERSION=non-gki
 	ui_print "[-] Non-GKI kernel detected... use non-GKI susfs bins..."
 	chmod +x "${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64"
-	if [ ${ARCH} = "arm64" ]; then
-		# Example output = 'v1.5.3'
-		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
-		# SUSFS_DECIMAL_MAIN = '1'
-		SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
-		# SUSFS_DECIMAL_SUB = '5'
-		SUSFS_DECIMAL_SUB=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f2)
-		# SUSFS_DECIMAL_PATCH = '3'
-		SUSFS_DECIMAL_PATCH=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f3)
-	fi
+	# Example output = 'v1.5.3'
+	SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
+	# SUSFS_DECIMAL_MAIN = '1'
+	SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
+	# SUSFS_DECIMAL_SUB = '5'
+	SUSFS_DECIMAL_SUB=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f2)
+	# SUSFS_DECIMAL_PATCH = '3'
+	SUSFS_DECIMAL_PATCH=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f3)
 else
 	KERNEL_VERSION=gki
 	ui_print "[-] GKI kernel detected... use GKI susfs bins..."
 	chmod +x "${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64"
-	if [ ${ARCH} = "arm64" ]; then
-		# Example output = 'v1.5.3'
-		SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
-		# SUSFS_DECIMAL_MAIN = '1'
-		SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
-		# SUSFS_DECIMAL_SUB = '5'
-		SUSFS_DECIMAL_SUB=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f2)
-		# SUSFS_DECIMAL_PATCH = '3'
-		SUSFS_DECIMAL_PATCH=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f3)
-	fi
+	# Example output = 'v1.5.3'
+	SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
+	# SUSFS_DECIMAL_MAIN = '1'
+	SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
+	# SUSFS_DECIMAL_SUB = '5'
+	SUSFS_DECIMAL_SUB=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f2)
+	# SUSFS_DECIMAL_PATCH = '3'
+	SUSFS_DECIMAL_PATCH=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f3)
 fi
 
 # dl logic, shorthand
