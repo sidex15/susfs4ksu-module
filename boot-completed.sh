@@ -33,11 +33,7 @@ emulate_vold_app_data=0
 
 # update description
 if [ -f $tmpfolder/logs/susfs_active ] || dmesg | grep -q "susfs:"; then
-	if ${KSU_BIN} module list | grep -qiE integrity\.box; then
-		description="description=status: ✅ SuS ඞ ‼️ There's an impostor among us"
-	else
 		description="description=status: ✅ SuS ඞ"
-	fi
 else
 	description="description=status: failed 💢 - Make sure you're on a SuSFS patched kernel! 😭"
 	touch ${MODDIR}/disable
