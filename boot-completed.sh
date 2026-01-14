@@ -99,6 +99,17 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 	done
 fi
 
+# Add open redirect paths (boot-completed)
+if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
+	grep -v "#" "$PERSISTENT_DIR/sus_open_redirect.txt" | while IFS= read -r line; do
+		original_path=$(echo "$line" | awk '{print $1}')
+		redirected_path=$(echo "$line" | awk '{print $2}')
+		execute_on=$(echo "$line" | awk '{print $3}')
+		[ "$execute_on" != "0" ] && continue
+		${SUSFS_BIN} add_open_redirect "$original_path" "$redirected_path" && echo "[open_redirect]: susfs4ksu/boot-completed $original_path -> $redirected_path" >> $logfile1
+	done
+fi
+
 # Add sus_maps (late v1.5.12+)
 if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_SUS_MAP"; then
 	for i in $(grep -v "#" $PERSISTENT_DIR/sus_maps.txt); do

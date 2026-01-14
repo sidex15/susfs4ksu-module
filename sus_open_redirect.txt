@@ -1,0 +1,7 @@
+# this contains paths you want to redirect with
+# open redirect at boot-completed.sh or service.sh
+# example format
+# 0 = Execute on boot-completed.sh
+# 1 = Execute on service.sh
+# <original_path> <redirected_path> <0 or 1>
+# /system/bin/service /data/adb/susfs4ksu/service_redirected 0

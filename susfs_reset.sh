@@ -28,6 +28,8 @@ echo -e "# this contains suspicious paths that are in the maps you want \n# to b
 echo -e "# this contains suspicious mounts you want \n# to be sus_mounted at post-mount.sh\n# example\n# /system\n# /system_ext\n# /data/adb/modules\n# /debug_ramdisk" > "$config/sus_mount.txt"
 # Reset try_umount.txt
 echo -e "# this contains suspicious mounts you want \n# to be try_umounted at post-mount.sh\n# example\n# /system\n# /system_ext\n# /debug_ramdisk" > "$config/try_umount.txt"
+# Reset sus_open_redirect.txt
+echo -e "# this contains paths you want to redirect with\n# open redirect at boot-completed.sh or service.sh\n# example format\n# 0 = Execute on boot-completed.sh\n# 1 = Execute on service.sh\n# <original_path> <redirected_path> <0 or 1>\n# /system/bin/service /data/adb/susfs4ksu/service_redirected 0" > "$config/sus_open_redirect.txt"
 
 # Reset auto hide settings
 [ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] || rm -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount

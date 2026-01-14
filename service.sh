@@ -7,6 +7,7 @@ tmpfolder=/data/adb/ksu/susfs4ksu
 logfile1="$tmpfolder/logs/susfs1.log"
 logfile="$tmpfolder/logs/susfs.log"
 version=$(${SUSFS_BIN} show version)
+susfs_features=$(${SUSFS_BIN} show enabled_features)
 # SUSFS_DECIMAL_MAIN = '1'
 SUSFS_DECIMAL_MAIN=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f1)
 # SUSFS_DECIMAL_SUB = '5'
@@ -160,6 +161,17 @@ check_reset_prop "ro.crypto.state" "encrypted"
 HASH_FILE="/data/adb/VerifiedBootHash/VerifiedBootHash.txt"
 if [ -s "$HASH_FILE" ]; then
     resetprop -v -n ro.boot.vbmeta.digest "$(cat $HASH_FILE | tr '[:upper:]' '[:lower:]')"
+fi
+
+# Add open redirect paths (service.sh)
+if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
+	grep -v "#" "$PERSISTENT_DIR/sus_open_redirect.txt" | while IFS= read -r line; do
+		original_path=$(echo "$line" | awk '{print $1}')
+		redirected_path=$(echo "$line" | awk '{print $2}')
+		execute_on=$(echo "$line" | awk '{print $3}')
+		[ "$execute_on" != "1" ] && continue
+		${SUSFS_BIN} add_open_redirect "$original_path" "$redirected_path" && echo "[open_redirect]: susfs4ksu/service $original_path -> $redirected_path" >> $logfile1
+	done
 fi
 
 # echo "hide_loops=1" >> /data/adb/susfs4ksu/config.sh
