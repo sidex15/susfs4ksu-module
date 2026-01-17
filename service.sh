@@ -226,23 +226,4 @@ fi
 	}
 }
 
-# echo "fake_service_list=1" >> /data/adb/susfs4ksu/config.sh
-[ $fake_service_list = 1 ] && {
-	# feed fake service list
-	# this is bs but what can we do
-	mkdir -p "$mntfolder/system_bin"
-	echo "#!/bin/sh" > "$mntfolder/system_bin/service"
-	echo "FAKELIST=\"$(/system/bin/service list | sed 's/lineage//g; s/Lineage//g' | base64 -w 0)"\" >> "$mntfolder/system_bin/service"
-	echo "echo \$FAKELIST | base64 -d" >> "$mntfolder/system_bin/service"
-	susfs_clone_perm "$mntfolder/system_bin/service" /system/bin/service
-	#${SUSFS_BIN} add_sus_kstat /system/bin/service
-	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" = 1 ] 2>/dev/null; then
-		mount --bind "$mntfolder/system_bin/service" /system/bin/service
-		#${SUSFS_BIN} update_sus_kstat /system/bin/service
-		${SUSFS_BIN} add_sus_mount /system/bin/service && echo "[sus_mount]: susfs4ksu/service /system/bin/service" >> $logfile1
-	else
-		${SUSFS_BIN} add_open_redirect /system/bin/service "$mntfolder/system_bin/service" 1 && echo "[open_redirect]: susfs4ksu/service /system/bin/service -> $mntfolder/system_bin/service" >> $logfile1
-	fi
-}
-
 # EOF
