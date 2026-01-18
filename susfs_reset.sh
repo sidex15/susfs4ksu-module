@@ -19,9 +19,9 @@ while IFS= read -r line; do
 done < "$config/config.sh"
 
 # Reset sus_path.txt
-echo -e "# this contains suspicious paths you want \n# to be hidden at boot-completed.sh\n# example\n# /system/addon.d\n# /vendor/bin/install-recovery.sh\n# /system/bin/install-recovery.sh" > "$config/sus_path.txt"
+echo -e "# this contains suspicious paths you want \n# to be hidden at boot-completed.sh\n# format: <path> <check max tries (seconds)>\n# example\n# /system/addon.d # by default max tries is disabled\n# /vendor/bin/install-recovery.sh 1 # try to check only once\n# /system/bin/install-recovery.sh 15 # try to check for 15 seconds" > "$config/sus_path.txt"
 # Reset sus_path_loop.txt
-echo -e "# this contains suspicious paths you want \n# to be hidden at boot-completed.sh\n# example\n# /system/addon.d\n# /vendor/bin/install-recovery.sh\n# /system/bin/install-recovery.sh" > "$config/sus_path_loop.txt"
+echo -e "# this contains suspicious paths you want \n# to be hidden at boot-completed.sh\n# format: <path> <check max tries (seconds)>\n# example\n# /system/addon.d # by default max tries is disabled\n# /vendor/bin/install-recovery.sh 1 # try to check only once\n# /system/bin/install-recovery.sh 15 # try to check for 15 seconds" > "$config/sus_path_loop.txt"
 # Reset sus_maps.txt
 echo -e "# this contains suspicious paths that are in the maps you want \n# to be hidden at boot-completed.sh\n# example\n# /system/font/Roboto-Regular.ttf\n# /system/font/Roboto-Bold.ttf\n# /vendor/lib/libsuspicious.so" > "$config/sus_maps.txt"
 # Reset sus_mount.txt
@@ -32,7 +32,7 @@ echo -e "# this contains suspicious mounts you want \n# to be try_umounted at po
 echo -e "# this contains paths you want to redirect with\n# open redirect at boot-completed.sh or service.sh\n# example format\n# 0 = Execute on boot-completed.sh\n# 1 = Execute on service.sh\n# <original_path> <redirected_path> <0 or 1>\n# /system/bin/service /data/adb/susfs4ksu/service_redirected 0" > "$config/sus_open_redirect.txt"
 
 # Reset auto hide settings
-[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] || rm -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount
-[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] || rm -f /data/adb/susfs_no_auto_add_sus_bind_mount
-[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] || rm -f /data/adb/susfs_no_auto_add_try_umount_for_bind_mount
-[ -f data/adb/susfs_umount_for_zygote_system_process ] || rm -f /data/adb/susfs_umount_for_zygote_system_process
+[ -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount ] || rm -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount
+[ -f /data/adb/susfs_no_auto_add_sus_bind_mount ] || rm -f /data/adb/susfs_no_auto_add_sus_bind_mount
+[ -f /data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] || rm -f /data/adb/susfs_no_auto_add_try_umount_for_bind_mount
+[ -f /data/adb/susfs_umount_for_zygote_system_process ] || rm -f /data/adb/susfs_umount_for_zygote_system_process

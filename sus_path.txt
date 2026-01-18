@@ -1,6 +1,7 @@
 # this contains suspicious paths you want 
 # to be hidden at boot-completed.sh
+# format: <path> <check max tries>
 # example
-# /system/addon.d
-# /vendor/bin/install-recovery.sh
-# /system/bin/install-recovery.sh
+# /system/addon.d # by default max tries is disabled
+# /vendor/bin/install-recovery.sh 1 # try to check only once
+# /system/bin/install-recovery.sh 15 # try to check for 15 seconds

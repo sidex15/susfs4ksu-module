@@ -63,6 +63,7 @@ fi
 
 # Starting in SUSFS version v1.5.8, it needs to set the sdcard and android data root paths
 # This will start the sus_path process. Without this check, sus_path will not work
+{
 if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 8 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 	until [ -d "/sdcard/Android/data" ]; do sleep 1; done
 	${SUSFS_BIN} set_sdcard_root_path /sdcard
@@ -70,8 +71,14 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 	# to add paths
 	# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path.txt
 	# this'll make it easier for the webui to do stuff
-	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
-	${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
+	grep -v "#" $PERSISTENT_DIR/sus_path.txt | while read -r i; do
+		sus_path=$(echo "$i" | awk '{print $1}')
+		sus_path_max_tries=$(echo "$i" | awk '{print $2}')
+		until [ -z "$sus_path_max_tries" ] || [ "$sus_path_max_tries" -le 0 ] || [ -e "$sus_path" ]; do
+			sus_path_max_tries=$((sus_path_max_tries - 1))
+			sleep 1
+		done
+		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path "$sus_path" && echo "[sus_path]: susfs4ksu/boot-completed $sus_path" >> $logfile1; }
 	done
 
 	# Emulate Vold app data
@@ -83,21 +90,36 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 	}
 
 else
+	until [ -d "/sdcard/Android/data" ]; do sleep 1; done
 	grep -v "#" $PERSISTENT_DIR/sus_path.txt | while read -r i; do
-		until [ -d "/sdcard/Android/data" ]; do sleep 1; done
-		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1; }
+		sus_path=$(echo "$i" | awk '{print $1}')
+		sus_path_max_tries=$(echo "$i" | awk '{print $2}')
+		until [ -z "$sus_path_max_tries" ] || [ "$sus_path_max_tries" -le 0 ] || [ -e "$sus_path" ]; do
+			sus_path_max_tries=$((sus_path_max_tries - 1))
+			sleep 1
+		done
+		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path "$sus_path" && echo "[sus_path]: susfs4ksu/boot-completed $sus_path" >> $logfile1; }
 	done
 fi
+} & # run in background
 
 # Add sus_path_loop paths (late v1.5.9+)
+{
 if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 9 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ]  2>/dev/null; then
 	# to add paths
 	# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path_loop.txt
 	# this'll make it easier for the webui to do stuff
 	grep -v "#" $PERSISTENT_DIR/sus_path_loop.txt | while read -r i; do
-		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path_loop "$i" && echo "[sus_path_loop]: susfs4ksu/boot-completed $i" >> $logfile1; }
+		sus_path_loop=$(echo "$i" | awk '{print $1}')
+		sus_path_loop_max_tries=$(echo "$i" | awk '{print $2}')
+		until [ -z "$sus_path_loop_max_tries" ] || [ "$sus_path_loop_max_tries" -le 0 ] || [ -e "$sus_path_loop" ]; do
+			sus_path_loop_max_tries=$((sus_path_loop_max_tries - 1))
+			sleep 1
+		done
+		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path_loop "$sus_path_loop" && echo "[sus_path_loop]: susfs4ksu/boot-completed $sus_path_loop" >> $logfile1; }
 	done
 fi
+} & # run in background
 
 # Add open redirect paths (boot-completed)
 if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
