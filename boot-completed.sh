@@ -83,9 +83,9 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 	}
 
 else
-	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path.txt); do
+	grep -v "#" $PERSISTENT_DIR/sus_path.txt | while read -r i; do
 		until [ -d "/sdcard/Android/data" ]; do sleep 1; done
-		${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1
+		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path "$i" && echo "[sus_path]: susfs4ksu/boot-completed $i" >> $logfile1; }
 	done
 fi
 
@@ -94,14 +94,14 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 	# to add paths
 	# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path_loop.txt
 	# this'll make it easier for the webui to do stuff
-	for i in $(grep -v "#" $PERSISTENT_DIR/sus_path_loop.txt); do
-	${SUSFS_BIN} add_sus_path_loop "$i" && echo "[sus_path_loop]: susfs4ksu/boot-completed $i" >> $logfile1
+	grep -v "#" $PERSISTENT_DIR/sus_path_loop.txt | while read -r i; do
+		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path_loop "$i" && echo "[sus_path_loop]: susfs4ksu/boot-completed $i" >> $logfile1; }
 	done
 fi
 
 # Add open redirect paths (boot-completed)
 if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
-	grep -v "#" "$PERSISTENT_DIR/sus_open_redirect.txt" | while IFS= read -r line; do
+	grep -v "#" "$PERSISTENT_DIR/sus_open_redirect.txt" | while read -r line; do
 		original_path=$(echo "$line" | awk '{print $1}')
 		redirected_path=$(echo "$line" | awk '{print $2}')
 		execute_on=$(echo "$line" | awk '{print $3}')
@@ -113,8 +113,8 @@ fi
 
 # Add sus_maps (late v1.5.12+)
 if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_SUS_MAP"; then
-	for i in $(grep -v "#" $PERSISTENT_DIR/sus_maps.txt); do
-		${SUSFS_BIN} add_sus_map "$i" && echo "[sus_map]: susfs4ksu/boot-completed $i" >> $logfile1
+	grep -v "#" $PERSISTENT_DIR/sus_maps.txt | while read -r i; do
+		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_map "$i" && echo "[sus_map]: susfs4ksu/boot-completed $i" >> $logfile1; }
 	done
 fi
 
@@ -159,8 +159,8 @@ fi
 # Check and process try_umount paths (KSUD) (susfs v2.0.0+)
 if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
 	if grep -v "#" "$PERSISTENT_DIR/try_umount.txt" > /dev/null; then
-		for i in $(grep -v "#" "$PERSISTENT_DIR/try_umount.txt"); do
-			${KSU_BIN} kernel umount add "$i" --flags 2 && echo "[try_umount (KSUD)]: susfs4ksu/boot-completed $i" >> "$logfile1"
+		grep -v "#" "$PERSISTENT_DIR/try_umount.txt" | while read -r i; do
+			[ -z "$i" ] || { ${KSU_BIN} kernel umount add "$i" --flags 2 && echo "[try_umount (KSUD)]: susfs4ksu/boot-completed $i" >> "$logfile1"; }
 		done
 	fi
 fi
