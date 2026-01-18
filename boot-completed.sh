@@ -27,7 +27,7 @@ hide_cusrom=0
 hide_gapps=0
 hide_revanced=0
 spoof_uname=0
-hide_sus_mnts_for_all_procs=1
+hide_sus_mnts_for_all_procs=0
 emulate_vold_app_data=0
 [ -f $PERSISTENT_DIR/config.sh ] && . $PERSISTENT_DIR/config.sh
 
@@ -54,7 +54,7 @@ if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG
 fi
 
 # hide sus mounts for all processes v1.5.7+
-if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] 2>/dev/null; then
 	if [ $hide_sus_mnts_for_all_procs -lt 1 ]; then
 		# Hide sus mounts for all processes
 		${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/boot-completed" >> $logfile1
