@@ -6,7 +6,7 @@ while IFS= read -r line; do
     # Extract key name before = sign
     key=$(echo "$line" | cut -d'=' -f1)
     # Reset the key to its default value
-    if echo $key | grep -q -E 'hide_sus_mnts_for_all_procs|susfs_log'; then
+    if echo $key | grep -q -E 'hide_sus_mnts_for_all_or_non_su_procs|susfs_log'; then
         sed -i "s/^$key=.*/$key=1/" "$config/config.sh"
         continue
     elif echo $key | grep -q -E 'kernel_version|kernel_build'; then

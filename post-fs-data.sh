@@ -38,15 +38,21 @@ force_hide_lsposed=0
 spoof_uname=0
 umount_for_zygote_iso_service=0
 avc_log_spoofing=0
-hide_sus_mnts_for_all_procs=0
+hide_sus_mnts_for_all_or_non_su_procs=0
 [ -f $PERSISTENT_DIR/config.sh ] && . $PERSISTENT_DIR/config.sh
 
 echo "susfs4ksu/post-fs-data: [logging_initialized]" > $logfile1
 
 # Hide sus mounts for all processes
-[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && { [ $hide_sus_mnts_for_all_procs -ge 1 ] && {
-	${SUSFS_BIN} hide_sus_mnts_for_all_procs 1 && echo "[hide_sus_mnts_for_all_procs]: susfs4ksu/post-fs-data" >> $logfile1
-} }
+[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && { [ $hide_sus_mnts_for_all_or_non_su_procs -ge 1 ] && {
+	${SUSFS_BIN} hide_sus_mnts_for_all_procs 1 >/dev/null && echo "[hide_sus_mnts_for_all_procs = 1]: susfs4ksu/post-fs-data" || {
+		${SUSFS_BIN} hide_sus_mnts_for_non_su_procs 1 >/dev/null && echo "[hide_sus_mnts_for_non_su_procs = 1]: susfs4ksu/post-fs-data";
+	}
+} || {
+	${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 >/dev/null && echo "[hide_sus_mnts_for_all_procs = 0]: susfs4ksu/post-fs-data" || {
+		${SUSFS_BIN} hide_sus_mnts_for_non_su_procs 0 >/dev/null && echo "[hide_sus_mnts_for_non_su_procs = 0]: susfs4ksu/post-fs-data";
+	}
+}; } >> $logfile1
 
 #### Enable avc log spoofing to bypass 'su' domain detection via /proc/<pid> enumeration ####
 [ $avc_log_spoofing = 1 ] && ${SUSFS_BIN} enable_avc_log_spoofing 1
