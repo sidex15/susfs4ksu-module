@@ -50,7 +50,7 @@
   <string id="default_mounts_label">Монтування автоприховування за замовчуванням</string>
   <string id="bind_mounts_label">Автоприховування bind-монтування</string>
   <string id="try_umount_bind_label">Автоматично демонтувати bind-монтування</string>
-  <string id="hide_sus_mnts_for_all_procs_label">Приховати sus_mounts від усіх процесів</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Приховати sus_mounts від усіх процесів</string>
   <string id="zygote_try_umount_label">Спробувати демонтувати системні процеси zygote</string>
   <string id="umount_for_zygote_iso_service_label">Спробувати демонтувати ізольовані служби zygote</string>
   <string id="kernel_uname_label">Uname ядра</string>

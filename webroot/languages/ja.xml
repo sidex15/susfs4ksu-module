@@ -65,7 +65,7 @@
   <string id="default_mounts_label">自動非表示デフォルトマウント</string>
   <string id="bind_mounts_label">自動非表示バインドマウント</string>
   <string id="try_umount_bind_label">自動バインドアンマウント試行</string>
-  <string id="hide_sus_mnts_for_all_procs_label">全プロセスのsusマウントを非表示</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">全プロセスのsusマウントを非表示</string>
   <string id="zygote_try_umount_label">zygoteシステムプロセスのアンマウント試行</string>
   <string id="umount_for_zygote_iso_service_label">zygote分離サービスのアンマウント試行</string>
   <string id="kernel_uname_label">カーネルUname</string>
