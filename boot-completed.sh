@@ -329,10 +329,11 @@ fi
 dmesg | sed -n "/^\[ *$endmsg/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
 
 # Generate susfs stats
+sus_mount_count=$(($(grep -ciE "set SUS_MOUNT|to LH_SUS_MOUNT" $logfile ) + $(cat /proc/1/mountinfo | grep -cE "^[5][0-9]{5} .* (KSU|shared).*$" )))
 rm ${tmpfolder}/susfs_stats.txt
 echo sus_path=$(grep -ci 'sus_path' $logfile1 ) >> ${tmpfolder}/susfs_stats.txt
 echo sus_map=$(grep -ci 'AS_FLAGS_SUS_MAP' $logfile ) >> ${tmpfolder}/susfs_stats.txt
-echo sus_mount=$(grep -ciE "set SUS_MOUNT|to LH_SUS_MOUNT" $logfile ) >> ${tmpfolder}/susfs_stats.txt
+echo sus_mount=$sus_mount_count >> ${tmpfolder}/susfs_stats.txt
 if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
 	echo try_umount=$(grep -ci 'try_umount (KSUD)' $logfile1 ) >> ${tmpfolder}/susfs_stats.txt
 else
