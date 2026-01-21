@@ -65,7 +65,7 @@
   <string id="default_mounts_label">自動隱藏預設掛載</string>
   <string id="bind_mounts_label">自動隱藏綁定掛載</string>
   <string id="try_umount_bind_label">自動嘗試卸載綁定掛載</string>
-  <string id="hide_sus_mnts_for_all_procs_label">對所有程序隱藏sus_mounts</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">對所有程序隱藏sus_mounts</string>
   <string id="zygote_try_umount_label">為zygote系統程序嘗試卸載</string>
   <string id="umount_for_zygote_iso_service_label">為zygote隔離服務嘗試卸載</string>
   <string id="kernel_uname_label">核心Uname</string>

@@ -59,7 +59,7 @@
   <string id="default_mounts_label">Automatyczne ukrywanie domyślnych montowań</string>
   <string id="bind_mounts_label">Automatyczne ukrywanie bind mountów</string>
   <string id="try_umount_bind_label">Automatyczna próba odmontowania bind mountów</string>
-  <string id="hide_sus_mnts_for_all_procs_label">Ukryj sus_mounts dla wszystkich procesów</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Ukryj sus_mounts dla wszystkich procesów</string>
   <string id="zygote_try_umount_label">Spróbuj odmontować proces systemowy zygote</string>
   <string id="umount_for_zygote_iso_service_label">Spróbuj odmontować usługę izolacji zygote</string>
   <string id="kernel_uname_label">Kernel Uname</string>

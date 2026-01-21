@@ -68,7 +68,7 @@
   <string id="bind_mounts_label">auto hide bind mounts</string>
   <string id="try_umount_bind_label">auto try umount bind mounts</string>
   <string id="auto_try_umount_label">auto try umount (userspace)</string>
-  <string id="hide_sus_mnts_for_all_procs_label">Hide sus_mounts for all processes</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Hide sus_mounts for all/non-su processes</string>
   <string id="zygote_try_umount_label">try umount for zygote system process</string>
   <string id="umount_for_zygote_iso_service_label">try umount for zygote isolation service</string>
   <string id="kernel_uname_label">Kernel Uname</string>

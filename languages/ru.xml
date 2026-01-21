@@ -50,7 +50,7 @@
   <string id="default_mounts_label">Монтирование автоскрытия по умолчанию</string>
   <string id="bind_mounts_label">Автоскрытие bind монтирования</string>
   <string id="try_umount_bind_label">Автоматически размонтировать bind монтирование</string>
-  <string id="hide_sus_mnts_for_all_procs_label">Скрыть sus_mounts от всех процессов</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Скрыть sus_mounts от всех процессов</string>
   <string id="zygote_try_umount_label">Пробовать размонтировать системные процессы zygote</string>
   <string id="umount_for_zygote_iso_service_label">Пробовать размонтировать изолированые сервисы zygote</string>
   <string id="kernel_uname_label">Uname ядра</string>

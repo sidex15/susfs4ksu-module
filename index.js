@@ -298,14 +298,14 @@ async function auto_hide_settings(settings,susfs_features) {
 	const auto_umount_bind = document.getElementById("auto_umount_bind");
 	const auto_try_umount = document.getElementById("auto_try_umount");
 	const try_umount_zygote = document.getElementById("try_umount_zygote");
-	const hide_sus_mnts_for_all_procs = document.getElementById("hide_sus_mnts_for_all_procs");
+	const hide_sus_mnts_for_all_or_non_su_procs = document.getElementById("hide_sus_mnts_for_all_or_non_su_procs");
 	const umount_for_zygote_iso_service = document.getElementById("umount_for_zygote_iso_service");
 	const auto_mount_toggle = document.getElementById("auto_mount_toggle");
 	const auto_bind_toggle = document.getElementById("auto_bind_toggle");
 	const auto_umount_bind_toggle = document.getElementById("auto_umount_bind_toggle");
 	const auto_try_umount_toggle = document.getElementById("auto_try_umount_toggle");
 	const try_umount_zygote_toggle = document.getElementById("try_umount_zygote_toggle");
-	const hide_sus_mnts_for_all_procs_toggle = document.getElementById("hide_sus_mnts_for_all_procs_toggle");
+	const hide_sus_mnts_for_all_or_non_su_procs_toggle = document.getElementById("hide_sus_mnts_for_all_or_non_su_procs_toggle");
 	const umount_for_zygote_iso_service_toggle = document.getElementById("umount_for_zygote_iso_service_toggle");
 	var is_no_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
 	var is_no_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
@@ -345,16 +345,16 @@ async function auto_hide_settings(settings,susfs_features) {
 		try_umount_zygote.checked=false;
 	}
 	if ((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=7) || (susfs_versions.main>=2)){
-		hide_sus_mnts_for_all_procs_toggle.classList.remove("hidden");
-		if (custom_settings.hide_sus_mnts_for_all_procs==true){
-		hide_sus_mnts_for_all_procs.checked="checked";
+		hide_sus_mnts_for_all_or_non_su_procs_toggle.classList.remove("hidden");
+		if (custom_settings.hide_sus_mnts_for_all_or_non_su_procs==true){
+		hide_sus_mnts_for_all_or_non_su_procs.checked="checked";
 		}
 		else{
-			hide_sus_mnts_for_all_procs.checked=false;
+			hide_sus_mnts_for_all_or_non_su_procs.checked=false;
 		}
 	}
 	else{
-		hide_sus_mnts_for_all_procs.checked=false;
+		hide_sus_mnts_for_all_or_non_su_procs.checked=false;
 	}
 	if (((susfs_versions.main>=1 && susfs_versions.sub>=5 && susfs_versions.patch>=8) || (susfs_versions.main>=2)) && (await run(`${susfs_bin} umount_for_zygote_iso_service ${custom_settings.umount_for_zygote_iso_service} > /dev/null 2>&1 && echo true || echo false`))=="true"){
 		umount_for_zygote_iso_service_toggle.classList.remove("hidden");
@@ -483,20 +483,20 @@ async function auto_hide_settings(settings,susfs_features) {
 		}
 	});
 
-	hide_sus_mnts_for_all_procs.addEventListener("click",async function(){
-		if (custom_settings.hide_sus_mnts_for_all_procs==true){
-			await run(`sed -i 's/hide_sus_mnts_for_all_procs=.*/hide_sus_mnts_for_all_procs=0/' ${config}/config.sh`);
-			await run(`${susfs_bin} hide_sus_mnts_for_all_procs 0`);
-			custom_settings.hide_sus_mnts_for_all_procs=0;
-			toast("Hide SUS mounts for all processes disabled! No need to reboot");
-			hide_sus_mnts_for_all_procs.checked=false;
+	hide_sus_mnts_for_all_or_non_su_procs.addEventListener("click",async function(){
+		if (custom_settings.hide_sus_mnts_for_all_or_non_su_procs==true){
+			await run(`sed -i 's/hide_sus_mnts_for_all_or_non_su_procs=.*/hide_sus_mnts_for_all_or_non_su_procs=0/' ${config}/config.sh`);
+			await run(`${susfs_bin} hide_sus_mnts_for_all_procs 0 >/dev/null || ${susfs_bin} hide_sus_mnts_for_non_su_procs 0 >/dev/null`);
+			custom_settings.hide_sus_mnts_for_all_or_non_su_procs=0;
+			toast("Hide SUS mounts for all/non-su processes disabled! No need to reboot");
+			hide_sus_mnts_for_all_or_non_su_procs.checked=false;
 		}
 		else{
-			await run(`sed -i 's/hide_sus_mnts_for_all_procs=.*/hide_sus_mnts_for_all_procs=1/' ${config}/config.sh`);
-			await run(`${susfs_bin} hide_sus_mnts_for_all_procs 1`);
-			custom_settings.hide_sus_mnts_for_all_procs=1;
-			toast("Hide SUS mounts for all processes enabled! No need to reboot");
-			hide_sus_mnts_for_all_procs.checked="checked";
+			await run(`sed -i 's/hide_sus_mnts_for_all_or_non_su_procs=.*/hide_sus_mnts_for_all_or_non_su_procs=1/' ${config}/config.sh`);
+			await run(`${susfs_bin} hide_sus_mnts_for_all_procs 1 >/dev/null || ${susfs_bin} hide_sus_mnts_for_non_su_procs 1 >/dev/null`);
+			custom_settings.hide_sus_mnts_for_all_or_non_su_procs=1;
+			toast("Hide SUS mounts for all/non-su processes enabled! No need to reboot");
+			hide_sus_mnts_for_all_or_non_su_procs.checked="checked";
 		}
 	});
 

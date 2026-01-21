@@ -67,7 +67,7 @@
   <string id="default_mounts_label">Tự động ẩn gắn kết mặc định</string>
   <string id="bind_mounts_label">Tự động ẩn gắn kết liên kết</string>
   <string id="try_umount_bind_label">Tự động thử gỡ gắn kết liên kết</string>
-  <string id="hide_sus_mnts_for_all_procs_label">Ẩn sus_mounts cho tất cả tiến trình</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Ẩn sus_mounts cho tất cả tiến trình</string>
   <string id="zygote_try_umount_label">Thử gỡ gắn kết cho tiến trình hệ thống zygote</string>
   <string id="umount_for_zygote_iso_service_label">Thử gỡ gắn kết cho dịch vụ cách ly zygote</string>
   <string id="kernel_uname_label">Tên Kernel (Uname)</string>
