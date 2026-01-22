@@ -8,82 +8,61 @@
   <string id="about_label">О нас</string>
   <string id="main_menu_label">Главное меню</string>
   <string id="load_label">Загрузка</string>
-  <string id="edit_label">Изменить</string>
   <string id="enabled_label">Включено</string>
   <string id="disabled_label">Отключено</string>
-  <string id="deprecated_label">Устарело</string>
   <string id="unknown_label">Неизвестно</string>
   <string id="help_label">Помощь</string>
-  <string id="send_logs_label">Отправить логи</string>
-  <string id="export_config_label">Экспортировать конфигурацию</string>
-  <string id="reset_config_label">Сбросить все настройки</string>
-
-  <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">Ошибка! Неподдерживаемое ядро!</string>
-  <string id="susfs_error_desc">WebUI недоступен! Убедитесь что вы установили ядро с SUSFS!</string>
-
-  <!-- SUSFS Update Dialog -->  
-  <string id="susfs_update_label">Обновление для пользовательского пространства SUSFS!</string>
-  <string id="susfs_update_desc">Есть обновление для пользовательского пространства SUSFS!</string>
+  <string id="susfs_error_desc">Webui недоступен! Убедитесь что вы установили ядро с SUSFS!</string>
+  <string id="susfs_update_label">Обновление пользовательского пространства SUSFS!</string>
+  <string id="susfs_update_desc">Есть обновление для пользовательских файлов SUSFS!</string>
   <string id="susfs_update2_desc">Пожалуйста, обновитесь на последнюю версию чтобы обеспечить совместимость с модулем и WebUI.</string>
   <string id="susfs_updating_label">Обновление...</string>
   <string id="skip_btn_label">Пропустить</string>
   <string id="update_btn_label">Обновить</string>
-
-  <!-- Home Page -->  
   <string id="kernel_version_label">Версия ядра</string>
-  <string id="sus_path_label">Путей SUS</string>
-  <string id="sus_map_label">SUS MAPS</string>  
-  <string id="sus_mount_label">Смонтировано SUS</string>
-  <string id="try_umount_label">Размонтировано</string>
-  <string id="susfs_settings_label">Доп. настройки SUSFS</string>
+  <string id="sus_path_label">Патч SUS</string>
+  <string id="sus_mount_label">Монтирование SUS</string>
+  <string id="try_umount_label">Попробовать размонтировать</string>
+  <string id="susfs_settings_label">Дополнительные настройки SUSFS</string>
   <string id="susfs_kernel_status_label">Статус SUSFS ядра</string>
-
-  <!-- Status Page -->  
   <string id="kernel_features_label">Статус функций ядра</string>
-  <string id="sus_path_feature_label">Поддержка путей SUS</string>
-  <string id="sus_map_feature_label">Поддержка SUS Maps</string>  
-  <string id="sus_mount_feature_label">Поддержка монтирования SUS</string>
+  <string id="sus_path_feature_label">Поддержка патчей SUS</string>
+  <string id="sus_mount_feature_label">Поддержка монитрования SUS</string>
   <string id="sus_kstat_feature_label">Поддержка SUS Kstat</string>
   <string id="try_umount_feature_label">Поддержка размонтирования</string>
   <string id="spoof_uname_feature_label">Поддержка подмены Uname</string>
   <string id="spoof_cmdline_feature_label">Подмена Cmdline/Bootconfig</string>
-  <string id="open_redirect_feature_label">Поддержка Open Redirect</string>
+  <string id="open_redirect_feature_label">Поддержка открытого перенаправления</string>
   <string id="enable_log_feature_label">Поддержка логирования</string>
-  <string id="auto_default_mount_feature_label">Автоматический Default Mount</string>
+  <string id="auto_default_mount_feature_label">Автоматическое монтирование</string>
   <string id="auto_bind_mount_feature_label">Автоматический Bind Mount</string>
   <string id="auto_try_umount_bind_feature_label">Автоматический Try Umount Bind</string>
   <string id="hide_symbols_feature_label">Скрытие символов KSU SUSFS</string>
   <string id="magic_mount_feature_label">Поддержка Magic Mount</string>
   <string id="overlayfs_auto_kstat_feature_label">Поддержка OverlayFS Auto Kstat</string>
-
-  <!-- Settings -->  
   <string id="susfs_log_label">Логи SUSFS</string>
   <string id="sus_su_1_label">SUS SU в режиме 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU при загрузке</string>
   <string id="susfs_settings_label">Дополнительные настройки</string>
-  <string id="auto_hide_label">Настройки автоматического скрытия</string>
-  <string id="default_mounts_label">Автоскрытие default mounts</string>
-  <string id="bind_mounts_label">Автоскрытие bind mounts</string>
-  <string id="try_umount_bind_label">Автоматическое размонтирование bind mounts</string>
-  <string id="auto_try_umount_label">Автоматическое размонтирование (в пользовательском пространстве)</string>
-  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Скрыть sus_mounts от всех/non-su процессов</string>
-  <string id="zygote_try_umount_label">Пробовать размонтировать для системного процесса zygote</string>
-  <string id="umount_for_zygote_iso_service_label">Пробовать размонтировать для изолированного сервиса zygote</string>
+  <string id="auto_hide_label">Настройки автоскрытия</string>
+  <string id="default_mounts_label">Монтирование автоскрытия по умолчанию</string>
+  <string id="bind_mounts_label">Автоскрытие bind монтирования</string>
+  <string id="try_umount_bind_label">Автоматически размонтировать bind монтирование</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Скрыть sus_mounts от всех процессов</string>
+  <string id="zygote_try_umount_label">Пробовать размонтировать системные процессы zygote</string>
+  <string id="umount_for_zygote_iso_service_label">Пробовать размонтировать изолированые сервисы zygote</string>
   <string id="kernel_uname_label">Uname ядра</string>
   <string id="spoof_kernel_version_label">Подмена версии ядра</string>
   <string id="spoofed_kernel_version_label">Измененная версия ядра</string>
   <string id="spoof_kernel_build_label">Подмена билда ядра</string>
   <string id="spoofed_kernel_build_label">Измененная версия билда</string>
   <string id="spoof_on_boot_label">Подмена при загрузке</string>
-  <string id="post_fs_data_label">Выполнять при post-fs-data (подменяет лучше)</string>
-  <string id="uname_warning_label2">Эта настройка может вызвать циклическую загрузку или нестабильность. Вы уверены, что хотите включить выполнение на post-fs-data?</string>
-  <string id="reset_warning_label">Это сбросит все конфигурации к их значениям по умолчанию. Вы уверены, что хотите продолжить?</string>  
-
-  <!-- Custom -->  
-  <string id="custom_settings_label">Доп. настройки</string>
-  <string id="hide_paths_label">Скрытие кастомной прошивки</string>
+  <string id="post_fs_data_label">Выполнять post-fs-data (улучшенная подмена)</string>
+  <string id="uname_warning_label2">Эти настройки могут вызвать циклическую загрузку или нестабильность. Вы уверены, что хотите включить выполнение Post-FS-DATA?</string>
+  <string id="custom_settings_label">Дополнительные настройки</string>
+  <string id="hide_paths_label">Скрыть настройки кастомной прошивки</string>
   <string id="hide_custom_rom_label">Скрыть пути кастомной прошивки</string>
   <string id="hide_level_label">Уровень скрытия</string>
   <string id="hide_custom_rom_desc1">Исключить файлы .apk, .jar, .odex, .vdex, .so, .rc, и /vendor/bin/hw/</string>
@@ -93,21 +72,49 @@
   <string id="hide_custom_rom_desc5">Скрыть все пользовательские пути. ⚠️ Рискованно и может вызвать проблемы!</string>
   <string id="hide_vendor_sepolicy_label">Скрыть Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">Скрыть Compat Matrix</string>
+  <string id="fake_service_list_label">Скрыть сервисный лист</string>
+  <string id="kernel_version_label">Версия ядра</string>
+  <string id="sus_path_label">Пропатчено SUS</string>
+  <string id="sus_mount_label">Смонтировано SUS</string>
+  <string id="try_umount_label">Размонтировано</string>
+  <string id="susfs_log_label">Логи SUSFS</string>
+  <string id="sus_su_1_label">SUS SU находится в режиме 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU при загрузке boot</string>
+  <string id="susfs_settings_label">Доп. настройки susfs</string>
+  <string id="auto_hide_label">Настройки автоскрытия</string>
+  <string id="default_mounts_label">Автоскрытие default mounts</string>
+  <string id="bind_mounts_label">Автоскрытие bind mounts</string>
+  <string id="try_umount_bind_label">Автоматическое размонтирование bind mounts</string>
+  <string id="zygote_try_umount_label">Пробовать размонтировать системный процесс zygote</string>
+  <string id="kernel_uname_label">Название ядра</string>
+  <string id="spoof_kernel_version_label">Подмена версии ядра</string>
+  <string id="spoof_kernel_build_label">Подмена билда ядра</string>
+  <string id="spoof_on_boot_label">Подмена при загрузке boot</string>
+  <string id="post_fs_data_label">Выполнить из post-fs-data (эффективнее)</string>
+  <string id="uname_warning_label2">Включение этой опции может привести к циклу перезагрузки или нестабильности системы при неправильной подмене. Вы уверены, что хотите включить выполнение из post-fs-data?</string>
+  <string id="custom_settings_label">Доп. настройки</string>
+  <string id="hide_custom_rom_label">Скрыть следы кастомной прошивки</string>
+  <string id="hide_vendor_sepolicy_label">Скрыть Vendor SEPolicy</string>
+  <string id="hide_compat_matrix_label">Скрыть Compat Matrix</string>
   <string id="fake_service_list_label">Подмена Service List</string>
   <string id="hide_gapps_label">Скрыть GApps</string>
   <string id="hide_revanced_label">Скрыть Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Подмена Cmdline</string>
   <string id="hide_ksu_loop_label">Скрыть KSU Loop</string>
-  <string id="force_hide_dex2oat_label">Принудительно скрыть монтирования Dex2oat</string>
+  <string id="force_hide_dex2oat_label">Принудительно скрыть монтирование Dex2oat</string>
   <string id="avc_log_spoofing_label">Подмена логов AVC</string>
   <string id="emulate_vold_app_data_label">Эмулировать изоляцию данных приложений</string>
   <string id="custom_sus_path_label">Свой путь SUS</string>
-  <string id="custom_sus_path_loop_label">Свой путь SUS Loop</string>
-  <string id="custom_sus_maps_label">Свой SUS Maps</string> 
+  <string id="custom_sus_path_loop_label">Свой путь петли SUS</string>
+  <string id="custom_sus_mount_label">Свое SUS монтирование</string>
+  <string id="custom_try_umount_label">Свой Try Umount</string>
+  <string id="contrib_label">Contributors:</string>
+  <string id= "translators_label">Translators:</string>
+  <string id="force_hide_dex2oat_label">Принудительное скрытие Dex2oat</string>
+  <string id="custom_sus_path_label">Свой SUS Path</string>
   <string id="custom_sus_mount_label">Свой SUS Mount</string>
   <string id="custom_try_umount_label">Свой Try Umount</string>
-
-  <!-- Credits -->  
   <string id="contrib_label">Сопровождающие:</string>
   <string id="translators_label">Переводчики:</string>
 </language>
