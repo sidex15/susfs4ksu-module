@@ -302,6 +302,15 @@ fi
 	${KSU_BIN} kernel umount add /apex/com.android.art/bin/dex2oat64 --flags 2
 }
 
+# if hide_sus_mnts_for_all_or_non_su_procs = 2, turn off hide sus mounts for all processes after boot completed
+if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+		[ $hide_sus_mnts_for_all_or_non_su_procs = 2 ] && {
+			${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 >/dev/null && echo "[hide_sus_mnts_for_all_procs = 0]: susfs4ksu/post-fs-data" || {
+				${SUSFS_BIN} hide_sus_mnts_for_non_su_procs 0 >/dev/null && echo "[hide_sus_mnts_for_non_su_procs = 0]: susfs4ksu/post-fs-data";
+			}; 
+		} >> $logfile1
+fi
+
 # SUSFS Logging
 dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
 endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
