@@ -63,7 +63,6 @@ fi
 
 # Starting in SUSFS version v1.5.8, it needs to set the sdcard and android data root paths
 # This will start the sus_path process. Without this check, sus_path will not work
-{
 if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 8 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 	until [ -d "/sdcard/Android/data" ]; do sleep 1; done
 	${SUSFS_BIN} set_sdcard_root_path /sdcard
@@ -101,7 +100,6 @@ else
 		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path "$sus_path" && echo "[sus_path]: susfs4ksu/boot-completed $sus_path" >> $logfile1; }
 	done
 fi
-} & # run in background
 
 # Add sus_path_loop paths (late v1.5.9+)
 {
