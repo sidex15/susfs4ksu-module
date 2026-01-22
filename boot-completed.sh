@@ -139,8 +139,8 @@ fi
 	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 		# Disable hide sus mounts for all processes if hide_sus_mnts_for_all_procs is enabled
 		[ $hide_sus_mnts_for_all_or_non_su_procs -ge 1 ] && {
-			${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 >/dev/null && echo "[hide_sus_mnts_for_all_procs = 0]: susfs4ksu/post-fs-data" || {
-				${SUSFS_BIN} hide_sus_mnts_for_non_su_procs 0 >/dev/null && echo "[hide_sus_mnts_for_non_su_procs = 0]: susfs4ksu/post-fs-data";
+			${SUSFS_BIN} hide_sus_mnts_for_all_procs 0 >/dev/null && echo "[hide_sus_mnts_for_all_procs = 0]: susfs4ksu/boot-completed" || {
+				${SUSFS_BIN} hide_sus_mnts_for_non_su_procs 0 >/dev/null && echo "[hide_sus_mnts_for_non_su_procs = 0]: susfs4ksu/boot-completed";
 			};
 		} >> $logfile1
 	fi
@@ -162,8 +162,8 @@ fi
 	# Re-enable hide sus mounts for all processes
 	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 7 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 		[ $hide_sus_mnts_for_all_or_non_su_procs -ge 1 ] && {
-			${SUSFS_BIN} hide_sus_mnts_for_all_procs 1 >/dev/null && echo "[hide_sus_mnts_for_all_procs = 1]: susfs4ksu/post-fs-data" || {
-				${SUSFS_BIN} hide_sus_mnts_for_non_su_procs 1 >/dev/null && echo "[hide_sus_mnts_for_non_su_procs = 1]: susfs4ksu/post-fs-data";
+			${SUSFS_BIN} hide_sus_mnts_for_all_procs 1 >/dev/null && echo "[hide_sus_mnts_for_all_procs = 1]: susfs4ksu/boot-completed" || {
+				${SUSFS_BIN} hide_sus_mnts_for_non_su_procs 1 >/dev/null && echo "[hide_sus_mnts_for_non_su_procs = 1]: susfs4ksu/boot-completed";
 			}; 
 		} >> $logfile1
 	fi
@@ -293,7 +293,7 @@ fi
 # LSPosed
 # This is for SUSFS v2.0.0+ where ksud umount feature is used
 [ $force_hide_lsposed = 1 ] && [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && {
-	echo "susfs4ksu/post-fs-data: [force_hide_lsposed]" >> $logfile1
+	echo "susfs4ksu/boot-completed: [force_hide_lsposed]" >> $logfile1
 	${KSU_BIN} kernel umount add /system/apex/com.android.art/bin/dex2oat --flags 2
 	${KSU_BIN} kernel umount add /system/apex/com.android.art/bin/dex2oat32 --flags 2
 	${KSU_BIN} kernel umount add /system/apex/com.android.art/bin/dex2oat64 --flags 2
