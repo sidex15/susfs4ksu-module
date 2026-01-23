@@ -152,6 +152,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		custom_sus_path();
 		custom_sus_path_loop(susfs_versions);
 		custom_sus_maps(susfs_features);
+		custom_sus_open_redirect(susfs_features);
     }
 	else if (currentPath === '/status.html') {
 		//console.log("in status");
@@ -1284,6 +1285,41 @@ async function custom_try_umount(){
 			ease: 'power1.out' 
 		});
 	});
+}
+
+async function custom_sus_open_redirect(susfs_features){
+	const sus_open_redirect_section = document.getElementById("sus_open_redirect_section");
+	const load_sus_open_redirect = document.getElementById("load_sus_open_redirect");
+	const sus_open_redirect_area = document.getElementById("custom_sus_open_redirect");
+	const save_sus_open_redirect = document.getElementById("save_sus_open_redirect");
+	
+	// check if sus_open_redirect is enabled in kernel
+	// check if sus_maps is enabled in kernel
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_OPEN_REDIRECT")) {
+		sus_open_redirect_section.classList.remove("hidden");
+	}
+	else {
+		return;
+	}
+
+	// Load the custom SUS OPEN REDIRECT
+	load_sus_open_redirect.addEventListener("click",async ()=>{
+		sus_open_redirect_area.innerHTML=await run(`cat ${config}/sus_open_redirect.txt`);
+	})
+
+	// Save the custom SUS OPEN REDIRECT
+	save_sus_open_redirect.addEventListener("click",async ()=>{
+		var save_sus_open_redirect_val=sus_open_redirect_area.value;
+		// Check if the input is empty
+		if (save_sus_open_redirect_val=='') {
+			toast('please press load first!');
+		}
+		else{
+			await run(`echo '${save_sus_open_redirect_val}' > ${config}/sus_open_redirect.txt`);
+			toast("Custom SUS_OPEN_REDIRECT saved!");
+			toast("Reboot to take effect");
+		}
+	})
 }
 
 // Load kernel feature status
