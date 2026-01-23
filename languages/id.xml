@@ -68,7 +68,8 @@
   <string id="bind_mounts_label">otomatis sembunyikan bind mounts</string>
   <string id="try_umount_bind_label">otomatis try umount bind mounts</string>
   <string id="auto_try_umount_label">otomatis try umount (userspace)</string>
-  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Sembunyikan sus_mounts untuk semua proses</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Sembunyikan sus_mounts untuk semua/non-su proses</string>
+  <string id="turn_off_after_boot_completed_label">Matikan setelah boot selesai</string>
   <string id="zygote_try_umount_label">try umount proses zygote sistem</string>
   <string id="umount_for_zygote_iso_service_label">try umount layanan isolasi zygote</string>
   <string id="kernel_uname_label">Uname Kernel</string>
@@ -106,6 +107,7 @@
   <string id="custom_sus_maps_label">Kustom SUS Maps</string>
   <string id="custom_sus_mount_label">Kustom SUS Mount</string>
   <string id="custom_try_umount_label">Kustom TRY Umount</string>
+  <string id="custom_sus_open_redirect_label">Kustom Open Redirect</string>
 
   <!-- Credits -->
   <string id="contrib_label">Kontributor:</string>
