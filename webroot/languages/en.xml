@@ -107,6 +107,7 @@
   <string id="custom_sus_maps_label">Custom SUS Maps</string>
   <string id="custom_sus_mount_label">Custom SUS Mount</string>
   <string id="custom_try_umount_label">Custom Try Umount</string>
+  <string id="custom_sus_open_redirect_label">Custom Open Redirect</string>
 
   <!-- Credits -->
   <string id="contrib_label">Contributors:</string>
