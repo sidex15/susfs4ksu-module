@@ -114,9 +114,15 @@ if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
 		original_path=$(echo "$line" | awk '{print $1}')
 		redirected_path=$(echo "$line" | awk '{print $2}')
 		execute_on=$(echo "$line" | awk '{print $3}')
+		# Get inode and device of redirected path
+		redirected_ino=$({ stat -c %i "$redirected_path" 2>/dev/null || echo "0"; })
+		redirected_dev=$({ stat -c %d "$redirected_path" 2>/dev/null || echo "0"; })
 		susfs_clone_perm "$redirected_path" "$original_path"
 		[ "$execute_on" != "0" ] && continue
+		# Add open redirect
 		${SUSFS_BIN} add_open_redirect "$original_path" "$redirected_path" && echo "[open_redirect]: susfs4ksu/boot-completed $original_path -> $redirected_path" >> $logfile1
+		# Spoof kstat for open redirected paths
+		${SUSFS_BIN} add_sus_kstat_statically "$original_path" "$redirected_ino" "$redirected_dev" 'default' 'default' 'default' 'default' 'default' 'default' 'default' 'default' 'default' 'default' && echo "[add_sus_kstat_statically]: susfs4ksu/boot-completed $original_path" >> $logfile1
 	done
 fi
 
