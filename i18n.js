@@ -14,6 +14,9 @@ let currentLanguage = localStorage.getItem('susfs_language') || 'en';
 // Cache for current language document
 let currentLanguageDoc = null;
 
+// Cache for English language document (fallback)
+let englishLanguageDoc = null;
+
 /**
  * Load available languages from languages.json file
  * @returns {Promise<void>}
@@ -63,12 +66,29 @@ async function loadLanguage(langCode) {
 function getTranslation(key) {
   if (!currentLanguageDoc) return key;
   
+  // Try to get translation from current language
   const strings = currentLanguageDoc.getElementsByTagName("string");
   for (let i = 0; i < strings.length; i++) {
     if (strings[i].getAttribute("id") === key) {
-      return strings[i].textContent;
+      const text = strings[i].textContent;
+      // If translation exists and is not empty, return it
+      if (text && text.trim() !== '') {
+        return text;
+      }
+      break;
     }
   }
+  
+  // Fallback to English if translation not found or empty
+  if (englishLanguageDoc && currentLanguage !== 'en') {
+    const enStrings = englishLanguageDoc.getElementsByTagName("string");
+    for (let i = 0; i < enStrings.length; i++) {
+      if (enStrings[i].getAttribute("id") === key) {
+        return enStrings[i].textContent || key;
+      }
+    }
+  }
+  
   return key;
 }
 
@@ -79,6 +99,8 @@ function getTranslation(key) {
 function applyTranslations(xmlDoc) {
   if (!xmlDoc) return;
   
+  currentLanguageDoc = xmlDoc;
+  
   const strings = xmlDoc.getElementsByTagName("string");
   for (let i = 0; i < strings.length; i++) {
     const id = strings[i].getAttribute("id");
@@ -87,7 +109,6 @@ function applyTranslations(xmlDoc) {
     // Apply to elements with matching data-i18n attribute
     const elements = document.querySelectorAll(`[data-i18n="${id}"]`);
     elements.forEach(el => {
-    currentLanguageDoc = xmlDoc;
       el.textContent = text;
     });
   }
@@ -126,6 +147,9 @@ async function switchLanguage(langCode) {
 async function initTranslations() {
   // Load available languages first
   await loadAvailableLanguages();
+  
+  // Load English language as fallback
+  englishLanguageDoc = await loadLanguage('en');
   
   // Create language selector
   createLanguageSelector();
