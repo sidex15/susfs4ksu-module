@@ -38,6 +38,9 @@ This module will now have a directory called `VerifiedBootHash` in `/data/adb` c
 - Copy your VerifiedBootHash in the Key Attestation demo and paste it to `/data/adb/VerifiedBootHash/VerifiedBootHash.txt`
 
 ## Localization
+### [Crowdin contribution (WIP) (not yet merged)](https://crowdin.com/project/susfs4ksu-module)
+
+### Traditional PR (it will be deprecated once Crowdin is okay)
 If you want to contribute to add your own language, use the `webui` branch and add your translations in the `./languages` directory. Make sure to test the implementation thoroughly before submitting a pull request.
 Also, the name of the XML files should be the same as the language code, for example:
 - For English, the file should be named `en.xml`
