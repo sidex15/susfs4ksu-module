@@ -1361,17 +1361,17 @@ async function loadKernelFeatureStatus(susfs_features) {
         const span = statusElement.querySelector('span');
         if (result) {
           statusElement.className = 'badge badge-sm badge-success text-sm ml-4';
-          span.textContent = 'Enabled';
           span.setAttribute('data-i18n', 'enabled_label');
+          span.textContent = window.i18n ? window.i18n.getTranslation('enabled_label') : 'Enabled';
         } else {
 			if (deprecated_features.some(df => df.id === feature.id && ((susfs_versions.main>df.version_main)||(susfs_versions.main >= df.version_main && susfs_versions.sub >= df.version_sub && susfs_versions.patch >= df.version_patch)))) {
 				statusElement.className = 'badge badge-sm badge-secondary text-sm ml-4';
-				span.textContent = 'Deprecated';
 				span.setAttribute('data-i18n', 'deprecated_label');
+				span.textContent = window.i18n ? window.i18n.getTranslation('deprecated_label') : 'Deprecated';
 			} else {
 				statusElement.className = 'badge badge-sm badge-error text-sm ml-4';
-				span.textContent = 'Disabled';
 				span.setAttribute('data-i18n', 'disabled_label');
+				span.textContent = window.i18n ? window.i18n.getTranslation('disabled_label') : 'Disabled';
 			}
         }
       }
@@ -1381,8 +1381,8 @@ async function loadKernelFeatureStatus(susfs_features) {
       if (statusElement) {
         const span = statusElement.querySelector('span');
         statusElement.className = 'badge badge-sm badge-warning text-sm ml-4';
-        span.textContent = 'Unknown';
         span.setAttribute('data-i18n', 'unknown_label');
+        span.textContent = window.i18n ? window.i18n.getTranslation('unknown_label') : 'Unknown';
       }
     }
   }

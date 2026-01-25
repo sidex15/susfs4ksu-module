@@ -11,6 +11,9 @@ let availableLanguages = {
 // Current language
 let currentLanguage = localStorage.getItem('susfs_language') || 'en';
 
+// Cache for current language document
+let currentLanguageDoc = null;
+
 /**
  * Load available languages from languages.json file
  * @returns {Promise<void>}
@@ -53,6 +56,23 @@ async function loadLanguage(langCode) {
 }
 
 /**
+ * Get translated text for a given key
+ * @param {string} key - The translation key
+ * @returns {string} - The translated text, or the key if not found
+ */
+function getTranslation(key) {
+  if (!currentLanguageDoc) return key;
+  
+  const strings = currentLanguageDoc.getElementsByTagName("string");
+  for (let i = 0; i < strings.length; i++) {
+    if (strings[i].getAttribute("id") === key) {
+      return strings[i].textContent;
+    }
+  }
+  return key;
+}
+
+/**
  * Apply translations from XML to the DOM
  * @param {Document} xmlDoc - XML document with translations
  */
@@ -67,6 +87,7 @@ function applyTranslations(xmlDoc) {
     // Apply to elements with matching data-i18n attribute
     const elements = document.querySelectorAll(`[data-i18n="${id}"]`);
     elements.forEach(el => {
+    currentLanguageDoc = xmlDoc;
       el.textContent = text;
     });
   }
@@ -180,5 +201,6 @@ window.i18n = {
     init: initTranslations,
     switchLanguage: switchLanguage,
     getCurrentLanguage: () => currentLanguage,
+    getTranslation: getTranslation,
     applyTranslationsToNewContent: applyTranslationsToNewContent
 };
