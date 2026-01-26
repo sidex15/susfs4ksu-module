@@ -69,6 +69,7 @@
   <string id="try_umount_bind_label">自动尝试卸载绑定挂载</string>
   <string id="auto_try_umount_label">自动尝试卸载（用户空间）</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">对所有进程隐藏sus_mounts</string>
+  <string id="turn_off_after_boot_completed_label">启动完成后关闭</string>
   <string id="zygote_try_umount_label">为zygote系统进程尝试卸载</string>
   <string id="umount_for_zygote_iso_service_label">为zygote隔离服务尝试卸载</string>
   <string id="kernel_uname_label">内核Uname</string>
@@ -106,6 +107,7 @@
   <string id="custom_sus_maps_label">自定义SUS映射</string>
   <string id="custom_sus_mount_label">自定义SUS挂载</string>
   <string id="custom_try_umount_label">自定义尝试卸载</string>
+  <string id="custom_sus_open_redirect_label">自定义开放重定向</string>
 
   <!-- Credits -->
   <string id="contrib_label">贡献者：</string>
