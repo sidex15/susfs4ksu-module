@@ -62,7 +62,6 @@
   <string id="sus_su_1_label">SUS SU处于模式1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">开机时启动SUS SU</string>
-  <string id="susfs_settings_label">自定义susfs设置</string>
   <string id="auto_hide_label">自动隐藏设置</string>
   <string id="default_mounts_label">自动隐藏默认挂载</string>
   <string id="bind_mounts_label">自动隐藏绑定挂载</string>

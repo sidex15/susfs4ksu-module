@@ -45,7 +45,6 @@
   <string id="sus_su_1_label">SUS SU у режимі 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU під час завантаження</string>
-  <string id="susfs_settings_label">Додаткові налаштування</string>
   <string id="auto_hide_label">Налаштування автоприховування</string>
   <string id="default_mounts_label">Монтування автоприховування за замовчуванням</string>
   <string id="bind_mounts_label">Автоприховування bind-монтування</string>
@@ -81,7 +80,6 @@
   <string id="sus_su_1_label">SUS SU у режимі 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU під час завантаження boot</string>
-  <string id="susfs_settings_label">Дод. налаштування SUSFS</string>
   <string id="auto_hide_label">Налаштування автоприховування</string>
   <string id="default_mounts_label">Автоприховування default mounts</string>
   <string id="bind_mounts_label">Автоприховування bind mounts</string>
