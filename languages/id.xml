@@ -62,7 +62,6 @@
   <string id="sus_su_1_label">SUS SU ada di Mode 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU saat boot</string>
-  <string id="susfs_settings_label">kustom setelan susfs</string>
   <string id="auto_hide_label">setelan otomatis penyembunyian</string>
   <string id="default_mounts_label">otomatis sembunyikan mounts default</string>
   <string id="bind_mounts_label">otomatis sembunyikan bind mounts</string>

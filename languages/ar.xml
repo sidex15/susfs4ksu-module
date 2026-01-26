@@ -14,13 +14,13 @@
   <string id="sus_path_label">SUS PATH</string>
   <string id="sus_mount_label">SUS MOUNT</string>
   <string id="try_umount_label">TRY UMOUNT</string>
+  <string id="susfs_settings_label">إعدادات SUSFS مخصصة</string>
   
   <!-- Settings -->
   <string id="susfs_log_label">سجلات SUSFS</string>
   <string id="sus_su_1_label">SUS SU في الوضع 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU أثناء التمهيد</string>
-  <string id="susfs_settings_label">إعدادات SUSFS مخصصة</string>
   <string id="auto_hide_label">إخفاء الإعدادات تلقائيا</string>
   <string id="default_mounts_label">إخفاء mounts تلقائيا</string>
   <string id="bind_mounts_label">إخفاء bind mounts تلقائيا</string>

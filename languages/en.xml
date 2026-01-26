@@ -62,7 +62,6 @@
   <string id="sus_su_1_label">SUS SU is on Mode 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU on boot</string>
-  <string id="susfs_settings_label">custom susfs settings</string>
   <string id="auto_hide_label">auto hide settings</string>
   <string id="default_mounts_label">auto hide default mounts</string>
   <string id="bind_mounts_label">auto hide bind mounts</string>

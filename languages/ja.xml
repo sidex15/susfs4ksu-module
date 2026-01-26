@@ -60,7 +60,6 @@
   <string id="sus_su_1_label">SUS SUモード1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">起動時SUS SU実行</string>
-  <string id="susfs_settings_label">カスタムsusfs設定</string>
   <string id="auto_hide_label">自動非表示設定</string>
   <string id="default_mounts_label">自動非表示デフォルトマウント</string>
   <string id="bind_mounts_label">自動非表示バインドマウント</string>
