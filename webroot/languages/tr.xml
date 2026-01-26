@@ -18,13 +18,13 @@
   <string id="sus_path_label">SUS Yolu</string>
   <string id="sus_mount_label">SUS Bağlama</string>
   <string id="try_umount_label">Bağlantıyı Kaldırmayı Dene</string>
+  <string id="susfs_settings_label">Özel SUSFS Ayarları</string>
 
   <!-- Settings -->
   <string id="susfs_log_label">SUSFS Günlükleri</string>
   <string id="sus_su_1_label">SUS SU Mod 1\'de</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">Başlangıçta SUS SU</string>
-  <string id="susfs_settings_label">Özel SUSFS Ayarları</string>
   <string id="auto_hide_label">Otomatik Gizleme Ayarları</string>
   <string id="default_mounts_label">Varsayılan Bağlantıları Otomatik Gizle</string>
   <string id="bind_mounts_label">Bağlantı Bağlantılarını Otomatik Gizle</string>

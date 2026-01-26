@@ -14,13 +14,13 @@
   <string id="sus_path_label">CHEMIN SUS</string>
   <string id="sus_mount_label">MONTAGE SUS</string>
   <string id="try_umount_label">ESSAYER DE DÉMONTER</string>
+  <string id="susfs_settings_label">paramètres personnalisés susfs</string>
   
   <!-- Paramètres -->
   <string id="susfs_log_label">Journaux SUSFS</string>
   <string id="sus_su_1_label">SUS SU est en mode 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU au démarrage</string>
-  <string id="susfs_settings_label">paramètres personnalisés susfs</string>
   <string id="auto_hide_label">masquage automatique</string>
   <string id="default_mounts_label">masquer automatiquement les montages par défaut</string>
   <string id="bind_mounts_label">masquer automatiquement les montages de liaison</string>

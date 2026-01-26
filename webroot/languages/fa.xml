@@ -14,13 +14,13 @@
    <string id="sus_path_label">مسیر SUS</string>
    <string id="sus_mount_label">پیوست SUS</string>
    <string id="try_umount_label">کوشش برای جداکردن</string>
-   
+   <string id="susfs_settings_label">ساماندهی ویژه SUSFS</string>
+
    <!-- Settings -->
    <string id="susfs_log_label">گزاره‌های SUSFS</string>
    <string id="sus_su_1_label">SUS SU در گونه ۱ است</string>
    <string id="sus_su_label">SUS SU</string>
    <string id="sus_su_boot_label">SUS SU هنگام راه‌اندازی</string>
-   <string id="susfs_settings_label">ساماندهی ویژه SUSFS</string>
    <string id="auto_hide_label">نهان‌سازی خودکار</string>
    <string id="default_mounts_label">نهان‌سازی خودکار پیوست‌های پیش‌گزیده</string>
    <string id="bind_mounts_label">نهان‌سازی خودکار پیوست‌های پیوندی</string>
