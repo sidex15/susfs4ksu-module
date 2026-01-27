@@ -15,7 +15,7 @@
   <string id="unknown_label">不明</string>
   <string id="help_label">ヘルプ</string>
   <string id="send_logs_label">ログ送信</string>
-  <string id="export_config_label">Export Config</string>
+  <string id="export_config_label">設定エクスポート</string>
   <string id="reset_config_label">全設定リセット</string>
 
   <!-- SUSFS Not supported error-->
