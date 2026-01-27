@@ -1,4 +1,4 @@
-name: Crowdin Action
+name: Crowdin Download Translations
 
 on:
   workflow_dispatch:
