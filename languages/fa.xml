@@ -1,54 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <language id="fa">
+<language>
   <!-- General -->
-   <string id="app_title">فهرست وب</string>
-   <string id="warning_label">آگاهی!</string>
-   <string id="cancel_label">بازایست</string>
-   <string id="confirm_label">پذیرفتن</string>
-   <string id="about_label">درباره</string>
-   <string id="main_menu_label">فهرست اصلی</string>
-   <string id="load_label">بارگذاری</string>
-   
-  <!-- Home Page -->
-   <string id="kernel_version_label">نسخه هسته</string>
-   <string id="sus_path_label">مسیر SUS</string>
-   <string id="sus_mount_label">پیوست SUS</string>
-   <string id="try_umount_label">کوشش برای جداکردن</string>
-   <string id="susfs_settings_label">ساماندهی ویژه SUSFS</string>
+  <string id="app_title">فهرست وب</string>
+  <string id="warning_label">آگاهی!</string>
+  <string id="cancel_label">بازایست</string>
+  <string id="confirm_label">پذیرفتن</string>
+  <string id="about_label">درباره</string>
+  <string id="main_menu_label">فهرست اصلی</string>
+  <string id="load_label">بارگذاری</string>
+  <string id="edit_label">Edit With</string>
+  <string id="enabled_label">Enabled</string>
+  <string id="disabled_label">Disabled</string>
+  <string id="deprecated_label">Deprecated</string>
+  <string id="unknown_label">Unknown</string>
+  <string id="help_label">Help</string>
+  <string id="send_logs_label">Send Logs</string>
+  <string id="export_config_label">Export Config</string>
+  <string id="reset_config_label">Reset All Config</string>
 
-   <!-- Settings -->
-   <string id="susfs_log_label">گزاره‌های SUSFS</string>
-   <string id="sus_su_1_label">SUS SU در گونه ۱ است</string>
-   <string id="sus_su_label">SUS SU</string>
-   <string id="sus_su_boot_label">SUS SU هنگام راه‌اندازی</string>
-   <string id="auto_hide_label">نهان‌سازی خودکار</string>
-   <string id="default_mounts_label">نهان‌سازی خودکار پیوست‌های پیش‌گزیده</string>
-   <string id="bind_mounts_label">نهان‌سازی خودکار پیوست‌های پیوندی</string>
-   <string id="try_umount_bind_label">کوشش خودکار برای جداکردن پیوست‌های پیوندی</string>
-   <string id="zygote_try_umount_label">کوشش برای جداکردن فرآیند سیستمی Zygote</string>
-   <string id="kernel_uname_label">نام هسته</string>
-   <string id="spoof_kernel_version_label">ساختگی کردن نسخه هسته</string>
-   <string id="spoof_kernel_build_label">ساختگی کردن ساخت هسته</string>
-   <string id="spoof_on_boot_label">ساختگی کردن هنگام راه‌اندازی</string>
-   <string id="post_fs_data_label">اجرا در پسا-داده‌های سامانه پرونده (ساختگی بهتر)</string>
-   <string id="uname_warning_label2">فراچیدن این گزینه ممکن است ناپایداری یا چرخه راه‌اندازی پدید آورد اگر ساختگی نادرست باشد. آیا اطمینان دارید که اجرای پسا-داده‌های سامانه پرونده را فراچیده کنید؟</string>
-   
-   <!-- Custom -->
-   <string id="custom_settings_label">ساماندهی ویژه</string>
-   <string id="hide_custom_rom_label">نهان‌سازی رام ویژه</string>
-   <string id="hide_vendor_sepolicy_label">نهان‌سازی سیاست امنیتی فروشنده</string>
-   <string id="hide_compat_matrix_label">نهان‌سازی آرایه سازگاری</string>
-   <string id="fake_service_list_label">ساختگی کردن فهرست خدمت‌ها</string>
-   <string id="hide_gapps_label">نهان‌سازی برنامه‌های گوگل</string>
-   <string id="hide_revanced_label">نهان‌سازی ری‌ونسد (یوتیوب/موسیقی یوتیوب)</string>
-   <string id="spoof_cmdline_label">ساختگی کردن خط فرمان</string>
-   <string id="hide_ksu_loop_label">نهان‌سازی چرخه KSU</string>
-   <string id="force_hide_dex2oat_label">نهان‌سازی ناگزیر Dex2oat</string>
-   <string id="custom_sus_path_label">مسیر ویژه SUS</string>
-   <string id="custom_sus_mount_label">پیوست ویژه SUS</string>
-   <string id="custom_try_umount_label">کوشش ویژه برای جداکردن</string>
- 
-   <!-- Credits -->
-   <string id="contrib_label">همکاران:</string>
-   <string id="translators_label">برگردانندگان:</string>
- </language>
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
+  <string id="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</string>
+
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS Userspace Update!</string>
+  <string id="susfs_update_desc">There's an update to your SUSFS Userspace Binaries!</string>
+  <string id="susfs_update2_desc">Please update to the latest version to ensure compatibility with the Module and the WebUI.</string>
+  <string id="susfs_updating_label">Updating...</string>
+  <string id="skip_btn_label">Skip</string>
+  <string id="update_btn_label">Update</string>
+
+  <!-- Home Page -->
+  <string id="kernel_version_label">نسخه هسته</string>
+  <string id="sus_path_label">مسیر SUS</string>
+  <string id="sus_map_label">SUS MAPS</string>
+  <string id="sus_mount_label">پیوست SUS</string>
+  <string id="try_umount_label">کوشش برای جداکردن</string>
+  <string id="susfs_settings_label">ساماندهی ویژه SUSFS</string>
+  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
+
+  <!-- Status Page -->
+  <string id="kernel_features_label">Kernel Features Status</string>
+  <string id="sus_path_feature_label">SUS Path Support</string>
+  <string id="sus_map_feature_label">SUS Maps Support</string>
+  <string id="sus_mount_feature_label">SUS Mount Support</string>
+  <string id="sus_kstat_feature_label">SUS Kstat Support</string>
+  <string id="try_umount_feature_label">Try Umount Support</string>
+  <string id="spoof_uname_feature_label">Spoof Uname Support</string>
+  <string id="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Open Redirect Support</string>
+  <string id="enable_log_feature_label">Logging Support</string>
+  <string id="auto_default_mount_feature_label">Auto Default Mount</string>
+  <string id="auto_bind_mount_feature_label">Auto Bind Mount</string>
+  <string id="auto_try_umount_bind_feature_label">Auto Try Umount Bind</string>
+  <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
+  <string id="magic_mount_feature_label">Magic Mount Support</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</string>
+
+  <!-- Settings -->
+  <string id="susfs_log_label">گزاره‌های SUSFS</string>
+  <string id="sus_su_1_label">SUS SU در گونه ۱ است</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU هنگام راه‌اندازی</string>
+  <string id="auto_hide_label">نهان‌سازی خودکار</string>
+  <string id="default_mounts_label">نهان‌سازی خودکار پیوست‌های پیش‌گزیده</string>
+  <string id="bind_mounts_label">نهان‌سازی خودکار پیوست‌های پیوندی</string>
+  <string id="try_umount_bind_label">کوشش خودکار برای جداکردن پیوست‌های پیوندی</string>
+  <string id="auto_try_umount_label">auto try umount (userspace)</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Hide sus_mounts for all/non-su processes</string>
+  <string id="turn_off_after_boot_completed_label">Turn off after boot-completed</string>
+  <string id="zygote_try_umount_label">کوشش برای جداکردن فرآیند سیستمی Zygote</string>
+  <string id="umount_for_zygote_iso_service_label">try umount for zygote isolation service</string>
+  <string id="kernel_uname_label">نام هسته</string>
+  <string id="spoof_kernel_version_label">ساختگی کردن نسخه هسته</string>
+  <string id="spoofed_kernel_version_label">Spoofed Kernel Version</string>
+  <string id="spoof_kernel_build_label">ساختگی کردن ساخت هسته</string>
+  <string id="spoofed_kernel_build_label">Spoofed Kernel Build</string>
+  <string id="spoof_on_boot_label">ساختگی کردن هنگام راه‌اندازی</string>
+  <string id="post_fs_data_label">اجرا در پسا-داده‌های سامانه پرونده (ساختگی بهتر)</string>
+  <string id="uname_warning_label2">فراچیدن این گزینه ممکن است ناپایداری یا چرخه راه‌اندازی پدید آورد اگر ساختگی نادرست باشد. آیا اطمینان دارید که اجرای پسا-داده‌های سامانه پرونده را فراچیده کنید؟</string>
+  <string id="reset_warning_label">This will reset all configurations to their default values. Are you sure you want to proceed?</string>
+
+  <!-- Custom -->
+  <string id="custom_settings_label">ساماندهی ویژه</string>
+  <string id="hide_paths_label">Hide Custom Rom Settings</string>
+  <string id="hide_custom_rom_label">نهان‌سازی رام ویژه</string>
+  <string id="hide_level_label">Hide Level</string>
+  <string id="hide_custom_rom_desc1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc2">Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc3">Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc4">Exclude .apk, .jar, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc5">Hide all custom rom paths ⚠️Risky and it could cause issues!</string>
+  <string id="hide_vendor_sepolicy_label">نهان‌سازی سیاست امنیتی فروشنده</string>
+  <string id="hide_compat_matrix_label">نهان‌سازی آرایه سازگاری</string>
+  <string id="fake_service_list_label">ساختگی کردن فهرست خدمت‌ها</string>
+  <string id="hide_gapps_label">نهان‌سازی برنامه‌های گوگل</string>
+  <string id="hide_revanced_label">نهان‌سازی ری‌ونسد (یوتیوب/موسیقی یوتیوب)</string>
+  <string id="spoof_cmdline_label">ساختگی کردن خط فرمان</string>
+  <string id="hide_ksu_loop_label">نهان‌سازی چرخه KSU</string>
+  <string id="force_hide_dex2oat_label">نهان‌سازی ناگزیر Dex2oat</string>
+  <string id="avc_log_spoofing_label">AVC Log Spoofing</string>
+  <string id="emulate_vold_app_data_label">Emulate Vold App Data Isolation</string>
+  <string id="custom_sus_path_label">مسیر ویژه SUS</string>
+  <string id="custom_sus_path_loop_label">Custom SUS Path Loop</string>
+  <string id="custom_sus_maps_label">Custom SUS Maps</string>
+  <string id="custom_sus_mount_label">پیوست ویژه SUS</string>
+  <string id="custom_try_umount_label">کوشش ویژه برای جداکردن</string>
+  <string id="custom_sus_open_redirect_label">Custom Open Redirect</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">همکاران:</string>
+  <string id="translators_label">برگردانندگان:</string>
+</language>

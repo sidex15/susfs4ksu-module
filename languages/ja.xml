@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language id="ja">
+<language>
   <!-- General -->
   <string id="app_title">WebUIメニュー</string>
   <string id="warning_label">警告！</string>
@@ -8,12 +8,14 @@
   <string id="about_label">概要</string>
   <string id="main_menu_label">メインメニュー</string>
   <string id="load_label">読み込み</string>
+  <string id="edit_label">Edit With</string>
   <string id="enabled_label">有効</string>
   <string id="disabled_label">無効</string>
   <string id="deprecated_label">非推奨</string>
   <string id="unknown_label">不明</string>
   <string id="help_label">ヘルプ</string>
   <string id="send_logs_label">ログ送信</string>
+  <string id="export_config_label">Export Config</string>
   <string id="reset_config_label">全設定リセット</string>
 
   <!-- SUSFS Not supported error-->
@@ -27,7 +29,7 @@
   <string id="susfs_updating_label">更新中...</string>
   <string id="skip_btn_label">スキップ</string>
   <string id="update_btn_label">更新</string>
-  
+
   <!-- Home Page -->
   <string id="kernel_version_label">カーネルバージョン</string>
   <string id="sus_path_label">SUSパス</string>
@@ -36,7 +38,7 @@
   <string id="try_umount_label">アンマウント試行</string>
   <string id="susfs_settings_label">カスタムSUSFS設定</string>
   <string id="susfs_kernel_status_label">SUSFSカーネル状態</string>
-  
+
   <!-- Status Page -->
   <string id="kernel_features_label">カーネル機能状態</string>
   <string id="sus_path_feature_label">SUSパス対応</string>
@@ -54,7 +56,7 @@
   <string id="hide_symbols_feature_label">KSU SUSFSシンボル非表示</string>
   <string id="magic_mount_feature_label">マジックマウント対応</string>
   <string id="overlayfs_auto_kstat_feature_label">OverlayFS自動カーネル統計対応</string>
-  
+
   <!-- Settings -->
   <string id="susfs_log_label">SUSFSログ</string>
   <string id="sus_su_1_label">SUS SUモード1</string>
@@ -64,7 +66,9 @@
   <string id="default_mounts_label">自動非表示デフォルトマウント</string>
   <string id="bind_mounts_label">自動非表示バインドマウント</string>
   <string id="try_umount_bind_label">自動バインドアンマウント試行</string>
+  <string id="auto_try_umount_label">auto try umount (userspace)</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">全プロセスのsusマウントを非表示</string>
+  <string id="turn_off_after_boot_completed_label">Turn off after boot-completed</string>
   <string id="zygote_try_umount_label">zygoteシステムプロセスのアンマウント試行</string>
   <string id="umount_for_zygote_iso_service_label">zygote分離サービスのアンマウント試行</string>
   <string id="kernel_uname_label">カーネルUname</string>
@@ -76,7 +80,7 @@
   <string id="post_fs_data_label">post-fs-data段階で実行（偽装効果向上）</string>
   <string id="uname_warning_label2">偽装設定が正しくない場合、このオプションを有効にするとブートループやシステム不安定を引き起こす可能性があります。post-fs-data実行を有効にしてもよろしいですか？</string>
   <string id="reset_warning_label">全ての設定がデフォルト値にリセットされます。続行してもよろしいですか？</string>
-  
+
   <!-- Custom -->
   <string id="custom_settings_label">カスタム設定</string>
   <string id="hide_paths_label">カスタムROM設定非表示</string>
@@ -102,6 +106,7 @@
   <string id="custom_sus_maps_label">カスタムSUSマップ</string>
   <string id="custom_sus_mount_label">カスタムSUSマウント</string>
   <string id="custom_try_umount_label">カスタムアンマウント試行</string>
+  <string id="custom_sus_open_redirect_label">Custom Open Redirect</string>
 
   <!-- Credits -->
   <string id="contrib_label">貢献者：</string>

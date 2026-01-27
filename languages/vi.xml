@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language id="vi">
+<language>
   <!-- General -->
   <string id="app_title">Trình đơn WebUI</string>
   <string id="warning_label">Cảnh báo!</string>
@@ -21,7 +21,7 @@
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">Không được hỗ trợ!</string>
   <string id="susfs_error_desc">Truy cập WebUI bị từ chối! Hãy đảm bảo bạn đang sử dụng kernel đã vá SuSFS!</string>
-  
+
   <!-- SUSFS Update Dialog -->
   <string id="susfs_update_label">Cập nhật SUSFS Userspace!</string>
   <string id="susfs_update_desc">Có bản cập nhật mới cho các tệp nhị phân SUSFS Userspace của bạn!</string>
@@ -38,7 +38,7 @@
   <string id="try_umount_label">Thử gỡ gắn kết</string>
   <string id="susfs_settings_label">Tùy chỉnh SUSFS</string>
   <string id="susfs_kernel_status_label">Trạng thái Kernel SUSFS</string>
-  
+
   <!-- Status Page -->
   <string id="kernel_features_label">Trạng thái tính năng Kernel</string>
   <string id="sus_path_feature_label">Hỗ trợ đường dẫn SUS</string>
@@ -56,7 +56,7 @@
   <string id="hide_symbols_feature_label">Ẩn ký hiệu KSU SUSFS</string>
   <string id="magic_mount_feature_label">Hỗ trợ Magic Mount</string>
   <string id="overlayfs_auto_kstat_feature_label">Hỗ trợ OverlayFS Auto Kstat</string>
-  
+
   <!-- Settings -->
   <string id="susfs_log_label">Nhật ký SUSFS</string>
   <string id="sus_su_1_label">SUS SU đang ở chế độ 1</string>
@@ -66,7 +66,9 @@
   <string id="default_mounts_label">Tự động ẩn gắn kết mặc định</string>
   <string id="bind_mounts_label">Tự động ẩn gắn kết liên kết</string>
   <string id="try_umount_bind_label">Tự động thử gỡ gắn kết liên kết</string>
+  <string id="auto_try_umount_label">auto try umount (userspace)</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Ẩn sus_mounts cho tất cả tiến trình</string>
+  <string id="turn_off_after_boot_completed_label">Turn off after boot-completed</string>
   <string id="zygote_try_umount_label">Thử gỡ gắn kết cho tiến trình hệ thống zygote</string>
   <string id="umount_for_zygote_iso_service_label">Thử gỡ gắn kết cho dịch vụ cách ly zygote</string>
   <string id="kernel_uname_label">Tên Kernel (Uname)</string>
@@ -78,7 +80,7 @@
   <string id="post_fs_data_label">Thực thi ở giai đoạn post-fs-data (giả chính xác hơn)</string>
   <string id="uname_warning_label2">Bật tùy chọn này có thể gây bootloop hoặc mất ổn định nếu giả sai. Bạn có chắc muốn bật thực thi post-fs-data không?</string>
   <string id="reset_warning_label">Thao tác này sẽ đặt lại toàn bộ cấu hình về mặc định. Bạn có chắc muốn tiếp tục không?</string>
-  
+
   <!-- Custom -->
   <string id="custom_settings_label">Cài đặt tùy chỉnh</string>
   <string id="hide_paths_label">Ẩn cài đặt ROM tùy chỉnh</string>
@@ -104,6 +106,7 @@
   <string id="custom_sus_maps_label">Bản đồ SUS tùy chỉnh</string>
   <string id="custom_sus_mount_label">Gắn kết SUS tùy chỉnh</string>
   <string id="custom_try_umount_label">Thử gỡ gắn kết tùy chỉnh</string>
+  <string id="custom_sus_open_redirect_label">Custom Open Redirect</string>
 
   <!-- Credits -->
   <string id="contrib_label">Người đóng góp:</string>
