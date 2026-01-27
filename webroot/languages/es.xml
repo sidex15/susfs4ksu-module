@@ -1,50 +1,114 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<language id="es">  
-  <!-- General -->  
-  <string id="app_title">Menú WebUI</string>  
-  <string id="warning_label">¡Advertencia!</string>  
-  <string id="cancel_label">Cancelar</string>  
-  <string id="confirm_label">Confirmar</string>  
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+  <!-- General -->
+  <string id="app_title">Menú WebUI</string>
+  <string id="warning_label">¡Advertencia!</string>
+  <string id="cancel_label">Cancelar</string>
+  <string id="confirm_label">Confirmar</string>
   <string id="about_label">Acerca de</string>
   <string id="main_menu_label">Menú Principal</string>
   <string id="load_label">Cargar</string>
-  
-  <!-- Página de inicio -->  
-  <string id="kernel_version_label">Versión del Kernel</string>  
-  <string id="sus_path_label">RUTA SUS</string>  
-  <string id="sus_mount_label">MONTAJE SUS</string>  
-  <string id="try_umount_label">INTENTAR DESMONTAR</string>  
-  <string id="susfs_settings_label">configuraciones personalizadas de susfs</string>
+  <string id="edit_label">Edit With</string>
+  <string id="enabled_label">Enabled</string>
+  <string id="disabled_label">Disabled</string>
+  <string id="deprecated_label">Deprecated</string>
+  <string id="unknown_label">Unknown</string>
+  <string id="help_label">Help</string>
+  <string id="send_logs_label">Send Logs</string>
+  <string id="export_config_label">Export Config</string>
+  <string id="reset_config_label">Reset All Config</string>
 
-  <!-- Configuración -->  
-  <string id="susfs_log_label">Registros SUSFS</string>  
-  <string id="sus_su_1_label">SUS SU está en Modo 1</string>  
-  <string id="sus_su_label">SUS SU</string>  
-  <string id="sus_su_boot_label">SUS SU al arranque</string>  
-  <string id="auto_hide_label">ocultar automáticamente configuraciones</string>  
-  <string id="default_mounts_label">ocultar automáticamente montajes predeterminados</string>  
-  <string id="bind_mounts_label">ocultar automáticamente montajes de enlace</string>  
-  <string id="try_umount_bind_label">intentar automáticamente desmontar montajes de enlace</string>  
-  <string id="zygote_try_umount_label">intentar desmontar para el proceso del sistema zygote</string>  
-  <string id="kernel_uname_label">Uname del Kernel</string>  
-  <string id="spoof_kernel_version_label">Suplantar Versión del Kernel</string>  
-  <string id="spoof_kernel_build_label">Suplantar Compilación del Kernel</string>  
-  <string id="spoof_on_boot_label">Suplantar al arranque</string>  
-  <string id="post_fs_data_label">Ejecutar en post-fs-data (suplantación más efectiva)</string>  
-  <string id="uname_warning_label2">Activar esto puede causar un bucle de arranque o inestabilidad si la suplantación es incorrecta. ¿Seguro que deseas habilitar la ejecución post-fs-data?</string>  
-  
-  <!-- Personalizado -->  
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
+  <string id="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</string>
+
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS Userspace Update!</string>
+  <string id="susfs_update_desc">There's an update to your SUSFS Userspace Binaries!</string>
+  <string id="susfs_update2_desc">Please update to the latest version to ensure compatibility with the Module and the WebUI.</string>
+  <string id="susfs_updating_label">Updating...</string>
+  <string id="skip_btn_label">Skip</string>
+  <string id="update_btn_label">Update</string>
+
+  <!-- Home Page -->
+  <string id="kernel_version_label">Versión del Kernel</string>
+  <string id="sus_path_label">RUTA SUS</string>
+  <string id="sus_map_label">SUS MAPS</string>
+  <string id="sus_mount_label">MONTAJE SUS</string>
+  <string id="try_umount_label">INTENTAR DESMONTAR</string>
+  <string id="susfs_settings_label">configuraciones personalizadas de susfs</string>
+  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
+
+  <!-- Status Page -->
+  <string id="kernel_features_label">Kernel Features Status</string>
+  <string id="sus_path_feature_label">SUS Path Support</string>
+  <string id="sus_map_feature_label">SUS Maps Support</string>
+  <string id="sus_mount_feature_label">SUS Mount Support</string>
+  <string id="sus_kstat_feature_label">SUS Kstat Support</string>
+  <string id="try_umount_feature_label">Try Umount Support</string>
+  <string id="spoof_uname_feature_label">Spoof Uname Support</string>
+  <string id="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Open Redirect Support</string>
+  <string id="enable_log_feature_label">Logging Support</string>
+  <string id="auto_default_mount_feature_label">Auto Default Mount</string>
+  <string id="auto_bind_mount_feature_label">Auto Bind Mount</string>
+  <string id="auto_try_umount_bind_feature_label">Auto Try Umount Bind</string>
+  <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
+  <string id="magic_mount_feature_label">Magic Mount Support</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</string>
+
+  <!-- Settings -->
+  <string id="susfs_log_label">Registros SUSFS</string>
+  <string id="sus_su_1_label">SUS SU está en Modo 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU al arranque</string>
+  <string id="auto_hide_label">ocultar automáticamente configuraciones</string>
+  <string id="default_mounts_label">ocultar automáticamente montajes predeterminados</string>
+  <string id="bind_mounts_label">ocultar automáticamente montajes de enlace</string>
+  <string id="try_umount_bind_label">intentar automáticamente desmontar montajes de enlace</string>
+  <string id="auto_try_umount_label">auto try umount (userspace)</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Hide sus_mounts for all/non-su processes</string>
+  <string id="turn_off_after_boot_completed_label">Turn off after boot-completed</string>
+  <string id="zygote_try_umount_label">intentar desmontar para el proceso del sistema zygote</string>
+  <string id="umount_for_zygote_iso_service_label">try umount for zygote isolation service</string>
+  <string id="kernel_uname_label">Uname del Kernel</string>
+  <string id="spoof_kernel_version_label">Suplantar Versión del Kernel</string>
+  <string id="spoofed_kernel_version_label">Spoofed Kernel Version</string>
+  <string id="spoof_kernel_build_label">Suplantar Compilación del Kernel</string>
+  <string id="spoofed_kernel_build_label">Spoofed Kernel Build</string>
+  <string id="spoof_on_boot_label">Suplantar al arranque</string>
+  <string id="post_fs_data_label">Ejecutar en post-fs-data (suplantación más efectiva)</string>
+  <string id="uname_warning_label2">Activar esto puede causar un bucle de arranque o inestabilidad si la suplantación es incorrecta. ¿Seguro que deseas habilitar la ejecución post-fs-data?</string>
+  <string id="reset_warning_label">This will reset all configurations to their default values. Are you sure you want to proceed?</string>
+
+  <!-- Custom -->
   <string id="custom_settings_label">Configuraciones Personalizadas</string>
-  <string id="hide_custom_rom_label">Ocultar ROM Personalizada</string>  
-  <string id="hide_vendor_sepolicy_label">Ocultar SEPolicy del Fabricante</string>  
-  <string id="hide_compat_matrix_label">Ocultar Matriz de Compatibilidad</string>  
-  <string id="fake_service_list_label">Lista de Servicios Falsos</string>  
-  <string id="hide_gapps_label">Ocultar GApps</string>  
-  <string id="hide_revanced_label">Ocultar ReVanced</string>  
-  <string id="spoof_cmdline_label">Suplantar Línea de Comandos</string>  
-  <string id="hide_ksu_loop_label">Ocultar Bucle KSU</string>  
-  <string id="force_hide_dex2oat_label">Forzar Ocultación de Dex2oat</string>  
-  <string id="custom_sus_path_label">Ruta SUS Personalizada</string>  
-  <string id="custom_sus_mount_label">Montaje SUS Personalizado</string>  
-  <string id="custom_try_umount_label">Intento de Desmontaje Personalizado</string>  
-</language>  
+  <string id="hide_paths_label">Hide Custom Rom Settings</string>
+  <string id="hide_custom_rom_label">Ocultar ROM Personalizada</string>
+  <string id="hide_level_label">Hide Level</string>
+  <string id="hide_custom_rom_desc1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc2">Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc3">Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc4">Exclude .apk, .jar, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc5">Hide all custom rom paths ⚠️Risky and it could cause issues!</string>
+  <string id="hide_vendor_sepolicy_label">Ocultar SEPolicy del Fabricante</string>
+  <string id="hide_compat_matrix_label">Ocultar Matriz de Compatibilidad</string>
+  <string id="fake_service_list_label">Lista de Servicios Falsos</string>
+  <string id="hide_gapps_label">Ocultar GApps</string>
+  <string id="hide_revanced_label">Ocultar ReVanced</string>
+  <string id="spoof_cmdline_label">Suplantar Línea de Comandos</string>
+  <string id="hide_ksu_loop_label">Ocultar Bucle KSU</string>
+  <string id="force_hide_dex2oat_label">Forzar Ocultación de Dex2oat</string>
+  <string id="avc_log_spoofing_label">AVC Log Spoofing</string>
+  <string id="emulate_vold_app_data_label">Emulate Vold App Data Isolation</string>
+  <string id="custom_sus_path_label">Ruta SUS Personalizada</string>
+  <string id="custom_sus_path_loop_label">Custom SUS Path Loop</string>
+  <string id="custom_sus_maps_label">Custom SUS Maps</string>
+  <string id="custom_sus_mount_label">Montaje SUS Personalizado</string>
+  <string id="custom_try_umount_label">Intento de Desmontaje Personalizado</string>
+  <string id="custom_sus_open_redirect_label">Custom Open Redirect</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">Contributors:</string>
+  <string id="translators_label">Translators:</string>
+</language>

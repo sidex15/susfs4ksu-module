@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language id="en">
+<language>
   <!-- General -->
   <string id="app_title">WebUI menu</string>
   <string id="warning_label">Warning!</string>
@@ -21,7 +21,7 @@
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
   <string id="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</string>
-  
+
   <!-- SUSFS Update Dialog -->
   <string id="susfs_update_label">SUSFS Userspace Update!</string>
   <string id="susfs_update_desc">There's an update to your SUSFS Userspace Binaries!</string>
@@ -38,7 +38,7 @@
   <string id="try_umount_label">TRY UMOUNT</string>
   <string id="susfs_settings_label">Custom SUSFS Settings</string>
   <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
-  
+
   <!-- Status Page -->
   <string id="kernel_features_label">Kernel Features Status</string>
   <string id="sus_path_feature_label">SUS Path Support</string>
@@ -56,7 +56,7 @@
   <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
   <string id="magic_mount_feature_label">Magic Mount Support</string>
   <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</string>
-  
+
   <!-- Settings -->
   <string id="susfs_log_label">SUSFS Logs</string>
   <string id="sus_su_1_label">SUS SU is on Mode 1</string>
@@ -80,7 +80,7 @@
   <string id="post_fs_data_label">Execute on post-fs-data (spoofs better)</string>
   <string id="uname_warning_label2">Setting this on may cause a bootloop or instability if spoofed incorrectly. Are you sure you want to enable post-fs-data execution?</string>
   <string id="reset_warning_label">This will reset all configurations to their default values. Are you sure you want to proceed?</string>
-  
+
   <!-- Custom -->
   <string id="custom_settings_label">Custom Settings</string>
   <string id="hide_paths_label">Hide Custom Rom Settings</string>
@@ -110,5 +110,5 @@
 
   <!-- Credits -->
   <string id="contrib_label">Contributors:</string>
-  <string id= "translators_label">Translators:</string>
+  <string id="translators_label">Translators:</string>
 </language>

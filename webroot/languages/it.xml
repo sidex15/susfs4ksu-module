@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language id="it">
-  <!-- Generale -->
+<language>
+  <!-- General -->
   <string id="app_title">Menu WebUI</string>
   <string id="warning_label">Attenzione!</string>
   <string id="cancel_label">Annulla</string>
@@ -18,11 +18,11 @@
   <string id="export_config_label">Esporta Configurazioni</string>
   <string id="reset_config_label">Reimposta tutte le Configurazioni</string>
 
-  <!-- Errore SUSFS non supportato-->
+  <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">OH NO! Kernel non supportato!</string>
   <string id="susfs_error_desc">Accesso WebUI negato! Assicurati di avere un kernel con patch SuSFS!</string>
-  
-  <!-- Finestra di dialogo aggiornamento SUSFS -->
+
+  <!-- SUSFS Update Dialog -->
   <string id="susfs_update_label">Aggiornamento spazio utente SUSFS!</string>
   <string id="susfs_update_desc">C\'è un aggiornamento per i binari dello spazio utente SUSFS!</string>
   <string id="susfs_update2_desc">Aggiornare alla versione più recente per garantire la compatibilità con il Modulo e la WebUI.</string>
@@ -30,7 +30,7 @@
   <string id="skip_btn_label">Salta</string>
   <string id="update_btn_label">Aggiornamento</string>
 
-  <!-- Pagina Iniziale -->
+  <!-- Home Page -->
   <string id="kernel_version_label">Versione Kernel</string>
   <string id="sus_path_label">SUS PATH</string>
   <string id="sus_map_label">SUS MAPS</string>
@@ -38,8 +38,8 @@
   <string id="try_umount_label">TRY UMOUNT</string>
   <string id="susfs_settings_label">Impostazioni SUSFS personalizzate</string>
   <string id="susfs_kernel_status_label">Stato kernel SUSFS</string>
-  
-  <!-- Pagina di Stato -->
+
+  <!-- Status Page -->
   <string id="kernel_features_label">Stato Funzionalità kernel</string>
   <string id="sus_path_feature_label">Supporto SUS Path</string>
   <string id="sus_map_feature_label">Supporto SUS Maps</string>
@@ -56,8 +56,8 @@
   <string id="hide_symbols_feature_label">Nascondi simboli KSU SUSFS</string>
   <string id="magic_mount_feature_label">Supporto Magic Mount</string>
   <string id="overlayfs_auto_kstat_feature_label">Supporto OverlayFS Auto Kstat</string>
-  
-  <!-- Impostazioni -->
+
+  <!-- Settings -->
   <string id="susfs_log_label">SUSFS Logs</string>
   <string id="sus_su_1_label">SUS SU è in Modalità 1</string>
   <string id="sus_su_label">SUS SU</string>
@@ -66,7 +66,9 @@
   <string id="default_mounts_label">auto nascondimento montaggi predefiniti</string>
   <string id="bind_mounts_label">auto nascondimento montaggi bind</string>
   <string id="try_umount_bind_label">prova automaticamente a smontare i supporti bind</string>
+  <string id="auto_try_umount_label">auto try umount (userspace)</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Nascondi sus_mounts per tutti i processi</string>
+  <string id="turn_off_after_boot_completed_label">Turn off after boot-completed</string>
   <string id="zygote_try_umount_label">try umount per processo di sistema zigote</string>
   <string id="umount_for_zygote_iso_service_label">try umount per servizio isolamento zygote</string>
   <string id="kernel_uname_label">Nome Kernel</string>
@@ -78,8 +80,8 @@
   <string id="post_fs_data_label">Esegui su post-fs-data (migliore falsificazione)</string>
   <string id="uname_warning_label2">Attivare questa opzione potrebbe causare bootloop o instabilità se falsificato in modo errato. Vuoi davvero abilitare l\'esecuzione post-fs-data?</string>
   <string id="reset_warning_label">Questo ripristinerà tutte le configurazioni ai valori predefiniti. Vuoi procedere?</string>
-  
-  <!-- Personalizzato -->
+
+  <!-- Custom -->
   <string id="custom_settings_label">Impostazioni personalizzate</string>
   <string id="hide_paths_label">Nascondi impostazioni personalizzate Rom</string>
   <string id="hide_custom_rom_label">Nascondi ROM personalizzata</string>
@@ -104,8 +106,9 @@
   <string id="custom_sus_maps_label">SUS Maps Personalizzato</string>
   <string id="custom_sus_mount_label">SUS Mount Personalizzato</string>
   <string id="custom_try_umount_label">Try Umount Personalizzato</string>
+  <string id="custom_sus_open_redirect_label">Custom Open Redirect</string>
 
-  <!-- Crediti -->
+  <!-- Credits -->
   <string id="contrib_label">Collaboratori:</string>
-  <string id= "translators_label">Traduttori:</string>
+  <string id="translators_label">Traduttori:</string>
 </language>

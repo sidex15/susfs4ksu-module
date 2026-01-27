@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language id="en">
+<language>
   <!-- General -->
   <string id="app_title">قائمة واجهة الويب</string>
   <string id="warning_label">تحذير!</string>
@@ -8,14 +8,55 @@
   <string id="about_label">حول</string>
   <string id="main_menu_label">القائمة الرئيسية</string>
   <string id="load_label">تحميل</string>
-  
+  <string id="edit_label">Edit With</string>
+  <string id="enabled_label">Enabled</string>
+  <string id="disabled_label">Disabled</string>
+  <string id="deprecated_label">Deprecated</string>
+  <string id="unknown_label">Unknown</string>
+  <string id="help_label">Help</string>
+  <string id="send_logs_label">Send Logs</string>
+  <string id="export_config_label">Export Config</string>
+  <string id="reset_config_label">Reset All Config</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
+  <string id="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</string>
+
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS Userspace Update!</string>
+  <string id="susfs_update_desc">There's an update to your SUSFS Userspace Binaries!</string>
+  <string id="susfs_update2_desc">Please update to the latest version to ensure compatibility with the Module and the WebUI.</string>
+  <string id="susfs_updating_label">Updating...</string>
+  <string id="skip_btn_label">Skip</string>
+  <string id="update_btn_label">Update</string>
+
   <!-- Home Page -->
   <string id="kernel_version_label">إصدار الكيرنيل</string>
   <string id="sus_path_label">SUS PATH</string>
+  <string id="sus_map_label">SUS MAPS</string>
   <string id="sus_mount_label">SUS MOUNT</string>
   <string id="try_umount_label">TRY UMOUNT</string>
   <string id="susfs_settings_label">إعدادات SUSFS مخصصة</string>
-  
+  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
+
+  <!-- Status Page -->
+  <string id="kernel_features_label">Kernel Features Status</string>
+  <string id="sus_path_feature_label">SUS Path Support</string>
+  <string id="sus_map_feature_label">SUS Maps Support</string>
+  <string id="sus_mount_feature_label">SUS Mount Support</string>
+  <string id="sus_kstat_feature_label">SUS Kstat Support</string>
+  <string id="try_umount_feature_label">Try Umount Support</string>
+  <string id="spoof_uname_feature_label">Spoof Uname Support</string>
+  <string id="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</string>
+  <string id="open_redirect_feature_label">Open Redirect Support</string>
+  <string id="enable_log_feature_label">Logging Support</string>
+  <string id="auto_default_mount_feature_label">Auto Default Mount</string>
+  <string id="auto_bind_mount_feature_label">Auto Bind Mount</string>
+  <string id="auto_try_umount_bind_feature_label">Auto Try Umount Bind</string>
+  <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
+  <string id="magic_mount_feature_label">Magic Mount Support</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</string>
+
   <!-- Settings -->
   <string id="susfs_log_label">سجلات SUSFS</string>
   <string id="sus_su_1_label">SUS SU في الوضع 1</string>
@@ -25,17 +66,31 @@
   <string id="default_mounts_label">إخفاء mounts تلقائيا</string>
   <string id="bind_mounts_label">إخفاء bind mounts تلقائيا</string>
   <string id="try_umount_bind_label">إلغاء bind mounts تلقائيا</string>
+  <string id="auto_try_umount_label">auto try umount (userspace)</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Hide sus_mounts for all/non-su processes</string>
+  <string id="turn_off_after_boot_completed_label">Turn off after boot-completed</string>
   <string id="zygote_try_umount_label">محاولة unmount على عملية النواة (zygote)</string>
+  <string id="umount_for_zygote_iso_service_label">try umount for zygote isolation service</string>
   <string id="kernel_uname_label">Kernel Uname</string>
   <string id="spoof_kernel_version_label">تزييف إصدار الكيرنيل</string>
+  <string id="spoofed_kernel_version_label">Spoofed Kernel Version</string>
   <string id="spoof_kernel_build_label">تزييف بناء الكيرنيل</string>
+  <string id="spoofed_kernel_build_label">Spoofed Kernel Build</string>
   <string id="spoof_on_boot_label">تزييف أثناء التمهيد</string>
   <string id="post_fs_data_label">تزييف في مرحلة ما قبل تمهيد الجهاز</string>
   <string id="uname_warning_label2">تفعيل هذا الخيار قد يتسبب في تعطل الجهاز. هل انت متأكد؟</string>
-  
+  <string id="reset_warning_label">This will reset all configurations to their default values. Are you sure you want to proceed?</string>
+
   <!-- Custom -->
   <string id="custom_settings_label">إعدادات مخصصة</string>
+  <string id="hide_paths_label">Hide Custom Rom Settings</string>
   <string id="hide_custom_rom_label">إخفاء الروم المعدل</string>
+  <string id="hide_level_label">Hide Level</string>
+  <string id="hide_custom_rom_desc1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc2">Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc3">Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc4">Exclude .apk, .jar, and /vendor/bin/hw/ files</string>
+  <string id="hide_custom_rom_desc5">Hide all custom rom paths ⚠️Risky and it could cause issues!</string>
   <string id="hide_vendor_sepolicy_label">إخفاء vendor SEpolicy</string>
   <string id="hide_compat_matrix_label">إخفاء compat matrix</string>
   <string id="fake_service_list_label">تزييف قائمة الخدمات</string>
@@ -44,11 +99,16 @@
   <string id="spoof_cmdline_label">تزييف cmdline</string>
   <string id="hide_ksu_loop_label">إخفاء حلقة KSU</string>
   <string id="force_hide_dex2oat_label">إخفاء Dex2oat إجباريّا</string>
+  <string id="avc_log_spoofing_label">AVC Log Spoofing</string>
+  <string id="emulate_vold_app_data_label">Emulate Vold App Data Isolation</string>
   <string id="custom_sus_path_label">مسار SUS مخصص</string>
+  <string id="custom_sus_path_loop_label">Custom SUS Path Loop</string>
+  <string id="custom_sus_maps_label">Custom SUS Maps</string>
   <string id="custom_sus_mount_label">SUS mount مخصص</string>
   <string id="custom_try_umount_label">TRY umount مخصص</string>
+  <string id="custom_sus_open_redirect_label">Custom Open Redirect</string>
 
   <!-- Credits -->
   <string id="contrib_label">المساهمين:</string>
-  <string id= "translators_label">المترجمين:</string>
+  <string id="translators_label">المترجمين:</string>
 </language>

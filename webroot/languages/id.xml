@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language id="en">
+<language>
   <!-- General -->
   <string id="app_title">Menu WebUI</string>
   <string id="warning_label">Peringatan!</string>
@@ -21,7 +21,7 @@
   <!-- SUSFS Not supported error-->
   <string id="susfs_error_label">OH TIDAK! Kernel Tidak Didukung!</string>
   <string id="susfs_error_desc">Akses WebUI Ditolak! Pastikan Anda menggunakan kernel yang mengintegrasikan SuSFS!</string>
-  
+
   <!-- SUSFS Update Dialog -->
   <string id="susfs_update_label">Pembaruan Userspace SUSFS!</string>
   <string id="susfs_update_desc">Ada pembaruan pada Biner Userspace SUSFS Anda!</string>
@@ -38,7 +38,7 @@
   <string id="try_umount_label">TRY UMOUNT</string>
   <string id="susfs_settings_label">Kustom Setelan SUSFS</string>
   <string id="susfs_kernel_status_label">Status SUSFS Kernel</string>
-  
+
   <!-- Status Page -->
   <string id="kernel_features_label">Status Fitur Kernel</string>
   <string id="sus_path_feature_label">SUS Path</string>
@@ -56,7 +56,7 @@
   <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
   <string id="magic_mount_feature_label">Magic Mount</string>
   <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat</string>
-  
+
   <!-- Settings -->
   <string id="susfs_log_label">Log SUSFS</string>
   <string id="sus_su_1_label">SUS SU ada di Mode 1</string>
@@ -80,7 +80,7 @@
   <string id="post_fs_data_label">Dieksekusi pada post-fs-data (lebih baik dalam spoofing)</string>
   <string id="uname_warning_label2">Mengaktifkan fitur ini dapat menyebabkan bootloop atau ketidakstabilan jika di-spoof secara tidak benar. Apakah Anda yakin ingin mengaktifkan eksekusi post-fs-data?</string>
   <string id="reset_warning_label">Ini akan mengatur ulang semua konfigurasi ke nilai default. Apakah Anda yakin ingin melanjutkan?</string>
-  
+
   <!-- Custom -->
   <string id="custom_settings_label">Kustom Setelan</string>
   <string id="hide_paths_label">Sembunyikan Setelan Custom Rom</string>
@@ -110,5 +110,5 @@
 
   <!-- Credits -->
   <string id="contrib_label">Kontributor:</string>
-  <string id= "translators_label">Penerjemah:</string>
+  <string id="translators_label">Penerjemah:</string>
 </language>
