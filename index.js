@@ -1264,27 +1264,6 @@ async function custom_try_umount(){
 			toast("Reboot to take effect");
 		}
 	})
-
-	//Keyboard
-	try_umount_area.addEventListener('focus', () => {
-		// Add padding to prevent the keyboard from obscuring content
-		mainContainer.style.paddingBottom = '300px'; // Adjust padding value based on need
-		try_umount_area.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
-	});
-	
-	// Remove padding when the input loses focus
-	try_umount_area.addEventListener('blur', () => {
-		// Remove the padding when the input loses focus
-		//mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
-		/*setTimeout(() => {
-			mainContainer.style.paddingBottom = '0px';
-		}, 500);*/
-		gsap.to(mainContainer, { 
-			duration: 0.5, 
-			paddingBottom: '0px', 
-			ease: 'power1.out' 
-		});
-	});
 }
 
 async function custom_sus_open_redirect(susfs_features){
@@ -1292,6 +1271,7 @@ async function custom_sus_open_redirect(susfs_features){
 	const load_sus_open_redirect = document.getElementById("load_sus_open_redirect");
 	const sus_open_redirect_area = document.getElementById("custom_sus_open_redirect");
 	const save_sus_open_redirect = document.getElementById("save_sus_open_redirect");
+	const mainContainer = document.querySelector('main');
 	
 	// check if sus_open_redirect is enabled in kernel
 	// check if sus_maps is enabled in kernel
@@ -1320,6 +1300,27 @@ async function custom_sus_open_redirect(susfs_features){
 			toast("Reboot to take effect");
 		}
 	})
+
+	//Keyboard
+	sus_open_redirect_area.addEventListener('focus', () => {
+		// Add padding to prevent the keyboard from obscuring content
+		mainContainer.style.paddingBottom = '300px'; // Adjust padding value based on need
+		sus_open_redirect_area.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+	});
+	
+	// Remove padding when the input loses focus
+	sus_open_redirect_area.addEventListener('blur', () => {
+		// Remove the padding when the input loses focus
+		//mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+		/*setTimeout(() => {
+			mainContainer.style.paddingBottom = '0px';
+		}, 500);*/
+		gsap.to(mainContainer, { 
+			duration: 0.5, 
+			paddingBottom: '0px', 
+			ease: 'power1.out' 
+		});
+	});
 }
 
 // Load kernel feature status
