@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/refs/heads/new/susfsbanner.png" width=400px height=225px>
+
 # A KernelSU module for SUSFS patched kernel #
 
 This module installs a userspace helper tool called **ksu_susfs** and **sus_su** into /data/adb/ksu and provides a script to communicate with SUSFS kernel.
