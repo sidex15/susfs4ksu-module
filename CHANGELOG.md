@@ -1,53 +1,36 @@
-## v1.5.2+ Revision 24
-## Happy new year everyone! 🎉🎆 First Revision of 2026!
+## v1.5.2+ Revision 25
 ### WebUI
-* add support for susfs v2.0.0+
-* implement userspace auto try_umount feature (v1.5.5+)
-    * This is a userspace approach to the auto_try_umount instead of the kernel-level auto try_umount
-    * for susfs v2.0.0+ it uses ksud kernel umount feature if susfs try_umount is deprecated
-* set values to false when the feature toggle is greyed out (susfs feature not supported)
-* use new versioning system
-* hide custom sus path if feature not in kernel
-* hide custom sus_mount and custom try_umount under certain conditions
-* add KSU module list in send logs
-* deprecate susfsd
-* remove susfsd when checking the kernel variant
-* fix sus_su on boot toggle
+* add custom open redirect section
+* hide auto hide features if it is not supported, disabled, or deprecated in the susfs kernel
+* enable custom try_umount section for KernelSU V2.0+
+* Remove spoof service list toggle
+* rename hide_sus_mnts_for_all_procs to hide_sus_mnts_for_all_or_non_su_procs
+* add turn off after boot completed option for hide sus mounts for all/non-su processes
+* fix susfs kernel features translatation
 * Localization:
-    * Update Various translations (@mehu3dhokia, @DogancanYr, @Neebe3289)
+    * [Implement Crowdin Localization support](https://crowdin.com/project/susfs4ksu-module)
+    * fallback to english for some labels that are not translated yet
+    * fill out missing label on some languages for crowdin compliance
 
 ### Scripts
-* scripts: boot-completed: implement userspace auto try_umount feature
-* scripts: boot-completed: use ksud kernel umount on custom try_umount if susfs try_umount is disabled/deprecated (KernelSU v2.0+)
-* scripts: boot-completed: execute ksud umount enable first before executing ksud kernel umount
-* scripts: boot-completed: improve if statement on auto_try_umount (userspace) feature
-* scripts: boot-completed/sepolicy: Add ksud kernel unmount for revanced mounts
-* scripts: boot-completed: count 'try_umount (KSUD)' logs to susfs_stats.txt
-* scripts: boot-completed: move enable ksud umount feature to the bottom before susfs logging
-* scripts: boot-completed: Fallback to older susfs mount IDs if no mounts found within 500k range
-* scripts: boot-completed: update grep pattern to match mount IDs starting with 1, 3, or 5 (100000-199999, 300000-399999, 500000-599999)
-* scripts: boot-completed: Automatically disable and skip userspace auto try umount if susfs_no_auto_add_try_umount_for_bind_mount file does not exist for susfs v1.5.5-v1.5.12
-* scripts: boot-completed: fix logical error on hide sus mounts for all processes
-* scripts: service: always disable and never check  sus_su when the susfs version is v2.0.0+
-* scripts: remove old kernel_ver variable
-* scripts: boot-completed: Update version check to include v2.x.x on set_sdcard_root_path and set_android_data_root_path
-* scripts: rework versioning system
-* scripts: deprecate susfsd
-* scripts: customize: don't install sus_su and susfsd if the susfs version is on v2.0.0+
-* scripts: Hide "lineage" from /vendor/etc/selinux/vendor_file_contexts (#193) (@gavdoc38)
-* scripts: post-fs-data: use ksu_susfs show enabled_features to check if susfs is supported
-* scripts: customize/binaries: appropriately check susfs implementation by checking KernelSU version
+* scripts: implement custom susfs open redirect feature
+* scripts: service/boot-completed: clone permissions on every check on custom open redirect
+* scripts: service/boot-completed.sh: spoof ino and dev stat on custom open redirect
+* scripts: service: deprecate fake service list feature
+* scripts: boot-completed: temporarily disable hide sus mounts for all processes in auto try umount (userspace)
+* scripts: customize/boot-completed: remove imposter checks
+* scripts: customize: remove architecture check
+* scripts boot-completed/post-fs-data: add support for ksud umount in hide dex2oat mounts
+* scripts: post-mount/boot-completed: improve while loop and string conditions for custom susfs features 
+* scripts: boot-completed: rework custom sus_path and sus_path_loop
+* scripts: post-fs-data/boot-completed: rework hide sus mounts for all processes to comply with latest susfs commit
+* scripts post-fs-data/boot-completed: rework and rename "hide_sus_mnts_for_all_procs" to "hide_sus_mnts_for_all_or_non_su_procs"
+* scripts: boot-completed: count sus_mounts generated in /proc/1/mountinfo for sus_mount stats
+* scripts: boot-completed.sh: Turn off hide_sus_mnts_for_all_procs after boot completed if configured as hide_sus_mnts_for_all_or_non_su_procs = 2
+* scripts: boot-completed: rename 'susfs4ksu/post-fs-data' to 'susfs4ksu/boot-completed'
+* scripts: boot-completed: refactor sus_path code block
+* scripts: boot-completed: remove run on background on sus_path code block
 
 ### [Binaries](https://github.com/sidex15/susfs4ksu-binaries)
-* local-binaries: add susfs v2.0.0 local binary
-* cloud-binaries: add support for v2.0.0+
-* cloud-binaries: add new branch for new versioning system
-
-### Notes
-* Sorry for the very late update :( I was very busy for my Master studies and testing susfs v2.0.0 on non-gki
-* I just wanna thank to all [susfs4ksu module CI](https://github.com/sidex15/susfs4ksu-module/actions) testers there for testing the new features and bug hunting my module 🫡
-
-### Hotfix (1/08/2026)
-* WebUI: hide auto hide features if it is not supported, disabled, or deprecated in the susfs kernel
-* boot-completed: temporarily disable hide sus mounts for all processes in auto try umount (userspace)
-* scripts boot-completed/post-fs-data: add support for ksud umount in hide dex2oat mounts
+* cloud-binaries: return error if there's an invalid argument
+* local-inaries: return error if there's an invalid argument
