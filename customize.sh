@@ -15,6 +15,39 @@ fi
 
 unzip -qq ${ZIPFILE} -d ${TMPDIR}/susfs
 
+susfs4ksu_config_check() {
+  ui_print " "
+  ui_print "****************************************"
+  ui_print "     SUSFS4KSU Config Folder exists     "
+  ui_print "****************************************"
+  ui_print "     Do you want to reset settings?     "
+  ui_print "****************************************"
+  ui_print "  Volume Up (+): Reset to default"
+  ui_print "  Volume Down (-): Keep current settings"
+  ui_print " "
+  ui_print "  Keep current settings in 10 seconds"
+  ui_print "****************************************"
+  local timeout=10
+  local start_time=$(date +%s)
+  while true; do
+    local current_time=$(date +%s)
+    if [ $((current_time - start_time)) -ge $timeout ]; then
+      ui_print "[-] Timeout: Selected keep current settings"
+      break
+    fi
+    local key_event=$(timeout 0.5 getevent -l 2>/dev/null)
+    if echo "$key_event" | grep -q "KEY_VOLUMEUP"; then
+      ui_print "[-] Key Detected: Selected Yes, reset to default"
+	  ui_print "[-] Resetting susfs4ksu settings to default..."
+	  rm -rf /data/adb/susfs4ksu
+      break
+    elif echo "$key_event" | grep -q "KEY_VOLUMEDOWN"; then
+      ui_print "[-] Key Detected: Selected No, keep current settings"
+      break
+    fi
+  done
+}
+
 download() { busybox wget -T 10 --no-check-certificate -qO - "$1"; }
 if command -v curl > /dev/null 2>&1; then
 	download() { curl --connect-timeout 10 -Ls "$1"; }
@@ -101,13 +134,18 @@ fi
 # set permissions
 chmod 644 ${MODPATH}/post-fs-data.sh ${MODPATH}/post-mount.sh ${MODPATH}/service.sh ${MODPATH}/boot-completed.sh ${MODPATH}/action.sh ${MODPATH}/uninstall.sh ${MODPATH}/susfs-bin-update.sh ${MODPATH}/susfs_reset.sh
 
+# Check if config folder exists
+if [ -d /data/adb/susfs4ksu ]; then
+susfs4ksu_config_check
+fi
+
 prop_value=$(getprop ro.boot.vbmeta.digest)
 HASH_DIR=/data/adb/VerifiedBootHash
 if ${KSU_BIN} module list | grep -qE "vbmeta-fixer|TA_utl"; then
-	ui_print "*********************************************************"
+	ui_print "****************************************"
 	ui_print "! vbmeta-fixer or Tricky Addon module detected"
 	ui_print "! skipping VerifiedBootHash creation"
-	ui_print "*********************************************************"
+	ui_print "****************************************"
 else
 	if [ -z "$prop_value" ]; then
 		ui_print "[!] Property ro.boot.vbmeta.digest is empty, generate VerifiedBootHash directory"
@@ -116,15 +154,15 @@ else
 		mkdir -p "$HASH_DIR"
 		[ ! -f "$HASH_DIR/VerifiedBootHash.txt" ] && touch "$HASH_DIR/VerifiedBootHash.txt"
 		fi
-		ui_print "*********************************************************"
+		ui_print "****************************************"
 		ui_print "! Please copy your VerifiedBootHash in Key Attestation demo"
 		ui_print "! And Paste it to /data/adb/VerifiedBootHash/VerifiedBootHash.txt"
-		ui_print "*********************************************************"
+		ui_print "****************************************"
 	else
-		ui_print "*********************************************************"
+		ui_print "****************************************"
 		ui_print "! Property ro.boot.vbmeta.digest has a value"
 		ui_print "! skipping VerifiedBootHash creation"
-		ui_print "*********************************************************"
+		ui_print "****************************************"
 	fi
 fi
 
