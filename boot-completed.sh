@@ -43,7 +43,7 @@ sed -i "s/^description=.*/$description/g" $MODDIR/module.prop
 # Detect susfs version
 if [ -n "$version" ] 2>/dev/null; then
     # Replace only version number, keep suffix
-    sed -i "s/^version=v[0-9.]*/version=$version/" $MODDIR/module.prop
+    sed -i "s/^version=.*\(-[^ ]*\)$/version=$version\1/" $MODDIR/module.prop
 fi
 
 # routines
