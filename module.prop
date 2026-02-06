@@ -6,3 +6,5 @@ author=sidex15 & simonpunk
 description=An addon root hiding service for KernelSU compiled with patched kernel source.
 updateJson=https://raw.githubusercontent.com/sidex15/ksu_module_susfs/v1.5.2+/update.json
 banner=banner.png
+webuiIcon=susfsicon.png
+actionIcon=susfsicon.png
