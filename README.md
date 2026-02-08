@@ -60,6 +60,10 @@ so it will be included in the language drop-down menu. <br>
 ## Credits
 susfs4ksu: https://gitlab.com/simonpunk/susfs4ksu/
 
+[Among Us characters 1](https://www.reddit.com/r/AmongUs/comments/iut5y2/couldnt_find_many_pngs_of_the_among_us_characters/)
+
+[Among Us characters 2](https://www.stickpng.com/img/cartoons/among-us/among-us-characters)
+
 ## Buy us some coffee ☕
 ### simonpunk
 PayPal: `kingjeffkimo@yahoo.com.tw`
@@ -74,3 +78,12 @@ PayPal: `sidex15.official@gmail.com`
 
 ## Stars 🌟
 [![Stars 🌟](https://starchart.cc/sidex15/susfs4ksu-module.svg?variant=adaptive)](https://starchart.cc/sidex15/susfs4ksu-module)
+
+## Legal Disclaimer
+```
+This project is a non-commercial, fan-made tool. It is not affiliated with, endorsed by, or associated with Innersloth LLC.
+
+"Among Us" and all related characters and elements are trademarks and copyrights of Innersloth LLC.
+
+This project is intended for educational and personal use only. It is not intended for any commercial purposes or distribution.
+```
