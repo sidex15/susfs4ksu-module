@@ -67,6 +67,7 @@
   <string id="bind_mounts_label">自动隐藏绑定挂载</string>
   <string id="try_umount_bind_label">自动尝试卸载绑定挂载</string>
   <string id="auto_try_umount_label">自动尝试卸载（用户空间）</string>
+  <string id="skip_legit_mounts_label">Skip Legit Mounts</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">对所有进程隐藏sus_mounts</string>
   <string id="turn_off_after_boot_completed_label">启动完成后关闭</string>
   <string id="zygote_try_umount_label">为zygote系统进程尝试卸载</string>
