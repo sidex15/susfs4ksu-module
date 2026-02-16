@@ -67,6 +67,7 @@
   <string id="bind_mounts_label">نهان‌سازی خودکار پیوست‌های پیوندی</string>
   <string id="try_umount_bind_label">کوشش خودکار برای جداکردن پیوست‌های پیوندی</string>
   <string id="auto_try_umount_label">auto try umount (userspace)</string>
+  <string id="skip_legit_mounts_label">Skip Legit Mounts</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Hide sus_mounts for all/non-su processes</string>
   <string id="turn_off_after_boot_completed_label">Turn off after boot-completed</string>
   <string id="zygote_try_umount_label">کوشش برای جداکردن فرآیند سیستمی Zygote</string>

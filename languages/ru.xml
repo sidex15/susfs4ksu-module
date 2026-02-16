@@ -67,6 +67,7 @@
   <string id="bind_mounts_label">Автоскрытие bind mounts</string>
   <string id="try_umount_bind_label">Автоматическое размонтирование bind mounts</string>
   <string id="auto_try_umount_label">Автоматическое размонтирование (в пользовательском пространстве)</string>
+  <string id="skip_legit_mounts_label">Skip Legit Mounts</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Скрыть sus_mounts от всех/non-su процессов</string>
   <string id="turn_off_after_boot_completed_label">Выключить после boot-completed</string>
   <string id="zygote_try_umount_label">Пробовать размонтировать для системного процесса zygote</string>

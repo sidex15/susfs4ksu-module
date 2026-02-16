@@ -67,6 +67,7 @@
   <string id="bind_mounts_label">Tự động ẩn gắn kết liên kết</string>
   <string id="try_umount_bind_label">Tự động thử gỡ gắn kết liên kết</string>
   <string id="auto_try_umount_label">auto try umount (userspace)</string>
+  <string id="skip_legit_mounts_label">Skip Legit Mounts</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Ẩn sus_mounts cho tất cả tiến trình</string>
   <string id="turn_off_after_boot_completed_label">Turn off after boot-completed</string>
   <string id="zygote_try_umount_label">Thử gỡ gắn kết cho tiến trình hệ thống zygote</string>

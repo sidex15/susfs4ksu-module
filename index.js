@@ -298,6 +298,7 @@ async function auto_hide_settings(settings,susfs_features) {
 	const auto_bind = document.getElementById("auto_bind");
 	const auto_umount_bind = document.getElementById("auto_umount_bind");
 	const auto_try_umount = document.getElementById("auto_try_umount");
+	const skip_legit_mounts = document.getElementById("skip_legit_mounts");
 	const try_umount_zygote = document.getElementById("try_umount_zygote");
 	const hide_sus_mnts_for_all_or_non_su_procs = document.getElementById("hide_sus_mnts_for_all_or_non_su_procs");
 	const turn_off_after_boot_completed = document.getElementById("turn_off_after_boot_completed");
@@ -306,6 +307,7 @@ async function auto_hide_settings(settings,susfs_features) {
 	const auto_bind_toggle = document.getElementById("auto_bind_toggle");
 	const auto_umount_bind_toggle = document.getElementById("auto_umount_bind_toggle");
 	const auto_try_umount_toggle = document.getElementById("auto_try_umount_toggle");
+	const skip_legit_mounts_checkbox = document.getElementById("skip_legit_mounts_checkbox");
 	const try_umount_zygote_toggle = document.getElementById("try_umount_zygote_toggle");
 	const hide_sus_mnts_for_all_or_non_su_procs_toggle = document.getElementById("hide_sus_mnts_for_all_or_non_su_procs_toggle");
 	const turn_off_after_boot_completed_checkbox = document.getElementById("turn_off_after_boot_completed_checkbox");
@@ -340,9 +342,16 @@ async function auto_hide_settings(settings,susfs_features) {
 			is_no_auto_umount_bind="true";
 			auto_umount_bind.checked=false;
 		}
+		skip_legit_mounts_checkbox.classList.remove("hidden");
 	}
 	else{
 		auto_try_umount.checked=false;
+	}
+	if(custom_settings.skip_legit_mounts==true){
+		skip_legit_mounts.checked="checked";
+	}
+	else{
+		skip_legit_mounts.checked=false;
 	}
 	if(is_try_umount_zygote=="false"){
 		try_umount_zygote.checked=false;
@@ -466,16 +475,29 @@ async function auto_hide_settings(settings,susfs_features) {
 		}
 	});
 
+	skip_legit_mounts_checkbox.addEventListener("click",async function(){
+		if (custom_settings.skip_legit_mounts==true){
+			await run(`sed -i 's/skip_legit_mounts=.*/skip_legit_mounts=0/' ${config}/config.sh`);
+			custom_settings.skip_legit_mounts=false;
+			toast("Reboot to take effect");
+		}
+		else{
+			await run(`sed -i 's/skip_legit_mounts=.*/skip_legit_mounts=1/' ${config}/config.sh`);
+			custom_settings.skip_legit_mounts=true;
+			toast("Reboot to take effect");
+		}
+	});
+
 	try_umount_zygote.addEventListener("click",async function(){
 		is_try_umount_zygote = await run(`[ -f data/adb/susfs_umount_for_zygote_system_process ] && echo true || echo false`);
 		if (is_try_umount_zygote=="true"){
 			await run(`rm -f data/adb/susfs_umount_for_zygote_system_process`);
-			is_try_umount_zygote=="false";
+			is_try_umount_zygote="false";
 			toast("Reboot to take effect");
 		}
 		else{
 			await run(`touch data/adb/susfs_umount_for_zygote_system_process`);
-			is_try_umount_zygote=="true";
+			is_try_umount_zygote="true";
 			toast("Reboot to take effect");
 		}
 	});
