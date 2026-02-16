@@ -16,6 +16,8 @@ SUSFS_DECIMAL_SUB=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f2)
 # SUSFS_DECIMAL_PATCH = '3'
 SUSFS_DECIMAL_PATCH=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f3)
 
+legit_mounts="$PERSISTENT_DIR/legit_mounts.txt"
+
 # Mount folder of susfs4ksu
 [ -w /mnt ] && mntfolder=/mnt/susfs4ksu
 [ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
@@ -157,7 +159,15 @@ fi
 	if [ -z "$sus_mounts" ]; then
 		sus_mounts=$(cat /proc/1/mountinfo | grep -E "^[13][0-9]{5} .* (KSU|shared).*$" | awk '{print $5}')
 	fi
+	# Loop through each susfs mount and add try_umount path
 	for LINE in $sus_mounts; do
+
+		# remove legit mounts from the list if skip_legit_mounts is enabled
+		if [ $skip_legit_mounts = 1 ] && grep -qE "^$LINE$" $legit_mounts 2>/dev/null; then
+			echo "[skip_legit_mounts] Skipping legit mount: $LINE" >> $logfile1
+			continue
+		fi
+
 		if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then
 			${SUSFS_BIN} add_try_umount "${LINE}" 1 && echo "[try_umount (SUSFS)]: susfs4ksu/boot-completed ${LINE}" >> $logfile1
 		elif [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_TRY_UMOUNT"; then

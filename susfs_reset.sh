@@ -1,6 +1,54 @@
 #!/bin/sh
 config="/data/adb/susfs4ksu"
 
+legit_mounts="/system
+/system_ext
+/vendor
+/odm
+/product
+/system_dlkm
+/vendor_dlkm
+/odm_dlkm
+/apex
+/system/app
+/system/priv-app
+/system/lib
+/system/lib64
+/vendor/app
+/vendor/priv-app
+/vendor/lib
+/vendor/lib64
+/product/app
+/product/priv-app
+/product/lib
+/product/lib64
+/system_ext/app
+/system_ext/priv-app
+/system_ext/lib
+/system_ext/lib64
+/data
+/cache
+/metadata
+/persist
+/mnt
+/storage
+/debug_ramdisk
+/dev
+/proc
+/sys
+/sys/fs/cgroup
+/my_product
+/my_engineering
+/my_company
+/my_carrier
+/my_region
+/my_heytap
+/my_stock
+/my_preload
+/my_bigball
+/my_manifest
+"
+
 # Reset all settings from config.sh to default
 while IFS= read -r line; do
     # Extract key name before = sign
@@ -30,6 +78,8 @@ echo -e "# this contains suspicious mounts you want \n# to be sus_mounted at pos
 echo -e "# this contains suspicious mounts you want \n# to be try_umounted at post-mount.sh\n# example\n# /system\n# /system_ext\n# /debug_ramdisk" > "$config/try_umount.txt"
 # Reset sus_open_redirect.txt
 echo -e "# this contains paths you want to redirect with\n# open redirect at boot-completed.sh or service.sh\n# example format\n# 0 = Execute on boot-completed.sh\n# 1 = Execute on service.sh\n# <original_path> <redirected_path> <0 or 1>\n# /system/bin/service /data/adb/susfs4ksu/service_redirected 0" > "$config/sus_open_redirect.txt"
+# Reset legit_mounts.txt
+printf "$legit_mounts" > "$config/legit_mounts.txt"
 
 # Reset auto hide settings
 [ -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount ] || rm -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount
