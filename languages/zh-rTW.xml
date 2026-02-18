@@ -67,7 +67,7 @@
   <string id="bind_mounts_label">自動隱藏綁定掛載</string>
   <string id="try_umount_bind_label">自動嘗試卸載綁定</string>
   <string id="auto_try_umount_label">自動嘗試卸載（使用者空間）</string>
-  <string id="skip_legit_mounts_label">Skip Legit Mounts</string>
+  <string id="skip_legit_mounts_label">忽略正常掛載點</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">對所有或非 SU 程序隱藏 sus_mounts</string>
   <string id="turn_off_after_boot_completed_label">完成開機後關閉</string>
   <string id="zygote_try_umount_label">嘗試卸載 Zygote 系統程序</string>

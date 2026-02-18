@@ -67,7 +67,7 @@
   <string id="bind_mounts_label">otomatis sembunyikan bind mounts</string>
   <string id="try_umount_bind_label">otomatis try umount bind mounts</string>
   <string id="auto_try_umount_label">otomatis try umount (userspace)</string>
-  <string id="skip_legit_mounts_label">Skip Legit Mounts</string>
+  <string id="skip_legit_mounts_label">Lewati Mount Valid</string>
   <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Sembunyikan sus_mounts untuk semua/non-su proses</string>
   <string id="turn_off_after_boot_completed_label">Matikan setelah boot selesai</string>
   <string id="zygote_try_umount_label">try umount proses zygote sistem</string>
