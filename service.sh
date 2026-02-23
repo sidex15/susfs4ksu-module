@@ -203,13 +203,9 @@ fi
 			grep -v "lineage" $sepolicy_cil > $mntfolder/$cil_name
 			#${SUSFS_BIN} add_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
 			susfs_clone_perm $mntfolder/$cil_name $sepolicy_cil
-			if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" = 1 ] 2>/dev/null; then
-				mount --bind $mntfolder/$cil_name $sepolicy_cil
-				#${SUSFS_BIN} update_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
-				${SUSFS_BIN} add_sus_mount $sepolicy_cil && echo "[sus_mount]: susfs4ksu/service $sepolicy_cil" >> $logfile1
-			else
-				${SUSFS_BIN} add_open_redirect $sepolicy_cil "$mntfolder/$cil_name" 1 && echo "[open_redirect]: susfs4ksu/service $sepolicy_cil -> $mntfolder/$cil_name" >> $logfile1
-			fi
+			mount --bind $mntfolder/$cil_name $sepolicy_cil
+			#${SUSFS_BIN} update_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
+			${SUSFS_BIN} add_sus_mount $sepolicy_cil && echo "[sus_mount]: susfs4ksu/service $sepolicy_cil" >> $logfile1
 		}
 	done
 }
@@ -222,13 +218,9 @@ fi
 		grep -v "lineage" $compatibility_matrix > $mntfolder/compatibility_matrix.device.xml
 		#${SUSFS_BIN} add_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $compatibility_matrix" >> $logfile1
 		susfs_clone_perm $mntfolder/compatibility_matrix.device.xml $compatibility_matrix
-		if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" = 1 ] 2>/dev/null; then
-			mount --bind $mntfolder/compatibility_matrix.device.xml $compatibility_matrix
-			#${SUSFS_BIN} update_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $compatibility_matrix" >> $logfile1
-			${SUSFS_BIN} add_sus_mount $compatibility_matrix && echo "[sus_mount]: susfs4ksu/service $compatibility_matrix" >> $logfile1
-		else
-			${SUSFS_BIN} add_open_redirect $compatibility_matrix "$mntfolder/compatibility_matrix.device.xml" 1 && echo "[open_redirect]: susfs4ksu/service $compatibility_matrix -> $mntfolder/compatibility_matrix.device.xml" >> $logfile1
-		fi
+		mount --bind $mntfolder/compatibility_matrix.device.xml $compatibility_matrix
+		#${SUSFS_BIN} update_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $compatibility_matrix" >> $logfile1
+		${SUSFS_BIN} add_sus_mount $compatibility_matrix && echo "[sus_mount]: susfs4ksu/service $compatibility_matrix" >> $logfile1
 	}
 }
 
