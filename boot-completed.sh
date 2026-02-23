@@ -79,36 +79,31 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 	}
 fi
 
-# to add paths
-# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path.txt
-# this'll make it easier for the webui to do stuff
-{
-grep -v "#" $PERSISTENT_DIR/sus_path.txt | while read -r i; do
-	sus_path=$(echo "$i" | awk '{print $1}')
-	sus_path_max_tries=$(echo "$i" | awk '{print $2}')
-	until [ -z "$sus_path_max_tries" ] || [ "$sus_path_max_tries" -le 0 ] || [ -e "$sus_path" ]; do
-		sus_path_max_tries=$((sus_path_max_tries - 1))
-		sleep 1
-	done
-	[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path "$sus_path" && echo "[sus_path]: susfs4ksu/boot-completed $sus_path" >> $logfile1; }
-done
-
-# Add sus_path_loop paths (late v1.5.9+)
-if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 9 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ]  2>/dev/null; then
-	# to add paths
-	# echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path_loop.txt
-	# this'll make it easier for the webui to do stuff
-	grep -v "#" $PERSISTENT_DIR/sus_path_loop.txt | while read -r i; do
-		sus_path_loop=$(echo "$i" | awk '{print $1}')
-		sus_path_loop_max_tries=$(echo "$i" | awk '{print $2}')
-		until [ -z "$sus_path_loop_max_tries" ] || [ "$sus_path_loop_max_tries" -le 0 ] || [ -e "$sus_path_loop" ]; do
-			sus_path_loop_max_tries=$((sus_path_loop_max_tries - 1))
+# Helper: read paths from a file and add them via susfs, with optional wait-for-existence retry
+# Usage: _add_sus_paths <file> <susfs_subcommand> <log_tag>
+_add_sus_paths() {
+	grep -v "#" "$1" | while read -r i; do
+		[ -z "$i" ] && continue
+		path=$(echo "$i" | awk '{print $1}')
+		max_tries=$(echo "$i" | awk '{print $2}')
+		until [ -z "$max_tries" ] || [ "$max_tries" -le 0 ] || [ -e "$path" ]; do
+			max_tries=$((max_tries - 1))
 			sleep 1
 		done
-		[ -z "$i" ] || { ${SUSFS_BIN} add_sus_path_loop "$sus_path_loop" && echo "[sus_path_loop]: susfs4ksu/boot-completed $sus_path_loop" >> $logfile1; }
+		${SUSFS_BIN} "$2" "$path" && echo "[$3]: susfs4ksu/boot-completed $path" >> "$logfile1"
 	done
-fi
-} & # run in background
+}
+
+# to add paths: echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path.txt
+{
+	_add_sus_paths "$PERSISTENT_DIR/sus_path.txt" add_sus_path sus_path
+
+	# Add sus_path_loop paths (late v1.5.9+)
+	# to add paths: echo "/system/addon.d" >> /data/adb/susfs4ksu/sus_path_loop.txt
+	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 9 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
+		_add_sus_paths "$PERSISTENT_DIR/sus_path_loop.txt" add_sus_path_loop sus_path_loop
+	fi
+}
 
 # Add open redirect paths (boot-completed)
 if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
