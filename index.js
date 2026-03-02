@@ -459,11 +459,13 @@ async function auto_hide_settings(settings,susfs_features) {
 			await run(`sed -i 's/auto_try_umount=.*/auto_try_umount=0/' ${config}/config.sh`);
 			custom_settings.auto_try_umount=0;
 			auto_try_umount.checked=false;
+			skip_legit_mounts_checkbox.classList.add("hidden");
 			toast("Reboot to take effect");
 		}
 		else{
 			await run(`sed -i 's/auto_try_umount=.*/auto_try_umount=1/' ${config}/config.sh`);
 			custom_settings.auto_try_umount=1;
+			skip_legit_mounts_checkbox.classList.remove("hidden");
 			// disable auto umount for bind mount if it's enabled
 			if (susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT") && is_no_auto_umount_bind=="false"){
 				await run(`touch data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
