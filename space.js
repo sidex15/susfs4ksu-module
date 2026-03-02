@@ -1,8 +1,9 @@
 const canvas = document.getElementById('backgroundCanvas');
 const ctx = canvas.getContext('2d');
+
 import blue from '/assets/amongus/blue.png';
 import brown from '/assets/amongus/brown.png';
-import brown1 from '/assets/amongus/brown.png';
+import brown1 from '/assets/amongus/brown1.png';
 import cyan from '/assets/amongus/cyan.png';
 import cyan1 from '/assets/amongus/cyan1.png';
 import orange from '/assets/amongus/orange.png';
@@ -29,26 +30,12 @@ const stars = [];
 const icons = [];
 const STAR_COUNT = 100;
 const ICON_PATHS = [
-    blue,
-    brown,
-    brown1,
-    cyan,
-    cyan1,
-    orange,
-    orange1,
-    yellow,
-    yellow1,
-    green,
-    lime,
-    pink,
-    purple,
-    red,
-    white,
-    black
+    blue, brown, brown1, cyan, cyan1, orange, orange1,
+    yellow, yellow1, green, lime, pink, purple,
+    red, white, black
 ];
-const ICON_COUNT = ICON_PATHS.length;
 
-/// Initialize stars
+// Initialize stars
 function initializeStars() {
     stars.length = 0; // Clear existing stars
     for (let i = 0; i < STAR_COUNT; i++) {
