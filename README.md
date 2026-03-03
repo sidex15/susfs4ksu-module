@@ -1,4 +1,7 @@
 <img src="https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/refs/heads/new/susfsbanner.png" width=400px height=225px>
+<a href="https://nightly.link/sidex15/susfs4ksu-module/workflows/build/v1.5.2%2B?preview">
+  <img alt="Static Badge" src="https://img.shields.io/badge/Module%20CI%20Version-8A2BE2?style=for-the-badge&logo=github">
+</a>
 
 # A KernelSU module for SUSFS patched kernel #
 
