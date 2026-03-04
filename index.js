@@ -758,8 +758,9 @@ async function custom_toggles(settings) {
 
 	for (const { id, key } of simpleToggles) {
 		const el = document.getElementById(id);
-		el.checked = custom_settings[key] === true ? "checked" : false;
-		setupBooleanToggle(el, custom_settings, key, config);
+		console.log(key, custom_settings[key])
+		el.checked = custom_settings[key] === 1 ? "checked" : false;
+		setupBooleanToggle(el, custom_settings, key, `${config}/config.sh`);
 	}
 
 	// Emulate vold app data — disabled on older versions
@@ -768,11 +769,8 @@ async function custom_toggles(settings) {
 		emulate_vold_app_data.checked = false;
 		emulate_vold_app_data.disabled = true;
 	} else {
-		emulate_vold_app_data.checked = custom_settings.emulate_vold_app_data === true ? "checked" : false;
-		setupBooleanToggle(emulate_vold_app_data, custom_settings, "emulate_vold_app_data", config, {
-			onAction: () => run(`${susfs_bin} enable_vold_app_data 1`),
-			offAction: () => run(`${susfs_bin} enable_vold_app_data 0`),
-		});
+		emulate_vold_app_data.checked = custom_settings.emulate_vold_app_data === 1 ? "checked" : false;
+		setupBooleanToggle(emulate_vold_app_data, custom_settings, "emulate_vold_app_data", `${config}/config.sh`);
 	}
 
 	// AVC log spoofing — disabled on older versions or unsupported kernels
@@ -780,8 +778,8 @@ async function custom_toggles(settings) {
 	if (!versionAtLeast(susfs_versions, 1, 5, 9) || !is_avc_log_spoofing_enabled) {
 		avc_log_spoofing.disabled = true;
 	} else {
-		avc_log_spoofing.checked = custom_settings.avc_log_spoofing === true ? "checked" : false;
-		setupBooleanToggle(avc_log_spoofing, custom_settings, "avc_log_spoofing", config, {
+		avc_log_spoofing.checked = custom_settings.avc_log_spoofing === 1 ? "checked" : false;
+		setupBooleanToggle(avc_log_spoofing, custom_settings, "avc_log_spoofing", `${config}/config.sh`, {
 			onMessage: "AVC Log Spoofing on! no need to reboot",
 			offMessage: "AVC Log Spoofing off! no need to reboot",
 			onAction: () => run(`${susfs_bin} enable_avc_log_spoofing 1`),
@@ -908,8 +906,8 @@ async function custom_rom_settings(settings) {
 		}
 	});
 	// Vendor sepolicy & compat matrix toggles
-	hide_vendor_sepolicy.checked = custom_settings.hide_vendor_sepolicy === true ? "checked" : false;
-	hide_compat_matrix.checked = custom_settings.hide_compat_matrix === true ? "checked" : false;
+	hide_vendor_sepolicy.checked = custom_settings.hide_vendor_sepolicy === 1 ? "checked" : false;
+	hide_compat_matrix.checked = custom_settings.hide_compat_matrix === 1 ? "checked" : false;
 	setupBooleanToggle(hide_vendor_sepolicy, custom_settings, "hide_vendor_sepolicy", config);
 	setupBooleanToggle(hide_compat_matrix, custom_settings, "hide_compat_matrix", config);
 }
