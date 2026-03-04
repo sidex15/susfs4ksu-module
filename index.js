@@ -43,7 +43,7 @@ document.getElementById("sus_path").innerHTML= susfs_stats.sus_path;
 document.getElementById("sus_map").innerHTML= susfs_stats.sus_map;
 document.getElementById("sus_mount").innerHTML= susfs_stats.sus_mount;
 document.getElementById("try_umount").innerHTML= susfs_stats.try_umount;
-document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+document.getElementById("kernel_version").innerHTML= await run(`uname -r + uname -v`);
 
 // Toggles
 const is_sus_su_exists = settings.sus_su;
@@ -487,8 +487,9 @@ async function auto_hide_settings(settings,susfs_features) {
 
 //set uname function
 async function set_uname(settings) {
-	document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+	document.getElementById("kernel_version").innerHTML= await run(`uname -r + uname -v`);
 	const set_uname=document.getElementById("set_uname");
+	const set_stock_kernel_build_date=document.getElementById("set_stock_kernel_build_date");
 	const spoof_on_boot = document.getElementById('uname-spoof-on-boot');
 	const boot_on_postfsdata = document.getElementById('uname-spoof-on-postfsdata');
 	const postfsdata_toggle = document.getElementById('uname-at-postfs');
@@ -535,7 +536,7 @@ async function set_uname(settings) {
 				if(sus_uname.value==''){
 					run(`${susfs_bin} set_uname 'default' '${custom_settings.kernel_build}'`)
 					await run(`sed -i 's/kernel_version=.*/kernel_version="default"/' ${config}/config.sh`);
-					document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+					document.getElementById("kernel_version").innerHTML= await run(`uname -r + uname -v`);
 					custom_settings.kernel_version = "default";
 					spoofed_kernel_version.innerHTML="default";
 					set_uname.blur();
@@ -574,7 +575,7 @@ async function set_uname(settings) {
 					custom_settings.kernel_build = "default";
 					await run(`sed -i 's/kernel_version=.*/kernel_version="default"/' ${config}/config.sh`);
 					await run(`sed -i 's/kernel_build=.*/kernel_build="default"/' ${config}/config.sh`);
-					document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+					document.getElementById("kernel_version").innerHTML= await run(`uname -r + uname -v`);
 					spoofed_kernel_version.innerHTML="default";
 					spoofed_kernel_build.innerHTML="default";
 					set_uname.blur();
@@ -613,8 +614,18 @@ async function set_uname(settings) {
 				sus_uname_build.value='';
 			}
 		}
-		document.getElementById("kernel_version").innerHTML= await run(`uname -a | cut -d' ' -f3-`);
+		document.getElementById("kernel_version").innerHTML= await run(`uname -r + uname -v`);
 		set_uname.blur();
+	});
+
+	set_stock_kernel_build_date.addEventListener("click",async function(){
+		const stock_build_date = await run(`getprop ro.build.date`);
+		run(`${susfs_bin} set_uname '${custom_settings.kernel_version}' '#1 SMP PREEMPT ${stock_build_date}'`);
+		await run(`sed -i 's/kernel_build=.*/kernel_build="#1 SMP PREEMPT ${stock_build_date}"/' ${config}/config.sh`);
+		custom_settings.kernel_build = `#1 SMP PREEMPT ${stock_build_date}`;
+		spoofed_kernel_build.innerHTML=`#1 SMP PREEMPT ${stock_build_date}`;
+		document.getElementById("kernel_version").innerHTML= await run(`uname -r + uname -v`);
+		set_stock_kernel_build_date.blur();
 	});
 
 	spoof_on_boot.addEventListener('change', async function(event) {
