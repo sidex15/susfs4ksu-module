@@ -112,4 +112,7 @@
   <!-- Credits -->
   <string id="contrib_label">Сопровождающие:</string>
   <string id="translators_label">Переводчики:</string>
+
+  <!-- New strings -->
+  <string id="set_stock_kernel_build_date_label">Установить дату сборки стокового ядра</string>
 </language>
