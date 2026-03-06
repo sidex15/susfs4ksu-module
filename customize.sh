@@ -199,6 +199,6 @@ else
 fi
 
 rm -rf ${MODPATH}/tools
-rm ${MODPATH}/customize.sh ${MODPATH}/README.md
+rm ${MODPATH}/customize.sh
 
 # EOF
