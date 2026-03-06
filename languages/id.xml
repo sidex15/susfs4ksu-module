@@ -112,4 +112,7 @@
   <!-- Credits -->
   <string id="contrib_label">Kontributor:</string>
   <string id="translators_label">Penerjemah:</string>
+
+  <!-- New strings -->
+  <string id="set_stock_kernel_build_date_label">Set Stock Kernel Build Date</string>
 </language>
