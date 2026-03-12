@@ -71,10 +71,11 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 	${SUSFS_BIN} set_android_data_root_path /sdcard/Android/data
 
 	# Emulate Vold app data
-	[ $emulate_vold_app_data = 1 ] && {
+	[ $emulate_vold_app_data -ge 1 ] && {
 		# Emulate Vold app data by using sus_path on /sdcard/Android/data/<pkg name> for all third-party apps (-3)
 		for i in $(pm list packages -3 | cut -d: -f2); do
-			${SUSFS_BIN} add_sus_path "/sdcard/Android/data/$i" && echo "[sus_path]: susfs4ksu/boot-completed /sdcard/Android/data/$i" >> $logfile1
+			[ $emulate_vold_app_data = 1 ] && ${SUSFS_BIN} add_sus_path "/sdcard/Android/data/$i" && echo "[sus_path]: susfs4ksu/boot-completed /sdcard/Android/data/$i" >> $logfile1
+			[ $emulate_vold_app_data = 2 ] && ${SUSFS_BIN} add_sus_path_loop "/sdcard/Android/data/$i" && echo "[sus_path_loop]: susfs4ksu/boot-completed /sdcard/Android/data/$i" >> $logfile1
 		done
 	}
 fi
