@@ -9,9 +9,9 @@ fi
 
 check() { 
     if command -v curl > /dev/null 2>&1; then
-        curl -s --max-time 1 --head "$1" > /dev/null 2>&1
+        curl -s --max-time 0.7 --head "$1" > /dev/null 2>&1
     else
-        busybox wget --no-check-certificate --spider -q "$1" > /dev/null 2>&1
+        busybox wget --no-check-certificate --timeout=0.7 --spider -q "$1" > /dev/null 2>&1
     fi
 }
 
@@ -24,6 +24,6 @@ fi
 
 # Check the hash of susfs binaries
 hash=$(sha256sum ${SUSFS_BIN} | awk '{print $1}')
-cloudhash=$(download https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/new/$1/$2/$3/$4/ksu_susfs_arm64 | sha256sum | awk '{print $1}')
+cloudhash=$(download https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64 | sha256sum | awk '{print $1}')
 [ $hash = $cloudhash > /dev/null 2>&1 ] && echo "match" || echo "mismatch"
 #EOL

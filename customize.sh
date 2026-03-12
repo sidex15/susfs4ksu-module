@@ -53,6 +53,14 @@ if command -v curl > /dev/null 2>&1; then
 	download() { curl --connect-timeout 10 -Ls "$1"; }
 fi
 
+check() { 
+    if command -v curl > /dev/null 2>&1; then
+        curl -s --max-time 0.7 --head "$1" > /dev/null 2>&1
+    else
+        busybox wget --no-check-certificate --timeout=0.7 --spider -q "$1" > /dev/null 2>&1
+    fi
+}
+
 # Checking KernelSU Version
 ksuver=$(${KSU_BIN} debug version | cut -d' ' -f3)
 ui_print "[-] Detected KernelSU version: $ksuver"
@@ -63,59 +71,51 @@ if [ ${ksuver} -gt 19999 ] 2>/dev/null; then
 	susfs_temp_bin="20000"
 fi
 
-ver=$(uname -r | cut -d. -f1)
-if [ ${ver} -lt 5 ]; then
-    KERNEL_VERSION=non-gki
-	ui_print "[-] Non-GKI kernel detected... use non-GKI susfs bins..."
-	chmod +x "${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64"
-	# Example output = 'v1.5.3'
-	SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
-	# SUSFS_DECIMAL_MAIN = '1'
-	SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
-	# SUSFS_DECIMAL_SUB = '5'
-	SUSFS_DECIMAL_SUB=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f2)
-	# SUSFS_DECIMAL_PATCH = '3'
-	SUSFS_DECIMAL_PATCH=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f3)
-else
-	KERNEL_VERSION=gki
-	ui_print "[-] GKI kernel detected... use GKI susfs bins..."
-	chmod +x "${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64"
-	# Example output = 'v1.5.3'
-	SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 show version)"
-	# SUSFS_DECIMAL_MAIN = '1'
-	SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
-	# SUSFS_DECIMAL_SUB = '5'
-	SUSFS_DECIMAL_SUB=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f2)
-	# SUSFS_DECIMAL_PATCH = '3'
-	SUSFS_DECIMAL_PATCH=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f3)
-fi
+chmod +x "${TMPDIR}/susfs/tools/ksu_susfs_arm64"
+# Example output = 'v1.5.3'
+SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/ksu_susfs_arm64 show version)"
 
 # dl logic, shorthand
 # download remote
 #    test binary; if fail use whats shipped
 # if dl fail; use whats shipped
 if [ -n "$SUSFS_VERSION_RAW" ] 2>/dev/null; then
-	ui_print "[-] Kernel is using susfs $SUSFS_VERSION_RAW"
-	ui_print "[-] Downloading susfs $SUSFS_VERSION_RAW from the internet"
-	if download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/new/$SUSFS_DECIMAL_MAIN/$SUSFS_DECIMAL_SUB/$SUSFS_DECIMAL_PATCH/$KERNEL_VERSION/ksu_susfs_arm64" > ${MODPATH}/ksu_susfs_remote ; then
+	ui_print "[-] Kernel is using susfs $SUSFS_VERSION_RAW"	
+else
+	ui_print "[-] Kernel is using susfs v1.5.2"
+fi
+
+# Check connectivity first
+ui_print "[-] Checking susfs binary cloud connection"
+base_url="https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64"
+if check "$base_url"; then
+	ui_print "[-] susfs binary cloud connection established"
+	# Check the hash of susfs binaries
+	hash=$(sha256sum ${TMPDIR}/susfs/tools/ksu_susfs_arm64 | awk '{print $1}')
+	cloudhash=$(download https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64 | sha256sum | awk '{print $1}')
+	if [ $hash = $cloudhash > /dev/null 2>&1 ]; then
+		ui_print "[-] susfs local and cloud binary hash is the same"
+		ui_print "[-] skipping binary cloud update"
+	else
+		ui_print "[-] Downloading latest susfs binary from the internet"
+		download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64" > ${MODPATH}/ksu_susfs_remote
 		# test downloaded binary
 		chmod +x ${MODPATH}/ksu_susfs_remote
 		if ${MODPATH}/ksu_susfs_remote > /dev/null 2>&1 ; then
 			# test ok
+			ui_print "[-] Downloaded susfs binary is working, using it for installation"
 			cp -f ${MODPATH}/ksu_susfs_remote ${DEST_BIN_DIR}/ksu_susfs
 		else
 			# test failed
-			cp ${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
+			ui_print "[!] Downloaded susfs binary is not working, using local binary for installation"
+			cp ${TMPDIR}/susfs/tools/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
 		fi
-	else
-		# failed
-		echo "[!] No internet connection or susfs binaries not found"
-		echo "[-] Using local susfs binaries"
-		cp ${TMPDIR}/susfs/tools/${susfs_temp_bin}/${KERNEL_VERSION}/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
-	fi		
+	fi
 else
-	ui_print "[-] Kernel is using susfs v1.5.2"
-	cp -f ${TMPDIR}/susfs/tools/152/${KERNEL_VERSION}/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
+	# failed
+	ui_print "[!] No internet connection"
+	ui_print "[-] Using local susfs binaries"
+	cp ${TMPDIR}/susfs/tools/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
 fi
 
 # cleanup
