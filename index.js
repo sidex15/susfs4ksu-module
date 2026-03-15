@@ -919,8 +919,8 @@ async function custom_rom_settings(settings) {
 	// Vendor sepolicy & compat matrix toggles
 	hide_vendor_sepolicy.checked = custom_settings.hide_vendor_sepolicy === 1 ? "checked" : false;
 	hide_compat_matrix.checked = custom_settings.hide_compat_matrix === 1 ? "checked" : false;
-	setupBooleanToggle(hide_vendor_sepolicy, custom_settings, "hide_vendor_sepolicy", config);
-	setupBooleanToggle(hide_compat_matrix, custom_settings, "hide_compat_matrix", config);
+	setupBooleanToggle(hide_vendor_sepolicy, custom_settings, "hide_vendor_sepolicy", `${config}/config.sh`);
+	setupBooleanToggle(hide_compat_matrix, custom_settings, "hide_compat_matrix", `${config}/config.sh`);
 }
 
 // Custom text area sections (sus_path, sus_path_loop, sus_maps, sus_mount, try_umount, etc.)
