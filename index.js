@@ -748,6 +748,8 @@ async function susfs_log_toggle(settings) {
 // Custom toggles
 async function custom_toggles(settings) {
 	const custom_settings = settings;
+	const emulate_vold_app_data_sus_path_loop_checkbox = document.getElementById("emulate_vold_app_data_sus_path_loop_checkbox");
+	const emulate_vold_app_data_sus_path_loop = document.getElementById("emulate_vold_app_data_sus_path_loop");
 	let is_avc_log_spoofing_enabled = true;
 
 	// Check AVC log spoofing support
@@ -780,8 +782,29 @@ async function custom_toggles(settings) {
 		emulate_vold_app_data.checked = false;
 		emulate_vold_app_data.disabled = true;
 	} else {
-		emulate_vold_app_data.checked = custom_settings.emulate_vold_app_data === 1 ? "checked" : false;
-		setupBooleanToggle(emulate_vold_app_data, custom_settings, "emulate_vold_app_data", `${config}/config.sh`);
+		emulate_vold_app_data.checked = custom_settings.emulate_vold_app_data >= 1 ? "checked" : false;
+		if (custom_settings.emulate_vold_app_data >= 1 && versionAtLeast(susfs_versions, 2, 0, 0)) {
+			emulate_vold_app_data_sus_path_loop_checkbox.classList.remove("hidden");
+			emulate_vold_app_data_sus_path_loop.checked = custom_settings.emulate_vold_app_data === 2 ? "checked" : false;
+		}
+		setupBooleanToggle(emulate_vold_app_data, custom_settings, "emulate_vold_app_data", `${config}/config.sh`, {
+			onMessage: "Reboot to take effect",
+			offMessage: "Reboot to take effect",
+			onAction: () => {
+				if (versionAtLeast(susfs_versions, 2, 0, 0)) {
+					emulate_vold_app_data_sus_path_loop_checkbox.classList.remove("hidden");
+					emulate_vold_app_data_sus_path_loop.checked = custom_settings.emulate_vold_app_data === 2 ? "checked" : false;
+				}
+			},
+			offAction: () => {
+				if (versionAtLeast(susfs_versions, 2, 0, 0)) {
+					emulate_vold_app_data_sus_path_loop_checkbox.classList.add("hidden");
+				}
+			},
+		});
+		if (versionAtLeast(susfs_versions, 2, 0, 0)) {
+		setupBooleanToggle(emulate_vold_app_data_sus_path_loop, custom_settings, "emulate_vold_app_data", `${config}/config.sh`, { onstate: 2, offstate: 1 });
+		}
 	}
 
 	// AVC log spoofing — disabled on older versions or unsupported kernels

@@ -115,4 +115,5 @@
 
   <!-- New strings -->
   <string id="set_stock_kernel_build_date_label">Set Stock Kernel Build Date</string>
+  <string id="emulate_vold_app_data_sus_path_loop_label">Use sus path loop</string>
 </language>
