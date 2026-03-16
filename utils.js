@@ -122,6 +122,8 @@ export function setupTextArea({ loadBtn, saveBtn, textarea, filePath, featureNam
  * @param {Object} settings - Settings object (mutated on toggle)
  * @param {string} key - Settings key to toggle
  * @param {string} configPath - Config file path
+ * @param {int} onstate - Value representing "on" state (e.g., 1 or true)
+ * @param {int} offstate - Value representing "off" state (e.g., 0 or false)
  * @param {Object} [options] - Additional options
  */
 export function setupBooleanToggle(element, settings, key, configPath, {
@@ -129,16 +131,18 @@ export function setupBooleanToggle(element, settings, key, configPath, {
     offMessage = "Reboot to take effect",
     onAction = null,
     offAction = null,
+    onstate = 1,
+    offstate = 0,
 } = {}) {
     element.addEventListener("click", async function () {
-        if (settings[key] === true || settings[key] === 1) {
-            await run(`sed -i 's/${key}=.*/${key}=0/' ${configPath}`);
-            settings[key] = false;
+        if (settings[key] >= onstate) {
+            await run(`sed -i 's/${key}=.*/${key}=${offstate}/' ${configPath}`);
+            settings[key] = offstate;
             if (offAction) await offAction();
             toast(offMessage);
         } else {
-            await run(`sed -i 's/${key}=.*/${key}=1/' ${configPath}`);
-            settings[key] = true;
+            await run(`sed -i 's/${key}=.*/${key}=${onstate}/' ${configPath}`);
+            settings[key] = onstate;
             if (onAction) await onAction();
             toast(onMessage);
         }
