@@ -13,9 +13,9 @@ fi
 
 check() { 
     if command -v curl > /dev/null 2>&1; then
-        curl -s --max-time 0.7 --head "$1" > /dev/null 2>&1
+        curl -s --max-time 5 --head "$1" > /dev/null 2>&1
     else
-        busybox wget --no-check-certificate --timeout=0.7 --spider -q "$1" > /dev/null 2>&1
+        busybox wget --no-check-certificate --timeout=5 --spider -q "$1" > /dev/null 2>&1
     fi
 }
 
