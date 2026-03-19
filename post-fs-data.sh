@@ -43,6 +43,11 @@ hide_sus_mnts_for_all_or_non_su_procs=0
 
 echo "susfs4ksu/post-fs-data: [logging_initialized]" > $logfile1
 
+[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && [ -f /data/adb/ksu/susfs4ksu/using_old_sus_path_layout ] && {
+	echo "susfs4ksu/post-fs-data: Detected old sus path layout, removing the cache file for rechecking old and new sus_path layout" >> $logfile1
+	rm -f /data/adb/ksu/susfs4ksu/using_old_sus_path_layout
+}
+
 # Hide sus mounts for all processes
 [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && { [ $hide_sus_mnts_for_all_or_non_su_procs -ge 1 ] && {
 	${SUSFS_BIN} hide_sus_mnts_for_all_procs 1 >/dev/null && echo "[hide_sus_mnts_for_all_procs = 1]: susfs4ksu/post-fs-data" || {
