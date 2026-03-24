@@ -114,7 +114,6 @@ if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
 		execute_on=$(echo "$line" | awk '{print $3}')
 		# Get inode and device of redirected path
 		SUS_KSTAT=$(stat -c "%i %d default default %X 0 %Y 0 %Z 0 %b %B" "$original_path")
-		susfs_clone_perm "$redirected_path" "$original_path"
 		[ "$execute_on" != "0" ] && continue
 		if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && [ "$SUSFS_DECIMAL_SUB" -ge 1 ] 2>/dev/null; then
 			uid_scheme=$(echo "$line" | awk '{print $4}')
