@@ -24,6 +24,10 @@ check() {
 #    test binary; if fail use whats shipped
 # if dl fail; use whats shipped
 susfsupdate() {
+	# Get the latest commit message for the susfs binary main.c
+	susfs_binary_msg=$(curl -s "https://api.github.com/repos/sidex15/susfs4ksu-binaries/commits?sha=universal-binary&path=main.c&page=1&per_page=1" | grep '"message":' | head -n 1 | sed 's/.*"message": "\(.*\)".*/\1/')
+	echo -e "[-] Latest susfs binary message:\n\n$susfs_binary_msg\n"
+	# Update susfs binary
     echo "[-] Downloading susfs binary from the internet"
 	if download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64" > ${TMPDIR}/ksu_susfs_remote ; then
 		# test downloaded binary
