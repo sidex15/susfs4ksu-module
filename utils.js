@@ -91,32 +91,6 @@ export async function updateConfig(configPath, key, value) {
 }
 
 /**
- * Create a load/save handler for text area sections
- * @param {Object} options
- * @param {HTMLElement} options.loadBtn - Load button element
- * @param {HTMLElement} options.saveBtn - Save button element
- * @param {HTMLElement} options.textarea - Textarea element
- * @param {string} options.filePath - Path to the backing file
- * @param {string} options.featureName - Display name for toast messages
- */
-export function setupTextArea({ loadBtn, saveBtn, textarea, filePath, featureName }) {
-    loadBtn.addEventListener("click", async () => {
-        textarea.innerHTML = await run(`cat ${filePath}`);
-    });
-
-    saveBtn.addEventListener("click", async () => {
-        const value = textarea.value;
-        if (value === '') {
-            toast('please press load first!');
-        } else {
-            await run(`echo '${value}' > ${filePath}`);
-            toast(`Custom ${featureName} saved!`);
-            toast("Reboot to take effect");
-        }
-    });
-}
-
-/**
  * Create a simple boolean toggle handler that updates config via sed
  * @param {HTMLElement} element - Toggle/checkbox element
  * @param {Object} settings - Settings object (mutated on toggle)

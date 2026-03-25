@@ -122,94 +122,26 @@
                         </label>
                     </div>
                 </div>
-				<div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]" id="sus_path_section">
+                <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]" id="custom_feature_editor_section">
                     <div class="form-control min-w-full sm:min-w-[400px]">
                         <label class="label cursor-pointer justify-between items-center flex">
-                            <span class="text-white text-base" data-i18n="custom_sus_path_label">Custom SUS Path</span>
+                            <span class="text-white text-base font-bold" data-i18n="custom_sus_feature_select_label">Custom SUSFS Feature</span>
+                            <select id="custom_feature_select" class="select select-bordered select-sm max-w-[220px] text-white bg-black border-white text-base font-bold uppercase">
+                            </select>
+                        </label>
+                    </div>
+                    <div class="form-control min-w-full sm:min-w-[400px]">
+                        <label class="label cursor-pointer justify-between items-center flex">
+                               <span class="text-white text-base" id="custom_feature_label" data-i18n="custom_sus_feature_editor_label">Custom Feature</span>
                             <div class="flex flex-row gap-2">
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_path" data-i18n="load_label">load</button>
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="edit_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -t text/plain -d file:///data/adb/susfs4ksu/sus_path.txt`)">Edit with</button>
+                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_custom_feature" data-i18n="load_label">load</button>
+                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="edit_custom_feature" data-i18n="edit_label">Edit with</button>
                             </div>
                         </label>
                     </div>
                     <div class="stat flex flex-col justify-center items-center p-0">
-                        <textarea class="textarea min-w-full font-sans h-48 leading-normal font-normal" placeholder="Press Load" id="custom_sus_path"></textarea>
-                        <button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="save_sus_path">Make it SuS</button>
-                    </div>
-                </div>
-                <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px] hidden" id="sus_path_loop_section">
-                    <div class="form-control min-w-full sm:min-w-[400px]">
-                        <label class="label cursor-pointer justify-between items-center flex">
-                            <span class="text-white text-base" data-i18n="custom_sus_path_loop_label">Custom SUS Path Loop</span>
-                            <div class="flex flex-row gap-2">
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_path_loop" data-i18n="load_label">load</button>
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="edit_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -t text/plain -d file:///data/adb/susfs4ksu/sus_path_loop.txt`)">Edit with</button>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="stat flex flex-col justify-center items-center p-0">
-                        <textarea class="textarea min-w-full font-sans h-48 leading-normal font-normal" placeholder="Press Load" id="custom_sus_path_loop"></textarea>
-                        <button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="save_sus_path_loop">Make it SuS</button>
-                    </div>
-                </div>
-                <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px] hidden" id="sus_maps_section">
-                    <div class="form-control min-w-full sm:min-w-[400px]">
-                        <label class="label cursor-pointer justify-between items-center flex">
-                            <span class="text-white text-base" data-i18n="custom_sus_maps_label">Custom SUS Maps</span>
-                            <div class="flex flex-row gap-2">
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_maps" data-i18n="load_label">load</button>
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="edit_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -t text/plain -d file:///data/adb/susfs4ksu/sus_maps.txt`)">Edit with</button>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="stat flex flex-col justify-center items-center p-0">
-                        <textarea class="textarea min-w-full font-sans h-48 leading-normal font-normal" placeholder="Press Load" id="custom_sus_maps"></textarea>
-                        <button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="save_sus_maps">Make it SuS</button>
-                    </div>
-                </div>
-                <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]" id="sus_mount_section">
-                    <div class="form-control min-w-full sm:min-w-[400px]">
-                        <label class="label cursor-pointer justify-between items-center flex">
-                            <span class="text-white text-base" data-i18n="custom_sus_mount_label">Custom SUS Mount</span>
-                            <div class="flex flex-row gap-2">
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_mount" data-i18n="load_label">load</button>
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="edit_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -t text/plain -d file:///data/adb/susfs4ksu/sus_mount.txt`)">Edit with</button>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="stat flex flex-col justify-center items-center p-0">
-                        <textarea class="textarea min-w-full font-sans h-48 leading-normal font-normal" placeholder="Press Load" id="custom_sus_mount"></textarea>
-                        <button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="save_sus_mount">Make it SuS</button>
-                    </div>
-                </div>
-                <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]" id="try_umount_section">
-                    <div class="form-control min-w-full sm:min-w-[400px]">
-                        <label class="label cursor-pointer justify-between items-center flex">
-                            <span class="text-white text-base" data-i18n="custom_try_umount_label">Custom Try umount</span>
-                            <div class="flex flex-row gap-2">
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_try_umount" data-i18n="load_label">load</button>
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="edit_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -t text/plain -d file:///data/adb/susfs4ksu/try_umount.txt`)">Edit with</button>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="stat flex flex-col justify-center items-center p-0">
-                        <textarea class="textarea min-w-full font-sans h-48 leading-normal font-normal" placeholder="Press Load" id="custom_try_umount"></textarea>
-                        <button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="save_try_umount">Make it SuS</button>
-                    </div>
-                </div>
-                <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]" id="sus_open_redirect_section">
-                    <div class="form-control min-w-full sm:min-w-[400px]">
-                        <label class="label cursor-pointer justify-between items-center flex">
-                            <span class="text-white text-base" data-i18n="custom_sus_open_redirect_label">Custom Open Redirect</span>
-                            <div class="flex flex-row gap-2">
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" id="load_sus_open_redirect" data-i18n="load_label">load</button>
-                                <button class="btn btn-md btn-outline w-auto mt-2 border-white text-white text-base font-normal" data-i18n="edit_label" onclick="ksu.exec(`am start -a android.intent.action.VIEW -t text/plain -d file:///data/adb/susfs4ksu/sus_open_redirect.txt`)">Edit with</button>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="stat flex flex-col justify-center items-center p-0">
-                        <textarea class="textarea min-w-full font-sans h-48 leading-normal font-normal" placeholder="Press Load" id="custom_sus_open_redirect"></textarea>
-                        <button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="save_sus_open_redirect">Make it SuS</button>
+                        <textarea class="textarea min-w-full font-sans h-48 leading-normal font-normal" placeholder="Press Load" id="custom_feature_textarea"></textarea>
+                        <button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="save_custom_feature">Make it SuS</button>
                     </div>
                 </div>
 			</section>

@@ -5,7 +5,7 @@ import Fade from './fade.js';
 import './space.js';
 import './i18n.js';
 import { show_contributors, show_translators } from './credits.js';
-import { run, catToObject, parseVersion, versionAtLeast, updateConfig, setupTextArea, setupBooleanToggle } from './utils.js';
+import { run, catToObject, parseVersion, versionAtLeast, updateConfig, setupBooleanToggle } from './utils.js';
 
 // Module locations
 const tmpfolder = "/data/adb/ksu/susfs4ksu";
@@ -109,12 +109,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 	} else if (currentPath === '/custom.html') {
 		custom_toggles(settings);
 		custom_rom_settings(settings);
-		custom_sus_mount();
-		custom_try_umount();
-		custom_sus_path();
-		custom_sus_path_loop(susfs_versions);
-		custom_sus_maps(susfs_features);
-		custom_sus_open_redirect(susfs_features);
+		custom_feature_editor(susfs_features);
 	} else if (currentPath === '/status.html') {
 		loadKernelFeatureStatus(susfs_features);
 	}
@@ -946,99 +941,141 @@ async function custom_rom_settings(settings) {
 	setupBooleanToggle(hide_compat_matrix, custom_settings, "hide_compat_matrix", `${config}/config.sh`);
 }
 
-// Custom text area sections (sus_path, sus_path_loop, sus_maps, sus_mount, try_umount, etc.)
-async function custom_sus_path() {
-	if (!susfs_features.includes("CONFIG_KSU_SUSFS_SUS_PATH")) {
-		document.getElementById("sus_path_section").classList.add("hidden");
-		return;
+// Unified custom text editor (sus_path, sus_path_loop, sus_maps, sus_mount, try_umount, open_redirect)
+function getCustomEditorFeatures(susfs_features) {
+	const features = [];
+
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_SUS_PATH")) {
+		features.push({
+			value: "SUS_PATH",
+			valueKey: "sus_path_label",
+			labelKey: "custom_sus_path_label",
+			filePath: `${config}/sus_path.txt`,
+			featureName: "SUS_PATH",
+		});
 	}
-	setupTextArea({
-		loadBtn: document.getElementById("load_sus_path"),
-		saveBtn: document.getElementById("save_sus_path"),
-		textarea: document.getElementById("custom_sus_path"),
-		filePath: `${config}/sus_path.txt`,
-		featureName: "SUS_PATH",
-	});
-}
 
-async function custom_sus_path_loop() {
-	if (!versionAtLeast(susfs_versions, 1, 5, 9)) return;
-	document.getElementById("sus_path_loop_section").classList.remove("hidden");
-	setupTextArea({
-		loadBtn: document.getElementById("load_sus_path_loop"),
-		saveBtn: document.getElementById("save_sus_path_loop"),
-		textarea: document.getElementById("custom_sus_path_loop"),
-		filePath: `${config}/sus_path_loop.txt`,
-		featureName: "SUS_PATH_LOOP",
-	});
-}
-
-async function custom_sus_maps(susfs_features) {
-	if (!susfs_features.includes("CONFIG_KSU_SUSFS_SUS_MAP")) return;
-	document.getElementById("sus_maps_section").classList.remove("hidden");
-	setupTextArea({
-		loadBtn: document.getElementById("load_sus_maps"),
-		saveBtn: document.getElementById("save_sus_maps"),
-		textarea: document.getElementById("custom_sus_maps"),
-		filePath: `${config}/sus_maps.txt`,
-		featureName: "SUS_MAPS",
-	});
-}
-
-// Custom SUS mount
-async function custom_sus_mount() {
-	if (!susfs_features.includes("CONFIG_KSU_SUSFS_SUS_MOUNT") || versionAtLeast(susfs_versions, 2, 0, 0)) {
-		document.getElementById("sus_mount_section").classList.add("hidden");
-		return;
+	if (versionAtLeast(susfs_versions, 1, 5, 9)) {
+		features.push({
+			value: "SUS_PATH_LOOP",
+			valueKey: "sus_path_loop_label",
+			labelKey: "custom_sus_path_loop_label",
+			filePath: `${config}/sus_path_loop.txt`,
+			featureName: "SUS_PATH_LOOP",
+		});
 	}
-	setupTextArea({
-		loadBtn: document.getElementById("load_sus_mount"),
-		saveBtn: document.getElementById("save_sus_mount"),
-		textarea: document.getElementById("custom_sus_mount"),
-		filePath: `${config}/sus_mount.txt`,
-		featureName: "SUS_MOUNT",
-	});
-}
 
-// Custom try umount
-async function custom_try_umount() {
-	if (!susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT") && !versionAtLeast(susfs_versions, 2, 0, 0)) {
-		document.getElementById("try_umount_section").classList.add("hidden");
-		return;
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_SUS_MAP")) {
+		features.push({
+			value: "SUS_MAPS",
+			valueKey: "sus_map_label",
+			labelKey: "custom_sus_maps_label",
+			filePath: `${config}/sus_maps.txt`,
+			featureName: "SUS_MAPS",
+		});
 	}
-	setupTextArea({
-		loadBtn: document.getElementById("load_try_umount"),
-		saveBtn: document.getElementById("save_try_umount"),
-		textarea: document.getElementById("custom_try_umount"),
-		filePath: `${config}/try_umount.txt`,
-		featureName: "TRY_UMOUNT",
-	});
+
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_SUS_MOUNT") && !versionAtLeast(susfs_versions, 2, 0, 0)) {
+		features.push({
+			value: "SUS_MOUNT",
+			valueKey: "sus_mount_label",
+			labelKey: "custom_sus_mount_label",
+			filePath: `${config}/sus_mount.txt`,
+			featureName: "SUS_MOUNT",
+		});
+	}
+
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT") || versionAtLeast(susfs_versions, 2, 0, 0)) {
+		features.push({
+			value: "TRY_UMOUNT",
+			valueKey: "try_umount_label",
+			labelKey: "custom_try_umount_label",
+			filePath: `${config}/try_umount.txt`,
+			featureName: "TRY_UMOUNT",
+		});
+	}
+
+	if (susfs_features.includes("CONFIG_KSU_SUSFS_OPEN_REDIRECT")) {
+		features.push({
+			value: "SUS_OPEN_REDIRECT",
+			valueKey: "sus_open_redirect_label",
+			labelKey: "custom_sus_open_redirect_label",
+			filePath: `${config}/sus_open_redirect.txt`,
+			featureName: "SUS_OPEN_REDIRECT",
+		});
+	}
+
+	return features;
 }
 
-// Custom SUS open redirect
-async function custom_sus_open_redirect(susfs_features) {
-	if (!susfs_features.includes("CONFIG_KSU_SUSFS_OPEN_REDIRECT")) return;
-	document.getElementById("sus_open_redirect_section").classList.remove("hidden");
+async function custom_feature_editor(susfs_features) {
+	const section = document.getElementById("custom_feature_editor_section");
+	if (!section) return;
 
-	const sus_open_redirect_area = document.getElementById("custom_sus_open_redirect");
+	const featureSelect = document.getElementById("custom_feature_select");
+	const featureLabel = document.getElementById("custom_feature_label");
+	const loadBtn = document.getElementById("load_custom_feature");
+	const editBtn = document.getElementById("edit_custom_feature");
+	const saveBtn = document.getElementById("save_custom_feature");
+	const textarea = document.getElementById("custom_feature_textarea");
 	const mainContainer = document.querySelector('main');
 
-	setupTextArea({
-		loadBtn: document.getElementById("load_sus_open_redirect"),
-		saveBtn: document.getElementById("save_sus_open_redirect"),
-		textarea: sus_open_redirect_area,
-		filePath: `${config}/sus_open_redirect.txt`,
-		featureName: "SUS_OPEN_REDIRECT",
-	});
+	const availableFeatures = getCustomEditorFeatures(susfs_features);
+	if (availableFeatures.length === 0) {
+		section.classList.add("hidden");
+		return;
+	}
 
-	// Keyboard handling
-	sus_open_redirect_area.addEventListener('focus', () => {
+	section.classList.remove("hidden");
+	featureSelect.innerHTML = availableFeatures
+		.map((feature) => {
+			const translatedLabel = window.i18n ? window.i18n.getTranslation(feature.valueKey) : feature.featureName;
+			return `<option value="${feature.value}" data-i18n="${feature.valueKey}">${translatedLabel}</option>`;
+		})
+		.join("");
+
+	const getSelectedFeature = () => {
+		const selectedValue = featureSelect.value;
+		return availableFeatures.find((feature) => feature.value === selectedValue) || availableFeatures[0];
+	};
+
+	const bindSelectedFeature = () => {
+		const selected = getSelectedFeature();
+		featureLabel.setAttribute("data-i18n", selected.labelKey);
+		featureLabel.textContent = window.i18n ? window.i18n.getTranslation(selected.labelKey) : selected.featureName;
+		textarea.value = "";
+
+		loadBtn.onclick = async () => {
+			const content = await run(`cat ${selected.filePath}`);
+			textarea.value = content;
+		};
+
+		saveBtn.onclick = async () => {
+			const value = textarea.value;
+			if (value === '') {
+				toast('please press load first!');
+				return;
+			}
+			await run(`echo '${value}' > ${selected.filePath}`);
+			toast(`Custom ${selected.featureName} saved!`);
+			toast("Reboot to take effect");
+		};
+
+		editBtn.onclick = async () => {
+			await run(`am start -a android.intent.action.VIEW -t text/plain -d file://${selected.filePath}`);
+		};
+	};
+
+	featureSelect.onchange = bindSelectedFeature;
+	bindSelectedFeature();
+
+	textarea.onfocus = () => {
 		mainContainer.style.paddingBottom = '300px';
-		sus_open_redirect_area.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
-	});
-	sus_open_redirect_area.addEventListener('blur', () => {
+		textarea.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+	};
+	textarea.onblur = () => {
 		gsap.to(mainContainer, { duration: 0.5, paddingBottom: '0px', ease: 'power1.out' });
-	});
+	};
 }
 
 // Load kernel feature status
