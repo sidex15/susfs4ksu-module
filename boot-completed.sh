@@ -95,6 +95,45 @@ if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_SUS_MAP"; then
 	done
 fi
 
+# Add sus_kstat_statically entries from JSON (late v1.5.8+)
+if [ -f "$PERSISTENT_DIR/sus_kstat_statically.json" ]; then
+	# Parse JSON and add sus_kstat_statically entries
+	# Extract each JSON object and process it
+	awk '/^[[:space:]]*\{/,/^[[:space:]]*\}/' "$PERSISTENT_DIR/sus_kstat_statically.json" | {
+		current_obj=""
+		while IFS= read -r line; do
+			if echo "$line" | grep -q '^[[:space:]]*{'; then
+				current_obj=""
+			fi
+			current_obj="$current_obj $line"
+			
+			if echo "$line" | grep -q '^[[:space:]]*}'; then
+				# Process complete JSON object
+				path=$(echo "$current_obj" | grep -o '"path"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				ino=$(echo "$current_obj" | grep -o '"ino"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				dev=$(echo "$current_obj" | grep -o '"dev"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				nlink=$(echo "$current_obj" | grep -o '"nlink"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				size=$(echo "$current_obj" | grep -o '"size"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				atime=$(echo "$current_obj" | grep -o '"atime"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				atime_nsec=$(echo "$current_obj" | grep -o '"atime_nsec"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				mtime=$(echo "$current_obj" | grep -o '"mtime"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				mtime_nsec=$(echo "$current_obj" | grep -o '"mtime_nsec"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				ctime=$(echo "$current_obj" | grep -o '"ctime"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				ctime_nsec=$(echo "$current_obj" | grep -o '"ctime_nsec"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				blocks=$(echo "$current_obj" | grep -o '"blocks"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				blksize=$(echo "$current_obj" | grep -o '"blksize"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
+				
+				# Execute if path is not empty
+				if [ -n "$path" ]; then
+					${SUSFS_BIN} add_sus_kstat_statically "$path" "$ino" "$dev" "$nlink" "$size" "$atime" "$atime_nsec" "$mtime" "$mtime_nsec" "$ctime" "$ctime_nsec" "$blocks" "$blksize" && \
+					echo "[add_sus_kstat_statically]: susfs4ksu/boot-completed $path" >> "$logfile1"
+				fi
+				current_obj=""
+			fi
+		done
+	} 2>/dev/null || true
+fi
+
 # Auto try_umount (v1.5.5+)
 [ $auto_try_umount = 1 ] && {
 	# Skip if the disable file is present

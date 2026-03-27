@@ -80,6 +80,8 @@ echo -e "# this contains suspicious mounts you want \n# to be try_umounted at po
 echo -e "# this contains paths you want to redirect with\n# open redirect at boot-completed.sh or service.sh\n# example format\n# 0 = Execute on boot-completed.sh\n# 1 = Execute on service.sh\n# <original_path> <redirected_path> <0 or 1>\n# /system/bin/service /data/adb/susfs4ksu/service_redirected 0" > "$config/sus_open_redirect.txt"
 # Reset legit_mounts.txt
 printf "$legit_mounts" > "$config/legit_mounts.txt"
+# Reset sus_kstat_statically.json
+echo "[]" > "$config/sus_kstat_statically.json"
 
 # Reset auto hide settings
 [ -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount ] || rm -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount
