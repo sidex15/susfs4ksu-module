@@ -15,14 +15,120 @@
 	}
 </style>
 
-<body class="bg-black font-amongus2">
+<body class="bg-black font-amongus2" data-router-wrapper>
 	<!--<div class="z-50 toast toast-top toast-center">
 		<div id="toast" class="alert alert-error bg-red-500 font-bold text-black font-sans opacity-100 duration-300">
 			<span>Spaces are not allowed in the input!</span>
 		  </div>
 	</div>-->
-	<main class="max-h-screen relative overflow-auto" data-router-wrapper>
-		<div class="pt-3 pb-14" data-router-view="custom">
+
+	<main class="max-h-screen relative overflow-auto" data-router-view="custom">
+        <!-- SUS_KSTAT Edit Dialog Modal -->
+        <dialog id="kstat_edit_modal" class="modal font-sans font-normal">
+            <div class="modal-box bg-black border-2 border-white w-11/12 max-w-2xl">
+                <h3 class="font-bold text-xl text-white mb-4 font-amongus2 uppercase hidden" id="edit_kstat_entry_label_id" data-i18n="edit_kstat_entry_label">Edit SUS_KSTAT Entry</h3>
+                <h3 class="font-bold text-xl text-white mb-4 font-amongus2 uppercase hidden" id="add_kstat_entry_label_id" data-i18n="add_kstat_entry_label">Add SUS_KSTAT Entry</h3>
+                <div class="space-y-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="text-white text-sm font-bold" data-i18n="kstat_path_label">Path</span>
+                        </label>
+                        <input type="text" id="kstat_path_input" class="input input-bordered bg-black border-white text-white" placeholder="/system/..." />
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">inode</span>
+                            </label>
+                            <input type="text" id="kstat_ino_input" class="input input-bordered bg-black border-white text-white" placeholder="1234" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">device</span>
+                            </label>
+                            <input type="text" id="kstat_dev_input" class="input input-bordered bg-black border-white text-white" placeholder="1234" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">nlink</span>
+                            </label>
+                            <input type="text" id="kstat_nlink_input" class="input input-bordered bg-black border-white text-white" placeholder="2" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">size</span>
+                            </label>
+                            <input type="text" id="kstat_size_input" class="input input-bordered bg-black border-white text-white" placeholder="223344" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">atime</span>
+                            </label>
+                            <input type="text" id="kstat_atime_input" class="input input-bordered bg-black border-white text-white" placeholder="1712592355" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">mtime</span>
+                            </label>
+                            <input type="text" id="kstat_mtime_input" class="input input-bordered bg-black border-white text-white" placeholder="1712592355" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">ctime</span>
+                            </label>
+                            <input type="text" id="kstat_ctime_input" class="input input-bordered bg-black border-white text-white" placeholder="1712592355" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">atime_nsec</span>
+                            </label>
+                            <input type="text" id="kstat_atime_nsec_input" class="input input-bordered bg-black border-white text-white" placeholder="0" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">mtime_nsec</span>
+                            </label>
+                            <input type="text" id="kstat_mtime_nsec_input" class="input input-bordered bg-black border-white text-white" placeholder="0" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">ctime_nsec</span>
+                            </label>
+                            <input type="text" id="kstat_ctime_nsec_input" class="input input-bordered bg-black border-white text-white" placeholder="0" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">blocks</span>
+                            </label>
+                            <input type="text" id="kstat_blocks_input" class="input input-bordered bg-black border-white text-white" placeholder="16" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="text-white text-sm font-bold">blksize</span>
+                            </label>
+                            <input type="text" id="kstat_blksize_input" class="input input-bordered bg-black border-white text-white" placeholder="512" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-action mt-6 font-amongus2">
+                    <button class="btn btn-outline border-white text-white" onclick="document.getElementById('kstat_edit_modal').close()" data-i18n="cancel_label">Cancel</button>
+                    <button class="btn btn-primary text-white" id="save_kstat_entry">Make it SuS</button>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button></button>
+            </form>
+        </dialog>
+        <!-- End of SUS_KSTAT Edit Dialog Modal -->
+		<div class="pt-3 pb-14">
 			<div class="flex justify-between items-center mx-auto ml-4 pt-4 mr-4">
 				<div class="flex flex-col">
 					<div class="font-bold text-4xl text-white font-amongus2 uppercase" data-i18n="custom_settings_label">Custom Settings</div>
@@ -144,6 +250,19 @@
                         <button class="btn btn-md btn-outline w-24 mt-2 border-white text-white text-base font-normal" id="save_custom_feature">Make it SuS</button>
                     </div>
                 </div>
+                <div class="stats flex flex-col divide-x-0 divide-y-0 white:bg-cyan-100/20 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px] max-w-full overflow-hidden" id="custom_kstat_section">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-white text-xl font-bold" data-i18n="custom_sus_kstat_label">Custom SUS_KSTAT</h2>
+                        <button class="btn btn-sm btn-outline border-white text-white" id="add_kstat_entry">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="kstat_entries_list" class="space-y-3 overflow-hidden w-full min-w-0">
+                        <!-- Generated entries will be inserted here -->
+                    </div>
+                </div>
 			</section>
 		</div>
 	</main>
@@ -156,5 +275,3 @@
 </body>
 
 </html>
-
-

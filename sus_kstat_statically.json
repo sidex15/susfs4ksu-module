@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/system/addon.d",
+    "ino": "1234",
+    "dev": "1234",
+    "nlink": "2",
+    "size": "223344",
+    "atime": "1712592355",
+    "atime_nsec": "0",
+    "mtime": "1712592355",
+    "mtime_nsec": "0",
+    "ctime": "1712592355",
+    "ctime_nsec": "0",
+    "blocks": "16",
+    "blksize": "512"
+  },
+  {
+    "path": "/system/framework/test",
+    "ino": "default",
+    "dev": "default",
+    "nlink": "default",
+    "size": "default",
+    "atime": "1712592355",
+    "atime_nsec": "default",
+    "mtime": "1712592355",
+    "mtime_nsec": "default",
+    "ctime": "1712592355",
+    "ctime_nsec": "default",
+    "blocks": "default",
+    "blksize": "default"
+  }
+]
