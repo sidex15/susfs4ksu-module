@@ -120,4 +120,8 @@
   <string id="custom_sus_feature_editor_label">Custom Feature</string>
   <string id="sus_path_loop_label">SUS PATH LOOP</string>
   <string id="sus_open_redirect_label">OPEN REDIRECT</string>
+  <string id="edit_kstat_entry_label">Edit SUS_KSTAT Entry</string>
+  <string id="add_kstat_entry_label">Add SUS_KSTAT Entry</string>
+  <string id="kstat_path_label">Path</string>
+  <string id="custom_sus_kstat_label">Custom SUS_KSTAT</string>
 </language>
