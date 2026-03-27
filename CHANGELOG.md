@@ -1,30 +1,38 @@
-## v1.5.2+ Revision 26
+## v1.5.2+ Revision 27
 ### Notes
-The development for this module will be expected to be slower than usual as I'm doing on Master's thesis in my post-graduate studies... But if issues persists I will take issues and fix them as soon as possible, just submit an issue request... PRs are welcome though! 😊
+This is a small but major update, especially with the introduction of unified/universal susfs binary and custom sus_kstat
+
+### [Universal SUSFS Binary](https://github.com/sidex15/susfs4ksu-binaries/tree/universal-binary)
+* Implement universal binary for ksu_susfs
+  * This will support v1.5.x, v2.x.x, and beyond, even on future susfs versions
+  * The universal binary is using prctl (v1.5.x) and sys_reboot (v2.0.0+) depending on the susfs version implemented in the kernel.
+  * Cleaner help menu and add additional info in the help menu
+  * Add `--help` argument for more help on the specific info.
+  * CMD arguments on the help menu are showing the available CMDs for specific susfs kernel version
+  * Automatically adds `using_old_sus_path_layout` file tag at the `/data/adb/ksu/susfs4ksu` when it's using old sus_path (early v2.0.0) and new sus_path (post v2.0.0+)
+* [More technical changes here](https://github.com/sidex15/susfs4ksu-binaries/commits/universal-binary/)
 
 ### WebUI
-* Add skip legit mounts toggle for auto try umount (userspace)
-* Implement Set Stock Kernel Build Date button for Spoof Kernel Uname Section
-* Refactor JS codebase
-* Fix custom settings toggles and remove redundant scripts in vite config
-* Fix keyboard issue on custom open redirect
+* Implement custom SUS_KSTAT entry section.
+    * You can now add or edit sus_kstat entries
+* Consolidate custom susfs feature text area into one section.
+* Fix toggles in custom rom settings
+* Enhance setupBooleanToggle to support custom on/off states
+* Add 'Use sus path loop' option and enhance toggle functionality for Vold App Data
 * Localization
     * New Crowdin translations by GitHub Action
     * update languages xml
 
 ### Scripts
-* scripts: boot-completed: add skip_legit_mounts option to skip legit mounts from auto try_umount list
-    * You could add more legit mounts to exclude on `/data/adb/susfs4ksu/legit_mounts.txt`
-* scripts: customize: add user option to reset or keep susfs4ksu settings
-* scripts: boot-completed: Refactor custom sus_path and sus_path_loop functions
-* scripts: config: set hide_sus_mnts_for_all_or_non_su_procs=1 by default
-* scripts: boot-completed: improve susfs version sed matching
-* scripts: config: Disable all settings by default
-* Revert "scripts: service: use susfs open redirect for hide_vendor_sepolicy hide_compat_matrix and fake_service_list for susfs v2.0.0+"
-* scripts: service: Uncomment kstat commands in service.sh
-* scripts: service: log bind mounts on hide vendor sepolicy and hide compat matrix
-* scripts: customize: add legit_mounts.txt to the persistent dir folder
-* scripts/workflow: customize: exclude README.md and LICENSE in the ci module content
-
-### Misc
-* Add susfs4ksu shortcut icon
+* scripts/binary: implement susfs universal binary
+* scripts: service/boot-completed: add 4th parameter (uid_scheme) in the custom open redirect for susfs v2.1.0+
+    * Sample parameter for custom open redirect for susfs v2.1.0+
+        * `<original_path> <redirected_path> <0 or 1 (execute boot stages)> <0-4 (uid_scheme)>`
+* scripts: boot-completed: add option to use add_sus_path_loop instead of add_sus_path for vold app data emulation
+* scripts: post-fs-data: delete `using_old_sus_path_layout` first for rechecking old and new sus_path layout
+* scripts: action/customize: set maximum timeout check for cloud binary to 5 seconds
+* scripts: service/boot-completed: refactor kstat code on open redirect code block
+* scripts: action: show latest susfs binary message when there's a new update
+* scripts: service/boot-completed: remove clone permissions on custom open_redirect
+* scripts: service: don't use susfs_clone_perm on susfs v2.1.0+
+* scripts: boot-completed: execute sus_path related code at nearly end of the script
