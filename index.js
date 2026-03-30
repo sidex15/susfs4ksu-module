@@ -1088,6 +1088,10 @@ async function custom_kstat_editor() {
 	const editModal = document.getElementById("kstat_edit_modal");
 	const saveBtn = document.getElementById("save_kstat_entry");
 	const modalBox = editModal ? editModal.querySelector(".modal-box") : null;
+	const confirm_del_kstat_modal = document.getElementById("confirm_del_kstat_modal");
+	const modal_kstat_del_message = document.getElementById("modal_kstat_del_message");
+	const confirmDelBtn = document.getElementById("confirm_del_kstat");
+	const cancelDelBtn = document.getElementById("cancel_del_kstat");
 
 	const fields = {
 		path: document.getElementById("kstat_path_input"),
@@ -1240,12 +1244,20 @@ async function custom_kstat_editor() {
 
 	// Delete entry with confirmation
 	window.deleteKstatEntry = async (index) => {
-		if (confirm(`Delete path: ${kstatData[index].path}?`)) {
+		modal_kstat_del_message.innerText += ` ${kstatData[index].path}?`;
+		confirm_del_kstat_modal.showModal();
+		confirmDelBtn.onclick = async () => {
+			modal_kstat_del_message.innerText = modal_kstat_del_message.innerText.replace(` ${kstatData[index].path}?`, "");
 			kstatData.splice(index, 1);
 			await saveKstatData();
 			renderKstatList();
 			toast("Entry deleted and saved");
-		}
+			confirm_del_kstat_modal.close();
+		};
+		cancelDelBtn.onclick = () => {
+			confirm_del_kstat_modal.close();
+			modal_kstat_del_message.innerText = modal_kstat_del_message.innerText.replace(` ${kstatData[index].path}?`, "");
+		};
 	};
 
 	// Save entry from modal

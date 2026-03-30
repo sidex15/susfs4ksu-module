@@ -124,4 +124,5 @@
   <string id="add_kstat_entry_label">Add SUS_KSTAT Entry</string>
   <string id="kstat_path_label">Path</string>
   <string id="custom_sus_kstat_label">Custom SUS_KSTAT</string>
+  <string id="del_path_label">Delete path:</string>
 </language>

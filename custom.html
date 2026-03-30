@@ -128,6 +128,17 @@
             </form>
         </dialog>
         <!-- End of SUS_KSTAT Edit Dialog Modal -->
+        <!--Spoof uname dialog-->
+        <dialog id="confirm_del_kstat_modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <h3 class="font-bold text-base font-sans" data-i18n="warning_label">Warning!</h3>
+                <p class="py-4 font-sans" id="modal_kstat_del_message" data-i18n="del_path_label">Delete path:</p>
+                <div class="modal-action">
+                    <button class="btn btn-md btn-error font-sans" id="cancel_del_kstat" data-i18n="cancel_label">Cancel</button>
+                    <button class="btn btn-md btn-primary font-sans" id="confirm_del_kstat" data-i18n="confirm_label">Confirm</button>
+                </div>
+            </div>
+        </dialog>
 		<div class="pt-3 pb-14">
 			<div class="flex justify-between items-center mx-auto ml-4 pt-4 mr-4">
 				<div class="flex flex-col">
