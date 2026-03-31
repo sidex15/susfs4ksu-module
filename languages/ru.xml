@@ -115,4 +115,14 @@
 
   <!-- New strings -->
   <string id="set_stock_kernel_build_date_label">Установить дату сборки стокового ядра</string>
+  <string id="emulate_vold_app_data_sus_path_loop_label">Использовать путь sus loop</string>
+  <string id="custom_sus_feature_select_label">Пользовательская функция SUS</string>
+  <string id="custom_sus_feature_editor_label">Пользовательская функция</string>
+  <string id="sus_path_loop_label">ПУТЬ SUS LOOP</string>
+  <string id="sus_open_redirect_label">OPEN REDIRECT</string>
+  <string id="edit_kstat_entry_label">Изменить запись SUS_KSTAT</string>
+  <string id="add_kstat_entry_label">Добавить запись SUS_KSTAT</string>
+  <string id="kstat_path_label">Путь</string>
+  <string id="custom_sus_kstat_label">Пользовательский SUS_KSTAT</string>
+  <string id="del_path_label">Delete path:</string>
 </language>

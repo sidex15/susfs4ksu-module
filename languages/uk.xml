@@ -4,116 +4,125 @@
   <string id="app_title">Меню WebUI</string>
   <string id="warning_label">Увага!</string>
   <string id="cancel_label">Скасувати</string>
-  <string id="confirm_label">Підтвердити</string>
-  <string id="about_label">Про програму</string>
+  <string id="confirm_label">Застосувати</string>
+  <string id="about_label">Про нас</string>
   <string id="main_menu_label">Головне меню</string>
-  <string id="load_label">Завантажити</string>
+  <string id="load_label">Завантаження</string>
   <string id="edit_label">Редагувати за допомогою</string>
   <string id="enabled_label">Увімкнено</string>
   <string id="disabled_label">Вимкнено</string>
   <string id="deprecated_label">Застаріло</string>
   <string id="unknown_label">Невідомо</string>
-  <string id="help_label">Довідка</string>
+  <string id="help_label">Допомога</string>
   <string id="send_logs_label">Надіслати логи</string>
   <string id="export_config_label">Експорт конфігурації</string>
   <string id="reset_config_label">Скинути всі налаштування</string>
 
   <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">Ой-ой! Непідтримуване ядро!</string>
-  <string id="susfs_error_desc">Доступ до WebUI заборонено! Переконайтеся, що ви використовуєте ядро з патчем SuSFS!</string>
+  <string id="susfs_error_label">Помилка! Непідтримуване ядро!</string>
+  <string id="susfs_error_desc">WebUI недоступний! Переконайтеся, що ви встановили ядро з підтримкою SUSFS!</string>
 
   <!-- SUSFS Update Dialog -->
-  <string id="susfs_update_label">Оновлення компонентів SUSFS!</string>
-  <string id="susfs_update_desc">Доступне оновлення для виконуваних файлів SUSFS!</string>
-  <string id="susfs_update2_desc">Будь ласка, оновіться до останньої версії, щоб забезпечити сумісність із модулем та WebUI.</string>
+  <string id="susfs_update_label">Оновлення користувацького простору SUSFS!</string>
+  <string id="susfs_update_desc">Доступне оновлення користувацьких файлів SUSFS!</string>
+  <string id="susfs_update2_desc">Будь ласка, оновіться до останньої версії, щоб забезпечити сумісність із модулем і WebUI.</string>
   <string id="susfs_updating_label">Оновлення...</string>
   <string id="skip_btn_label">Пропустити</string>
   <string id="update_btn_label">Оновити</string>
 
   <!-- Home Page -->
   <string id="kernel_version_label">Версія ядра</string>
-  <string id="sus_path_label">Шляхи SUS (PATH)</string>
+  <string id="sus_path_label">Патч SUS</string>
   <string id="sus_map_label">Мапи SUS (MAPS)</string>
-  <string id="sus_mount_label">Монтування SUS (MOUNT)</string>
-  <string id="try_umount_label">Спроба розмонтування (TRY UMOUNT)</string>
-  <string id="susfs_settings_label">Спеціальні налаштування SUSFS</string>
-  <string id="susfs_kernel_status_label">Статус ядра SUSFS</string>
+  <string id="sus_mount_label">Монтування SUS</string>
+  <string id="try_umount_label">Спробувати демонтувати</string>
+  <string id="susfs_settings_label">Додаткові налаштування SUSFS</string>
+  <string id="susfs_kernel_status_label">Стан ядра SUSFS</string>
 
   <!-- Status Page -->
-  <string id="kernel_features_label">Статус функцій ядра</string>
-  <string id="sus_path_feature_label">Підтримка SUS Path</string>
+  <string id="kernel_features_label">Стан функцій ядра</string>
+  <string id="sus_path_feature_label">Підтримка патчів SUS</string>
   <string id="sus_map_feature_label">Підтримка SUS Maps</string>
-  <string id="sus_mount_feature_label">Підтримка SUS Mount</string>
+  <string id="sus_mount_feature_label">Підтримка монтування SUS</string>
   <string id="sus_kstat_feature_label">Підтримка SUS Kstat</string>
-  <string id="try_umount_feature_label">Підтримка Try Umount</string>
+  <string id="try_umount_feature_label">Підтримка демонтування</string>
   <string id="spoof_uname_feature_label">Підтримка підміни Uname</string>
   <string id="spoof_cmdline_feature_label">Підміна Cmdline/Bootconfig</string>
-  <string id="open_redirect_feature_label">Підтримка Open Redirect</string>
+  <string id="open_redirect_feature_label">Підтримка відкритого перенаправлення</string>
   <string id="enable_log_feature_label">Підтримка логування</string>
-  <string id="auto_default_mount_feature_label">Автоматичне Default Mount</string>
-  <string id="auto_bind_mount_feature_label">Автоматичне Bind Mount</string>
+  <string id="auto_default_mount_feature_label">Автоматичне монтування</string>
+  <string id="auto_bind_mount_feature_label">Автоматичне Bind-монтування</string>
   <string id="auto_try_umount_bind_feature_label">Автоматичне Try Umount Bind</string>
-  <string id="hide_symbols_feature_label">Приховати символи KSU SUSFS</string>
+  <string id="hide_symbols_feature_label">Приховування символів KSU SUSFS</string>
   <string id="magic_mount_feature_label">Підтримка Magic Mount</string>
   <string id="overlayfs_auto_kstat_feature_label">Підтримка OverlayFS Auto Kstat</string>
 
   <!-- Settings -->
-  <string id="susfs_log_label">Логи SUSFS</string>
-  <string id="sus_su_1_label">SUS SU в режимі 1</string>
+  <string id="susfs_log_label">Журнали SUSFS</string>
+  <string id="sus_su_1_label">SUS SU у режимі 1</string>
   <string id="sus_su_label">SUS SU</string>
   <string id="sus_su_boot_label">SUS SU під час завантаження</string>
   <string id="auto_hide_label">Налаштування автоприховування</string>
-  <string id="default_mounts_label">Автоприховування default mounts</string>
-  <string id="bind_mounts_label">Автоприховування bind mounts</string>
-  <string id="try_umount_bind_label">Автоспроба розмонтування bind mounts</string>
+  <string id="default_mounts_label">Монтування автоприховування за замовчуванням</string>
+  <string id="bind_mounts_label">Автоприховування bind-монтування</string>
+  <string id="try_umount_bind_label">Автоматично демонтувати bind-монтування</string>
   <string id="auto_try_umount_label">Автоспроба розмонтування (userspace)</string>
   <string id="skip_legit_mounts_label">Пропускати легітимні монтування</string>
-  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Приховати sus_mounts для всіх/non-su процесів</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Приховати sus_mounts від усіх процесів</string>
   <string id="turn_off_after_boot_completed_label">Вимкнути після завершення завантаження</string>
-  <string id="zygote_try_umount_label">Спроба розмонтування для системного процесу zygote</string>
-  <string id="umount_for_zygote_iso_service_label">Спроба розмонтування для ізольованої служби zygote</string>
+  <string id="zygote_try_umount_label">Спробувати демонтувати системні процеси zygote</string>
+  <string id="umount_for_zygote_iso_service_label">Спробувати демонтувати ізольовані служби zygote</string>
   <string id="kernel_uname_label">Uname ядра</string>
   <string id="spoof_kernel_version_label">Підміна версії ядра</string>
-  <string id="spoofed_kernel_version_label">Підмінена версія ядра</string>
-  <string id="spoof_kernel_build_label">Підміна збірки ядра</string>
-  <string id="spoofed_kernel_build_label">Підмінена збірка ядра</string>
+  <string id="spoofed_kernel_version_label">Змінена версія ядра</string>
+  <string id="spoof_kernel_build_label">Підміна білду ядра</string>
+  <string id="spoofed_kernel_build_label">Змінена версія білду</string>
   <string id="spoof_on_boot_label">Підміна під час завантаження</string>
-  <string id="post_fs_data_label">Виконувати на post-fs-data (краща підміна)</string>
-  <string id="uname_warning_label2">Увімкнення цього параметра може призвести до циклічного завантаження (bootloop) або нестабільності у разі некоректної підміни. Ви впевнені, що хочете активувати виконання на post-fs-data?</string>
+  <string id="post_fs_data_label">Виконувати post-fs-data (покращена підміна)</string>
+  <string id="uname_warning_label2">Ці налаштування можуть спричинити циклічне завантаження або нестабільність. Ви впевнені, що хочете ввімкнути виконання Post-FS-DATA?</string>
   <string id="reset_warning_label">Це скине всі налаштування до значень за замовчуванням. Бажаєте продовжити?</string>
 
   <!-- Custom -->
-  <string id="custom_settings_label">Спеціальні налаштування</string>
-  <string id="hide_paths_label">Приховування Custom Rom</string>
+  <string id="custom_settings_label">Додаткові налаштування</string>
+  <string id="hide_paths_label">Приховати налаштування кастомної прошивки</string>
   <string id="hide_custom_rom_label">Приховати шляхи кастомної прошивки</string>
   <string id="hide_level_label">Рівень приховування</string>
-  <string id="hide_custom_rom_desc1">Виключити файли .apk, .jar, .odex, .vdex, .so, .rc та /vendor/bin/hw/</string>
-  <string id="hide_custom_rom_desc2">Виключити файли .apk, .jar, .odex, .vdex, .so та /vendor/bin/hw/</string>
-  <string id="hide_custom_rom_desc3">Виключити файли .apk, .jar, .odex, .vdex та /vendor/bin/hw/</string>
-  <string id="hide_custom_rom_desc4">Виключити файли .apk, .jar та /vendor/bin/hw/</string>
-  <string id="hide_custom_rom_desc5">Приховати всі шляхи кастомної прошивки ⚠️Ризиковано, може спричинити проблеми!</string>
+  <string id="hide_custom_rom_desc1">Виключити файли .apk, .jar, .odex, .vdex, .so, .rc і /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc2">Виключити файли .apk, .jar, .odex, .vdex, .so і /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc3">Виключити файли .apk, .jar, .odex, .vdex і /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc4">Виключити файли .apk, .jar і /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc5">Приховати всі користувацькі шляхи. ⚠️ Ризиковано й може спричинити проблеми!</string>
   <string id="hide_vendor_sepolicy_label">Приховати Vendor SEPolicy</string>
   <string id="hide_compat_matrix_label">Приховати Compat Matrix</string>
-  <string id="fake_service_list_label">Підміна списку сервісів (Service List)</string>
+  <string id="fake_service_list_label">Приховати список сервісів</string>
   <string id="hide_gapps_label">Приховати GApps</string>
   <string id="hide_revanced_label">Приховати Revanced (YT/YTM)</string>
   <string id="spoof_cmdline_label">Підміна Cmdline</string>
   <string id="hide_ksu_loop_label">Приховати KSU Loop</string>
   <string id="force_hide_dex2oat_label">Примусово приховати монтування Dex2oat</string>
   <string id="avc_log_spoofing_label">Підміна логів AVC</string>
-  <string id="emulate_vold_app_data_label">Емуляція ізоляції даних додатків Vold</string>
-  <string id="custom_sus_path_label">Спеціальний шлях SUS</string>
-  <string id="custom_sus_path_loop_label">Спеціальний шлях SUS Loop</string>
+  <string id="emulate_vold_app_data_label">Емуляція ізоляції даних застосунків</string>
+  <string id="custom_sus_path_label">Власний шлях SUS</string>
+  <string id="custom_sus_path_loop_label">Власний шлях петлі SUS</string>
   <string id="custom_sus_maps_label">Спеціальні мапи SUS</string>
-  <string id="custom_sus_mount_label">Спеціальне монтування SUS</string>
-  <string id="custom_try_umount_label">Спеціальне розмонтування (Try Umount)</string>
+  <string id="custom_sus_mount_label">Власне монтування SUS</string>
+  <string id="custom_try_umount_label">Власний Try Umount</string>
   <string id="custom_sus_open_redirect_label">Спеціальний Open Redirect</string>
 
   <!-- Credits -->
-  <string id="contrib_label">Співавтори:</string>
+  <string id="contrib_label">Учасники розробки:</string>
   <string id="translators_label">Перекладачі:</string>
 
   <!-- New strings -->
   <string id="set_stock_kernel_build_date_label">Встановити дату збірки стокового ядра</string>
   <string id="emulate_vold_app_data_sus_path_loop_label">Використовувати sus path loop</string>
+  <string id="custom_sus_feature_select_label">Custom SUS Feature</string>
+  <string id="custom_sus_feature_editor_label">Custom Feature</string>
+  <string id="sus_path_loop_label">SUS PATH LOOP</string>
+  <string id="sus_open_redirect_label">OPEN REDIRECT</string>
+  <string id="edit_kstat_entry_label">Edit SUS_KSTAT Entry</string>
+  <string id="add_kstat_entry_label">Add SUS_KSTAT Entry</string>
+  <string id="kstat_path_label">Path</string>
+  <string id="custom_sus_kstat_label">Custom SUS_KSTAT</string>
+  <string id="del_path_label">Delete path:</string>
 </language>
