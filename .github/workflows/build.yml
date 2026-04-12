@@ -46,7 +46,7 @@ jobs:
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
-          github_token: ${{ secrets.SUSFS4KSU_SECRET }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           author_email: "24408329+sidex15@users.noreply.github.com"
           author_name: "sidex15"
           message: "WebUI: ${{ steps.commit_message.outputs.message }}"
