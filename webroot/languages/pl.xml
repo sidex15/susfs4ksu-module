@@ -5,8 +5,8 @@
   <string id="warning_label">Ostrzeżenie!</string>
   <string id="cancel_label">Anuluj</string>
   <string id="confirm_label">Potwierdź</string>
-  <string id="about_label">O aplikacji</string>
-  <string id="main_menu_label">Główne menu</string>
+  <string id="about_label">O SUFS</string>
+  <string id="main_menu_label">Menu główne</string>
   <string id="load_label">Ładowanie</string>
   <string id="edit_label">Edytuj z</string>
   <string id="enabled_label">Włączone</string>
@@ -67,7 +67,7 @@
   <string id="turn_off_after_boot_completed_label">Wyłącz po zakończeniu rozruchu</string>
   <string id="zygote_try_umount_label">spróbuj odmontować proces systemu zygoty</string>
   <string id="umount_for_zygote_iso_service_label">spróbuj odmontować usługę izolacji zygoty</string>
-  <string id="kernel_uname_label">Uname kernel</string>
+  <string id="kernel_uname_label">Nazwa jądra</string>
   <string id="spoof_kernel_version_label">Sfałszuj wersję jądra</string>
   <string id="spoofed_kernel_version_label">Sfałszuj wersję jądra</string>
   <string id="spoof_kernel_build_label">Sfałszuj kompilację jądra</string>
