@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+  <!-- Główne-->
+  <string id="app_title">Menu WebUI</string>
+  <string id="warning_label">Ostrzeżenie!</string>
+  <string id="cancel_label">Anuluj</string>
+  <string id="confirm_label">Potwierdź</string>
+  <string id="about_label">O aplikacji</string>
+  <string id="main_menu_label">Główne menu</string>
+  <string id="load_label">Ładowanie</string>
+  <string id="edit_label">Edytuj z</string>
+  <string id="enabled_label">Włączone</string>
+  <string id="disabled_label">Wyłączone</string>
+  <string id="deprecated_label">Przestarzałe</string>
+  <string id="unknown_label">Nieznane</string>
+  <string id="help_label">Pomoc</string>
+  <string id="send_logs_label">Wyślij dzienniki</string>
+  <string id="export_config_label">Eksportuj konfigurację</string>
+  <string id="reset_config_label">Zresetuj całą konfigurację</string>
+  <!-- Błąd! SUSFS nieobsługiwany-->
+  <string id="susfs_error_label">Błąd! Nieobsługiwane jądro!</string>
+  <string id="susfs_error_desc">Dostęp do WebUI zabroniony! Upewnij się, że korzystasz z jądra z poprawką SUSFS!</string>
+  <!-- Okno dialogowe aktualizacji SUSFS-->
+  <string id="susfs_update_label">Aktualizacja przestrzeni użytkownika SUSFS!</string>
+  <string id="susfs_update_desc">Dostępna jest aktualizacja plików binarnych przestrzeni użytkownika SUSFS!</string>
+  <string id="susfs_update2_desc">Aby zapewnić zgodność modułu i interfejsu WebUI, należy dokonać aktualizacji do najnowszej wersji.</string>
+  <string id="susfs_updating_label">Aktualizowanie...</string>
+  <string id="skip_btn_label">Pomiń</string>
+  <string id="update_btn_label">Aktualizacja</string>
+  <!-- Strona domowa-->
+  <string id="kernel_version_label">Wersja jądra</string>
+  <string id="sus_path_label">Ścieżka SUS</string>
+  <string id="sus_map_label">Mapowanie SUS</string>
+  <string id="sus_mount_label">Montowanie SUS</string>
+  <string id="try_umount_label">Próba odmontowania</string>
+  <string id="susfs_settings_label">Niestandardowe ustawienia SUSFS</string>
+  <string id="susfs_kernel_status_label">Status jądra SUSFS</string>
+  <!-- Status strony-->
+  <string id="kernel_features_label">Status funkcji jądra</string>
+  <string id="sus_path_feature_label">Wsparcie ścieżki SUS</string>
+  <string id="sus_map_feature_label">Wsparcie mapowania SUS</string>
+  <string id="sus_mount_feature_label">Wsparcie montowania SUS</string>
+  <string id="sus_kstat_feature_label">Wsparcie kstat SUS</string>
+  <string id="try_umount_feature_label">Wsparcie próby odmontowania</string>
+  <string id="spoof_uname_feature_label">Sfałszuj wsparcie uname</string>
+  <string id="spoof_cmdline_feature_label">Sfałszuj wiersz poleceń i konfigurację rozruchu</string>
+  <string id="open_redirect_feature_label">Wsparcie otwartych przekierowań</string>
+  <string id="enable_log_feature_label">Wsparcie rejestrowania</string>
+  <string id="auto_default_mount_feature_label">Automatyczne domyślne montowanie</string>
+  <string id="auto_bind_mount_feature_label">Automatyczne montowanie powiązań</string>
+  <string id="auto_try_umount_bind_feature_label">Automatyczna próba odmontowania powiązań</string>
+  <string id="hide_symbols_feature_label">Ukryj symbole KSU SUSFS</string>
+  <string id="magic_mount_feature_label">Wsparcie magicznego montowania</string>
+  <string id="overlayfs_auto_kstat_feature_label">Automatyczne wsparcie kstat dla OverlayFS</string>
+  <!-- Ustawienia -->
+  <string id="susfs_log_label">Dzienniki SUSFS</string>
+  <string id="sus_su_1_label">SUS SU jest w trybie 1</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">SUS SU podczas rozruchu</string>
+  <string id="auto_hide_label">ustawienia automatycznego ukrywania</string>
+  <string id="default_mounts_label">automatyczne ukrywanie domyślnego montowania</string>
+  <string id="bind_mounts_label">automatyczne ukrywanie powiązań montowania</string>
+  <string id="try_umount_bind_label">automatyczna próba odmontowania powiązania montowania</string>
+  <string id="auto_try_umount_label">automatyczna próba odmontowania (przestrzeń użytkownika)</string>
+  <string id="skip_legit_mounts_label">Pomiń prawidłowe montowanie</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">Ukryj montowanie SUS dla wszystkich procesów niebędących procesami su</string>
+  <string id="turn_off_after_boot_completed_label">Wyłącz po zakończeniu rozruchu</string>
+  <string id="zygote_try_umount_label">spróbuj odmontować proces systemu zygoty</string>
+  <string id="umount_for_zygote_iso_service_label">spróbuj odmontować usługę izolacji zygoty</string>
+  <string id="kernel_uname_label">Uname kernel</string>
+  <string id="spoof_kernel_version_label">Sfałszuj wersję jądra</string>
+  <string id="spoofed_kernel_version_label">Sfałszuj wersję jądra</string>
+  <string id="spoof_kernel_build_label">Sfałszuj kompilację jądra</string>
+  <string id="spoofed_kernel_build_label">Sfałszuj kompilację jądra</string>
+  <string id="spoof_on_boot_label">Sfałszuj przy rozruchu</string>
+  <string id="post_fs_data_label">Wykonaj po zamontowaniu partycji danych (lepsze fałszowanie)</string>
+  <string id="uname_warning_label2">Włączenie tej opcji może spowodować pętlę rozruchową lub niestabilność w przypadku nieprawidłowego fałszowania. Czy na pewno chcesz włączyć wykonywanie po partycji danych? </string>
+  <string id="reset_warning_label">Spowoduje to przywrócenie wszystkich konfiguracji do wartości domyślnych. Czy na pewno chcesz kontynuować?</string>
+  <!-- Niestandardowe-->
+  <string id="custom_settings_label">Ustawienia niestandardowe</string>
+  <string id="hide_paths_label">Ukryj ustawienia niestandardowego ROM-u</string>
+  <string id="hide_custom_rom_label">Ukryj ścieżki niestandardowego ROM-u</string>
+  <string id="hide_level_label">Ukryj poziom</string>
+  <string id="hide_custom_rom_desc1">Wyklucz pliki .apk, .jar, .odex, .vdex, .so, .rc i /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc2">Wyklucz pliki .apk, .jar, .odex, .vdex, .so i /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc3">Wyklucz pliki .apk, .jar, .odex, .vdex i /vendor/bin/hw/</string>
+  <string id="hide_custom_rom_desc4">Wyklucz pliki .apk, .jar i /vendor/bin/hw/ </string>
+  <string id="hide_custom_rom_desc5">Ukryj wszystkie ścieżki niestandardowego ROM-u ⚠️Ryzykowne i może powodować problemy!</string>
+  <string id="hide_vendor_sepolicy_label">Ukryj zasady bezpieczeństwa dostawcy</string>
+  <string id="hide_compat_matrix_label">Ukryj macierz zgodności</string>
+  <string id="fake_service_list_label">Sfałszuj listę usług</string>
+  <string id="hide_gapps_label">Ukryj aplikacje Google</string>
+  <string id="hide_revanced_label">Ukryj Revanced (YouTube/YouTube Music)</string>
+  <string id="spoof_cmdline_label">Sfałszuj wiersz poleceń</string>
+  <string id="hide_ksu_loop_label">Ukryj pętlę KSU</string>
+  <string id="force_hide_dex2oat_label">Wymuś ukrycie montowania dex2oat</string>
+  <string id="avc_log_spoofing_label">Sfałszuj dziennik AVC</string>
+  <string id="emulate_vold_app_data_label">Emuluj izolację danych aplikacji Vold</string>
+  <string id="custom_sus_path_label">Niestandardowa ścieżka SUS</string>
+  <string id="custom_sus_path_loop_label">Niestandardowa pętla ścieżki SUS</string>
+  <string id="custom_sus_maps_label">Niestandardowe mapowanie SUS</string>
+  <string id="custom_sus_mount_label">Niestandardowe montowanie SUS</string>
+  <string id="custom_try_umount_label">Niestandardowa próba odmontowania</string>
+  <string id="custom_sus_open_redirect_label">Niestandardowe otwarte przekierowanie</string>
+  <!--Podziękowania-->
+  <string id="contrib_label">Współtwórcy:</string>
+  <string id="translators_label"> Tłumaczący:</string>
+  <!-- Nowe ciągi-->
+  <string id="set_stock_kernel_build_date_label">Ustaw datę kompilacji fabrycznego jądra </string>
+  <string id="emulate_vold_app_data_sus_path_loop_label">Użyj pętli ścieżki SUS</string>
+  <string id="custom_sus_feature_select_label">Niestandardowa funkcja SUS</string>
+  <string id="custom_sus_feature_editor_label">Funkcja niestandardowa</string>
+  <string id="sus_path_loop_label">Pętla ścieżki SUS</string>
+  <string id="sus_open_redirect_label">Otwórz przekierowanie</string>
+  <string id="edit_kstat_entry_label">Edytuj wpis kstat SUS</string>
+  <string id="add_kstat_entry_label">Dodaj wpis kstat SUS</string>
+  <string id="kstat_path_label">Ścieżka</string>
+  <string id="custom_sus_kstat_label">Niestandardowy kstat SUS</string>
+  <string id="del_path_label">Usuń ścieżkę:</string>
+</language>
