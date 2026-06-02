@@ -153,7 +153,7 @@ fi
 	fi
 
 	# Get all susfs mounts from /proc/1/mountinfo
-	sus_mounts=$(cat /proc/1/mountinfo | grep -E "^[5][0-9]{5} .* (KSU|shared).*$" | awk '{print $5}') # Newer susfs mount IDs start with 500k
+	sus_mounts=$(cat /proc/1/mountinfo | grep -E "^[25][0-9]{5,9} .* (KSU|shared).*$" | awk '{print $5}') # Newer susfs mount IDs start with 500k or 2b
 	# Fallback to older susfs mount IDs if no mounts found within 500k range
 	if [ -z "$sus_mounts" ]; then
 		sus_mounts=$(cat /proc/1/mountinfo | grep -E "^[13][0-9]{5} .* (KSU|shared).*$" | awk '{print $5}')
@@ -371,7 +371,7 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 fi
 
 # Generate susfs stats
-sus_mount_count=$(($(grep -ciE "set SUS_MOUNT|to LH_SUS_MOUNT" $logfile ) + $(cat /proc/1/mountinfo | grep -cE "^[5][0-9]{5} .* (KSU|shared).*$" )))
+sus_mount_count=$(($(grep -ciE "set SUS_MOUNT|to LH_SUS_MOUNT" $logfile ) + $(cat /proc/1/mountinfo | grep -cE "^[25][0-9]{5,9} .* (KSU|shared).*$" )))
 rm ${tmpfolder}/susfs_stats.txt
 echo sus_map=$(grep -ci 'AS_FLAGS_SUS_MAP' $logfile ) >> ${tmpfolder}/susfs_stats.txt
 echo sus_mount=$sus_mount_count >> ${tmpfolder}/susfs_stats.txt
