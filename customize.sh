@@ -81,6 +81,8 @@ SUSFS_VERSION_RAW="$(${TMPDIR}/susfs/tools/ksu_susfs_arm64 show version)"
 # if dl fail; use whats shipped
 if [ -n "$SUSFS_VERSION_RAW" ] 2>/dev/null; then
 	ui_print "[-] Kernel is using susfs $SUSFS_VERSION_RAW"	
+	# SUSFS_DECIMAL_MAIN = '1'
+	SUSFS_DECIMAL_MAIN=$(echo "$SUSFS_VERSION_RAW" | sed 's/^v//;' | cut -d'.' -f1)
 else
 	ui_print "[-] Kernel is using susfs v1.5.2"
 fi
