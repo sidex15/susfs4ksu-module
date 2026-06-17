@@ -69,9 +69,9 @@ if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
 		original_path=$(echo "$line" | awk '{print $1}')
 		redirected_path=$(echo "$line" | awk '{print $2}')
 		execute_on=$(echo "$line" | awk '{print $3}')
+		[ "$execute_on" != "0" ] && continue
 		# Get inode and device of redirected path
 		SUS_KSTAT=$(stat -c "%i %d default default %X 0 %Y 0 %Z 0 %b %B" "$original_path")
-		[ "$execute_on" != "0" ] && continue
 		if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && [ "$SUSFS_DECIMAL_SUB" -ge 1 ] 2>/dev/null; then
 			uid_scheme=$(echo "$line" | awk '{print $4}')
 			if [ -z $uid_scheme ]; then
@@ -108,21 +108,28 @@ if [ -f "$PERSISTENT_DIR/sus_kstat_statically.json" ]; then
 			current_obj="$current_obj $line"
 			
 			if echo "$line" | grep -q '^[[:space:]]*}'; then
-				# Process complete JSON object
-				path=$(echo "$current_obj" | grep -o '"path"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				ino=$(echo "$current_obj" | grep -o '"ino"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				dev=$(echo "$current_obj" | grep -o '"dev"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				nlink=$(echo "$current_obj" | grep -o '"nlink"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				size=$(echo "$current_obj" | grep -o '"size"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				atime=$(echo "$current_obj" | grep -o '"atime"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				atime_nsec=$(echo "$current_obj" | grep -o '"atime_nsec"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				mtime=$(echo "$current_obj" | grep -o '"mtime"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				mtime_nsec=$(echo "$current_obj" | grep -o '"mtime_nsec"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				ctime=$(echo "$current_obj" | grep -o '"ctime"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				ctime_nsec=$(echo "$current_obj" | grep -o '"ctime_nsec"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				blocks=$(echo "$current_obj" | grep -o '"blocks"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				blksize=$(echo "$current_obj" | grep -o '"blksize"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 | head -n1)
-				
+				# Process complete JSON object: extract all 13 string fields in a
+				# single awk pass (first occurrence of each key wins), emitted as
+				# one tab-separated record, then read them at once.
+				IFS='	' read -r path ino dev nlink size atime atime_nsec mtime mtime_nsec ctime ctime_nsec blocks blksize <<EOF
+$(echo "$current_obj" | awk '
+				{
+					while (match($0, /"[a-z_]+"[[:space:]]*:[[:space:]]*"[^"]*"/)) {
+						pair = substr($0, RSTART, RLENGTH)
+						$0 = substr($0, RSTART + RLENGTH)
+						k = pair; sub(/"[[:space:]]*:.*/, "", k); sub(/^"/, "", k)
+						v = pair; sub(/^[^:]*:[[:space:]]*"/, "", v); sub(/"$/, "", v)
+						if (!(k in seen)) { seen[k] = 1; val[k] = v }
+					}
+				}
+				END {
+					printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", \
+						val["path"], val["ino"], val["dev"], val["nlink"], val["size"], \
+						val["atime"], val["atime_nsec"], val["mtime"], val["mtime_nsec"], \
+						val["ctime"], val["ctime_nsec"], val["blocks"], val["blksize"]
+				}')
+EOF
+
 				# Execute if path is not empty
 				if [ -n "$path" ]; then
 					${SUSFS_BIN} add_sus_kstat_statically "$path" "$ino" "$dev" "$nlink" "$size" "$atime" "$atime_nsec" "$mtime" "$mtime_nsec" "$ctime" "$ctime_nsec" "$blocks" "$blksize" && \
@@ -153,10 +160,10 @@ fi
 	fi
 
 	# Get all susfs mounts from /proc/1/mountinfo
-	sus_mounts=$(cat /proc/1/mountinfo | grep -E "^[25][0-9]{5,9} .* (KSU|shared).*$" | awk '{print $5}') # Newer susfs mount IDs start with 500k or 2b
+	sus_mounts=$(grep -E "^[25][0-9]{5,9} .* (KSU|shared).*$" /proc/1/mountinfo | awk '{print $5}') # Newer susfs mount IDs start with 500k or 2b
 	# Fallback to older susfs mount IDs if no mounts found within 500k range
 	if [ -z "$sus_mounts" ]; then
-		sus_mounts=$(cat /proc/1/mountinfo | grep -E "^[13][0-9]{5} .* (KSU|shared).*$" | awk '{print $5}')
+		sus_mounts=$(grep -E "^[13][0-9]{5} .* (KSU|shared).*$" /proc/1/mountinfo | awk '{print $5}')
 	fi
 	# Loop through each susfs mount and add try_umount path
 	for LINE in $sus_mounts; do
@@ -197,42 +204,28 @@ fi
 [ $spoof_uname = 1 ] && spoof_uname
 
 # Hide Custom ROM Paths
+# Find lineage and crdroid paths for all files and directories, with a
+# mode-specific exclusion of certain file types (and /vendor/bin/hw/).
+# Mode 5 excludes nothing; lower modes progressively exclude more.
 [ $hide_cusrom -gt 0 ] && {
-    [ $hide_cusrom = 5 ] && {
-    # Find lineage and crdroid paths for all files and directories
-	echo "susfs4ksu/boot-completed: [hide_cusrom][5]" >> $logfile1
-    find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | while read -r path; do
-        ${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
-    done
-	}
-	[ $hide_cusrom = 4 ] && {
-	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, and /vendor/bin/hw/ files
-	echo "susfs4ksu/boot-completed: [hide_cusrom][4]" >> $logfile1
-	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar)|/vendor/bin/hw/" | while read -r path; do
+	case $hide_cusrom in
+		5) cusrom_exclude="" ;;
+		4) cusrom_exclude=".(apk|jar)|/vendor/bin/hw/" ;;
+		3) cusrom_exclude=".(apk|jar|odex|vdex)|/vendor/bin/hw/" ;;
+		2) cusrom_exclude=".(apk|jar|odex|vdex|so)|/vendor/bin/hw/" ;;
+		1) cusrom_exclude=".(apk|jar|odex|vdex|so|rc)|/vendor/bin/hw/" ;;
+		*) cusrom_exclude="" ;;
+	esac
+	echo "susfs4ksu/boot-completed: [hide_cusrom][$hide_cusrom]" >> $logfile1
+	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | {
+		if [ -n "$cusrom_exclude" ]; then
+			grep -vE "$cusrom_exclude"
+		else
+			cat
+		fi
+	} | while read -r path; do
 		${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
 	done
-	}
-	[ $hide_cusrom = 3 ] && {
-	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, and /vendor/bin/hw/ files
-	echo "susfs4ksu/boot-completed: [hide_cusrom][3]" >> $logfile1
-	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex)|/vendor/bin/hw/" | while read -r path; do
-		${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
-	done
-	}
-	[ $hide_cusrom = 2 ] && {
-	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, so, and /vendor/bin/hw/ files
-	echo "susfs4ksu/boot-completed: [hide_cusrom][2]" >> $logfile1
-	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex|so)|/vendor/bin/hw/" | while read -r path; do
-		${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
-	done
-	}
-	[ $hide_cusrom = 1 ] && {
-	# Find lineage and crdroid paths for all files and directories, excluding specific .apk, jar, odex, vdex, so, rc, and /vendor/bin/hw/ files
-	echo "susfs4ksu/boot-completed: [hide_cusrom][1]" >> $logfile1
-	find /system /vendor /system_ext /product -type f -o -type d | grep -iE "lineage|crdroid" | grep -iE "\." | grep -vE ".(apk|jar|odex|vdex|so|rc)|/vendor/bin/hw/" | while read -r path; do
-		${SUSFS_BIN} add_sus_path "$path" && echo "[sus_path]: susfs4ksu/boot-completed $path" >> "$logfile1"
-	done
-	}
 }
 
 # echo "hide_gapps=1" >> /data/adb/susfs4ksu/config.sh
@@ -328,7 +321,12 @@ fi
 
 # Starting in SUSFS version v1.5.8, it needs to set the sdcard and android data root paths
 # This will start the sus_path process. Without this check, sus_path will not work
-until [ -d "/sdcard/Android/data" ]; do sleep 1; done
+count=0
+max_attempts=60
+until [ -d "/sdcard/Android/data" ] || [ $count -ge $max_attempts ]; do
+	sleep 1
+	count=$((count + 1))
+done
 if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 8 ] || [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] 2>/dev/null; then
 	${SUSFS_BIN} set_sdcard_root_path /sdcard
 	${SUSFS_BIN} set_android_data_root_path /sdcard/Android/data
@@ -360,8 +358,9 @@ _add_sus_paths() {
 }
 
 # SUSFS Logging
-dmesg | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
-endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
+dmesg_snapshot=$(dmesg)
+echo "$dmesg_snapshot" | sed -n "/^\[ *$service/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
+endmsg=$(echo "$dmesg_snapshot" | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
 echo "boot_completed=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 sleep 15; # this delay is to ensure that all of the susfs logs have been captured
 # Just to be sure, set sdcard and android data root paths again
@@ -371,7 +370,7 @@ if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB
 fi
 
 # Generate susfs stats
-sus_mount_count=$(($(grep -ciE "set SUS_MOUNT|to LH_SUS_MOUNT" $logfile ) + $(cat /proc/1/mountinfo | grep -cE "^[25][0-9]{5,9} .* (KSU|shared).*$" )))
+sus_mount_count=$(($(grep -ciE "set SUS_MOUNT|to LH_SUS_MOUNT" $logfile ) + $(grep -cE "^[25][0-9]{5,9} .* (KSU|shared).*$" /proc/1/mountinfo )))
 rm ${tmpfolder}/susfs_stats.txt
 echo sus_map=$(grep -ci 'AS_FLAGS_SUS_MAP' $logfile ) >> ${tmpfolder}/susfs_stats.txt
 echo sus_mount=$sus_mount_count >> ${tmpfolder}/susfs_stats.txt

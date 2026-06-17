@@ -46,7 +46,7 @@ sus_su_2(){
 [ $sus_su = -1 ] && {
 	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 3 ] 2>/dev/null; then
 		# Check if sus_su is supported
-		if ${SUSFS_BIN} show enabled_features 2>/dev/null | grep -q "CONFIG_KSU_SUSFS_SUS_SU"; then
+		if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_SUS_SU"; then
   			sed -i "s/^sus_su=.*/sus_su=0/" ${PERSISTENT_DIR}/config.sh
 			${SUSFS_BIN} sus_su 0
 			sed -i "s/^sus_su_active=.*/sus_su_active=0/" ${PERSISTENT_DIR}/config.sh
@@ -62,7 +62,7 @@ sus_su_2(){
 [ $sus_su = 0 ] && {
 	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 3 ] 2>/dev/null; then
 		# Check if sus_su is supported
-		if ! ${SUSFS_BIN} show enabled_features 2>/dev/null | grep -q "CONFIG_KSU_SUSFS_SUS_SU"; then
+		if ! echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_SUS_SU"; then
 			sed -i "s/^sus_su=.*/sus_su=-1/" ${PERSISTENT_DIR}/config.sh
 		else
 			${SUSFS_BIN} sus_su 0
@@ -81,7 +81,7 @@ sus_su_2(){
 	# Check for susfs version (1.5.3 and above)
 	if [ -n "$version" ] && [ "$SUSFS_DECIMAL_MAIN" -ge 1 ] && [ "$SUSFS_DECIMAL_SUB" -ge 5 ] && [ "$SUSFS_DECIMAL_PATCH" -ge 3 ] 2>/dev/null; then
 		# Check if sus_su is supported
-		if ${SUSFS_BIN} show enabled_features 2>/dev/null | grep -q "CONFIG_KSU_SUSFS_SUS_SU"; then
+		if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_SUS_SU"; then
 			${SUSFS_BIN} sus_su 2
 			sed -i "s/^sus_su=.*/sus_su=2/" ${PERSISTENT_DIR}/config.sh
 			sed -i "s/^sus_su_active=.*/sus_su_active=2/" ${PERSISTENT_DIR}/config.sh
@@ -105,8 +105,9 @@ sus_su_2(){
 }
 
 # SUSFS Logging
-dmesg | sed -n "/^\[ *$post_mount/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
-endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
+dmesg_snapshot=$(dmesg)
+echo "$dmesg_snapshot" | sed -n "/^\[ *$post_mount/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
+endmsg=$(echo "$dmesg_snapshot" | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
 echo "service=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 
 ## Props ##
@@ -169,9 +170,9 @@ if echo "$susfs_features" | grep -q "CONFIG_KSU_SUSFS_OPEN_REDIRECT"; then
 		original_path=$(echo "$line" | awk '{print $1}')
 		redirected_path=$(echo "$line" | awk '{print $2}')
 		execute_on=$(echo "$line" | awk '{print $3}')
+		[ "$execute_on" != "1" ] && continue
 		# Get inode and device of redirected path
 		SUS_KSTAT=$(stat -c "%i %d default default %X 0 %Y 0 %Z 0 %b %B" "$original_path")
-		[ "$execute_on" != "1" ] && continue
 		if [ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && [ "$SUSFS_DECIMAL_SUB" -ge 1 ] 2>/dev/null; then
 			uid_scheme=$(echo "$line" | awk '{print $4}')
 			if [ -z $uid_scheme ]; then

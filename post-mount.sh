@@ -32,7 +32,8 @@ if grep -v "#" "$PERSISTENT_DIR/try_umount.txt" > /dev/null; then
 fi
 
 # SUSFS Logging
-dmesg | sed -n "/^\[ *$post_fs_data/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
-endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
+dmesg_snapshot=$(dmesg)
+echo "$dmesg_snapshot" | sed -n "/^\[ *$post_fs_data/,\$p" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" >> $logfile
+endmsg=$(echo "$dmesg_snapshot" | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
 echo "post_mount=$endmsg" >> $tmpfolder/logs/boot_stage_time.sh
 # EOF

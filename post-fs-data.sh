@@ -22,8 +22,9 @@ SUSFS_DECIMAL_PATCH=$(echo "$version" | sed 's/^v//;' | cut -d'.' -f3)
 [ -w /mnt/vendor ] && mntfolder=/mnt/vendor/susfs4ksu
 mkdir -p $mntfolder
 
-# use ksu_susfs show enabled_features to check if susfs is supported, if it returns an error, then susfs is not supported
-if ${SUSFS_BIN} show enabled_features; then
+# use the cached enabled_features to check if susfs is supported; if it's empty
+# the binary returned an error, then susfs is not supported
+if [ -n "$susfs_features" ]; then
 	touch $tmpfolder/logs/susfs_active
 else # check dmesg for susfs indication
 	dmesg | grep -q "susfs:" > /dev/null && touch $tmpfolder/logs/susfs_active || rm -f $tmpfolder/logs/susfs_active
@@ -77,8 +78,7 @@ enable_sus_su_mode_1(){
 	fi
 	# Enable sus_su or abort the function if sus_su is not supported #
 	sed -i "s/^sus_su=.*/sus_su=1/" ${PERSISTENT_DIR}/config.sh
-	sed -i "s/^sus_su_acitve=.*/sus_active=1/" ${PERSISTENT_DIR}/config.sh
-	echo 'sus_su=1' >> ${PERSISTENT_DIR}/config.sh
+	sed -i "s/^sus_su_active=.*/sus_su_active=1/" ${PERSISTENT_DIR}/config.sh
 	mkdir -p ${MODDIR}/system/bin 2>/dev/null
 	# Copy the new generated sus_su_drv_path and 'sus_su' to /system/bin/ and rename 'sus_su' to 'su' #
 	cp -f /data/adb/ksu/bin/sus_su ${MODDIR}/system/bin/su
@@ -110,6 +110,7 @@ fi
 
 
 # SUSFS Logging
-dmesg | grep -iE "susfs_auto_add|ksu_susfs|susfs:" > $logfile
-endmsg=$(dmesg | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
+dmesg_snapshot=$(dmesg)
+echo "$dmesg_snapshot" | grep -iE "susfs_auto_add|ksu_susfs|susfs:" > $logfile
+endmsg=$(echo "$dmesg_snapshot" | grep -E '^\[ *[0-9]' | cut -d']' -f1 | sed 's/^\[ *//' | cut -d' ' -f1 | tail -n 1)
 echo "post_fs_data=$endmsg" > $tmpfolder/logs/boot_stage_time.sh
