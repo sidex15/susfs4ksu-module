@@ -108,7 +108,7 @@ export async function auto_hide_settings(settings, susfs_features, susfs_version
 	if(susfs_features.includes("CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT")){
 		auto_umount_bind_toggle.classList.remove("hidden");
 	}
-	if(susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT")){
+	if(susfs_features.includes("CONFIG_KSU_SUSFS_TRY_UMOUNT") && !versionAtLeast(susfs_versions, 2, 1, 0)){
 		try_umount_zygote_toggle.classList.remove("hidden");
 	}
 	if (versionAtLeast(susfs_versions, 1, 5, 5)) {
