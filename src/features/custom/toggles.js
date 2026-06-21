@@ -67,6 +67,7 @@ export async function custom_toggles(settings, susfs_versions) {
 	const avc_log_spoofing = document.getElementById("avc_log_spoofing");
 	if (!versionAtLeast(susfs_versions, 1, 5, 9) || !is_avc_log_spoofing_enabled) {
 		avc_log_spoofing.disabled = true;
+		avc_log_spoofing.checked = false;
 	} else {
 		avc_log_spoofing.checked = custom_settings.avc_log_spoofing === 1 ? "checked" : false;
 		setupBooleanToggle(avc_log_spoofing, custom_settings, "avc_log_spoofing", `${config}/config.sh`, {
