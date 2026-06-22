@@ -68,6 +68,18 @@
 			</div>
 		</div>
 	</dialog>
+	<!--Confirm Import dialog-->
+	<dialog id="confirm_import_modal" class="modal modal-bottom sm:modal-middle">
+		<div class="modal-box">
+			<h3 class="font-bold text-base font-sans" data-i18n="warning_label">Warning!</h3>
+			<p class="py-4 font-sans" data-i18n="import_warning_label">This will overwrite your current configuration. Are you sure you want to proceed?</p>
+			<div class="modal-action">
+				<button class="btn btn-md btn-error font-sans" id="import_modal_cancel" data-i18n="cancel_label">Cancel</button>
+				<button class="btn btn-md btn-primary font-sans" id="import_modal_confirm" data-i18n="confirm_label">Confirm</button>
+				<button class="btn btn-md btn-secondary font-sans" id="import_modal_backup" data-i18n="import_backup_label">Backup Current Config</button>
+			</div>
+		</div>
+	</dialog>
 	<!--<div class="z-50 toast toast-top toast-center">
 		<div id="toast" class="alert alert-error bg-red-500 font-bold text-black font-sans opacity-100 duration-300">
 			<span>Spaces are not allowed in the input!</span>
@@ -268,6 +280,7 @@
 					<div class="stat-title pb-2 text-lg text-white" data-i18n="danger_zone_label">Danger Zone</div>
 					<div class="form-control">
 						<button class="btn btn-md btn-outline w-full mt-2 border-white text-white text-sm font-normal font-sans" id="susfs_send_logs" data-i18n="send_logs_label">Send Logs</button>
+						<button class="btn btn-md btn-outline w-full mt-2 border-blue-500 text-white text-sm font-normal font-sans" id="susfs_import" data-i18n="import_config_label">Import Config</button>
 						<button class="btn btn-md btn-outline w-full mt-2 border-green-500 text-white text-sm font-normal font-sans" id="susfs_export" data-i18n="export_config_label">Export Config</button>
 						<button class="btn btn-md btn-outline w-full mt-2 border-red-500 text-white text-sm font-normal font-sans" id="susfs_reset" data-i18n="reset_config_label">Reset All Config</button>
 					</div>

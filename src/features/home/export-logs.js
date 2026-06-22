@@ -25,12 +25,24 @@ export function susfs_send_logs(){
 export function susfs_export_config(){
 	const susfs_export_config_btn = document.getElementById('susfs_export');
 	susfs_export_config_btn.addEventListener('click', async function(event) {
-		try{
-			await run(`tar -C /data/adb/susfs4ksu/ -czvf /sdcard/susfs_settings.tar.gz .`);
-			toast("Settings exported to /sdcard/susfs_settings.tar.gz");
-		}
-		catch{
-			toast("Failed to export settings");
-		}
+		await export_susfs_config();
 	});
+}
+
+// export config function
+export async function export_susfs_config() {
+	try{
+		var currentDate = new Date();
+		var formattedDate = currentDate.getFullYear() + '-' +
+			String(currentDate.getMonth() + 1).padStart(2, '0') + '-' +
+			String(currentDate.getDate()).padStart(2, '0') + '_' +
+			String(currentDate.getHours()).padStart(2, '0') + '-' +
+			String(currentDate.getMinutes()).padStart(2, '0') + '-' +
+			String(currentDate.getSeconds()).padStart(2, '0');
+		await run(`tar -C /data/adb/susfs4ksu/ -czvf /sdcard/Download/susfs_settings_${formattedDate}.tar.gz .`);
+		toast("Settings exported to /sdcard/Download/susfs_settings_" + formattedDate + ".tar.gz");
+	}
+	catch{
+		toast("Failed to export settings");
+	}
 }

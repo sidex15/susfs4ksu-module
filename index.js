@@ -15,6 +15,7 @@ import { susfs_reset } from './src/features/home/reset.js';
 import { susfs_export_config, susfs_send_logs } from './src/features/home/export-logs.js';
 import { susfs_bin_update } from './src/features/home/bin-update.js';
 import { auto_hide_settings } from './src/features/auto-hide/auto-hide.js';
+import { susfs_import_config } from './src/features/home/import-config.js';
 
 // Custom page features
 import { custom_toggles } from './src/features/custom/toggles.js';
@@ -115,6 +116,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 		susfs_reset();
 		susfs_export_config();
 		susfs_send_logs();
+		susfs_import_config(susfs_versions, susfs_features);
 		set_uname(settings);
 		susfs_log_toggle(settings);
 		if (versionAtLeast(susfs_versions, 1, 5, 4)) auto_hide_settings(settings, susfs_features, susfs_versions);
@@ -133,6 +135,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 susfs_send_logs();
 susfs_export_config();
 susfs_reset();
+susfs_import_config(susfs_versions, susfs_features);
 set_uname(settings);
 susfs_log_toggle(settings);
 
