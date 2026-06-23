@@ -114,7 +114,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 
 	if (currentPath === '/index.html') {
 		susfs_reset();
-		susfs_export_config();
+		susfs_export_config(susfs_versions);
 		susfs_send_logs();
 		susfs_import_config(susfs_versions, susfs_features);
 		set_uname(settings);
@@ -133,7 +133,7 @@ H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
 
 // Initialize the page
 susfs_send_logs();
-susfs_export_config();
+susfs_export_config(susfs_versions);
 susfs_reset();
 susfs_import_config(susfs_versions, susfs_features);
 set_uname(settings);
