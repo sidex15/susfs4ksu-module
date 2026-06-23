@@ -1,5 +1,5 @@
 import { toast } from 'kernelsu';
-import { run, versionAtLeast } from './src/utils.js';
+import { run, versionAtLeast } from '../../utils.js';
 import { config } from '../../core/constants.js';
 
 // send logs
