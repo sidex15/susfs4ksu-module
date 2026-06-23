@@ -16,19 +16,15 @@ export async function susfs_import_config(susfs_versions, susfs_features) {
     const import_modal_cancel = document.getElementById('import_modal_cancel');
     const import_modal_confirm = document.getElementById('import_modal_confirm');
     const import_modal_backup = document.getElementById('import_modal_backup');
-    var is_no_auto_mount = await run(`[ -f data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && echo true || echo false`);
-    var is_no_auto_bind = await run(`[ -f data/adb/susfs_no_auto_add_sus_bind_mount ] && echo true || echo false`);
-    var is_no_auto_umount_bind = await run(`[ -f data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && echo true || echo false`);
-    var is_try_umount_zygote = await run(`[ -f data/adb/susfs_umount_for_zygote_system_process ] && echo true || echo false`);
     importButton.addEventListener('click', async () => {
         fileSelector.getFilePath('tar.gz').then(async (filePath) => {
             if (!filePath) {
                 toast('No file selected.');
                 return;
             }
-            const ifLegitSusfsConfig = await run(`tar -tzf "${filePath}"`);
-            console.log(ifLegitSusfsConfig);
-            if (!ifLegitSusfsConfig.includes('config.sh')) {
+            const LegitSusfsConfig = await run(`tar -tzf "${filePath}"`);
+            console.log(LegitSusfsConfig);
+            if (!LegitSusfsConfig.includes('config.sh')) {
                 toast('Selected file is not a valid SUSFS config backup.');
                 return;
             }
@@ -41,25 +37,25 @@ export async function susfs_import_config(susfs_versions, susfs_features) {
                     await run(`tar -xzf "${filePath}" -C ${config}`);
                     // Copy the files to a original directory
                     if (versionAtLeast(susfs_versions, 1, 5, 3) && !versionAtLeast(susfs_versions, 2, 0, 0)) {
-                        if (is_no_auto_mount === "true") {
+                        if (LegitSusfsConfig.includes('susfs_no_auto_add_sus_ksu_default_mount')) {
                             await run(`mv ${config}/susfs_no_auto_add_sus_ksu_default_mount /data/adb/ `);
                         }
                         else {
                             await run(`rm -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount`);
                         }
-                        if (is_no_auto_bind === "true") {
+                        if (LegitSusfsConfig.includes('susfs_no_auto_add_sus_bind_mount')) {
                             await run(`mv ${config}/susfs_no_auto_add_sus_bind_mount /data/adb/`);
                         }
                         else {
                             await run(`rm -f /data/adb/susfs_no_auto_add_sus_bind_mount`);
                         }
-                        if (is_no_auto_umount_bind === "true") {
+                        if (LegitSusfsConfig.includes('susfs_no_auto_add_try_umount_for_bind_mount')) {
                             await run(`mv ${config}/susfs_no_auto_add_try_umount_for_bind_mount /data/adb/`);
                         }
                         else {
                             await run(`rm -f /data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
                         }
-                        if (is_try_umount_zygote === "true") {
+                        if (LegitSusfsConfig.includes('susfs_umount_for_zygote_system_process')) {
                             await run(`mv ${config}/susfs_umount_for_zygote_system_process /data/adb/`);
                         }
                         else {
