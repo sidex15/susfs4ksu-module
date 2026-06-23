@@ -34,7 +34,12 @@ export async function susfs_import_config(susfs_versions, susfs_features) {
             });
             import_modal_confirm.addEventListener('click', async () => {
                 try {
-                    await run(`tar -xzf "${filePath}" -C ${config}`);
+                    if (versionAtLeast(susfs_versions, 1, 5, 3) && !versionAtLeast(susfs_versions, 2, 0, 0)) {
+                        await run(`tar -xzf "${filePath}" -C ${config}`);
+                    }
+                    else {
+                        await run(`tar --exclude="./susfs_no_auto_add_sus_ksu_default_mount" --exclude="./susfs_no_auto_add_sus_bind_mount" --exclude="./susfs_no_auto_add_try_umount_for_bind_mount" --exclude="./susfs_umount_for_zygote_system_process" -xzf "${filePath}" -C ${config}`);
+                    }
                     // Copy the files to a original directory
                     if (versionAtLeast(susfs_versions, 1, 5, 3) && !versionAtLeast(susfs_versions, 2, 0, 0)) {
                         if (LegitSusfsConfig.includes('susfs_no_auto_add_sus_ksu_default_mount')) {
