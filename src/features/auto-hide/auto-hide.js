@@ -31,8 +31,14 @@ export async function auto_hide_settings(settings, susfs_features, susfs_version
 	if(is_no_auto_mount=="true"){
 		auto_mount.checked=false;
 	}
+	else{
+		auto_mount.checked="checked";
+	}
 	if(is_no_auto_bind=="true"){
 		auto_bind.checked=false;
+	}
+	else{
+		auto_bind.checked="checked";
 	}
 	if(is_no_auto_umount_bind=="true"){
 		auto_umount_bind.checked=false;
@@ -65,6 +71,9 @@ export async function auto_hide_settings(settings, susfs_features, susfs_version
 	}
 	if(is_try_umount_zygote=="false"){
 		try_umount_zygote.checked=false;
+	}
+	else{
+		try_umount_zygote.checked="checked";
 	}
 	if (versionAtLeast(susfs_versions, 1, 5, 7)) {
 		hide_sus_mnts_for_all_or_non_su_procs_toggle.classList.remove("hidden");
