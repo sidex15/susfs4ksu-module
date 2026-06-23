@@ -62,12 +62,6 @@ export async function susfs_import_config(susfs_versions, susfs_features) {
                             await run(`rm -f /data/adb/susfs_umount_for_zygote_system_process`);
                         }
                     }
-                    else {
-                        await run(`[ -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount ] && rm -f /data/adb/susfs_no_auto_add_sus_ksu_default_mount`);
-                        await run(`[ -f /data/adb/susfs_no_auto_add_sus_bind_mount ] && rm -f /data/adb/susfs_no_auto_add_sus_bind_mount`);
-                        await run(`[ -f /data/adb/susfs_no_auto_add_try_umount_for_bind_mount ] && rm -f /data/adb/susfs_no_auto_add_try_umount_for_bind_mount`);
-                        await run(`[ -f /data/adb/susfs_umount_for_zygote_system_process ] && rm -f /data/adb/susfs_umount_for_zygote_system_process`);
-                    }
                     toast('Config imported successfully. Please reboot to apply changes.');
                     const settings = catToObject(await run(`cat ${config}/config.sh`));
                     set_uname(settings);
