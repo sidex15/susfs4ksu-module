@@ -19,8 +19,8 @@
   <string id="reset_config_label">Zresetuj całą konfigurację</string>
 
   <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">Nieobsługiwane jądro!</string>
-  <string id="susfs_error_desc">Dostęp do WebUI zabroniony! Upewnij się, że używasz jądra z łatkami SUSFS!</string>
+  <string id="susfs_error_label">NUH UH! Nieobsługiwany kernel!</string>
+  <string id="susfs_error_desc">Dostęp do WebUI zabroniony! Upewnij się, że używasz kernela z patchami SUSFS!</string>
 
   <!-- SUSFS Update Dialog -->
   <string id="susfs_update_label">Aktualizacja przestrzeni użytkownika SUSFS!</string>
@@ -31,8 +31,8 @@
   <string id="update_btn_label">Aktualizuj</string>
 
   <!-- Home Page -->
-  <string id="kernel_version_label">Wersja jądra</string>
-  <string id="sus_path_label">Ścieżka SUS</string>
+  <string id="kernel_version_label">Wersja kernela</string>
+  <string id="sus_path_label">ŚCIEŻKA SUS</string>
   <string id="sus_map_label">Mapy SUS</string>
   <string id="sus_mount_label">Montowanie SUS</string>
   <string id="try_umount_label">Spróbuj odmontować</string>
