@@ -8,53 +8,53 @@
   <string id="about_label">درباره</string>
   <string id="main_menu_label">فهرست اصلی</string>
   <string id="load_label">بارگذاری</string>
-  <string id="edit_label">Edit With</string>
-  <string id="enabled_label">Enabled</string>
-  <string id="disabled_label">Disabled</string>
-  <string id="deprecated_label">Deprecated</string>
-  <string id="unknown_label">Unknown</string>
-  <string id="help_label">Help</string>
-  <string id="send_logs_label">Send Logs</string>
-  <string id="export_config_label">Export Config</string>
-  <string id="reset_config_label">Reset All Config</string>
+  <string id="edit_label">ویرایش با</string>
+  <string id="enabled_label">فعال شده</string>
+  <string id="disabled_label">غیر فعال شده</string>
+  <string id="deprecated_label">منسوخ شده</string>
+  <string id="unknown_label">نامشخص</string>
+  <string id="help_label">کمک</string>
+  <string id="send_logs_label">ارسال گزارش‌ها</string>
+  <string id="export_config_label">خروجی‌گیری پیکربندی</string>
+  <string id="reset_config_label">بازنشانی تمامی پیکربندی ها</string>
 
   <!-- SUSFS Not supported error-->
-  <string id="susfs_error_label">NUH UH! Unsupported Kernel!</string>
-  <string id="susfs_error_desc">WebUI Access Denied! Make sure you're on a SuSFS patched kernel!</string>
+  <string id="susfs_error_label">نوچ‌نوچ! کرنل پشتیبانی نمی شود!</string>
+  <string id="susfs_error_desc">دسترسی به رباط وب رد شد! مطمئن شوید از یک کرنل پچ شده با SuSFS استفاده می کنید!</string>
 
   <!-- SUSFS Update Dialog -->
-  <string id="susfs_update_label">SUSFS Userspace Update!</string>
-  <string id="susfs_update_desc">There's an update to your SUSFS Userspace Binaries!</string>
-  <string id="susfs_update2_desc">Please update to the latest version to ensure compatibility with the Module and the WebUI.</string>
-  <string id="susfs_updating_label">Updating...</string>
-  <string id="skip_btn_label">Skip</string>
-  <string id="update_btn_label">Update</string>
+  <string id="susfs_update_label">به‌روزرسانی فضای کاربری SUSFS!</string>
+  <string id="susfs_update_desc">یک به‌روزرسانی برای فایل‌های باینری فضای کاربری SUSFS شما منتشر شده است!</string>
+  <string id="susfs_update2_desc">لطفاً برای اطمینان از سازگاری با ماژول و رابط کاربری وب آن را به آخرین نسخه به‌روزرسانی کنید.</string>
+  <string id="susfs_updating_label">درحال به‌روزرسانی...</string>
+  <string id="skip_btn_label">رد شدن</string>
+  <string id="update_btn_label">به‌روزرسانی</string>
 
   <!-- Home Page -->
   <string id="kernel_version_label">نسخه هسته</string>
   <string id="sus_path_label">مسیر SUS</string>
-  <string id="sus_map_label">SUS MAPS</string>
+  <string id="sus_map_label">نقشه SUS</string>
   <string id="sus_mount_label">پیوست SUS</string>
   <string id="try_umount_label">کوشش برای جداکردن</string>
   <string id="susfs_settings_label">ساماندهی ویژه SUSFS</string>
-  <string id="susfs_kernel_status_label">SUSFS Kernel Status</string>
+  <string id="susfs_kernel_status_label">وضعیت کرنل SUSFS</string>
 
   <!-- Status Page -->
-  <string id="kernel_features_label">Kernel Features Status</string>
-  <string id="sus_path_feature_label">SUS Path Support</string>
-  <string id="sus_map_feature_label">SUS Maps Support</string>
-  <string id="sus_mount_feature_label">SUS Mount Support</string>
-  <string id="sus_kstat_feature_label">SUS Kstat Support</string>
-  <string id="try_umount_feature_label">Try Umount Support</string>
-  <string id="spoof_uname_feature_label">Spoof Uname Support</string>
-  <string id="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</string>
+  <string id="kernel_features_label">وضعیت ویژگی های کرنل</string>
+  <string id="sus_path_feature_label">پشتیبانی از مسیر SUS</string>
+  <string id="sus_map_feature_label">پشتیبانی از نقشه SUS</string>
+  <string id="sus_mount_feature_label">پشتیبانی از پیوست SUS</string>
+  <string id="sus_kstat_feature_label">پشتیبانی از SUS Kstat</string>
+  <string id="try_umount_feature_label">پشتیبانی از جداسازی</string>
+  <string id="spoof_uname_feature_label">پشتیبانی از جعل سازی Uname</string>
+  <string id="spoof_cmdline_feature_label">جعل سازی Cmdline/Bootconfig</string>
   <string id="open_redirect_feature_label">Open Redirect Support</string>
-  <string id="enable_log_feature_label">Logging Support</string>
+  <string id="enable_log_feature_label">پشتیبانی از گزارش گیری</string>
   <string id="auto_default_mount_feature_label">Auto Default Mount</string>
   <string id="auto_bind_mount_feature_label">Auto Bind Mount</string>
   <string id="auto_try_umount_bind_feature_label">Auto Try Umount Bind</string>
-  <string id="hide_symbols_feature_label">Hide KSU SUSFS Symbols</string>
-  <string id="magic_mount_feature_label">Magic Mount Support</string>
+  <string id="hide_symbols_feature_label">پنهان سازی نماد های KSU SUSFS</string>
+  <string id="magic_mount_feature_label">پشتیبانی از Magic Mount</string>
   <string id="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</string>
 
   <!-- Settings -->
@@ -74,19 +74,19 @@
   <string id="umount_for_zygote_iso_service_label">try umount for zygote isolation service</string>
   <string id="kernel_uname_label">نام هسته</string>
   <string id="spoof_kernel_version_label">ساختگی کردن نسخه هسته</string>
-  <string id="spoofed_kernel_version_label">Spoofed Kernel Version</string>
+  <string id="spoofed_kernel_version_label">نسخه کرنل جعل شده</string>
   <string id="spoof_kernel_build_label">ساختگی کردن ساخت هسته</string>
-  <string id="spoofed_kernel_build_label">Spoofed Kernel Build</string>
+  <string id="spoofed_kernel_build_label">شماره ساخت کرنل جعل شده</string>
   <string id="spoof_on_boot_label">ساختگی کردن هنگام راه‌اندازی</string>
   <string id="post_fs_data_label">اجرا در پسا-داده‌های سامانه پرونده (ساختگی بهتر)</string>
   <string id="uname_warning_label2">فراچیدن این گزینه ممکن است ناپایداری یا چرخه راه‌اندازی پدید آورد اگر ساختگی نادرست باشد. آیا اطمینان دارید که اجرای پسا-داده‌های سامانه پرونده را فراچیده کنید؟</string>
-  <string id="reset_warning_label">This will reset all configurations to their default values. Are you sure you want to proceed?</string>
+  <string id="reset_warning_label">این کار تمام تنظیمات را به مقادیر پیش‌فرضشان بازنشانی می‌کند. آیا مطمئن هستید که می‌خواهید ادامه دهید؟</string>
 
   <!-- Custom -->
   <string id="custom_settings_label">ساماندهی ویژه</string>
-  <string id="hide_paths_label">Hide Custom Rom Settings</string>
+  <string id="hide_paths_label">پنهان سازی تنظیمات رام سفارشی</string>
   <string id="hide_custom_rom_label">نهان‌سازی رام ویژه</string>
-  <string id="hide_level_label">Hide Level</string>
+  <string id="hide_level_label">سطح پنهان سازی</string>
   <string id="hide_custom_rom_desc1">Exclude .apk, .jar, .odex, .vdex, .so, .rc, and /vendor/bin/hw/ files</string>
   <string id="hide_custom_rom_desc2">Exclude .apk, .jar, .odex, .vdex, .so, and /vendor/bin/hw/ files</string>
   <string id="hide_custom_rom_desc3">Exclude .apk, .jar, .odex, .vdex, and /vendor/bin/hw/ files</string>
