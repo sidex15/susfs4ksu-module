@@ -242,15 +242,20 @@ fi
 	
 	# Spoof cmdline and bootconfig
 	if grep -q "androidboot.verifiedbootstate" /proc/cmdline; then
-        sed 's|androidboot.verifiedbootstate=orange|androidboot.verifiedbootstate=green|g' /proc/cmdline > $mntfolder/cmdline
-    else
-		sed 's|androidboot.verifiedbootstate=orange|androidboot.verifiedbootstate=green|g' /proc/bootconfig > $mntfolder/bootconfig    
+		sed 's|androidboot\.verifiedbootstate=orange|androidboot.verifiedbootstate=green|g' /proc/cmdline > $mntfolder/cmdline
+	else
+		# GKI bootconfig uses `key = "value"`, unlike the compact cmdline format.
+		sed 's|androidboot\.verifiedbootstate[[:space:]]*=[[:space:]]*"orange"|androidboot.verifiedbootstate = "green"|g' /proc/bootconfig > $mntfolder/bootconfig
 	fi	
 		
 	if grep -q "androidboot.hwname\|androidboot.product.hardware.sku" /proc/cmdline; then
-		sed -i "s/androidboot.hwname=[^ ]*/androidboot.hwname=$(getprop ro.product.name)/; s/androidboot.product.hardware.sku=[^ ]*/androidboot.product.hardware.sku=$(getprop ro.product.name)/" $mntfolder/cmdline
+		sed -i "s/androidboot\.hwname=[^ ]*/androidboot.hwname=$(getprop ro.product.name)/; s/androidboot\.product\.hardware\.sku=[^ ]*/androidboot.product.hardware.sku=$(getprop ro.product.name)/" $mntfolder/cmdline
 	else
-		sed -i "s/androidboot.hwname=[^ ]*/androidboot.hwname=$(getprop ro.product.name)/; s/androidboot.product.hardware.sku=[^ ]*/androidboot.product.hardware.sku=$(getprop ro.product.name)/" $mntfolder/bootconfig
+		product_name=$(getprop ro.product.name)
+		sed -i \
+			-e "s|androidboot\.hwname[[:space:]]*=[[:space:]]*\"[^\"]*\"|androidboot.hwname = \"$product_name\"|g" \
+			-e "s|androidboot\.product\.hardware\.sku[[:space:]]*=[[:space:]]*\"[^\"]*\"|androidboot.product.hardware.sku = \"$product_name\"|g" \
+			$mntfolder/bootconfig
 	fi
 	
 	#check for susfs version and use the appropriate method
