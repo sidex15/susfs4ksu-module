@@ -60,7 +60,7 @@
   <!-- Settings -->
   <string id="susfs_log_label">Журнали SUSFS</string>
   <string id="sus_su_1_label">SUS SU у режимі 1</string>
-  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_label">Спробувати демонтувати системні процеси zygote</string>
   <string id="sus_su_boot_label">SUS SU під час завантаження</string>
   <string id="auto_hide_label">Налаштування автоприховування</string>
   <string id="default_mounts_label">Монтування автоприховування за замовчуванням</string>
@@ -116,16 +116,16 @@
   <!-- New strings -->
   <string id="set_stock_kernel_build_date_label">Встановити дату збірки стокового ядра</string>
   <string id="emulate_vold_app_data_sus_path_loop_label">Використовувати sus path loop</string>
-  <string id="custom_sus_feature_select_label">Custom SUS Feature</string>
-  <string id="custom_sus_feature_editor_label">Custom Feature</string>
-  <string id="sus_path_loop_label">SUS PATH LOOP</string>
-  <string id="sus_open_redirect_label">OPEN REDIRECT</string>
-  <string id="edit_kstat_entry_label">Edit SUS_KSTAT Entry</string>
-  <string id="add_kstat_entry_label">Add SUS_KSTAT Entry</string>
-  <string id="kstat_path_label">Path</string>
-  <string id="custom_sus_kstat_label">Custom SUS_KSTAT</string>
-  <string id="del_path_label">Delete path:</string>
-  <string id="import_config_label">Import Config</string>
-  <string id="import_warning_label">Importing a config will overwrite your current settings. Are you sure you want to proceed?</string>
-  <string id="import_backup_label">Backup Current Config</string>
+  <string id="custom_sus_feature_select_label">Користувацька функція SUS</string>
+  <string id="custom_sus_feature_editor_label">Користувацька Функція</string>
+  <string id="sus_path_loop_label">SUS циклічний шлях</string>
+  <string id="sus_open_redirect_label">Відкрити перенаправлення</string>
+  <string id="edit_kstat_entry_label">Редагувати запис SUS_KSTAT</string>
+  <string id="add_kstat_entry_label">Додати запис SUS_KSTAT</string>
+  <string id="kstat_path_label">Шлях</string>
+  <string id="custom_sus_kstat_label">Користувацький SUS_KSTAT</string>
+  <string id="del_path_label">Видалити шлях:</string>
+  <string id="import_config_label">Імпортувати конфігурацію</string>
+  <string id="import_warning_label">Імпорт конфігурації, це перезапише ваші поточні налаштування. Ви впевнені, що хочете продовжити?</string>
+  <string id="import_backup_label">Резервне копіювання поточної конфігурації</string>
 </language>

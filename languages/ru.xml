@@ -125,7 +125,7 @@
   <string id="kstat_path_label">Путь</string>
   <string id="custom_sus_kstat_label">Пользовательский SUS_KSTAT</string>
   <string id="del_path_label">Удалить путь:</string>
-  <string id="import_config_label">Import Config</string>
-  <string id="import_warning_label">Importing a config will overwrite your current settings. Are you sure you want to proceed?</string>
-  <string id="import_backup_label">Backup Current Config</string>
+  <string id="import_config_label">Импортировать конфигурацию</string>
+  <string id="import_warning_label">Импортирование конфигурации перезапишет ваши текущие настройки. Вы уверены, что хотите продолжить?</string>
+  <string id="import_backup_label">Сделать бэкап текущей конфигурации</string>
 </language>
