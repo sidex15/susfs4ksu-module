@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+  <!-- General -->
+  <string id="app_title">WebUI 메뉴</string>
+  <string id="warning_label">경고!</string>
+  <string id="cancel_label">취소</string>
+  <string id="confirm_label">확인</string>
+  <string id="about_label">정보</string>
+  <string id="main_menu_label">메인 메뉴</string>
+  <string id="load_label">불러오기</string>
+  <string id="edit_label">다음으로 편집</string>
+  <string id="enabled_label">활성화됨</string>
+  <string id="disabled_label">비활성화됨</string>
+  <string id="deprecated_label">지원 종료됨</string>
+  <string id="unknown_label">알 수 없음</string>
+  <string id="help_label">도움말</string>
+  <string id="send_logs_label">로그 전송</string>
+  <string id="export_config_label">설정 내보내기</string>
+  <string id="reset_config_label">모든 설정 초기화</string>
+
+  <!-- SUSFS Not supported error-->
+  <string id="susfs_error_label">아니 이런! 지원되지 않는 커널입니다!</string>
+  <string id="susfs_error_desc">WebUI 접근이 거부되었습니다! SuSFS 패치가 적용된 커널인지 확인하세요!</string>
+
+  <!-- SUSFS Update Dialog -->
+  <string id="susfs_update_label">SUSFS 유저스페이스 업데이트!</string>
+  <string id="susfs_update_desc">SUSFS 유저스페이스 바이너리 업데이트가 있습니다!</string>
+  <string id="susfs_update2_desc">모듈 및 WebUI와의 호환성을 위해 최신 버전으로 업데이트해 주세요.</string>
+  <string id="susfs_updating_label">업데이트 중...</string>
+  <string id="skip_btn_label">건너뛰기</string>
+  <string id="update_btn_label">업데이트</string>
+
+  <!-- Home Page -->
+  <string id="kernel_version_label">커널 버전</string>
+  <string id="sus_path_label">SUS PATH</string>
+  <string id="sus_map_label">SUS MAPS</string>
+  <string id="sus_mount_label">SUS MOUNT</string>
+  <string id="try_umount_label">TRY UMOUNT</string>
+  <string id="susfs_settings_label">사용자 지정 SUSFS 설정</string>
+  <string id="susfs_kernel_status_label">SUSFS 커널 상태</string>
+
+  <!-- Status Page -->
+  <string id="kernel_features_label">커널 기능 상태</string>
+  <string id="sus_path_feature_label">SUS Path 지원</string>
+  <string id="sus_map_feature_label">SUS Maps 지원</string>
+  <string id="sus_mount_feature_label">SUS Mount 지원</string>
+  <string id="sus_kstat_feature_label">SUS Kstat 지원</string>
+  <string id="try_umount_feature_label">Try Umount 지원</string>
+  <string id="spoof_uname_feature_label">Uname 스푸핑 지원</string>
+  <string id="spoof_cmdline_feature_label">Cmdline/Bootconfig 스푸핑</string>
+  <string id="open_redirect_feature_label">Open Redirect 지원</string>
+  <string id="enable_log_feature_label">로깅 지원</string>
+  <string id="auto_default_mount_feature_label">자동 기본 마운트</string>
+  <string id="auto_bind_mount_feature_label">자동 바인드 마운트</string>
+  <string id="auto_try_umount_bind_feature_label">자동 바인드 마운트 언마운트 시도</string>
+  <string id="hide_symbols_feature_label">KSU SUSFS 심볼 숨기기</string>
+  <string id="magic_mount_feature_label">Magic Mount 지원</string>
+  <string id="overlayfs_auto_kstat_feature_label">OverlayFS 자동 Kstat 지원</string>
+
+  <!-- Settings -->
+  <string id="susfs_log_label">SUSFS 로그</string>
+  <string id="sus_su_1_label">SUS SU가 모드 1로 설정됨</string>
+  <string id="sus_su_label">SUS SU</string>
+  <string id="sus_su_boot_label">부팅 시 SUS SU</string>
+  <string id="auto_hide_label">자동 숨김 설정</string>
+  <string id="default_mounts_label">기본 마운트 자동 숨김</string>
+  <string id="bind_mounts_label">바인드 마운트 자동 숨김</string>
+  <string id="try_umount_bind_label">바인드 마운트 자동 언마운트 시도</string>
+  <string id="auto_try_umount_label">자동 언마운트 시도 (유저스페이스)</string>
+  <string id="skip_legit_mounts_label">정상 마운트 건너뛰기</string>
+  <string id="hide_sus_mnts_for_all_or_non_su_procs_label">모든/비-su 프로세스에 대해 sus_mounts 숨기기</string>
+  <string id="turn_off_after_boot_completed_label">부팅 완료 후 끄기</string>
+  <string id="zygote_try_umount_label">zygote 시스템 프로세스에 대해 언마운트 시도</string>
+  <string id="umount_for_zygote_iso_service_label">zygote 격리 서비스에 대해 언마운트 시도</string>
+  <string id="kernel_uname_label">커널 Uname</string>
+  <string id="spoof_kernel_version_label">커널 버전 스푸핑</string>
+  <string id="spoofed_kernel_version_label">스푸핑된 커널 버전</string>
+  <string id="spoof_kernel_build_label">커널 빌드 스푸핑</string>
+  <string id="spoofed_kernel_build_label">스푸핑된 커널 빌드</string>
+  <string id="spoof_on_boot_label">부팅 시 스푸핑</string>
+  <string id="post_fs_data_label">post-fs-data에서 실행 (더 나은 스푸핑)</string>
+  <string id="uname_warning_label2">잘못 스푸핑할 경우 부트루프나 불안정한 동작이 발생할 수 있습니다. post-fs-data 실행을 활성화하시겠습니까?</string>
+  <string id="reset_warning_label">모든 설정을 기본값으로 초기화합니다. 계속 진행하시겠습니까?</string>
+
+  <!-- Custom -->
+  <string id="custom_settings_label">사용자 지정 설정</string>
+  <string id="hide_paths_label">커스텀 롬 설정 숨기기</string>
+  <string id="hide_custom_rom_label">커스텀 롬 경로 숨기기</string>
+  <string id="hide_level_label">숨김 레벨</string>
+  <string id="hide_custom_rom_desc1">.apk, .jar, .odex, .vdex, .so, .rc, /vendor/bin/hw/ 파일 제외</string>
+  <string id="hide_custom_rom_desc2">.apk, .jar, .odex, .vdex, .so, /vendor/bin/hw/ 파일 제외</string>
+  <string id="hide_custom_rom_desc3">.apk, .jar, .odex, .vdex, /vendor/bin/hw/ 파일 제외</string>
+  <string id="hide_custom_rom_desc4">.apk, .jar, /vendor/bin/hw/ 파일 제외</string>
+  <string id="hide_custom_rom_desc5">모든 커스텀 롬 경로 숨기기 ⚠️위험하며 문제가 발생할 수 있습니다!</string>
+  <string id="hide_vendor_sepolicy_label">벤더 SEPolicy 숨기기</string>
+  <string id="hide_compat_matrix_label">Compat Matrix 숨기기</string>
+  <string id="fake_service_list_label">서비스 목록 스푸핑</string>
+  <string id="hide_gapps_label">GApps 숨기기</string>
+  <string id="hide_revanced_label">리밴스드 숨기기 (YT/YTM)</string>
+  <string id="spoof_cmdline_label">Cmdline 스푸핑</string>
+  <string id="hide_ksu_loop_label">KSU 루프 숨기기</string>
+  <string id="force_hide_dex2oat_label">Dex2oat 마운트 강제 숨김</string>
+  <string id="avc_log_spoofing_label">AVC 로그 스푸핑</string>
+  <string id="emulate_vold_app_data_label">Vold 앱 데이터 격리 에뮬레이션</string>
+  <string id="custom_sus_path_label">사용자 지정 SUS Path</string>
+  <string id="custom_sus_path_loop_label">사용자 지정 SUS Path 루프</string>
+  <string id="custom_sus_maps_label">사용자 지정 SUS Maps</string>
+  <string id="custom_sus_mount_label">사용자 지정 SUS Mount</string>
+  <string id="custom_try_umount_label">사용자 지정 Try Umount</string>
+  <string id="custom_sus_open_redirect_label">사용자 지정 Open Redirect</string>
+
+  <!-- Credits -->
+  <string id="contrib_label">기여자:</string>
+  <string id="translators_label">번역가:</string>
+
+  <!-- New strings -->
+  <string id="set_stock_kernel_build_date_label">스톡 커널 빌드 날짜 설정</string>
+  <string id="emulate_vold_app_data_sus_path_loop_label">SUS Path 루프 사용</string>
+  <string id="custom_sus_feature_select_label">사용자 지정 SUS 기능</string>
+  <string id="custom_sus_feature_editor_label">사용자 지정 기능</string>
+  <string id="sus_path_loop_label">SUS PATH LOOP</string>
+  <string id="sus_open_redirect_label">OPEN REDIRECT</string>
+  <string id="edit_kstat_entry_label">SUS_KSTAT 항목 편집</string>
+  <string id="add_kstat_entry_label">SUS_KSTAT 항목 추가</string>
+  <string id="kstat_path_label">경로</string>
+  <string id="custom_sus_kstat_label">사용자 지정 SUS_KSTAT</string>
+  <string id="del_path_label">경로 삭제:</string>
+  <string id="import_config_label">설정 가져오기</string>
+  <string id="import_warning_label">설정을 가져오면 현재 설정이 덮어씌워집니다. 계속 진행하시겠습니까?</string>
+  <string id="import_backup_label">현재 설정 백업</string>
+</language>
