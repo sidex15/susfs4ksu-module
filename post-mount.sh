@@ -1,6 +1,6 @@
 #!/bin/sh
 MODDIR=/data/adb/modules/susfs4ksu
-SUSFS_BIN=/data/adb/ksu/bin/ksu_susfs
+SUSFS_BIN=${MODDIR}/ksu_susfs_modern
 . ${MODDIR}/utils.sh
 PERSISTENT_DIR=/data/adb/susfs4ksu
 tmpfolder=/data/adb/ksu/susfs4ksu
@@ -13,23 +13,6 @@ logfile1="$tmpfolder/logs/susfs1.log"
 
 post_fs_data=0
 [ -f $tmpfolder/logs/boot_stage_time.sh ] && . $tmpfolder/logs/boot_stage_time.sh
-
-# to add mounts
-# echo "/system" >> /data/adb/susfs4ksu/sus_mount.txt
-# this'll make it easier for the webui to do stuff
-# Check and process sus_mount paths
-if grep -v "#" "$PERSISTENT_DIR/sus_mount.txt" > /dev/null; then
-    grep -v "#" "$PERSISTENT_DIR/sus_mount.txt" | while read -r i; do
-        [ -z "$i" ] || { ${SUSFS_BIN} add_sus_mount "$i" && echo "[sus_mount]: susfs4ksu/post-mount $i" >> "$logfile1"; }
-    done
-fi
-
-# Check and process try_umount paths
-if grep -v "#" "$PERSISTENT_DIR/try_umount.txt" > /dev/null; then
-    grep -v "#" "$PERSISTENT_DIR/try_umount.txt" | while read -r i; do
-        [ -z "$i" ] || { ${SUSFS_BIN} add_try_umount "$i" 1 && echo "[try_umount]: susfs4ksu/post-mount $i" >> "$logfile1"; }
-    done
-fi
 
 # SUSFS Logging
 dmesg_snapshot=$(dmesg)
