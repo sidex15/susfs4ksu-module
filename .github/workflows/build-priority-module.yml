@@ -34,7 +34,7 @@ jobs:
           cd susfs-source/ksu_susfs
           "$ANDROID_HOME/ndk/27.2.12479018/ndk-build" NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=jni/Android.mk NDK_APPLICATION_MK=jni/Application.mk APP_ABI=arm64-v8a APP_PLATFORM=android-26
           cp libs/arm64-v8a/ksu_susfs ../../module/ksu_susfs_modern
-      - name: Assemble and identify UID filter integration
+      - name: Assemble UID filter integration
         shell: bash
         run: |
           set -euo pipefail
@@ -57,26 +57,17 @@ jobs:
               assert '</head>' in html
               if 'src="/priority-uid-filter.js"' not in html:
                   html = html.replace('</head>', '<script defer src="/priority-uid-filter.js"></script>\n</head>', 1)
-              marker = '<p style="color:white;background:#171717;padding:8px;font:12px sans-serif;position:relative;z-index:40">UID Filter UI 2 - build ' + build + '</p>'
-              html, count = re.subn(r'(<section\b[^>]*>)', lambda m: m[0] + marker, html, count=1)
-              assert count == 1, name + ': missing section'
               page.write_text(html)
-          ui = root / 'webroot/priority-uid-filter.js'
-          text = ui.read_text()
-          assert 'row.hidden = true;' in text
-          text = text.replace('row.hidden = true;', 'row.hidden = true; row.style.setProperty("display", "none", "important");')
-          text = text.replace('row.hidden = false;', 'row.hidden = false; row.style.removeProperty("display");')
-          ui.write_text(text)
           installer = root / 'customize.sh'
           text = installer.read_text()
           anchor = '# set permissions'
           assert anchor in text
           installer.write_text(text.replace(anchor, 'chmod 0755 "${MODPATH}/ksu_susfs_modern"\n' + anchor, 1))
           prop = root / 'module.prop'
-          text, count = re.subn(r'^version=(.*)$', lambda m: 'version=' + m[1] + '-UID2-' + build, prop.read_text(), count=1, flags=re.M)
+          text, count = re.subn(r'^version=(.*)$', lambda m: 'version=' + m[1] + '-UID3-' + build, prop.read_text(), count=1, flags=re.M)
           assert count == 1
           prop.write_text(text)
-          (root / 'UID-FILTER-BUILD.txt').write_text('UI integration: 2\nModule revision: ' + os.environ['GITHUB_SHA'] + '\n')
+          (root / 'UID-FILTER-BUILD.txt').write_text('UI integration: 3\nModule revision: ' + os.environ['GITHUB_SHA'] + '\n')
           PY
           sh -n module/priority-uid-filter.sh
           sh -n module/boot-completed.sh
@@ -99,7 +90,11 @@ jobs:
               for name in ('index.html', 'custom.html', 'status.html'):
                   html = archive.read('webroot/' + name).decode()
                   assert 'src="/priority-uid-filter.js"' in html, name
-                  assert 'UID Filter UI 2 - build ' in html, name
+                  assert 'UID Filter UI 2 - build ' not in html, name
+              ui = archive.read('webroot/priority-uid-filter.js').decode()
+              assert 'UID Priority Filter' in ui
+              assert 'uid-priority-feature' in ui
+              assert 'priority-uid-card' not in ui
               assert b'priority_uid_filter=' in archive.read('config.sh')
               assert b'priority-uid-filter.sh boot' in archive.read('boot-completed.sh')
               assert b'set_priority_uid_filter' in archive.read('ksu_susfs_modern')

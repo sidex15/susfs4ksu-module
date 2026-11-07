@@ -2,6 +2,7 @@
   if (window.susfsPriorityUIStarted) return;
   window.susfsPriorityUIStarted = true;
   const script = '/data/adb/modules/susfs4ksu/priority-uid-filter.sh';
+  const bound = new WeakSet();
   let serial = 0;
   function exec(action) {
     return new Promise((resolve, reject) => {
@@ -10,7 +11,7 @@
         return;
       }
       const name = 'susfsPriorityCallback' + (++serial);
-      const timer = setTimeout(() => { delete window[name]; reject(new Error('Operation timed out; refresh status before retrying')); }, 60000);
+      const timer = setTimeout(() => { delete window[name]; reject(new Error('Operation timed out; reopen this page to refresh status')); }, 60000);
       window[name] = (code, stdout, stderr) => {
         clearTimeout(timer);
         delete window[name];
@@ -20,62 +21,94 @@
       catch (error) { clearTimeout(timer); delete window[name]; reject(error); }
     });
   }
-  function addCard(section) {
-    if (section.querySelector('.priority-uid-card')) return;
-    const card = document.createElement('div');
-    card.className = 'priority-uid-card';
-    card.style.cssText = 'width:100%;max-width:600px;box-sizing:border-box;margin:16px auto;padding:16px;border:2px solid white;border-radius:16px;color:white;background:#171717;font:14px sans-serif;text-transform:none;position:relative;z-index:40';
-    card.innerHTML = '<h3 style="margin:0 0 12px">Priority UID Filter</h3><label style="display:flex;align-items:center;justify-content:space-between;gap:16px"><span>Hide third-party app UIDs</span><input type="checkbox" class="toggle toggle-primary priority-toggle" aria-label="Enable Priority UID Filter" disabled></label><p>Opt-in. Enabling applies now and after boot. Disabling requires a reboot to remove a filter already applied.</p><p class="priority-summary">Checking support and application status...</p><button type="button" class="btn btn-sm priority-refresh">Refresh status</button><pre class="priority-status" style="white-space:pre-wrap;overflow-wrap:anywhere;font:12px monospace"></pre>';
-    section.prepend(card);
-    const toggle = card.querySelector('.priority-toggle');
-    const refresh = card.querySelector('.priority-refresh');
-    const output = card.querySelector('.priority-status');
-    const summary = card.querySelector('.priority-summary');
-    let busy = false;
-    async function update() {
-      toggle.disabled = true;
-      const result = await exec('status');
-      output.textContent = result.text;
-      const configured = result.text.includes('Configured: enabled');
-      const supported = result.text.includes('Kernel support: available') && result.text.includes('Companion command: available');
-      const applied = result.text.includes('Last application this boot: applied');
-      toggle.checked = configured;
-      toggle.disabled = result.code !== 0 || (!configured && !supported);
-      summary.textContent = 'Kernel/helper: ' + (supported ? 'available' : 'unavailable') + ' | Setting: ' + (configured ? 'ON' : 'OFF') + ' | Last application: ' + (applied ? 'accepted this boot' : 'not confirmed this boot');
-      summary.style.color = configured && applied ? '#74e6a8' : '#ffd479';
+  function notify(text) {
+    if (window.ksu && typeof window.ksu.toast === 'function') window.ksu.toast(text);
+    else window.alert(text);
+  }
+  async function status() {
+    const result = await exec('status');
+    if (result.code !== 0) throw new Error(result.text || 'Cannot read UID filter status');
+    return {
+      configured: /^Configured: enabled$/m.test(result.text),
+      kernel: /^Kernel support: available$/m.test(result.text),
+      helper: /^Companion command: available$/m.test(result.text),
+      details: result.text
+    };
+  }
+  function custom(view) {
+    const group = view.querySelector('section .stats');
+    if (!group) return;
+    let row = group.querySelector('.uid-priority-control');
+    if (!row) {
+      row = document.createElement('div');
+      row.className = 'form-control uid-priority-control';
+      row.innerHTML = '<label class="label cursor-pointer"><span class="text-white text-base">UID Priority Filter</span><input type="checkbox" class="toggle toggle-md toggle-primary" aria-label="UID Priority Filter" disabled></label>';
+      group.appendChild(row);
     }
-    async function operate(action) {
-      if (busy) return;
-      busy = true;
+    const toggle = row.querySelector('input');
+    if (bound.has(toggle)) return;
+    bound.add(toggle);
+    async function refresh() {
+      const state = await status();
+      toggle.checked = state.configured;
+      toggle.disabled = !state.configured && !(state.kernel && state.helper);
+      toggle.title = state.details;
+    }
+    toggle.addEventListener('change', async () => {
+      const action = toggle.checked ? 'enable' : 'disable';
       toggle.disabled = true;
-      refresh.disabled = true;
       try {
-        if (action) {
-          const result = await exec(action);
-          await update();
-          output.textContent = result.text + '\n' + output.textContent;
-        } else await update();
+        const result = await exec(action);
+        await refresh();
+        if (result.code !== 0) notify(result.text || 'UID filter application failed');
+        else notify(action === 'enable' ? 'UID Priority Filter applied' : 'UID Priority Filter disabled for future boots. Reboot to remove the applied filter.');
       } catch (error) {
-        output.textContent = error.message;
-        summary.textContent = 'Status could not be read. Use Refresh status.';
-        summary.style.color = '#ffd479';
         toggle.disabled = true;
-      } finally { busy = false; refresh.disabled = false; }
+        toggle.title = error.message;
+        notify(error.message);
+      }
+    });
+    refresh().catch(error => { toggle.disabled = true; toggle.title = error.message; });
+  }
+  function features(view) {
+    const anchor = view.querySelector('#status_sus_path');
+    if (!anchor) return;
+    const group = anchor.parentElement.parentElement;
+    let row = group.querySelector('.uid-priority-feature');
+    if (!row) {
+      row = document.createElement('div');
+      row.className = 'flex justify-between items-center py-2 px-2 uid-priority-feature';
+      row.innerHTML = '<span class="text-white text-base">Priority UID Filter</span><div class="badge badge-warning text-sm ml-4">Unknown</div>';
+      group.appendChild(row);
     }
-    toggle.addEventListener('change', () => operate(toggle.checked ? 'enable' : 'disable'));
-    refresh.addEventListener('click', () => operate());
-    operate();
+    if (bound.has(row)) return;
+    bound.add(row);
+    const badge = row.querySelector('.badge');
+    status().then(state => {
+      badge.textContent = state.kernel ? 'Enabled' : 'Disabled';
+      badge.className = 'badge ' + (state.kernel ? 'badge-success' : 'badge-error') + ' text-sm ml-4';
+      badge.title = state.details;
+    }).catch(error => { badge.textContent = 'Unknown'; badge.title = error.message; });
   }
   function mount() {
     document.querySelectorAll('[id^="status_"]').forEach(badge => {
       const row = badge.parentElement;
       if (!row || !row.querySelector('span')) return;
-      const deprecated = /deprecated/i.test(badge.textContent);
-      if (deprecated && !row.hidden) { row.hidden = true; row.dataset.priorityDeprecated = '1'; }
-      else if (!deprecated && row.dataset.priorityDeprecated === '1') { row.hidden = false; delete row.dataset.priorityDeprecated; }
+      const deprecated = /deprecated/i.test(badge.textContent) || !!badge.querySelector('[data-i18n="deprecated_label"]');
+      if (deprecated && !row.hidden) {
+        row.hidden = true;
+        row.style.setProperty('display', 'none', 'important');
+        row.dataset.priorityDeprecated = '1';
+      } else if (!deprecated && row.dataset.priorityDeprecated === '1') {
+        row.hidden = false;
+        row.style.removeProperty('display');
+        delete row.dataset.priorityDeprecated;
+      }
     });
-    if (!/(?:\/|^)(?:index|custom|status)\.html$/.test(location.pathname) && !location.pathname.endsWith('/')) return;
-    document.querySelectorAll('[data-router-view] section').forEach(addCard);
+    document.querySelectorAll('[data-router-view]').forEach(view => {
+      if (view.getAttribute('data-router-view') === 'custom') custom(view);
+      if (view.querySelector('#status_sus_path')) features(view);
+    });
   }
   let scheduled = false;
   const observer = new MutationObserver(() => {
