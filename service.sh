@@ -134,7 +134,18 @@ check_reset_prop "ro.build.type" "user"
 check_reset_prop "ro.build.tags" "release-keys"
 check_reset_prop "ro.vendor.boot.warranty_bit" "0"
 check_reset_prop "ro.vendor.warranty_bit" "0"
-check_reset_prop "sys.oem_unlock_allowed" "0"
+
+# Hide OEM unlock indicators without breaking Android 15 behavior
+if [ "$(getprop ro.build.version.sdk)" -ge 36 ]; then
+	# Android 16+ no longer sets this property.
+	# Keeping a spoofed "0" can itself look abnormal to Duck Detector.
+	resetprop --delete sys.oem_unlock_allowed 2>/dev/null
+else
+	check_reset_prop "sys.oem_unlock_allowed" "0"
+fi
+
+# BRENE-style OEM unlock toggle hiding
+check_reset_prop "ro.oem_unlock_supported" "0"
 
 # MIUI specific
 check_reset_prop "ro.secureboot.lockstate" "locked"
@@ -198,8 +209,8 @@ fi
 	do
 		grep -q lineage $sepolicy_cil && {
 			cil_name=`basename "$sepolicy_cil"`
-			grep -v "lineage" $sepolicy_cil > $mntfolder/$cil_name
-			[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ${SUSFS_BIN} add_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
+			grep -v lineage $sepolicy_cil > $mntfolder/$cil_name
+			[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ${SUSFS_BIN} add_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/boot-completed $sepolicy_cil" >> $logfile1
 			[ "$SUSFS_DECIMAL_MAIN" = 2 ] && [ "$SUSFS_DECIMAL_SUB" = 0 ] || [ "$SUSFS_DECIMAL_MAIN" -lt 2 ] && susfs_clone_perm $mntfolder/$cil_name $sepolicy_cil
 			mount --bind $mntfolder/$cil_name $sepolicy_cil && echo "[bind_mount]: susfs4ksu/service $sepolicy_cil" >> $logfile1
 			[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ${SUSFS_BIN} update_sus_kstat $sepolicy_cil && echo "[update_sus_kstat]: susfs4ksu/service $sepolicy_cil" >> $logfile1
@@ -213,8 +224,8 @@ fi
 	echo "susfs4ksu/service: [hide_compat_matrix] - compatibility_matrix.device.xml" >> $logfile1
 	compatibility_matrix=/system/etc/vintf/compatibility_matrix.device.xml
 	grep -q lineage $compatibility_matrix && {
-		grep -v "lineage" $compatibility_matrix > $mntfolder/compatibility_matrix.device.xml
-		[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ${SUSFS_BIN} add_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $compatibility_matrix" >> $logfile1
+		grep -v lineage $compatibility_matrix > $mntfolder/compatibility_matrix.device.xml
+		[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ${SUSFS_BIN} add_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/boot-completed $compatibility_matrix" >> $logfile1
 		[ "$SUSFS_DECIMAL_MAIN" = 2 ] && [ "$SUSFS_DECIMAL_SUB" = 0 ] || [ "$SUSFS_DECIMAL_MAIN" -lt 2 ] && susfs_clone_perm $mntfolder/compatibility_matrix.device.xml $compatibility_matrix
 		mount --bind $mntfolder/compatibility_matrix.device.xml $compatibility_matrix && echo "[bind_mount]: susfs4ksu/service $compatibility_matrix" >> $logfile1
 		[ "$SUSFS_DECIMAL_MAIN" -ge 2 ] && ${SUSFS_BIN} update_sus_kstat $compatibility_matrix && echo "[update_sus_kstat]: susfs4ksu/service $compatibility_matrix" >> $logfile1
