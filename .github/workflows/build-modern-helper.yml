@@ -21,6 +21,8 @@ jobs:
           java-version: '17'
       - name: Set up Android SDK command-line tools
         uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
       - name: Install pinned Android NDK
         shell: bash
         run: |
