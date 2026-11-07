@@ -1,5 +1,4 @@
 name: Build and Release
-
 on:
   push:
     paths-ignore:
@@ -8,32 +7,8 @@ on:
       - 'docs/**'
       - '.github/ISSUE_TEMPLATE/**'
   workflow_dispatch:
-
+permissions:
+  contents: read
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout v1.5.2+ branch
-        uses: actions/checkout@v4
-        with:
-          ref: v1.5.2+
-
-      - name: Update version with git HEAD
-        run: |
-          RANDOM_STRING=$(git rev-parse --short HEAD | cut -c1-7)
-          echo "BUILD_ID=${RANDOM_STRING}" >> $GITHUB_ENV
-          sed -i "s/version=v1.5.2-R.*/version=v1.5.2-CI-${RANDOM_STRING}/" module.prop
-
-      - name: Upload release artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-1.5.2+_${{ env.BUILD_ID }}
-          path: |
-            ${{ github.workspace }}/**/*
-            !${{ github.workspace }}/.git/**
-            !${{ github.workspace }}/.github/**
-            !${{ github.workspace }}/node_modules/**
-            !${{ github.workspace }}/src/**
-            !${{ github.workspace }}/tests/**
-            !${{ github.workspace }}/README.md
-            !${{ github.workspace }}/LICENSE
+    uses: ./.github/workflows/build-priority-module.yml
