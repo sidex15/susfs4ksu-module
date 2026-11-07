@@ -14,11 +14,20 @@ jobs:
           ref: 65c44a650f0b0d8c79a517fb1a49c24a7cb22b23
           path: susfs-source
           persist-credentials: false
+      - name: Set up Java for Android SDK tools
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Android SDK command-line tools
+        uses: android-actions/setup-android@v3
       - name: Install pinned Android NDK
         shell: bash
         run: |
           set -euo pipefail
+          command -v sdkmanager
           sdkmanager --install 'ndk;27.2.12479018'
+          test -x "$ANDROID_HOME/ndk/27.2.12479018/ndk-build"
       - name: Build arm64 helper and record provenance
         shell: bash
         run: |
