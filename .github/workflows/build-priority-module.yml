@@ -44,10 +44,11 @@ jobs:
           config.write_text(config.read_text() + '\npriority_uid_filter=0\n')
           boot = root / 'boot-completed.sh'
           boot.write_text(boot.read_text() + '\n# Optional Priority UID Filter companion\nsh /data/adb/modules/susfs4ksu/priority-uid-filter.sh boot >> /data/adb/susfs4ksu/priority_uid_filter.log 2>&1\n')
-          index = root / 'webroot/index.html'
-          html = index.read_text()
-          assert '</head>' in html
-          index.write_text(html.replace('</head>', '<script defer src="/priority-uid-filter.js"></script>\n</head>', 1))
+          for name in ('index.html', 'custom.html', 'status.html'):
+              page = root / 'webroot' / name
+              html = page.read_text()
+              assert '</head>' in html
+              page.write_text(html.replace('</head>', '<script defer src="/priority-uid-filter.js"></script>\n</head>', 1))
           installer = root / 'customize.sh'
           text = installer.read_text()
           anchor = '# set permissions'
