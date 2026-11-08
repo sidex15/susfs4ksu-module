@@ -90,6 +90,27 @@
       badge.title = state.details;
     }).catch(error => { badge.textContent = 'Unknown'; badge.title = error.message; });
   }
+  function recommendations(view) {
+    if (view.querySelector('#recommended-umount-settings')) return;
+    const logs = view.querySelector('#susfs_log');
+    const panel = logs && logs.closest('.stats');
+    if (!panel || !panel.parentElement) return;
+    const card = document.createElement('aside');
+    card.id = 'recommended-umount-settings';
+    card.className = 'stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]';
+    card.setAttribute('aria-labelledby', 'recommended-umount-heading');
+    card.style.cssText = 'white-space:normal;overflow-wrap:anywhere;box-sizing:border-box;';
+    card.innerHTML = '<h2 id="recommended-umount-heading" class="text-white text-xl mb-3">Recommended Umount settings</h2>' +
+      '<div class="text-white font-sans normal-case font-normal text-sm" style="line-height:1.6;white-space:normal;">' +
+      '<p style="margin-bottom:12px;">If an app crashes, refuses to open, or stops working with module unmounting enabled, try one of these compatibility options:</p>' +
+      '<ol style="list-style:decimal;padding-left:22px;margin-bottom:12px;"><li>For the affected app only (preferred): open its App Profile in KernelSU Manager, select a custom profile, and turn off &quot;Umount modules&quot;.</li>' +
+      '<li>For all apps using the default profile: open KernelSU Manager settings and turn off &quot;Umount modules by default&quot;.</li></ol>' +
+      '<p style="margin-bottom:12px;">Force-stop and reopen the affected app after changing its profile. Reboot if the change does not take effect.</p>' +
+      '<p style="margin-bottom:12px;color:#fcd34d;">Compatibility trade-off: disabling module unmounting can expose module mounts or modifications to apps. Prefer a per-app exception when possible. This is a troubleshooting option, not a guarantee that every app will work.</p>' +
+      '<p style="margin-bottom:12px;">Keep &quot;Hide SUS mounts for all/non-su processes&quot; enabled, with &quot;Turn off at boot-completed&quot; unchecked. That SUSFS control is separate from KernelSU app-profile unmounting.</p>' +
+      '<div role="status" style="border:1px solid #94a3b8;border-radius:8px;padding:10px;color:#cbd5e1;">Manager setting status: Not available in this WebUI. Check KernelSU Manager for the current value. No setting has been changed by this card.</div></div>';
+    panel.parentElement.insertBefore(card, panel);
+  }
   function mount() {
     document.querySelectorAll('[id^="status_"]').forEach(badge => {
       const row = badge.parentElement;
@@ -106,6 +127,7 @@
       }
     });
     document.querySelectorAll('[data-router-view]').forEach(view => {
+      if (view.getAttribute('data-router-view') === 'home') recommendations(view);
       if (view.getAttribute('data-router-view') === 'custom') custom(view);
       if (view.querySelector('#status_sus_path')) features(view);
     });
