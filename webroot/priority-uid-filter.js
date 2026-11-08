@@ -70,7 +70,7 @@
     card.className = 'stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]';
     card.setAttribute('aria-labelledby', 'recommended-umount-heading');
     card.style.cssText = 'white-space:normal;overflow-wrap:anywhere;box-sizing:border-box;';
-    card.innerHTML = '<h2 id="recommended-umount-heading" class="text-white text-xl mb-3">Recommended Umount settings</h2><p class="text-white font-sans normal-case font-normal text-sm" style="line-height:1.6;white-space:normal;">App not working? Turn off &quot;Umount modules&quot; for that app in KernelSU Manager, or disable &quot;Umount modules by default&quot;.</p><button type="button" class="btn btn-md btn-outline border-white text-white font-sans normal-case mt-3" aria-haspopup="dialog" aria-controls="recommended-umount-dialog">What does it mean?</button>';
+    card.innerHTML = '<h2 id="recommended-umount-heading" class="text-white text-xl mb-3">Recommended Umount settings</h2><p class="text-white text-base font-amongus2" style="line-height:1.6;white-space:normal;">App not working? Turn off &quot;Umount modules&quot; for that app in KernelSU Manager, or disable &quot;Umount modules by default&quot;.</p><div class="flex justify-center"><button type="button" class="btn btn-md btn-outline text-base border-white mt-2 text-white font-amongus2" aria-haspopup="dialog" aria-controls="recommended-umount-dialog">What does it mean?</button></div>';
     panel.parentElement.insertBefore(card, panel);
     const button = card.querySelector('button');
     button.addEventListener('click', () => {
@@ -78,15 +78,16 @@
       if (!dialog) {
         dialog = document.createElement('dialog');
         dialog.id = 'recommended-umount-dialog';
+        dialog.className = 'font-amongus2 font-bold';
         dialog.setAttribute('aria-labelledby', 'recommended-umount-dialog-heading');
-        dialog.style.cssText = 'position:fixed;inset:0;margin:auto;width:calc(100% - 32px);max-width:520px;max-height:85vh;padding:0;border:2px solid white;border-radius:16px;background:#111;color:white;z-index:2147483647;overflow:hidden;font-family:system-ui,sans-serif;font-weight:400;text-transform:none;box-sizing:border-box;';
-        dialog.innerHTML = '<div style="display:flex;flex-direction:column;max-height:calc(85vh - 4px);"><h2 id="recommended-umount-dialog-heading" style="padding:16px;margin:0;font-size:18px;flex-shrink:0;">What does it mean?</h2><div style="padding:0 16px 16px;overflow-y:auto;overscroll-behavior:contain;line-height:1.6;font-size:14px;white-space:normal;overflow-wrap:anywhere;">' +
+        dialog.style.cssText = 'position:fixed;inset:0;margin:auto;width:calc(100% - 32px);max-width:520px;max-height:85vh;padding:0;border:2px solid white;border-radius:16px;background:#111;color:white;z-index:2147483647;overflow:hidden;text-transform:none;box-sizing:border-box;';
+        dialog.innerHTML = '<div style="display:flex;flex-direction:column;max-height:calc(85vh - 4px);"><h2 id="recommended-umount-dialog-heading" class="text-xl" style="padding:16px;margin:0;flex-shrink:0;">What does it mean?</h2><div class="text-base" style="padding:0 16px 16px;overflow-y:auto;overscroll-behavior:contain;line-height:1.6;white-space:normal;overflow-wrap:anywhere;">' +
           '<p style="margin-bottom:12px;">If an app crashes, refuses to open, or stops working with module unmounting enabled, try one of these compatibility options:</p>' +
           '<ol style="list-style:decimal;padding-left:22px;margin-bottom:12px;"><li>For the affected app only (preferred): open its App Profile in KernelSU Manager, select a custom profile, and turn off &quot;Umount modules&quot;.</li><li>For all apps using the default profile: open KernelSU Manager settings and turn off &quot;Umount modules by default&quot;.</li></ol>' +
           '<p style="margin-bottom:12px;">Force-stop and reopen the affected app after changing its profile. Reboot if the change does not take effect.</p>' +
           '<p style="margin-bottom:12px;color:#fcd34d;">Compatibility trade-off: disabling module unmounting can expose module mounts or modifications to apps. Prefer a per-app exception when possible. This is a troubleshooting option, not a guarantee that every app will work.</p>' +
           '<p style="margin-bottom:12px;">Keep &quot;Hide SUS mounts for all/non-su processes&quot; enabled, with &quot;Turn off at boot-completed&quot; unchecked. That SUSFS control is separate from KernelSU app-profile unmounting.</p>' +
-          '<p style="border:1px solid #94a3b8;border-radius:8px;padding:10px;color:#cbd5e1;">Manager setting status: Not available in this WebUI. Check KernelSU Manager for the current value. No setting has been changed by this card.</p></div><form method="dialog" style="padding:12px 16px;border-top:1px solid #475569;flex-shrink:0;display:flex;justify-content:flex-end;"><button type="submit" class="btn btn-md btn-outline border-white text-white font-sans normal-case" autofocus>Close</button></form></div>';
+          '<p style="border:1px solid #94a3b8;border-radius:8px;padding:10px;color:#cbd5e1;">Manager setting status: Not available in this WebUI. Check KernelSU Manager for the current value. No setting has been changed by this card.</p></div><form method="dialog" style="padding:12px 16px;border-top:1px solid #475569;flex-shrink:0;display:flex;justify-content:center;"><button type="submit" class="btn btn-md btn-outline text-base border-white text-white font-amongus2" autofocus>Close</button></form></div>';
         document.body.appendChild(dialog);
       }
       if (!dialog.open) dialog.showModal();
