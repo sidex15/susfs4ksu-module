@@ -7,8 +7,19 @@ on:
       - 'docs/**'
       - '.github/ISSUE_TEMPLATE/**'
   workflow_dispatch:
+    inputs:
+      helper_source:
+        description: 'SUSFS binary source'
+        type: choice
+        required: true
+        default: pinned
+        options:
+          - pinned
+          - latest
 permissions:
   contents: read
 jobs:
   build-and-release:
     uses: ./.github/workflows/build-priority-module.yml
+    with:
+      helper_source: ${{ inputs.helper_source || 'pinned' }}

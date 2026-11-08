@@ -1,24 +1,62 @@
-name: Build module with modern and legacy helpers
+name: Build module with upstream and legacy helpers
 on:
   workflow_dispatch:
+    inputs:
+      helper_source:
+        description: 'SUSFS binary source'
+        type: choice
+        required: true
+        default: pinned
+        options:
+          - pinned
+          - latest
   workflow_call:
+    inputs:
+      helper_source:
+        type: string
+        required: false
+        default: pinned
 permissions:
   contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SOURCE_URL: https://gitlab.com/simonpunk/susfs4ksu.git
+      PINNED_HELPER_REV: a2165b6f875b73e2f87d3c6f12814efac8de061d
+      UPSTREAM_BRANCH: gki-android14-6.1
+      HELPER_SOURCE: ${{ inputs.helper_source }}
+      NDK_VERSION: 27.2.12479018
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
           path: module
           persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: midori01/susfs4ksu
-          ref: 65c44a650f0b0d8c79a517fb1a49c24a7cb22b23
-          path: susfs-source
-          persist-credentials: false
+      - name: Fetch pinned or latest Simonpunk source
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$HELPER_SOURCE" in
+            pinned) ref="$PINNED_HELPER_REV" ;;
+            latest) ref="refs/heads/$UPSTREAM_BRANCH" ;;
+            *) echo 'Invalid helper_source; expected pinned or latest' >&2; exit 1 ;;
+          esac
+          mkdir susfs-source helper-source-artifact
+          git -C susfs-source init
+          git -C susfs-source remote add origin "$SOURCE_URL"
+          git -C susfs-source fetch --depth=1 origin "$ref"
+          git -C susfs-source checkout --detach FETCH_HEAD
+          revision=$(git -C susfs-source rev-parse HEAD)
+          if [ "$HELPER_SOURCE" = pinned ]; then
+            test "$revision" = "$PINNED_HELPER_REV"
+          fi
+          echo "SOURCE_SHA=$revision" >> "$GITHUB_ENV"
+          git -C susfs-source show -s --format=fuller HEAD > helper-source-artifact/SOURCE-COMMIT.txt
+          git -C susfs-source archive --format=tar.gz --prefix=susfs-source/ HEAD > helper-source-artifact/upstream-source.tar.gz
+          test -f susfs-source/ksu_susfs/jni/Android.mk
+          test -f susfs-source/ksu_susfs/jni/Application.mk
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -30,26 +68,52 @@ jobs:
         id: revision
         shell: bash
         run: echo "short=$(git -C module rev-parse --short=7 HEAD)" >> "$GITHUB_OUTPUT"
-      - name: Build pinned modern helper
+      - name: Build and verify upstream ARM64 helper
         shell: bash
         run: |
           set -euo pipefail
-          sdkmanager --install 'ndk;27.2.12479018'
+          sdkmanager --install "ndk;$NDK_VERSION"
           cd susfs-source/ksu_susfs
-          "$ANDROID_HOME/ndk/27.2.12479018/ndk-build" NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=jni/Android.mk NDK_APPLICATION_MK=jni/Application.mk APP_ABI=arm64-v8a APP_PLATFORM=android-26
-          cp libs/arm64-v8a/ksu_susfs ../../module/ksu_susfs_modern
+          "$ANDROID_HOME/ndk/$NDK_VERSION/ndk-build" NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=jni/Android.mk NDK_APPLICATION_MK=jni/Application.mk APP_ABI=arm64-v8a APP_PLATFORM=android-26
+          cd ../..
+          install -m 0755 susfs-source/ksu_susfs/libs/arm64-v8a/ksu_susfs module/ksu_susfs_modern
+          readelf -h module/ksu_susfs_modern | tee helper-source-artifact/elf-header.txt
+          grep -Eq 'Class:.*ELF64' helper-source-artifact/elf-header.txt
+          grep -Eq 'Machine:.*AArch64' helper-source-artifact/elf-header.txt
+          grep -a -q set_priority_uid_filter module/ksu_susfs_modern
       - name: Stage and verify directly installable module
         shell: bash
         run: |
           set -euo pipefail
           cp susfs-source/LICENSE module/MODERN-HELPER-LICENSE
-          printf '%s\n' 'Source: midori01/susfs4ksu' 'Revision: 65c44a650f0b0d8c79a517fb1a49c24a7cb22b23' 'NDK: 27.2.12479018' > module/MODERN-HELPER-SOURCE.txt
+          {
+            printf 'Source: %s\nSelection: %s\nRevision: %s\nNDK: %s\n' "$SOURCE_URL" "$HELPER_SOURCE" "$SOURCE_SHA" "$NDK_VERSION"
+            printf '%s\n' 'ABI: arm64-v8a; API: android-26' 'Module-local filename retained for router compatibility: ksu_susfs_modern' 'Build checks do not establish runtime compatibility. Kernel code is not updated.'
+            sha256sum module/ksu_susfs_modern | awk '{print "Helper SHA256: " $1}'
+          } > module/MODERN-HELPER-SOURCE.txt
+          cp module/MODERN-HELPER-SOURCE.txt helper-source-artifact/PROVENANCE.txt
+          cp module/MODERN-HELPER-LICENSE helper-source-artifact/SOURCE-LICENSE
+          (cd helper-source-artifact && sha256sum upstream-source.tar.gz > SHA256SUMS)
           python3 module/.github/scripts/prepare-distribution.py module module-dist
+          cmp module/ksu_susfs_modern module-dist/ksu_susfs_modern
+          (cd module-dist && sha256sum -c HELPER-SHA256SUMS)
           for script in module-dist/*.sh; do sh -n "$script"; done
           node --check module-dist/webroot/priority-uid-filter.js
           node --input-type=module --check < module-dist/webroot/assets/index-BS9hEn4H.js
+          {
+            echo '## Module with upstream SUSFS helper'
+            printf 'Selection: `%s`\n\nHelper commit: `%s`\n\n' "$HELPER_SOURCE" "$SOURCE_SHA"
+            echo 'Pinned is the default. Latest affects this build only and never changes the saved pin.'
+            echo 'Helper routing and legacy compatibility are unchanged. New revisions require device testing.'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: susfs4ksu-${{ steps.revision.outputs.short }}
           path: module-dist/
+          if-no-files-found: error
+      - name: Upload exact helper source and provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: susfs-helper-source-${{ github.run_id }}
+          path: helper-source-artifact/
           if-no-files-found: error
