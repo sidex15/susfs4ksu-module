@@ -16,6 +16,11 @@ on:
         options:
           - pinned
           - latest
+      helper_sha:
+        description: 'Helper commit SHA override (optional full 40-character SHA; ignores dropdown)'
+        type: string
+        required: false
+        default: ''
 permissions:
   contents: read
 jobs:
@@ -23,3 +28,4 @@ jobs:
     uses: ./.github/workflows/build-priority-module.yml
     with:
       helper_source: ${{ inputs.helper_source || 'pinned' }}
+      helper_sha: ${{ inputs.helper_sha || '' }}

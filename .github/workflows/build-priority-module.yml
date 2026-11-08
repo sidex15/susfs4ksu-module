@@ -10,12 +10,21 @@ on:
         options:
           - pinned
           - latest
+      helper_sha:
+        description: 'Helper commit SHA override (optional full 40-character SHA; ignores dropdown)'
+        type: string
+        required: false
+        default: ''
   workflow_call:
     inputs:
       helper_source:
         type: string
         required: false
         default: pinned
+      helper_sha:
+        type: string
+        required: false
+        default: ''
 permissions:
   contents: read
 jobs:
@@ -27,6 +36,7 @@ jobs:
       PINNED_HELPER_REV: a2165b6f875b73e2f87d3c6f12814efac8de061d
       UPSTREAM_BRANCH: gki-android14-6.1
       HELPER_SOURCE: ${{ inputs.helper_source }}
+      HELPER_SHA: ${{ inputs.helper_sha }}
       NDK_VERSION: 27.2.12479018
     steps:
       - uses: actions/checkout@v4
@@ -34,25 +44,36 @@ jobs:
           ref: ${{ github.sha }}
           path: module
           persist-credentials: false
-      - name: Fetch pinned or latest Simonpunk source
+      - name: Select and fetch upstream helper source
         shell: bash
         run: |
           set -euo pipefail
-          case "$HELPER_SOURCE" in
-            pinned) ref="$PINNED_HELPER_REV" ;;
-            latest) ref="refs/heads/$UPSTREAM_BRANCH" ;;
-            *) echo 'Invalid helper_source; expected pinned or latest' >&2; exit 1 ;;
-          esac
+          expected=''
+          if [ -n "$HELPER_SHA" ]; then
+            if [[ ! "$HELPER_SHA" =~ ^[0-9a-fA-F]{40}$ ]]; then
+              echo 'helper_sha must be a full 40-character hexadecimal commit SHA' >&2
+              exit 1
+            fi
+            ref=$(printf '%s' "$HELPER_SHA" | tr 'A-F' 'a-f')
+            expected="$ref"
+            selection=sha-override
+          else
+            selection="$HELPER_SOURCE"
+            case "$HELPER_SOURCE" in
+              pinned) ref="$PINNED_HELPER_REV"; expected="$ref" ;;
+              latest) ref="refs/heads/$UPSTREAM_BRANCH" ;;
+              *) echo 'Invalid helper_source; expected pinned or latest' >&2; exit 1 ;;
+            esac
+          fi
           mkdir susfs-source helper-source-artifact
           git -C susfs-source init
           git -C susfs-source remote add origin "$SOURCE_URL"
           git -C susfs-source fetch --depth=1 origin "$ref"
           git -C susfs-source checkout --detach FETCH_HEAD
           revision=$(git -C susfs-source rev-parse HEAD)
-          if [ "$HELPER_SOURCE" = pinned ]; then
-            test "$revision" = "$PINNED_HELPER_REV"
-          fi
+          if [ -n "$expected" ]; then test "$revision" = "$expected"; fi
           echo "SOURCE_SHA=$revision" >> "$GITHUB_ENV"
+          echo "SOURCE_SELECTION=$selection" >> "$GITHUB_ENV"
           git -C susfs-source show -s --format=fuller HEAD > helper-source-artifact/SOURCE-COMMIT.txt
           git -C susfs-source archive --format=tar.gz --prefix=susfs-source/ HEAD > helper-source-artifact/upstream-source.tar.gz
           test -f susfs-source/ksu_susfs/jni/Android.mk
@@ -87,7 +108,7 @@ jobs:
           set -euo pipefail
           cp susfs-source/LICENSE module/MODERN-HELPER-LICENSE
           {
-            printf 'Source: %s\nSelection: %s\nRevision: %s\nNDK: %s\n' "$SOURCE_URL" "$HELPER_SOURCE" "$SOURCE_SHA" "$NDK_VERSION"
+            printf 'Source: %s\nSelection: %s\nRevision: %s\nNDK: %s\n' "$SOURCE_URL" "$SOURCE_SELECTION" "$SOURCE_SHA" "$NDK_VERSION"
             printf '%s\n' 'ABI: arm64-v8a; API: android-26' 'Module-local filename retained for router compatibility: ksu_susfs_modern' 'Build checks do not establish runtime compatibility. Kernel code is not updated.'
             sha256sum module/ksu_susfs_modern | awk '{print "Helper SHA256: " $1}'
           } > module/MODERN-HELPER-SOURCE.txt
@@ -102,8 +123,9 @@ jobs:
           node --input-type=module --check < module-dist/webroot/assets/index-BS9hEn4H.js
           {
             echo '## Module with upstream SUSFS helper'
-            printf 'Selection: `%s`\n\nHelper commit: `%s`\n\n' "$HELPER_SOURCE" "$SOURCE_SHA"
-            echo 'Pinned is the default. Latest affects this build only and never changes the saved pin.'
+            printf 'Selection: `%s`\n\nHelper commit: `%s`\n\n' "$SOURCE_SELECTION" "$SOURCE_SHA"
+            echo 'A non-empty SHA overrides the dropdown. Otherwise pinned is the default.'
+            echo 'Latest and SHA overrides affect this build only; neither changes the saved pin.'
             echo 'Helper routing and legacy compatibility are unchanged. New revisions require device testing.'
           } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
