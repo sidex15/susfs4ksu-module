@@ -1,0 +1,88 @@
+name: Build upstream SUSFS helper (test artifact)
+on:
+  workflow_dispatch:
+    inputs:
+      source_ref:
+        description: 'Simonpunk branch or full 40-character commit SHA'
+        required: true
+        default: gki-android14-6.1
+        type: string
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SOURCE_URL: https://gitlab.com/simonpunk/susfs4ksu.git
+      SOURCE_REF: ${{ inputs.source_ref }}
+      NDK_VERSION: 27.2.12479018
+    steps:
+      - name: Fetch upstream and record exact revision
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$SOURCE_REF" =~ ^[0-9a-fA-F]{40}$ ]]; then
+            fetch_ref="$SOURCE_REF"
+          else
+            git check-ref-format "refs/heads/$SOURCE_REF"
+            fetch_ref="refs/heads/$SOURCE_REF"
+          fi
+          mkdir susfs-source artifact
+          git -C susfs-source init
+          git -C susfs-source remote add origin "$SOURCE_URL"
+          git -C susfs-source fetch --depth=1 origin "$fetch_ref"
+          git -C susfs-source checkout --detach FETCH_HEAD
+          revision=$(git -C susfs-source rev-parse HEAD)
+          echo "SOURCE_SHA=$revision" >> "$GITHUB_ENV"
+          git -C susfs-source show -s --format=fuller HEAD > artifact/SOURCE-COMMIT.txt
+          git -C susfs-source archive --format=tar.gz --prefix=susfs-source/ HEAD > artifact/upstream-source.tar.gz
+          test -f susfs-source/ksu_susfs/jni/Android.mk
+          test -f susfs-source/ksu_susfs/jni/Application.mk
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+      - name: Install pinned NDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdkmanager --install "ndk;$NDK_VERSION"
+          test -x "$ANDROID_HOME/ndk/$NDK_VERSION/ndk-build"
+      - name: Build and verify ARM64 helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd susfs-source/ksu_susfs
+          "$ANDROID_HOME/ndk/$NDK_VERSION/ndk-build" NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=jni/Android.mk NDK_APPLICATION_MK=jni/Application.mk APP_ABI=arm64-v8a APP_PLATFORM=android-26
+          cd ../..
+          install -m 0755 susfs-source/ksu_susfs/libs/arm64-v8a/ksu_susfs artifact/ksu_susfs
+          file artifact/ksu_susfs | tee artifact/file-info.txt
+          readelf -h artifact/ksu_susfs | tee artifact/elf-header.txt
+          grep -Eq 'Class:.*ELF64' artifact/elf-header.txt
+          grep -Eq 'Machine:.*AArch64' artifact/elf-header.txt
+          grep -a -q set_priority_uid_filter artifact/ksu_susfs
+          cp susfs-source/LICENSE artifact/SOURCE-LICENSE
+          {
+            printf 'Source: %s\nRequested ref: %s\nResolved revision: %s\n' "$SOURCE_URL" "$SOURCE_REF" "$SOURCE_SHA"
+            printf 'NDK: %s\nABI: arm64-v8a\nAPI: android-26\n' "$NDK_VERSION"
+            printf '%s\n' 'Checks: ARM64 ELF and priority command string only; no runtime compatibility test.' 'Test artifact only: not a flashable module ZIP; no packaged binary or repository pin was updated.'
+          } > artifact/PROVENANCE.txt
+          (cd artifact && sha256sum ksu_susfs upstream-source.tar.gz > SHA256SUMS)
+          {
+            echo '## Upstream helper build'
+            printf 'Resolved commit: `%s`\n\n' "$SOURCE_SHA"
+            echo 'Download the test artifact for the binary, exact source archive, license, and checksums.'
+            echo 'The module and pinned builder remain unchanged. Device testing is required before integration.'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload binary and exact source
+        uses: actions/upload-artifact@v4
+        with:
+          name: susfs-upstream-helper-arm64-${{ github.run_id }}
+          path: artifact/
+          if-no-files-found: error
