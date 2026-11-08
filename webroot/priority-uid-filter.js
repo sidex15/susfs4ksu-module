@@ -67,7 +67,7 @@
     if (!panel || !panel.parentElement) return;
     const card = document.createElement('aside');
     card.id = 'recommended-umount-settings';
-    card.className = 'stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]';
+    card.className = 'stats flex flex-col divide-x-0 divide-y-0 bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 p-4 border-white backdrop-blur-[2.5px] min-w-full sm:min-w-[400px]';
     card.setAttribute('aria-labelledby', 'recommended-umount-heading');
     card.style.cssText = 'white-space:normal;overflow-wrap:anywhere;box-sizing:border-box;';
     card.innerHTML = '<h2 id="recommended-umount-heading" class="text-white text-xl mb-3">Recommended Umount settings</h2><p class="text-white text-base font-amongus2" style="line-height:1.6;white-space:normal;">App not working? Turn off &quot;Umount modules&quot; for that app in KernelSU Manager, or disable &quot;Umount modules by default&quot;.</p><div class="flex justify-center"><button type="button" class="btn btn-md btn-outline text-base border-white mt-2 text-white font-amongus2" aria-haspopup="dialog" aria-controls="recommended-umount-dialog">What does it mean?</button></div>';
